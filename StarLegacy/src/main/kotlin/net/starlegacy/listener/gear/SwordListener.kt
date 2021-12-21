@@ -1,7 +1,7 @@
 package net.starlegacy.listener.gear
 
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
+import net.starlegacy.feature.misc.customitem.CustomItem
+import net.starlegacy.feature.misc.customitem.CustomItems
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.msg

@@ -1,6 +1,7 @@
 package net.starlegacy.feature.misc
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
+import net.starlegacy.feature.misc.customitem.CustomItems
 import net.starlegacy.util.NMSBlockData
 import net.starlegacy.util.nms
 import org.bukkit.Material

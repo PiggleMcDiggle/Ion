@@ -1,6 +1,6 @@
 package net.starlegacy.feature.gear.blaster
 
-import net.starlegacy.feature.misc.CustomItems
+import net.starlegacy.feature.misc.customitem.CustomItems
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.enumValueOfOrNull
 import org.bukkit.Color

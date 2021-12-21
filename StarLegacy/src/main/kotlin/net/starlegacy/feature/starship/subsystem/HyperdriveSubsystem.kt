@@ -1,6 +1,6 @@
 package net.starlegacy.feature.starship.subsystem
 
-import net.starlegacy.feature.misc.CustomItems
+import net.starlegacy.feature.misc.customitem.CustomItems
 import net.starlegacy.feature.multiblock.hyperdrive.HyperdriveMultiblock
 import net.starlegacy.feature.starship.active.ActiveStarship
 import net.starlegacy.feature.starship.hyperspace.Hyperspace

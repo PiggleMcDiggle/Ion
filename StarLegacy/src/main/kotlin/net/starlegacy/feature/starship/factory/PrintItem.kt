@@ -5,8 +5,8 @@ import com.google.common.cache.CacheLoader
 import com.google.common.cache.LoadingCache
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.misc.CustomBlocks
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
+import net.starlegacy.feature.misc.customitem.CustomItem
+import net.starlegacy.feature.misc.customitem.CustomItems
 import org.bukkit.Material
 import org.bukkit.block.data.BlockData
 import org.bukkit.block.data.type.Slab

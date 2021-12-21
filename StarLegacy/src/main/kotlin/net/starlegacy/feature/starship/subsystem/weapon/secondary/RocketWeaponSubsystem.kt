@@ -1,6 +1,6 @@
 package net.starlegacy.feature.starship.subsystem.weapon.secondary
 
-import net.starlegacy.feature.misc.CustomItems
+import net.starlegacy.feature.misc.customitem.CustomItems
 import net.starlegacy.feature.multiblock.starshipweapon.heavy.RocketStarshipWeaponMultiblock
 import net.starlegacy.feature.starship.active.ActiveStarship
 import net.starlegacy.feature.starship.subsystem.DirectionalSubsystem

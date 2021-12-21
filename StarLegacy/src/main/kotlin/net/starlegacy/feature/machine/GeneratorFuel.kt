@@ -1,7 +1,7 @@
 package net.starlegacy.feature.machine
 
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
+import net.starlegacy.feature.misc.customitem.CustomItem
+import net.starlegacy.feature.misc.customitem.CustomItems
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 

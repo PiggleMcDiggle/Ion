@@ -2,9 +2,9 @@ package net.starlegacy.listener.gear
 
 import net.starlegacy.PLUGIN
 import net.starlegacy.feature.gear.TreeCutter
-import net.starlegacy.feature.misc.CustomItems
-import net.starlegacy.feature.misc.getPower
-import net.starlegacy.feature.misc.removePower
+import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.misc.customitem.getPower
+import net.starlegacy.feature.misc.customitem.removePower
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit

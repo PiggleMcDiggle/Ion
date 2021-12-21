@@ -3,9 +3,9 @@ package net.starlegacy.feature.gear.blaster
 import net.md_5.bungee.api.ChatColor
 import net.starlegacy.cache.nations.NationCache
 import net.starlegacy.cache.nations.PlayerCache
-import net.starlegacy.feature.misc.CustomItems
-import net.starlegacy.feature.misc.getPower
-import net.starlegacy.feature.misc.removePower
+import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.misc.customitem.getPower
+import net.starlegacy.feature.misc.customitem.removePower
 import net.starlegacy.util.updateMeta
 import org.bukkit.Color
 import org.bukkit.DyeColor

@@ -1,8 +1,7 @@
-package net.starlegacy.feature.misc
+package net.starlegacy.feature.misc.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.util.colorize
-import net.starlegacy.util.stripColor
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
@@ -23,7 +22,8 @@ fun getPower(itemStack: ItemStack): Int {
 	}
 	return itemStack.itemMeta.persistentDataContainer.get(
 		NamespacedKey(plugin, "item-power"),
-		PersistentDataType.INTEGER)
+		PersistentDataType.INTEGER
+	)
 		?: 0
 }
 

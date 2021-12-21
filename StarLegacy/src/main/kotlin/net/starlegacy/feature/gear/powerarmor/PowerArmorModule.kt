@@ -1,6 +1,6 @@
 package net.starlegacy.feature.gear.powerarmor
 
-import net.starlegacy.feature.misc.CustomItems
+import net.starlegacy.feature.misc.customitem.CustomItems
 import org.bukkit.inventory.ItemStack
 
 enum class PowerArmorModule(

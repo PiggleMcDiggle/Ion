@@ -1,9 +1,11 @@
-package net.starlegacy.feature.misc
+package net.starlegacy.feature.misc.customitem
 
 import com.google.common.collect.HashBasedTable
 import com.google.common.collect.Table
-import net.starlegacy.util.updateMeta
+import net.starlegacy.feature.misc.CustomBlock
+import net.starlegacy.feature.misc.CustomBlocks
 import net.starlegacy.util.set
+import net.starlegacy.util.updateMeta
 import org.bukkit.ChatColor
 import org.bukkit.ChatColor.AQUA
 import org.bukkit.ChatColor.BLUE
