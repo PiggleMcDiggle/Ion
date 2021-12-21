@@ -1,8 +1,11 @@
 package net.starlegacy.feature.misc
 
+import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.util.colorize
 import net.starlegacy.util.stripColor
+import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
 import kotlin.math.max
 import kotlin.math.min
 
@@ -18,8 +21,10 @@ fun getPower(itemStack: ItemStack): Int {
 	if (!isPowerable(itemStack)) {
 		return -1
 	}
-	val lore = itemStack.lore ?: return -1
-	return lore[0].stripColor().split(' ').last().toInt()
+	return itemStack.itemMeta.persistentDataContainer.get(
+		NamespacedKey(plugin, "item-power"),
+		PersistentDataType.INTEGER)
+		?: 0
 }
 
 /**
@@ -36,17 +41,23 @@ fun getMaxPower(itemStack: ItemStack): Int {
  * Automatically limits to max power
  * @return The old power if it was a powerable item, otherwise -1
  */
-fun setPower(itemStack: ItemStack, newPower: Int): Int {
+fun setPower(itemStack: ItemStack, power: Int): Int {
 	val poweredCustomItem = CustomItems[itemStack] as? PoweredCustomItem ?: return -1
 
 	val oldPower = getPower(itemStack)
+	val newPower = max(min(power, poweredCustomItem.maxPower), 0)
 
 	val lore: MutableList<String> = itemStack.lore ?: mutableListOf()
-	val text = "$ITEM_POWER_PREFIX${max(min(newPower, poweredCustomItem.maxPower), 0)}"
+	val text = "$ITEM_POWER_PREFIX$newPower"
 	if (lore.size == 0) lore.add(text)
 	else lore[0] = text
 	itemStack.lore = lore
 
+	itemStack.itemMeta.persistentDataContainer.set(
+		NamespacedKey(plugin, "item-power"),
+		PersistentDataType.INTEGER,
+		newPower
+	)
 	return oldPower
 }
 
