@@ -36,7 +36,7 @@ class CustomItemManager: Listener {
 		}
 	}
 
-	override fun onEnable() {
+	init {
 		plugin.server.pluginManager.registerEvents(this, plugin)
 		registerItems()
 	}
