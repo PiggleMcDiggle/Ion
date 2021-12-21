@@ -1,4 +1,4 @@
-package net.starlegacy.feature.misc.customitems
+package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
 import org.bukkit.NamespacedKey

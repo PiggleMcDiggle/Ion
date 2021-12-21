@@ -36,32 +36,6 @@ import org.bukkit.Material.SHIELD
 import org.bukkit.Material.SNOWBALL
 import org.bukkit.inventory.ItemStack
 
-open class CustomItem(
-	val id: String,
-	displayName: String,
-	val material: Material,
-	val model: Int,
-	val unbreakable: Boolean
-) {
-	val displayName = "${ChatColor.RESET}$displayName"
-
-	open fun itemStack(amount: Int): ItemStack = ItemStack(material, amount)
-		.updateMeta {
-			it.setDisplayName(displayName)
-			it.isUnbreakable = unbreakable
-			it.setCustomModelData(model)
-		}
-
-	fun singleItem() = itemStack(1)
-
-	override fun equals(other: Any?): Boolean {
-		return other === this
-	}
-
-	override fun hashCode(): Int {
-		return id.hashCode()
-	}
-}
 
 open class PoweredCustomItem(
 	id: String,
@@ -303,30 +277,6 @@ object CustomItems {
 	val MINERAL_ORIOMIUM = registerMineral("oriomium", "Oriomium", 6)
 	//endregion Minerals
 
-	//region Planet Icons
-	private fun registerPlanetIcon(name: String, model: Int): CustomItem = makeItem(
-		id = "planet_icon_${name.lowercase().replace(" ", "")}",
-		name = name,
-		mat = APPLE,
-		model = model
-	)
-
-	val PLANET_ICON_AECOR = registerPlanetIcon("Aecor", 1)
-	val PLANET_ICON_ARBUSTO = registerPlanetIcon("Arbusto", 2)
-	val PLANET_ICON_CERUS_ALPHA = registerPlanetIcon("Cerus Alpha", 3)
-	val PLANET_ICON_CERUS_BETA = registerPlanetIcon("Cerus Beta", 4)
-	val PLANET_ICON_COLLIS = registerPlanetIcon("Collis", 5)
-	val PLANET_ICON_HARENUM = registerPlanetIcon("Harenum", 6)
-	val PLANET_ICON_KORYZA = registerPlanetIcon("Koryza", 7)
-	val PLANET_ICON_ORCUS = registerPlanetIcon("Orcus", 8)
-	val PLANET_ICON_PORRUS = registerPlanetIcon("Porrus", 9)
-	val PLANET_ICON_QUOD_CANIS = registerPlanetIcon("Quod Canis", 10)
-	val PLANET_ICON_SAKARO = registerPlanetIcon("Sakaro", 11)
-	val PLANET_ICON_SYRE = registerPlanetIcon("Syre", 12)
-	val PLANET_ICON_TERRAM = registerPlanetIcon("Terram", 13)
-	val PLANET_ICON_TITUS = registerPlanetIcon("Titus", 14)
-	val PLANET_ICON_TRUNKADIS = registerPlanetIcon("Trunkadis", 15)
-	//endregion
 
 	//region Rockets
 	val ROCKET_BASE = makeItem("rocket_base", "Rocket Base", Material.STICK, 1)

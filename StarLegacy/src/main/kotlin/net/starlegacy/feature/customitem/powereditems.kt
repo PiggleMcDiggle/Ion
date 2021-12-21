@@ -10,7 +10,7 @@ import kotlin.math.min
 
 val ITEM_POWER_PREFIX = "&8Power: &7".colorize()
 
-fun isPowerable(itemStack: ItemStack?): Boolean = CustomItems[itemStack] is PoweredCustomItem
+fun isPowerable(itemStack: ItemStack?): Boolean = CustomItems[itemStack] instanceof PowerItem
 
 /**
  * Get the power of the item

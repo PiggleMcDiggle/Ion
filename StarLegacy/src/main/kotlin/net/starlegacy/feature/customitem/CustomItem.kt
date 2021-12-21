@@ -1,4 +1,4 @@
-package net.starlegacy.feature.misc.customitems
+package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.kyori.adventure.text.Component
@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
-abstract class CustomItem {
+abstract class CustomItem() {
 	abstract val displayName: String
 	abstract val id: String
 	abstract val lore: MutableList<Component>
@@ -17,9 +17,6 @@ abstract class CustomItem {
 	abstract val model: Int
 	abstract val material: Material
 
-	init {
-		CustomItemManager.register(this)
-	}
 
 	fun getItem(amount: Int = 1) : ItemStack {
 		return ItemStack(material, amount).updateMeta {
@@ -32,4 +29,12 @@ abstract class CustomItem {
 
 	open fun onRightClick(event: PlayerInteractEvent) {}
 	open fun onLeftClick(event: PlayerInteractEvent) {}
+
+	override fun equals(other: Any?): Boolean {
+		return other === this
+	}
+
+	override fun hashCode(): Int {
+		return id.hashCode()
+	}
 }
