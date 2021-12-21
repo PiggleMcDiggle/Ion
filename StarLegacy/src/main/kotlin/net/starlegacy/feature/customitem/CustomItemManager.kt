@@ -1,6 +1,8 @@
 package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
+import net.starlegacy.feature.customitem.type.CustomItem
+import net.starlegacy.feature.customitem.type.GenericCustomItem
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler

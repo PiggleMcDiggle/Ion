@@ -1,4 +1,4 @@
-package net.starlegacy.feature.customitem
+package net.starlegacy.feature.customitem.type
 
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.kyori.adventure.text.Component

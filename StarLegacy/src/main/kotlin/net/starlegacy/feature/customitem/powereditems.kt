@@ -1,6 +1,7 @@
 package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
+import net.starlegacy.feature.customitem.type.PowerItem
 import net.starlegacy.util.colorize
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack

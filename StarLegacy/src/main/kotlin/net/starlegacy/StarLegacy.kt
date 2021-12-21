@@ -53,7 +53,7 @@ import net.starlegacy.feature.machine.AreaShields
 import net.starlegacy.feature.machine.PowerMachines
 import net.starlegacy.feature.machine.Turrets
 import net.starlegacy.feature.misc.*
-import net.starlegacy.feature.customitem.CustomItem
+import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.customitem.CustomRecipes
 import net.starlegacy.feature.multiblock.Multiblocks

@@ -12,7 +12,7 @@ import net.starlegacy.cache.trade.EcoStations
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.economy.CollectedItem
 import net.starlegacy.database.schema.economy.EcoStation
-import net.starlegacy.feature.customitem.CustomItem
+import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.util.*

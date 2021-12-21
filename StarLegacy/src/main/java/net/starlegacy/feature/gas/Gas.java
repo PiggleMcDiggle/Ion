@@ -1,7 +1,7 @@
 package net.starlegacy.feature.gas;
 
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor;
-import net.starlegacy.feature.customitem.CustomItem;
+import net.starlegacy.feature.customitem.type.CustomItem;
 import net.starlegacy.feature.customitem.CustomItems;
 import org.bukkit.Location;
 

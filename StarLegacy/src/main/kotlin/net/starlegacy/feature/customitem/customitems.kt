@@ -2,11 +2,10 @@ package net.starlegacy.feature.customitem
 
 import com.google.common.collect.HashBasedTable
 import com.google.common.collect.Table
+import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.misc.CustomBlock
 import net.starlegacy.feature.misc.CustomBlocks
 import net.starlegacy.util.set
-import net.starlegacy.util.updateMeta
-import org.bukkit.ChatColor
 import org.bukkit.ChatColor.AQUA
 import org.bukkit.ChatColor.BLUE
 import org.bukkit.ChatColor.DARK_AQUA
@@ -19,7 +18,6 @@ import org.bukkit.ChatColor.RED
 import org.bukkit.ChatColor.WHITE
 import org.bukkit.ChatColor.YELLOW
 import org.bukkit.Material
-import org.bukkit.Material.APPLE
 import org.bukkit.Material.BOW
 import org.bukkit.Material.DIAMOND_AXE
 import org.bukkit.Material.DIAMOND_PICKAXE

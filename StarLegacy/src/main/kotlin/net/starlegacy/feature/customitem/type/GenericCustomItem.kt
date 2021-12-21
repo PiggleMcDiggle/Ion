@@ -1,5 +1,6 @@
-package net.starlegacy.feature.customitem
+package net.starlegacy.feature.customitem.type
 
+import net.starlegacy.feature.customitem.CustomItemManager
 import org.bukkit.Material
 
 class GenericCustomItem(

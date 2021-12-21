@@ -1,5 +1,6 @@
 package net.starlegacy.feature.customitem
 
+import net.starlegacy.feature.customitem.type.CustomItem
 import org.bukkit.Material
 
 class PlanetIcons {

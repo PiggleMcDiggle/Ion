@@ -2,6 +2,7 @@ package net.starlegacy.feature.customitem
 
 import net.starlegacy.PLUGIN
 import net.starlegacy.SLComponent
+import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
 import org.bukkit.Material
