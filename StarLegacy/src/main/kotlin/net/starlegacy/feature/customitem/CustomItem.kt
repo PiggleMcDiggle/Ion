@@ -10,15 +10,14 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
 abstract class CustomItem() {
-	abstract val displayName: String
 	abstract val id: String
-	abstract val lore: MutableList<Component>
-	abstract val unbreakable: Boolean
 	abstract val model: Int
+	abstract val displayName: String
 	abstract val material: Material
+	open val lore = mutableListOf<Component>()
+	open val unbreakable = true
 
-
-	fun getItem(amount: Int = 1) : ItemStack {
+	fun getItem(amount: Int = 1): ItemStack {
 		return ItemStack(material, amount).updateMeta {
 			it.setCustomModelData(model)
 			it.isUnbreakable = unbreakable
@@ -29,12 +28,4 @@ abstract class CustomItem() {
 
 	open fun onRightClick(event: PlayerInteractEvent) {}
 	open fun onLeftClick(event: PlayerInteractEvent) {}
-
-	override fun equals(other: Any?): Boolean {
-		return other === this
-	}
-
-	override fun hashCode(): Int {
-		return id.hashCode()
-	}
 }

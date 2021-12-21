@@ -1,6 +1,7 @@
 package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -26,10 +27,14 @@ class CustomItemManager: Listener {
 			}
 		}
 		fun getCustomItem(stack: ItemStack): CustomItem? = customItems[stack.itemMeta.persistentDataContainer.get(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING)]
+		fun makeGenericItem(id: String, modelData: Int, name: String, material: Material): GenericCustomItem {
+			return GenericCustomItem(id, modelData, name, material)
+		}
 	}
 
 	init {
 		plugin.server.pluginManager.registerEvents(this, plugin)
+		registerItems()
 	}
 
 	@EventHandler
@@ -50,5 +55,9 @@ class CustomItemManager: Listener {
 			}
 			else -> return // ugh
 		}
+	}
+
+	private fun registerItems() {
+		PlanetIcons.register()
 	}
 }

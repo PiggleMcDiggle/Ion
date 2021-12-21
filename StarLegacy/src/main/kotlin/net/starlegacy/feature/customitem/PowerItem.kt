@@ -1,6 +1,6 @@
 package net.starlegacy.feature.customitem
 
 
-abstract class PowerItem: CustomItem {
+abstract class PowerItem: CustomItem() {
 
 }
