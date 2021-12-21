@@ -2,7 +2,7 @@ package net.starlegacy.listener.gear
 
 import net.starlegacy.PLUGIN
 import net.starlegacy.feature.machine.AreaShields
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
 import org.bukkit.Material

@@ -2,7 +2,7 @@ package net.starlegacy.feature.gas
 
 import net.starlegacy.SLComponent
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.util.*
 import org.bukkit.Location
 import org.bukkit.Material

@@ -4,7 +4,7 @@ import net.starlegacy.SLComponent
 import net.starlegacy.cache.nations.PlayerCache
 import net.starlegacy.cache.nations.RelationCache
 import net.starlegacy.database.schema.nations.NationRelation
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.multiblock.gravitywell.GravityWellMultiblock
 import net.starlegacy.feature.space.SpaceWorlds

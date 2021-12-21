@@ -1,8 +1,8 @@
 package net.starlegacy.feature.gas;
 
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor;
-import net.starlegacy.feature.misc.customitem.CustomItem;
-import net.starlegacy.feature.misc.customitem.CustomItems;
+import net.starlegacy.feature.customitem.CustomItem;
+import net.starlegacy.feature.customitem.CustomItems;
 import org.bukkit.Location;
 
 import java.util.List;

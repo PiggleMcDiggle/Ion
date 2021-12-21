@@ -12,8 +12,8 @@ import net.starlegacy.feature.economy.city.CityNPCs
 import net.starlegacy.feature.economy.city.TradeCities
 import net.starlegacy.feature.economy.city.TradeCityData
 import net.starlegacy.feature.economy.city.TradeCityType
-import net.starlegacy.feature.misc.customitem.CustomItem
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItem
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.feature.nations.region.Regions
 import net.starlegacy.feature.nations.region.types.RegionTerritory

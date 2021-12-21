@@ -1,4 +1,4 @@
-package net.starlegacy.feature.misc.customitem
+package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.util.colorize

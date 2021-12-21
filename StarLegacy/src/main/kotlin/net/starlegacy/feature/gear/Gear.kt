@@ -2,7 +2,7 @@ package net.starlegacy.feature.gear
 
 import net.starlegacy.SLComponent
 import net.starlegacy.feature.gear.powerarmor.PowerArmorManager
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
 

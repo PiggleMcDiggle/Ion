@@ -2,7 +2,7 @@ package net.starlegacy.feature.multiblock.generator
 
 import net.starlegacy.feature.machine.GeneratorFuel
 import net.starlegacy.feature.machine.PowerMachines
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.multiblock.FurnaceMultiblock
 import net.starlegacy.feature.multiblock.MultiblockShape
 import net.starlegacy.feature.multiblock.PowerStoringMultiblock

@@ -1,6 +1,6 @@
 package net.starlegacy.listener.misc
 
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.multiblock.misc.MobDefender
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.filtered

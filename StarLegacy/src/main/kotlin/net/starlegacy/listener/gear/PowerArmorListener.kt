@@ -5,9 +5,9 @@ import net.starlegacy.cache.nations.NationCache
 import net.starlegacy.cache.nations.PlayerCache
 import net.starlegacy.feature.gear.powerarmor.PowerArmorManager
 import net.starlegacy.feature.gear.powerarmor.PowerArmorModule
-import net.starlegacy.feature.misc.customitem.CustomItems
-import net.starlegacy.feature.misc.customitem.getPower
-import net.starlegacy.feature.misc.customitem.removePower
+import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.getPower
+import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.action

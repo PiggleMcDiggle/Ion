@@ -2,8 +2,8 @@ package net.starlegacy.feature.space
 
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.space.Planet
-import net.starlegacy.feature.misc.customitem.CustomItem
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItem
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.util.*
 import org.bukkit.Bukkit
 import org.bukkit.World

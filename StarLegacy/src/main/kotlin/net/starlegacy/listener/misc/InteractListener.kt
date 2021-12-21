@@ -3,10 +3,10 @@ package net.starlegacy.listener.misc
 //import net.starlegacy.feature.machine.BaseShields
 import net.starlegacy.feature.machine.PowerMachines
 import net.starlegacy.feature.misc.*
-import net.starlegacy.feature.misc.customitem.CustomBlockItem
-import net.starlegacy.feature.misc.customitem.CustomItems
-import net.starlegacy.feature.misc.customitem.getPower
-import net.starlegacy.feature.misc.customitem.setPower
+import net.starlegacy.feature.customitem.CustomBlockItem
+import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.getPower
+import net.starlegacy.feature.customitem.setPower
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.multiblock.PowerStoringMultiblock
 import net.starlegacy.feature.multiblock.dockingtube.ConnectedDockingTubeMultiblock

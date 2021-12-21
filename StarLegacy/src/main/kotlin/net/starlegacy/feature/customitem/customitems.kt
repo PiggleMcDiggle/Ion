@@ -1,4 +1,4 @@
-package net.starlegacy.feature.misc.customitem
+package net.starlegacy.feature.customitem
 
 import com.google.common.collect.HashBasedTable
 import com.google.common.collect.Table

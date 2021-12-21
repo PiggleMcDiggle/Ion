@@ -2,7 +2,7 @@ package net.starlegacy.command.misc
 
 import co.aikar.commands.annotation.*
 import net.starlegacy.command.SLCommand
-import net.starlegacy.feature.misc.customitem.CustomItem
+import net.starlegacy.feature.customitem.CustomItem
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import net.starlegacy.util.*
 import org.bukkit.command.CommandSender

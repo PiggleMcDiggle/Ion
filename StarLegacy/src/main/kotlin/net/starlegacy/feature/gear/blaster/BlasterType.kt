@@ -1,6 +1,6 @@
 package net.starlegacy.feature.gear.blaster
 
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItems
 import org.bukkit.Sound
 
 enum class BlasterType(

@@ -1,4 +1,4 @@
-package net.starlegacy.feature.misc.customitem
+package net.starlegacy.feature.customitem
 
 import net.starlegacy.PLUGIN
 import net.starlegacy.SLComponent

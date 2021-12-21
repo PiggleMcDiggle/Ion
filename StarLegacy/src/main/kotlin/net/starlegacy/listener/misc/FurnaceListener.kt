@@ -1,7 +1,7 @@
 package net.starlegacy.listener.misc
 
-import net.starlegacy.feature.misc.customitem.CustomBlockItem
-import net.starlegacy.feature.misc.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomBlockItem
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.multiblock.FurnaceMultiblock
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.listener.SLEventListener
