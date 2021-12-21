@@ -1,6 +1,7 @@
 package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
+import net.starlegacy.SLComponent
 import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import org.bukkit.Material
@@ -8,6 +9,7 @@ import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
@@ -34,7 +36,7 @@ class CustomItemManager: Listener {
 		}
 	}
 
-	init {
+	override fun onEnable() {
 		plugin.server.pluginManager.registerEvents(this, plugin)
 		registerItems()
 	}
@@ -58,8 +60,19 @@ class CustomItemManager: Listener {
 			else -> return // ugh
 		}
 	}
+	@EventHandler
+	fun onDrop(event: PlayerDropItemEvent) {
+		val item = customItems[
+				event.itemDrop.itemStack.itemMeta.persistentDataContainer.get(
+					NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING
+				) ?: return]
+			?: return
+
+		item.onDropped(event)
+	}
 
 	private fun registerItems() {
+		// Register items here
 		PlanetIcons.register()
 	}
 }

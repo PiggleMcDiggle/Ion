@@ -5,8 +5,10 @@ import net.kyori.adventure.text.Component
 import net.starlegacy.util.updateMeta
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.persistence.PersistentDataType
 
 abstract class CustomItem() {
@@ -14,6 +16,7 @@ abstract class CustomItem() {
 	abstract val model: Int
 	abstract val displayName: String
 	abstract val material: Material
+	abstract val recipe: ShapedRecipe;
 	open val lore = mutableListOf<Component>()
 	open val unbreakable = true
 
@@ -28,4 +31,5 @@ abstract class CustomItem() {
 
 	open fun onRightClick(event: PlayerInteractEvent) {}
 	open fun onLeftClick(event: PlayerInteractEvent) {}
+	open fun onDropped(event: PlayerDropItemEvent) {}
 }
