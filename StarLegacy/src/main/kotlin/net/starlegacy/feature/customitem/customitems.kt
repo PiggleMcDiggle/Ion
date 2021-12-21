@@ -37,23 +37,6 @@ import org.bukkit.Material.SNOWBALL
 import org.bukkit.inventory.ItemStack
 
 
-open class PoweredCustomItem(
-	id: String,
-	displayName: String,
-	material: Material,
-	model: Int,
-	unbreakable: Boolean,
-	val maxPower: Int
-) : CustomItem(id, displayName, material, model, unbreakable) {
-	override fun itemStack(amount: Int): ItemStack {
-		val item = super.itemStack(amount)
-		item.lore = (item.lore ?: mutableListOf()).apply {
-			add("$ITEM_POWER_PREFIX$maxPower")
-		}
-		return item
-	}
-}
-
 class CustomBlockItem(id: String, displayName: String, material: Material, model: Int, val customBlockId: String) :
 	CustomItem(id, displayName, material, model, false) {
 
