@@ -32,6 +32,4 @@ abstract class CustomItem {
 
 	open fun onRightClick(event: PlayerInteractEvent) {}
 	open fun onLeftClick(event: PlayerInteractEvent) {}
-	open fun onDropped() {}
-	open fun onPickup() {}
 }
