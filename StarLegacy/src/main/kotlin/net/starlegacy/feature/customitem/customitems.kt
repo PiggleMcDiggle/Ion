@@ -3,10 +3,20 @@ package net.starlegacy.feature.customitem
 import com.google.common.collect.HashBasedTable
 import com.google.common.collect.Table
 import net.starlegacy.feature.customitem.type.CustomItem
+import net.starlegacy.feature.misc.CustomBlock
+import net.starlegacy.feature.misc.CustomBlocks
 import net.starlegacy.util.set
+import org.bukkit.ChatColor.AQUA
+import org.bukkit.ChatColor.BLUE
+import org.bukkit.ChatColor.DARK_AQUA
+import org.bukkit.ChatColor.DARK_GRAY
+import org.bukkit.ChatColor.DARK_PURPLE
 import org.bukkit.ChatColor.GOLD
 import org.bukkit.ChatColor.GRAY
+import org.bukkit.ChatColor.GREEN
 import org.bukkit.ChatColor.RED
+import org.bukkit.ChatColor.WHITE
+import org.bukkit.ChatColor.YELLOW
 import org.bukkit.Material
 import org.bukkit.Material.BOW
 import org.bukkit.Material.DIAMOND_AXE
@@ -19,6 +29,10 @@ import org.bukkit.Material.LEATHER_BOOTS
 import org.bukkit.Material.LEATHER_CHESTPLATE
 import org.bukkit.Material.LEATHER_HELMET
 import org.bukkit.Material.LEATHER_LEGGINGS
+import org.bukkit.Material.SHEARS
+import org.bukkit.Material.SHIELD
+import org.bukkit.Material.SNOWBALL
+import org.bukkit.inventory.ItemStack
 
 
 @Suppress("unused")

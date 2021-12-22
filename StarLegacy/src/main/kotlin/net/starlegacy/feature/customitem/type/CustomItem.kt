@@ -10,9 +10,10 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.persistence.PersistentDataType
 
-abstract class CustomItem {
+abstract class CustomItem() {
 	abstract val id: String
 	abstract val model: Int
 	abstract val displayName: String
@@ -38,40 +39,34 @@ abstract class CustomItem {
 	 * @param event The event.
 	 */
 	open fun onRightClick(event: PlayerInteractEvent) {}
-
 	/**
 	 * Called when the player left clicks while holding the item.
 	 *
 	 * @param event The event.
 	 */
 	open fun onLeftClick(event: PlayerInteractEvent) {}
-
 	/**
 	 * Called when the player drops the item.
 	 *
 	 * @param event The event.
 	 */
 	open fun onDropped(event: PlayerDropItemEvent) {}
-
 	/**
 	 * Called immediately after the item is registered.
 	 */
 	open fun onItemRegistered() {}
-
 	/**
 	 * Called when an entity damages another entity while holding the item.
 	 *
 	 * @param event The event.
 	 */
 	open fun onHitEntity(event: EntityDamageByEntityEvent) {}
-
 	/**
 	 * Called when an entity takes damage from another entity while holding the item.
 	 *
 	 * @param event The event.
 	 */
 	open fun onHitWhileHolding(event: EntityDamageByEntityEvent) {}
-
 	/**
 	 * Called when the crafting grid is matched to the item.
 	 *

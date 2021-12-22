@@ -17,7 +17,7 @@ class DetonatorItem(
 	override val model: Int,
 	override val displayName: String,
 	override val material: Material
-) : CustomItem() {
+): CustomItem() {
 
 	override fun onRightClick(event: PlayerInteractEvent) {
 		event.isCancelled = true
