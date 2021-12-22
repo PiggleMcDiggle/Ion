@@ -6,9 +6,13 @@ import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.inventory.CraftItemEvent
+import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
@@ -29,6 +33,7 @@ class CustomItemManager: Listener {
 			if (customItems.put(item.id, item) != null) {
 				plugin.logger.warning("Multiple custom items with id ${item.id} have been registered!")
 			}
+			item.onItemRegistered()
 		}
 		fun getCustomItem(stack: ItemStack): CustomItem? = customItems[stack.itemMeta.persistentDataContainer.get(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING)]
 	}
@@ -36,6 +41,15 @@ class CustomItemManager: Listener {
 	init {
 		plugin.server.pluginManager.registerEvents(this, plugin)
 		registerItems()
+	}
+
+	private fun registerItems() {
+		// Register items here
+		PlanetIcons.register()
+		MiscItems.register()
+		GasItems.register()
+		BatteryItems.register()
+		EnergySwords.register()
 	}
 
 	@EventHandler
@@ -67,13 +81,26 @@ class CustomItemManager: Listener {
 
 		item.onDropped(event)
 	}
+	@EventHandler
+	fun onCraft(event: PrepareItemCraftEvent) {
+		val item = customItems[
+				event.inventory.result!!.itemMeta.persistentDataContainer.get(
+					NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING
+				) ?: return]
+			?: return
 
-	private fun registerItems() {
-		// Register items here
-		PlanetIcons.register()
-		MiscItems.register()
-		GasItems.register()
-		BatteryItems.register()
-		EnergySwords.register()
+		item.onPrepareCraft(event)
+	}
+	@EventHandler
+	fun onHit(event: EntityDamageByEntityEvent) {
+		val damager = event.damager as? LivingEntity ?: return
+		val itemInHand = damager.equipment?.itemInMainHand ?: return
+		getCustomItem(itemInHand)?.onHitEntity(event) ?: return
+	}
+	@EventHandler
+	fun onHitWhileHolding(event: EntityDamageByEntityEvent) {
+		val damaged = event.entity as? LivingEntity ?: return
+		val itemInHand = damaged.equipment?.itemInMainHand ?: return
+		getCustomItem(itemInHand)?.onHitWhileHolding(event) ?: return
 	}
 }
