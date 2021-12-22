@@ -72,5 +72,6 @@ class CustomItemManager: Listener {
 		// Register items here
 		PlanetIcons.register()
 		MiscItems.register()
+		GasItems.register()
 	}
 }

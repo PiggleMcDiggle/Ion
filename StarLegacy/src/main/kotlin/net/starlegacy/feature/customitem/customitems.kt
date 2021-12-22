@@ -46,22 +46,6 @@ object CustomItems {
 		return item
 	}
 
-	//region Gas Canisters
-	private fun registerGas(id: String, name: String, model: Int) = register(
-		GasItem(id, displayName = "$name$GRAY Gas Canister", material = SNOWBALL, model = model)
-	)
-
-	class GasItem(id: String, displayName: String, material: Material, model: Int) :
-		CustomItem(id, displayName, material, model, false)
-
-	val GAS_CANISTER_EMPTY = registerGas(id = "empty_canister", name = "${WHITE}Empty", model = 1)
-	val GAS_CANISTER_HELIUM = registerGas(id = "gas_helium", name = "${YELLOW}Helium", model = 2)
-	val GAS_CANISTER_OXYGEN = registerGas(id = "gas_oxygen", name = "${AQUA}Oxygen", model = 3)
-	val GAS_CANISTER_HYDROGEN = registerGas(id = "gas_hydrogen", name = "${GREEN}Hydrogen", model = 4)
-	val GAS_CANISTER_NITROGEN = registerGas(id = "gas_nitrogen", name = "${DARK_PURPLE}Nitrogen", model = 5)
-	val GAS_CANISTER_CARBON_DIOXIDE = registerGas(id = "gas_carbon_dioxide", name = "${RED}Carbon Dioxide", model = 6)
-	//endregion Gas Canisters
-
 	//region Batteries
 	enum class BatteryType(val itemId: String, val maxPower: Int) {
 		SMALL("battery_a", 500), MEDIUM("battery_m", 1000), LARGE("battery_g", 2000);
