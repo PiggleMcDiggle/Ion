@@ -8,7 +8,7 @@ import org.bukkit.Material
 
 class GasItems {
 	companion object {
-		private fun registerGas(name: String, model: Int): CustomItem {
+		private fun registerGas(name: String, model: Int): GasItem {
 			val item = GasItem(
 				id = "gas_canister_${name.stripColor().lowercase().replace(" ", "_")}",
 				displayName = name,
