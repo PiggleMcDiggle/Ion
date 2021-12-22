@@ -46,25 +46,6 @@ object CustomItems {
 		return item
 	}
 
-	//region Batteries
-	enum class BatteryType(val itemId: String, val maxPower: Int) {
-		SMALL("battery_a", 500), MEDIUM("battery_m", 1000), LARGE("battery_g", 2000);
-
-		fun getItem(): CustomItem = CustomItems[itemId] ?: error("No custom item for battery type $name!")
-	}
-
-	class BatteryItem(type: BatteryType, typeName: String, model: Int) : PoweredCustomItem(
-		type.itemId, "${BLUE}Size$DARK_GRAY-$typeName$BLUE Battery", SNOWBALL, model, false, type.maxPower
-	)
-
-	private fun registerBattery(type: BatteryType, typeName: String, model: Int): PoweredCustomItem =
-		register(BatteryItem(type, typeName, model))
-
-	val BATTERY_SMALL = registerBattery(type = BatteryType.SMALL, typeName = "${RED}A", model = 7)
-	val BATTERY_MEDIUM = registerBattery(type = BatteryType.MEDIUM, typeName = "${GREEN}M", model = 8)
-	val BATTERY_LARGE = registerBattery(type = BatteryType.LARGE, typeName = "${GOLD}G", model = 9)
-	//endregion
-
 	//region Energy Swords
 	private fun registerEnergySword(color: String, colorName: String, model: Int): EnergySwordItem = register(
 		EnergySwordItem("energy_sword_$color", "$colorName$YELLOW Energy$DARK_AQUA Sword", SHIELD, model)

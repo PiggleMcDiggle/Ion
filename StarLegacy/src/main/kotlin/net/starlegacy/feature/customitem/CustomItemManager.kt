@@ -73,5 +73,6 @@ class CustomItemManager: Listener {
 		PlanetIcons.register()
 		MiscItems.register()
 		GasItems.register()
+		BatteryItems.register()
 	}
 }
