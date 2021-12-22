@@ -35,13 +35,6 @@ import org.bukkit.Material.SNOWBALL
 import org.bukkit.inventory.ItemStack
 
 
-class CustomBlockItem(id: String, displayName: String, material: Material, model: Int, val customBlockId: String) :
-	CustomItem(id, displayName, material, model, false) {
-
-	val customBlock: CustomBlock
-		get() = CustomBlocks[customBlockId] ?: error("Custom block $customBlockId not found for custom item $id")
-}
-
 @Suppress("unused")
 object CustomItems {
 	private val idMap = mutableMapOf<String, CustomItem>()
@@ -52,52 +45,6 @@ object CustomItems {
 		modelMap[item.material, item.model] = item
 		return item
 	}
-
-	private fun makeItem(
-		id: String,
-		name: String,
-		mat: Material,
-		model: Int,
-		unbreakable: Boolean = false
-	): CustomItem = register(CustomItem(id, name, mat, model, unbreakable))
-
-	private fun makePoweredItem(
-		id: String,
-		displayName: String,
-		material: Material,
-		model: Int,
-		maxPower: Int,
-		unbreakable: Boolean = false
-	): PoweredCustomItem = register(PoweredCustomItem(id, displayName, material, model, unbreakable, maxPower))
-
-	private fun makeBlockItem(
-		id: String,
-		displayName: String,
-		material: Material,
-		model: Int,
-		blockId: String
-	): CustomBlockItem = register(CustomBlockItem(id, displayName, material, model, blockId))
-
-	operator fun get(id: String?): CustomItem? = idMap[id]
-
-	operator fun get(item: ItemStack?): CustomItem? {
-		val itemMeta = item?.itemMeta ?: return null
-		if (!itemMeta.hasCustomModelData()) {
-			return null
-		}
-		return modelMap[item.type, itemMeta.customModelData]
-	}
-
-	fun all(): Collection<CustomItem> = idMap.values
-
-	//region Misc
-	val DETONATOR: CustomItem = makeItem(
-		id = "detonator",
-		name = "${RED}Thermal$GRAY Detonator",
-		mat = SHEARS,
-		model = 1
-	)
-	//endregion Misc
 
 	//region Gas Canisters
 	private fun registerGas(id: String, name: String, model: Int) = register(
