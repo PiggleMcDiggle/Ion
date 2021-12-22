@@ -74,5 +74,6 @@ class CustomItemManager: Listener {
 	private fun registerItems() {
 		// Register items here
 		PlanetIcons.register()
+		MiscItems.register()
 	}
 }
