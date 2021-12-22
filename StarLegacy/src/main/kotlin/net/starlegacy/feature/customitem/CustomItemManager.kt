@@ -31,9 +31,6 @@ class CustomItemManager: Listener {
 			}
 		}
 		fun getCustomItem(stack: ItemStack): CustomItem? = customItems[stack.itemMeta.persistentDataContainer.get(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING)]
-		fun makeGenericItem(id: String, modelData: Int, name: String, material: Material): GenericCustomItem {
-			return GenericCustomItem(id, modelData, name, material)
-		}
 	}
 
 	init {

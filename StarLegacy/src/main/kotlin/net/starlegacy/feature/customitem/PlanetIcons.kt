@@ -1,16 +1,17 @@
 package net.starlegacy.feature.customitem
 
 import net.starlegacy.feature.customitem.type.CustomItem
+import net.starlegacy.feature.customitem.type.GenericCustomItem
 import org.bukkit.Material
 
 class PlanetIcons {
 	companion object {
 		private fun registerPlanetIcon(name: String, model: Int): CustomItem {
-			val item = CustomItemManager.makeGenericItem(
+			val item = GenericCustomItem(
 				id = "planet_icon_${name.lowercase().replace(" ", "_")}",
-				name = name,
+				displayName = name,
 				material = Material.APPLE,
-				modelData = model
+				model = model
 			)
 			CustomItemManager.register(item)
 			return item
