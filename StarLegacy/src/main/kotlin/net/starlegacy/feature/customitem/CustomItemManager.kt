@@ -74,5 +74,6 @@ class CustomItemManager: Listener {
 		MiscItems.register()
 		GasItems.register()
 		BatteryItems.register()
+		EnergySwords.register()
 	}
 }

@@ -46,21 +46,6 @@ object CustomItems {
 		return item
 	}
 
-	//region Energy Swords
-	private fun registerEnergySword(color: String, colorName: String, model: Int): EnergySwordItem = register(
-		EnergySwordItem("energy_sword_$color", "$colorName$YELLOW Energy$DARK_AQUA Sword", SHIELD, model)
-	)
-
-	class EnergySwordItem(id: String, displayName: String, material: Material, model: Int) :
-		CustomItem(id, displayName, material, model, true)
-
-	val ENERGY_SWORD_BLUE = registerEnergySword(color = "blue", colorName = "${BLUE}Blue", model = 1)
-	val ENERGY_SWORD_RED = registerEnergySword(color = "red", colorName = "${RED}Red", model = 2)
-	val ENERGY_SWORD_YELLOW = registerEnergySword(color = "yellow", colorName = "${YELLOW}Yellow", model = 3)
-	val ENERGY_SWORD_GREEN = registerEnergySword(color = "green", colorName = "${GREEN}Green", model = 4)
-	val ENERGY_SWORD_PURPLE = registerEnergySword(color = "purple", colorName = "${DARK_PURPLE}Purple", model = 5)
-	val ENERGY_SWORD_ORANGE = registerEnergySword(color = "orange", colorName = "${GOLD}Orange", model = 6)
-	//endregion Energy Swords
 
 	//region Blasters
 	private fun registerBlaster(type: String, typeName: String, model: Int, maxPower: Int): BlasterItem = register(
