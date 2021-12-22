@@ -1,40 +1,28 @@
-package net.starlegacy.listener.gear
+package net.starlegacy.feature.customitem.type
 
 import net.starlegacy.PLUGIN
 import net.starlegacy.feature.machine.AreaShields
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.entity.LivingEntity
-import org.bukkit.event.EventHandler
-import org.bukkit.event.EventPriority
-import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockExplodeEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.util.Vector
-import java.util.ArrayList
 
-object DetonatorListener : SLEventListener() {
-	@EventHandler(priority = EventPriority.LOWEST)
-	fun onThrowDetonator(event: PlayerInteractEvent) {
-		if (event.action != Action.RIGHT_CLICK_BLOCK && event.action != Action.RIGHT_CLICK_AIR) {
-			return
-		}
+class DetonatorItem(
+	override val id: String,
+	override val model: Int,
+	override val displayName: String,
+	override val material: Material
+): CustomItem() {
 
-		val item = event.item ?: return
-		val customItem = CustomItems[item]
-
-		if (customItem != CustomItems.DETONATOR) {
-			return
-		}
-
+	override fun onRightClick(event: PlayerInteractEvent) {
 		event.isCancelled = true
 		val player = event.player
-		val newItem = item.clone()
+		val newItem = event.item!!.clone()
 		newItem.amount = 1
 		val detonator = player.world.dropItem(player.eyeLocation, newItem)
 		detonator.pickupDelay = Integer.MAX_VALUE
@@ -100,6 +88,6 @@ object DetonatorListener : SLEventListener() {
 					.forEach { it?.damage(80.0 / it.location.distance(detonator.location), player) }
 			}
 		}.runTaskTimer(PLUGIN, 1, 1)
-		item.amount = 0
+		event.item!!.amount = 0
 	}
 }
