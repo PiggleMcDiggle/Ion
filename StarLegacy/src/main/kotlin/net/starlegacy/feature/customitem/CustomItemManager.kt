@@ -1,30 +1,26 @@
 package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
-import net.starlegacy.SLComponent
 import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.type.GenericCustomItem
-import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.entity.EntityDamageByEntityEvent
-import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
-class CustomItemManager: Listener {
+class CustomItemManager : Listener {
 	companion object {
 		val customItems = mutableMapOf<String, CustomItem>()
 
 		fun register(item: CustomItem) {
 			// Check for duplicate custom model data
-			customItems.forEach{ (id, customItem) ->
+			customItems.forEach { (id, customItem) ->
 				if (customItem.model == item.model && customItem.material == item.material) {
 					plugin.logger.warning("Multiple custom items have registered for the same material and model data!")
 					plugin.logger.warning("${customItem.id} and ${item.id} are both using ${customItem.material.name} and ${customItem.model}")
@@ -35,7 +31,11 @@ class CustomItemManager: Listener {
 			}
 			item.onItemRegistered()
 		}
-		fun getCustomItem(stack: ItemStack): CustomItem? = customItems[stack.itemMeta.persistentDataContainer.get(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING)]
+
+		fun getCustomItem(stack: ItemStack): CustomItem? = customItems[stack.itemMeta.persistentDataContainer.get(
+			NamespacedKey(plugin, "custom-item-id"),
+			PersistentDataType.STRING
+		)]
 	}
 
 	init {
@@ -63,7 +63,7 @@ class CustomItemManager: Listener {
 
 		when (event.action) {
 			Action.LEFT_CLICK_BLOCK, Action.LEFT_CLICK_AIR -> {
-				 item.onLeftClick(event)
+				item.onLeftClick(event)
 			}
 			Action.RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK -> {
 				item.onRightClick(event)
@@ -71,6 +71,7 @@ class CustomItemManager: Listener {
 			else -> return // ugh
 		}
 	}
+
 	@EventHandler
 	fun onDrop(event: PlayerDropItemEvent) {
 		val item = customItems[
@@ -81,6 +82,7 @@ class CustomItemManager: Listener {
 
 		item.onDropped(event)
 	}
+
 	@EventHandler
 	fun onCraft(event: PrepareItemCraftEvent) {
 		val item = customItems[
@@ -91,12 +93,14 @@ class CustomItemManager: Listener {
 
 		item.onPrepareCraft(event)
 	}
+
 	@EventHandler
 	fun onHit(event: EntityDamageByEntityEvent) {
 		val damager = event.damager as? LivingEntity ?: return
 		val itemInHand = damager.equipment?.itemInMainHand ?: return
 		getCustomItem(itemInHand)?.onHitEntity(event) ?: return
 	}
+
 	@EventHandler
 	fun onHitWhileHolding(event: EntityDamageByEntityEvent) {
 		val damaged = event.entity as? LivingEntity ?: return

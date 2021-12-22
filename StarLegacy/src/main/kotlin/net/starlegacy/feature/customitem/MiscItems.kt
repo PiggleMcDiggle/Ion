@@ -10,11 +10,11 @@ class MiscItems {
 			// Detonators
 			CustomItemManager.register(
 				DetonatorItem(
-				id = "detonator",
-				displayName = "${ChatColor.RED}Thermal${ChatColor.GRAY} Detonator",
-				material = Material.SHEARS,
-				model = 1
-			)
+					id = "detonator",
+					displayName = "${ChatColor.RED}Thermal${ChatColor.GRAY} Detonator",
+					material = Material.SHEARS,
+					model = 1
+				)
 			)
 		}
 	}

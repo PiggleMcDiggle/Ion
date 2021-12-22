@@ -10,8 +10,8 @@ class GenericCustomItem(
 	override val displayName: String,
 	override val material: Material
 
-	): CustomItem() {
-		init {
-			CustomItemManager.register(this)
-		}
+) : CustomItem() {
+	init {
+		CustomItemManager.register(this)
+	}
 }

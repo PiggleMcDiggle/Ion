@@ -11,7 +11,7 @@ class CustomBlockItem(
 	override val material: Material,
 	val customBlockId: String
 
-): CustomItem() {
+) : CustomItem() {
 	val customBlock: CustomBlock
-	get() = CustomBlocks[customBlockId] ?: error("Custom block $customBlockId not found for custom item $id")
+		get() = CustomBlocks[customBlockId] ?: error("Custom block $customBlockId not found for custom item $id")
 }
