@@ -5,12 +5,16 @@ import org.bukkit.Material
 
 class PlanetIcons {
 	companion object {
-		private fun registerPlanetIcon(name: String, model: Int): CustomItem = CustomItemManager.makeGenericItem(
-			id = "planet_icon_${name.lowercase().replace(" ", "")}",
-			name = name,
-			material = Material.APPLE,
-			modelData = model
-		)
+		private fun registerPlanetIcon(name: String, model: Int): CustomItem {
+			val item = CustomItemManager.makeGenericItem(
+				id = "planet_icon_${name.lowercase().replace(" ", "")}",
+				name = name,
+				material = Material.APPLE,
+				modelData = model
+			)
+			CustomItemManager.register(item)
+			return item
+		}
 
 		fun register() {
 			registerPlanetIcon("Aecor", 1)
