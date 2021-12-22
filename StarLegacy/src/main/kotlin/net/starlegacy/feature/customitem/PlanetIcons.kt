@@ -7,7 +7,7 @@ class PlanetIcons {
 	companion object {
 		private fun registerPlanetIcon(name: String, model: Int): CustomItem {
 			val item = CustomItemManager.makeGenericItem(
-				id = "planet_icon_${name.lowercase().replace(" ", "")}",
+				id = "planet_icon_${name.lowercase().replace(" ", "_")}",
 				name = name,
 				material = Material.APPLE,
 				modelData = model
