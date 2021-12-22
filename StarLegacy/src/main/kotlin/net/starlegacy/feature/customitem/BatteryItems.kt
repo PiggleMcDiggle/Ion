@@ -1,6 +1,9 @@
 package net.starlegacy.feature.customitem
 
-import org.bukkit.Material;
+import net.starlegacy.feature.customitem.type.BatteryItem
+import net.starlegacy.util.SLTextStyle
+import net.starlegacy.util.stripColor
+import org.bukkit.Material
 
 class BatteryItems {
 	companion object {
@@ -17,9 +20,9 @@ class BatteryItems {
 		}
 
 		fun register() {
-			registerBattery("Battery ${RED}A", 7, 500)
-			registerBattery("Battery ${GREEN}M", 8, 1000)
-			registerBattery("Battery ${GOLD}G", 9, 2000)
+			registerBattery("Battery ${SLTextStyle.RED}A", 7, 500)
+			registerBattery("Battery ${SLTextStyle.GREEN}M", 8, 1000)
+			registerBattery("Battery ${SLTextStyle.GOLD}G", 9, 2000)
 		}
 	}
 }
