@@ -16,7 +16,6 @@ abstract class CustomItem() {
 	abstract val model: Int
 	abstract val displayName: String
 	abstract val material: Material
-	abstract val recipe: ShapedRecipe;
 	open val lore = mutableListOf<Component>()
 	open val unbreakable = true
 
