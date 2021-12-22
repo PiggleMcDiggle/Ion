@@ -1,17 +1,13 @@
 package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
-import net.starlegacy.SLComponent
 import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.type.GenericCustomItem
-import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.entity.EntityDamageByEntityEvent
-import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent

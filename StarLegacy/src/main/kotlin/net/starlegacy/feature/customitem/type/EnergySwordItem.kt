@@ -1,15 +1,10 @@
 package net.starlegacy.feature.customitem.type
 
-import net.horizonsend.ion.Ion.Companion.plugin
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.listener.gear.SwordListener
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.msg
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.HumanEntity
-import org.bukkit.entity.LivingEntity
-import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent

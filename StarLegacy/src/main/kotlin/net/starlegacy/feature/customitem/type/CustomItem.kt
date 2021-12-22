@@ -10,7 +10,6 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.persistence.PersistentDataType
 
 abstract class CustomItem() {

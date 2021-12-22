@@ -1,10 +1,6 @@
 package net.starlegacy.feature.customitem
 
-import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.type.GasItem
-import net.starlegacy.util.stripColor
-import org.bukkit.ChatColor
-import org.bukkit.Material
+import org.bukkit.Material;
 
 class EnergySwords {
 	companion object {
