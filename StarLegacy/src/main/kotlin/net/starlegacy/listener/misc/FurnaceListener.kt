@@ -1,7 +1,7 @@
 package net.starlegacy.listener.misc
 
-import net.starlegacy.feature.customitem.CustomBlockItem
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.type.CustomBlockItem
 import net.starlegacy.feature.multiblock.FurnaceMultiblock
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.listener.SLEventListener
@@ -60,10 +60,10 @@ object FurnaceListener : SLEventListener() {
 	@EventHandler
 	fun onFurnaceSmeltCustomOre(event: FurnaceSmeltEvent) {
 		val source: ItemStack = event.source
-		val item = CustomItems[source]
+		val item = CustomItemManager[source]
 
 		if (item is CustomBlockItem && item.id.endsWith("_ore")) {
-			event.result = CustomItems[item.id.replace("_ore", "")]!!.itemStack(1)
+			event.result = CustomItemManager[item.id.replace("_ore", "")]!!.getItem()
 			return
 		}
 
@@ -83,7 +83,7 @@ object FurnaceListener : SLEventListener() {
 		}
 
 		val result: ItemStack = event.result
-		if (result.type == Material.DEAD_BUSH || result.type == Material.DANDELION || CustomItems[source] != null) {
+		if (result.type == Material.DEAD_BUSH || result.type == Material.DANDELION || CustomItemManager[source] != null) {
 			event.isCancelled = true
 		}
 	}

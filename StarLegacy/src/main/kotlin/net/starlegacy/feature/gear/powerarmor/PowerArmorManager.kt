@@ -1,8 +1,9 @@
 package net.starlegacy.feature.gear.powerarmor
 
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.removePower
+import net.starlegacy.feature.customitem.type.PowerArmorItem
 import net.starlegacy.listener.gear.hasMovedInLastSecond
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
@@ -105,7 +106,7 @@ object PowerArmorManager {
 		}
 	}
 
-	fun isPowerArmor(item: ItemStack?): Boolean = CustomItems[item] is CustomItems.PowerArmorItem
+	fun isPowerArmor(item: ItemStack?): Boolean = CustomItemManager[item] is PowerArmorItem
 
 	fun isModule(item: ItemStack?) = PowerArmorModule[item] != null
 

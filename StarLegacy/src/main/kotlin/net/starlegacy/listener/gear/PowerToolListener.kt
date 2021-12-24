@@ -1,8 +1,7 @@
 package net.starlegacy.listener.gear
 
 import net.starlegacy.PLUGIN
-import net.starlegacy.feature.gear.TreeCutter
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.listener.SLEventListener
@@ -30,7 +29,7 @@ object PowerToolListener : SLEventListener() {
 		}
 
 		val item = event.item ?: return
-		val customItem = CustomItems[item]
+		val customItem = CustomItemManager[item]
 		if (customItem == null || !customItem.id.startsWith("power_tool_")) {
 			return
 		}

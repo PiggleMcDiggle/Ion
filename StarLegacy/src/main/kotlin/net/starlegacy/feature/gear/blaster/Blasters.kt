@@ -3,8 +3,10 @@ package net.starlegacy.feature.gear.blaster
 import net.md_5.bungee.api.ChatColor
 import net.starlegacy.cache.nations.NationCache
 import net.starlegacy.cache.nations.PlayerCache
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.removePower
+import net.starlegacy.feature.customitem.type.BlasterItem
 import net.starlegacy.util.updateMeta
 import org.bukkit.Color
 import org.bukkit.DyeColor
@@ -19,10 +21,10 @@ import java.util.Random
 import java.util.UUID
 
 object Blasters {
-	fun getBlaster(item: ItemStack): CustomItems.BlasterItem? = CustomItems[item] as? CustomItems.BlasterItem
+	fun getBlaster(item: ItemStack): BlasterItem? = CustomItemManager[item] as? BlasterItem
 
 	private val typeMap = mutableMapOf<String, BlasterType>()
-	fun getBlasterType(item: CustomItems.BlasterItem): BlasterType =
+	fun getBlasterType(item: BlasterItem): BlasterType =
 		typeMap.getOrPut(item.id) { BlasterType.values().single { it.item === item } }
 
 	private val randomColorCache = mutableMapOf<UUID, Color>()
