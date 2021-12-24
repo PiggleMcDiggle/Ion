@@ -8,7 +8,7 @@ object MiscItems {
 
 	fun register() {
 		// Detonators
-		CustomItemManager.register(
+		CustomItems.register(
 			DetonatorItem(
 				id = "detonator",
 				displayName = "${ChatColor.RED}Thermal${ChatColor.GRAY} Detonator",

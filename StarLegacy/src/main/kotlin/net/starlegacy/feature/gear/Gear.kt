@@ -1,7 +1,7 @@
 package net.starlegacy.feature.gear
 
 import net.starlegacy.SLComponent
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.gear.powerarmor.PowerArmorManager
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
@@ -20,8 +20,8 @@ object Gear : SLComponent() {
 						val main = player.inventory.itemInMainHand
 						val offhand = player.inventory.itemInOffHand
 
-						val mainCustomItem = CustomItemManager[main]
-						val offhandCustomItem = CustomItemManager[offhand]
+						val mainCustomItem = CustomItems[main]
+						val offhandCustomItem = CustomItems[offhand]
 
 						if (mainCustomItem != null && mainCustomItem.id.contains("sword")
 							|| offhandCustomItem != null && offhandCustomItem.id.contains("sword")

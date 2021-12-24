@@ -1,6 +1,6 @@
 package net.starlegacy.feature.starship.subsystem.weapon.secondary
 
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.multiblock.starshipweapon.heavy.RocketStarshipWeaponMultiblock
 import net.starlegacy.feature.starship.active.ActiveStarship
 import net.starlegacy.feature.starship.subsystem.DirectionalSubsystem
@@ -84,6 +84,6 @@ class RocketWeaponSubsystem(
 	}
 
 	override fun getRequiredAmmo(): ItemStack {
-		return CustomItemManager["rocket_oriomium"]!!.getItem()
+		return CustomItems["rocket_oriomium"]!!.getItem()
 	}
 }

@@ -1,6 +1,6 @@
 package net.starlegacy.feature.gas;
 
-import net.starlegacy.feature.customitem.CustomItemManager;
+import net.starlegacy.feature.customitem.CustomItems;
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor;
 import net.starlegacy.feature.customitem.type.CustomItem;
 import org.bukkit.Location;
@@ -66,7 +66,7 @@ public class Gas {
 
 
 	public CustomItem getItem() {
-		return CustomItemManager.Companion.getCustomItem(getItemId());
+		return CustomItems.Companion.getCustomItem(getItemId());
 	}
 
 	public List<List<CollectionFactor>> getFactors() {

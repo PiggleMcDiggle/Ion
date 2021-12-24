@@ -41,7 +41,7 @@ import net.starlegacy.database.schema.starships.Blueprint
 import net.starlegacy.database.slPlayerId
 import net.starlegacy.feature.chat.ChannelSelections
 import net.starlegacy.feature.chat.ChatChannel
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.economy.bazaar.Merchants
 import net.starlegacy.feature.economy.city.CityNPCs
@@ -226,7 +226,7 @@ class StarLegacy : JavaPlugin() {
 
 	override fun onEnable() {
 		Ion().onEnable()
-		CustomItemManager()
+		CustomItems()
 		// Hack. Dumb library has a static plugin set based on which plugin loaded it.
 		// Set it to this, since the starlegacy-libs plugin is loading it.
 		BukkitEvents::class.java.getDeclaredField("plugin").apply { isAccessible = true }.set(null, this)
@@ -346,7 +346,7 @@ class StarLegacy : JavaPlugin() {
 		manager.commandContexts.run {
 			registerContext(CustomItem::class.java) { c: BukkitCommandExecutionContext ->
 				val arg = c.popFirstArg()
-				return@registerContext CustomItemManager.getCustomItem(arg)
+				return@registerContext CustomItems.getCustomItem(arg)
 					?: throw InvalidCommandArgument("No custom item $arg found!")
 			}
 
@@ -376,7 +376,7 @@ class StarLegacy : JavaPlugin() {
 
 		// Add static tab completions
 		mapOf(
-			"customitems" to CustomItemManager.all().joinToString("|") { it.id },
+			"customitems" to CustomItems.all().joinToString("|") { it.id },
 			"npctypes" to CityNPC.Type.values().joinToString("|") { it.name }
 		).forEach { manager.commandCompletions.registerStaticCompletion(it.key, it.value) }
 

@@ -10,7 +10,7 @@ import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.misc.SLPlayer
 import net.starlegacy.database.schema.nations.Settlement
 import net.starlegacy.database.schema.nations.Territory
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.feature.nations.region.Regions
 import net.starlegacy.feature.nations.region.types.RegionTerritory
@@ -91,7 +91,7 @@ object PlanetSpawns : SLComponent() {
 
 					for (planet in orderedPlanets) {
 						val nameLower: String = planet.name.lowercase()
-						val planetIcon = (CustomItemManager["planet_icon_$nameLower"] ?: CustomItemManager.blankItem).getItem()
+						val planetIcon = (CustomItems["planet_icon_$nameLower"] ?: CustomItems.blankItem).getItem()
 
 						val planetName: String = planet.name
 

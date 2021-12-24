@@ -3,7 +3,7 @@ package net.starlegacy.feature.starship.factory
 import com.google.common.cache.CacheBuilder
 import com.google.common.cache.CacheLoader
 import com.google.common.cache.LoadingCache
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.misc.CustomBlocks
 import net.starlegacy.feature.customitem.type.CustomItem
@@ -41,7 +41,7 @@ data class PrintItem(val itemString: String) {
 			when {
 				CustomBlocks[data] != null -> {
 					val customBlock = CustomBlocks[data] ?: return null
-					val customItem = CustomItemManager[customBlock.id] ?: return null
+					val customItem = CustomItems[customBlock.id] ?: return null
 					return PrintItem(customItem)
 				}
 				data is Slab -> {

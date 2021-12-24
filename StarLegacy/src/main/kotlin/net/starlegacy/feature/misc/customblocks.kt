@@ -1,7 +1,7 @@
 package net.starlegacy.feature.misc
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.util.NMSBlockData
 import net.starlegacy.util.nms
 import org.bukkit.Material
@@ -30,7 +30,7 @@ open class CustomBlock(
 		if (itemUsed == null) {
 			return cloneDrops()
 		}
-		val customItem = CustomItemManager[itemUsed]
+		val customItem = CustomItems[itemUsed]
 
 		val isTool = customItem == null && itemUsed.type.name.lowercase().contains(tool)
 		val isSpecialItem = customItem != null && customItem.id.lowercase().replace("drill", "pickaxe").contains(tool)
@@ -57,7 +57,7 @@ object CustomBlocks {
 	}
 
 	private fun customItemDrop(id: String, amount: Int): Array<ItemStack> {
-		return arrayOf(CustomItemManager[id]?.getItem(amount) ?: error("No item for block $id"))
+		return arrayOf(CustomItems[id]?.getItem(amount) ?: error("No item for block $id"))
 	}
 
 	//region Minerals

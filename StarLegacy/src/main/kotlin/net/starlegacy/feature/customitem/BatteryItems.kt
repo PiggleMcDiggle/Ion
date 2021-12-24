@@ -15,7 +15,7 @@ object BatteryItems {
 			model = model,
 			maxPower = power,
 		)
-		CustomItemManager.register(item)
+		CustomItems.register(item)
 		return item
 	}
 

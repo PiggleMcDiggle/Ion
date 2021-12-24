@@ -1,6 +1,6 @@
 package net.starlegacy.listener.gear
 
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.gear.blaster.Blasters
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
@@ -102,7 +102,7 @@ object BlasterListener : SLEventListener() {
 		val skeleton = event.entity as Skeleton
 
 		if (skeleton.world.name.lowercase().contains("arena")) Tasks.sync {
-			val blasterRifle = CustomItemManager["blaster_rifle"]?.getItem(1)
+			val blasterRifle = CustomItems["blaster_rifle"]?.getItem(1)
 			val meta = blasterRifle?.itemMeta
 			meta?.lore = listOf("PINK")
 			blasterRifle?.itemMeta = meta

@@ -29,6 +29,7 @@ abstract class CustomItem() {
 			it.isUnbreakable = unbreakable
 			it.persistentDataContainer.set(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING, id)
 			it.lore(lore)
+			it.displayName(Component.text(displayName))
 		}
 	}
 

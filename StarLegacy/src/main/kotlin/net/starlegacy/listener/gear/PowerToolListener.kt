@@ -1,12 +1,10 @@
 package net.starlegacy.listener.gear
 
-import net.starlegacy.PLUGIN
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
-import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Effect
 import org.bukkit.GameMode
@@ -29,7 +27,7 @@ object PowerToolListener : SLEventListener() {
 		}
 
 		val item = event.item ?: return
-		val customItem = CustomItemManager[item]
+		val customItem = CustomItems[item]
 		if (customItem == null || !customItem.id.startsWith("power_tool_")) {
 			return
 		}

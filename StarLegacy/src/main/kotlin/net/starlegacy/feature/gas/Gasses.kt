@@ -1,7 +1,7 @@
 package net.starlegacy.feature.gas
 
 import net.starlegacy.SLComponent
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor
 import net.starlegacy.util.*
 import org.bukkit.Location
@@ -13,7 +13,6 @@ import org.bukkit.block.Furnace
 import org.bukkit.block.Hopper
 import org.bukkit.block.Sign
 import org.bukkit.block.data.Directional
-import org.bukkit.block.data.type.WallSign
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.inventory.ItemStack
 import java.io.File
@@ -29,7 +28,7 @@ object Gasses : SLComponent() {
 		val configuration = YamlConfiguration.loadConfiguration(file)
 		gasses = HashMap()
 		for (id in configuration.getKeys(false)) {
-			val item = CustomItemManager[id] ?: return
+			val item = CustomItems[id] ?: return
 			val name = configuration.getString("$id.name")
 			val factors = configuration.getStringList("$id.factors").map(CollectionFactor::collectionSetFromString)
 			gasses[item.id] = Gas(name, id, factors)
@@ -85,7 +84,7 @@ object Gasses : SLComponent() {
 	}
 
 	fun isEmptyCanister(itemStack: ItemStack?): Boolean {
-		return itemStack != null && CustomItemManager[itemStack] === CustomItemManager["gas_canister_empty"]
+		return itemStack != null && CustomItems[itemStack] === CustomItems["gas_canister_empty"]
 	}
 
 	private fun tryHarvestGas(furnaceBlock: Block, hopperBlock: Block, gas: Gas): Boolean {

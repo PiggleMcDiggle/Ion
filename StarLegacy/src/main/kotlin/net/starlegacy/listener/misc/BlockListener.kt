@@ -1,6 +1,6 @@
 package net.starlegacy.listener.misc
 
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.multiblock.misc.MobDefender
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.filtered
@@ -24,7 +24,7 @@ object BlockListener : SLEventListener() {
 		// Don't allow breaking blocks with custom items
 		subscribe<BlockBreakEvent>().handler { event ->
 			val item = event.player.inventory.itemInMainHand
-			val customItem = CustomItemManager[item]
+			val customItem = CustomItems[item]
 			if (customItem != null && !customItem.id.startsWith("power_tool_")) {
 				event.isCancelled = true
 			}

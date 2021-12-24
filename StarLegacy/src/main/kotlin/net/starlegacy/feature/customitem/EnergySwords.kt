@@ -12,7 +12,7 @@ object EnergySwords {
 			material = Material.SHIELD,
 			model = model
 		)
-		CustomItemManager.register(item)
+		CustomItems.register(item)
 		return item
 	}
 

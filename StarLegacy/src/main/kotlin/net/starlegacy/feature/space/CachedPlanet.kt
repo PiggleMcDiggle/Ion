@@ -2,7 +2,7 @@ package net.starlegacy.feature.space
 
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.space.Planet
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.util.*
 import org.bukkit.Bukkit
@@ -49,8 +49,8 @@ class CachedPlanet(
 	var orbitDistance: Int = orbitDistance; private set
 	var orbitProgress: Double = orbitProgress; private set
 
-	val planetIcon: CustomItem = CustomItemManager["planet_icon_${name.lowercase().replace(" ", "")}"]
-		?: CustomItemManager.blankItem
+	val planetIcon: CustomItem = CustomItems["planet_icon_${name.lowercase().replace(" ", "")}"]
+		?: CustomItems.blankItem
 
 	init {
 		require(size > 0 && size <= 1)

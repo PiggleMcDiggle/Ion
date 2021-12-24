@@ -1,5 +1,6 @@
 package net.starlegacy.feature.customitem
 
+import com.destroystokyo.paper.event.player.PlayerJumpEvent
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
@@ -13,10 +14,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
-class CustomItemManager: Listener {
+class CustomItems: Listener {
 	companion object {
 		val customItems = mutableMapOf<String, CustomItem>()
 
@@ -32,6 +34,7 @@ class CustomItemManager: Listener {
 				plugin.logger.warning("Multiple custom items with id ${item.id} have been registered!")
 			}
 			item.onItemRegistered()
+			plugin.logger.warning("Registered custom item ${item.id}")
 		}
 		fun all(): Collection<CustomItem> = customItems.values
 		fun getCustomItem(id: String?): CustomItem? = customItems[id]

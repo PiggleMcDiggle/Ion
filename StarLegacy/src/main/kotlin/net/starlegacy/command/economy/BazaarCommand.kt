@@ -6,7 +6,7 @@ import net.starlegacy.database.schema.economy.BazaarItem
 import net.starlegacy.database.schema.economy.CityNPC
 import net.starlegacy.database.schema.nations.Settlement
 import net.starlegacy.database.slPlayerId
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.economy.bazaar.Merchants
 import net.starlegacy.feature.economy.city.CityNPCs
@@ -14,7 +14,6 @@ import net.starlegacy.feature.economy.city.TradeCities
 import net.starlegacy.feature.economy.city.TradeCityData
 import net.starlegacy.feature.economy.city.TradeCityType
 import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.feature.nations.region.Regions
 import net.starlegacy.feature.nations.region.types.RegionTerritory
@@ -22,7 +21,6 @@ import net.starlegacy.feature.space.Sector
 import net.starlegacy.feature.space.Space
 import net.starlegacy.util.*
 import org.bukkit.DyeColor
-import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -223,7 +221,7 @@ object BazaarCommand : SLCommand() {
 				val territory: RegionTerritory = Regions[territoryId]
 
 				// attempt to get the planet icon, just use a blank item
-				val item: CustomItem = Space.getPlanet(territory.world)?.planetIcon ?: CustomItemManager.blankItem
+				val item: CustomItem = Space.getPlanet(territory.world)?.planetIcon ?: CustomItems.blankItem
 
 				return@map guiButton(item.getItem(1)) {
 					val clicker: Player = playerClicker

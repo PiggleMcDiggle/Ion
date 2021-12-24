@@ -13,7 +13,7 @@ object PlanetIcons {
 			material = Material.APPLE,
 			model = model
 		)
-		CustomItemManager.register(item)
+		CustomItems.register(item)
 		return item
 	}
 

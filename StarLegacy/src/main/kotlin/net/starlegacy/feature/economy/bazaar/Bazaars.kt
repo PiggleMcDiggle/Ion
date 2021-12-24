@@ -7,7 +7,7 @@ import net.starlegacy.database.schema.economy.BazaarItem
 import net.starlegacy.database.schema.misc.SLPlayer
 import net.starlegacy.database.schema.nations.Settlement
 import net.starlegacy.database.schema.nations.Territory
-import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.economy.city.TradeCities
 import net.starlegacy.feature.economy.city.TradeCityData
 import net.starlegacy.feature.economy.city.TradeCityType
@@ -205,12 +205,12 @@ object Bazaars : SLComponent() {
 	}
 
 	fun toItemString(item: ItemStack): String {
-		return CustomItemManager.getCustomItem(item)?.id ?: item.type.toString()
+		return CustomItems.getCustomItem(item)?.id ?: item.type.toString()
 	}
 
 	fun fromItemString(string: String): ItemStack {
 		// if a custom item is found, use that
-		CustomItemManager.getCustomItem(string)?.let { return it.getItem(1) }
+		CustomItems.getCustomItem(string)?.let { return it.getItem(1) }
 		val material: Material = Material.valueOf(string)
 		check(material.isItem) { "$material is not an item" }
 		return ItemStack(material, 1)
