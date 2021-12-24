@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Subcommand
 import net.starlegacy.command.SLCommand
 import net.starlegacy.feature.customitem.addPower
+import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.isPowerable
 import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.feature.customitem.setPower
@@ -27,6 +28,11 @@ object BatteryCommand : SLCommand() {
 		}
 
 		return item
+	}
+	@Subcommand("get")
+	fun onGet(sender: Player){
+		val item = getPowerableItemInHand(sender)
+		sender.msg("${item.displayName} currently has ${getPower(item)} power.")
 	}
 
 	@Subcommand("set")
