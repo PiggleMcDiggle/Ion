@@ -9,9 +9,9 @@ object BatteryItems {
 
 	private fun registerBattery(name: String, model: Int, power: Int): BatteryItem {
 		val item = BatteryItem(
-			id = "battery_${name.stripColor().lowercase().replace(" ", "_")}",
+			id = name.stripColor().lowercase().replace(" ", "_"),
 			displayName = name,
-			material = Material.APPLE,
+			material = Material.SNOWBALL,
 			model = model,
 			maxPower = power,
 		)

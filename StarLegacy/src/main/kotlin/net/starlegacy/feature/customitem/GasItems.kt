@@ -11,7 +11,7 @@ object GasItems {
 		val item = GasItem(
 			id = "gas_canister_${name.stripColor().lowercase().replace(" ", "_")}",
 			displayName = name,
-			material = Material.APPLE,
+			material = Material.SNOWBALL,
 			model = model
 		)
 		CustomItems.register(item)
