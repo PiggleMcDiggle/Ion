@@ -6,6 +6,7 @@ import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerItem
 import net.starlegacy.util.colorize
+import net.starlegacy.util.updateMeta
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.LivingEntity
@@ -167,11 +168,13 @@ fun setPower(itemStack: ItemStack, power: Int): Int {
 	else lore[0] = text
 	itemStack.lore = lore
 
-	itemStack.itemMeta.persistentDataContainer.set(
-		NamespacedKey(plugin, "item-power"),
-		PersistentDataType.INTEGER,
-		newPower
-	)
+	itemStack.updateMeta {
+		it.persistentDataContainer.set(
+			NamespacedKey(plugin, "item-power"),
+			PersistentDataType.INTEGER,
+			newPower
+		)
+	}
 	return oldPower
 }
 
