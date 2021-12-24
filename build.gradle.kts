@@ -21,7 +21,7 @@ dependencies {
 	compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
 	paperDevBundle("1.17.1-R0.1-SNAPSHOT")
 
-	compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.0-SNAPSHOT") // https://github.com/EngineHub/WorldEdit
+	compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.8") // https://github.com/EngineHub/WorldEdit
 	compileOnly("com.github.bloodmc:GriefDefenderAPI:master") // https://github.com/bloodmc/GriefDefender/
 	compileOnly("net.citizensnpcs:citizens:2.0.27-SNAPSHOT") // https://github.com/CitizensDev/Citizens2/
 	compileOnly("com.github.MilkBowl:VaultAPI:1.7.1") // https://github.com/MilkBowl/Vault
@@ -32,7 +32,7 @@ dependencies {
 
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
 	implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.0")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.10")
 	implementation("com.github.stefvanschie.inventoryframework:IF:0.10.3") // https://github.com/stefvanschie/IF
 	implementation("com.daveanthonythomas.moshipack:moshipack:1.0.1") // https://github.com/davethomas11/MoshiPack
 	implementation("com.googlecode.cqengine:cqengine:3.6.0") // https://github.com/npgall/cqengine

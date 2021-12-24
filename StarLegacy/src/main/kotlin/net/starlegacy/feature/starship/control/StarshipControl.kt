@@ -14,7 +14,14 @@ import net.starlegacy.feature.starship.subsystem.weapon.TurretWeaponSubsystem
 import net.starlegacy.feature.starship.subsystem.weapon.WeaponSubsystem
 import net.starlegacy.feature.starship.subsystem.weapon.interfaces.HeavyWeaponSubsystem
 import net.starlegacy.feature.starship.subsystem.weapon.interfaces.ManualWeaponSubsystem
-import net.starlegacy.util.*
+import net.starlegacy.util.ConnectionUtils
+import net.starlegacy.util.PerPlayerCooldown
+import net.starlegacy.util.Tasks
+import net.starlegacy.util.d
+import net.starlegacy.util.isLava
+import net.starlegacy.util.isSign
+import net.starlegacy.util.isWater
+import net.starlegacy.util.nms
 import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.Material
@@ -25,14 +32,28 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockPlaceEvent
-import org.bukkit.event.player.*
+import org.bukkit.event.player.PlayerDropItemEvent
+import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerItemHeldEvent
+import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.event.player.PlayerSwapHandItemsEvent
+import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.util.Vector
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.TimeUnit
 import kotlin.collections.set
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.pow
+import kotlin.math.round
+import kotlin.math.roundToInt
+import kotlin.math.sign
+import kotlin.math.sin
 
 object StarshipControl : SLComponent() {
 	val CONTROLLER_TYPE = Material.CLOCK
@@ -126,11 +147,11 @@ object StarshipControl : SLComponent() {
 		var dz = 0
 		val direction = starship.getTargetForward()
 		val targetSpeed = calculateSpeed(heldItemSlot)
-		dx += (targetSpeed * direction.modX)
-		dz += (targetSpeed * direction.modZ)
+		dx += (targetSpeed * direction.modX) * 2
+		dz += (targetSpeed * direction.modZ) * 2
 		if (pilot.isSneaking) {
-			dx *= 2
-			dz *= 2
+			dx /= 2
+			dz /= 2
 		}
 		var center = starship.directControlCenter
 		if (center == null) {
@@ -162,10 +183,6 @@ object StarshipControl : SLComponent() {
 			vectors.poll()
 		}
 		vectors.add(vector)
-
-		if (vector.x != 0.0 || vector.z != 0.0) {
-			ConnectionUtils.teleport(pilot, center)
-		}
 
 		var highestFrequency = Collections.frequency(vectors, vector)
 		for (previousVector in vectors) {
@@ -220,6 +237,10 @@ object StarshipControl : SLComponent() {
 
 		pilot.walkSpeed = 0.009f
 		TranslateMovement.loadChunksAndMove(starship, dx, dy, dz)
+
+		if (vector.x != 0.0 || vector.z != 0.0) {
+			ConnectionUtils.teleport(pilot, center)
+		}
 	}
 
 	private fun processSneakFlight(pilot: Player, starship: ActivePlayerStarship) {
