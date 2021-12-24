@@ -12,8 +12,8 @@ import net.starlegacy.cache.trade.EcoStations
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.economy.CollectedItem
 import net.starlegacy.database.schema.economy.EcoStation
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.util.*
 import org.bukkit.Bukkit
@@ -50,13 +50,13 @@ object CollectionMissions : SLComponent() {
 		?: error("Failed to parse item string ${collectedItem.itemString}")
 
 	fun getItemFromString(itemString: String): ItemStack? {
-		CustomItems[itemString]?.let { return it.itemStack(1) }
+		CustomItemManager[itemString]?.let { return it.getItem(1) }
 		val material: Material = Material.getMaterial(itemString) ?: return null
 		return ItemStack(material, 1)
 	}
 
 	fun getString(itemStack: ItemStack): String {
-		return CustomItems[itemStack]?.id ?: itemStack.type.toString()
+		return CustomItemManager[itemStack]?.id ?: itemStack.type.toString()
 	}
 
 	private val itemCache: LoadingCache<Oid<EcoStation>, List<CollectedItem>> = CacheBuilder.newBuilder()
@@ -222,7 +222,7 @@ object CollectionMissions : SLComponent() {
 	}
 
 	private fun getMatchingFullStackSlots(itemStack: ItemStack, player: Player, stacks: Int): List<Int> {
-		val customItem: CustomItem? = CustomItems[itemStack]
+		val customItem: CustomItem? = CustomItemManager[itemStack]
 
 		// slots of the full stack items that match the collector mission's item type
 		return player.inventory.contents
@@ -231,7 +231,7 @@ object CollectionMissions : SLComponent() {
 			.filter {
 				when (customItem) {
 					null -> it.value?.isSimilar(itemStack)!! && it.value?.amount == it.value?.maxStackSize
-					else -> customItem == CustomItems[it.value] && it.value?.amount == customItem.material.maxStackSize
+					else -> customItem == CustomItemManager[it.value] && it.value?.amount == customItem.material.maxStackSize
 				}
 			}
 			// limit to the amount of stacks to avoid taking more stacks than required if they're carrying extra
