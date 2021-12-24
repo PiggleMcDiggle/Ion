@@ -63,27 +63,6 @@ object PowerToolListener : SLEventListener() {
 
 				return
 			}
-			"chainsaw" -> {
-				val breakEvent = BlockBreakEvent(block, player)
-				Bukkit.getPluginManager().callEvent(breakEvent)
-				if (breakEvent.isCancelled) return
-
-				event.isCancelled = true
-
-				if (!TreeCutter.isApplicable(blockType)) {
-					return
-				}
-
-				if (getPower(item) < 1000) {
-					player.sendMessage(ChatColor.RED.toString() + "Out of power.")
-					return
-				}
-
-				removePower(item, 1000)
-
-				TreeCutter(event.player, block).runTaskAsynchronously(PLUGIN)
-				return
-			}
 			else -> println("Unhandled power tool $type")
 		}
 	}

@@ -3,8 +3,8 @@ package net.starlegacy.feature.space
 import net.starlegacy.SLComponent
 import net.starlegacy.feature.gear.powerarmor.PowerArmorManager
 import net.starlegacy.feature.gear.powerarmor.PowerArmorModule
-import net.starlegacy.feature.misc.getPower
-import net.starlegacy.feature.misc.removePower
+import net.starlegacy.feature.customitem.getPower
+import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.util.*
 import org.bukkit.Bukkit
 import org.bukkit.GameMode

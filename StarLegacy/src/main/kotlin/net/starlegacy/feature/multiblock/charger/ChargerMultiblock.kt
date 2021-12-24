@@ -1,10 +1,10 @@
 package net.starlegacy.feature.multiblock.charger
 
 import net.starlegacy.feature.machine.PowerMachines
-import net.starlegacy.feature.misc.addPower
-import net.starlegacy.feature.misc.getMaxPower
-import net.starlegacy.feature.misc.getPower
-import net.starlegacy.feature.misc.isPowerable
+import net.starlegacy.feature.customitem.addPower
+import net.starlegacy.feature.customitem.getMaxPower
+import net.starlegacy.feature.customitem.getPower
+import net.starlegacy.feature.customitem.isPowerable
 import net.starlegacy.feature.multiblock.FurnaceMultiblock
 import net.starlegacy.feature.multiblock.MultiblockShape
 import net.starlegacy.feature.multiblock.PowerStoringMultiblock

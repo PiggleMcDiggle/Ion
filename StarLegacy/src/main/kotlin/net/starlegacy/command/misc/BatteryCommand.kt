@@ -6,10 +6,10 @@ import co.aikar.commands.annotation.CommandCompletion
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Subcommand
 import net.starlegacy.command.SLCommand
-import net.starlegacy.feature.misc.addPower
-import net.starlegacy.feature.misc.isPowerable
-import net.starlegacy.feature.misc.removePower
-import net.starlegacy.feature.misc.setPower
+import net.starlegacy.feature.customitem.addPower
+import net.starlegacy.feature.customitem.isPowerable
+import net.starlegacy.feature.customitem.removePower
+import net.starlegacy.feature.customitem.setPower
 import net.starlegacy.util.displayName
 import net.starlegacy.util.green
 import net.starlegacy.util.msg
