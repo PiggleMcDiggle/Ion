@@ -218,7 +218,6 @@ class StarLegacy : JavaPlugin() {
 			InteractListener,
 			InventoryListener,
 
-			BlasterListener,
 			DoubleJumpListener,
 			PowerArmorListener,
 			PowerToolListener,
