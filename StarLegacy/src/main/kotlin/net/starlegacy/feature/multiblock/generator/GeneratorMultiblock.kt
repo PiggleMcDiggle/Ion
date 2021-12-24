@@ -1,8 +1,9 @@
 package net.starlegacy.feature.multiblock.generator
 
+import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.type.GasItem
 import net.starlegacy.feature.machine.GeneratorFuel
 import net.starlegacy.feature.machine.PowerMachines
-import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.multiblock.FurnaceMultiblock
 import net.starlegacy.feature.multiblock.MultiblockShape
 import net.starlegacy.feature.multiblock.PowerStoringMultiblock
@@ -36,9 +37,9 @@ abstract class GeneratorMultiblock(tierText: String, private val tierMaterial: M
 			event.isBurning = true
 			event.burnTime = (fuel.cooldown / speed).toInt()
 			furnace.cookTime = (-1000).toShort()
-			val customItem = CustomItems[fuelItem]
-			if (customItem is CustomItems.GasItem) {
-				val emptyCanister = CustomItems.GAS_CANISTER_EMPTY.itemStack(1)
+			val customItem = CustomItemManager[fuelItem]
+			if (customItem is GasItem) {
+				val emptyCanister = CustomItemManager["gas_canister_empty"]!!.getItem()
 
 				val location = sign.block
 					.getRelative(sign.getFacing().rightFace)

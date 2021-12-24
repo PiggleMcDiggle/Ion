@@ -1,6 +1,6 @@
 package net.starlegacy.feature.starship.subsystem
 
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.multiblock.hyperdrive.HyperdriveMultiblock
 import net.starlegacy.feature.starship.active.ActiveStarship
 import net.starlegacy.feature.starship.hyperspace.Hyperspace
@@ -44,8 +44,8 @@ class HyperdriveSubsystem(starship: ActiveStarship, sign: Sign, multiblock: Hype
 	}
 
 	fun restoreFuel(): Unit = getHoppers().forEach { hopper ->
-		hopper.inventory.addItem(CustomItems.MINERAL_CHETHERITE.itemStack(Hyperspace.HYPERMATTER_AMOUNT))
+		hopper.inventory.addItem(CustomItemManager["mineral_chetherite"]!!.getItem(Hyperspace.HYPERMATTER_AMOUNT))
 	}
 
-	private fun isHypermatter(item: ItemStack) = CustomItems[item] == CustomItems.MINERAL_CHETHERITE
+	private fun isHypermatter(item: ItemStack) = CustomItemManager[item] == CustomItemManager["mineral_chetherite"]!!
 }

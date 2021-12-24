@@ -1,12 +1,12 @@
 package net.starlegacy.listener.misc
 
-//import net.starlegacy.feature.machine.BaseShields
 import net.starlegacy.feature.machine.PowerMachines
 import net.starlegacy.feature.misc.*
-import net.starlegacy.feature.customitem.CustomBlockItem
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.setPower
+import net.starlegacy.feature.customitem.type.BatteryItem
+import net.starlegacy.feature.customitem.type.CustomBlockItem
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.multiblock.PowerStoringMultiblock
 import net.starlegacy.feature.multiblock.dockingtube.ConnectedDockingTubeMultiblock
@@ -176,7 +176,7 @@ object InteractListener : SLEventListener() {
 		// Put power into the sign if right clicking with a battery
 		subscribe<PlayerInteractEvent>()
 			.filtered { it.action == Action.RIGHT_CLICK_BLOCK }
-			.filtered { CustomItems[it.item] is CustomItems.BatteryItem }
+			.filtered { CustomItemManager[it.item] is BatteryItem }
 			.handler { event ->
 				val sign = event.clickedBlock?.getState(false) as? Sign ?: return@handler
 				val multiblock = Multiblocks[sign] as? PowerStoringMultiblock ?: return@handler
@@ -205,7 +205,7 @@ object InteractListener : SLEventListener() {
 			.filtered { !it.isCancelled }
 			.filtered { it.canBuild() }
 			.handler { event ->
-				val item = CustomItems[event.itemInHand] as? CustomBlockItem ?: return@handler
+				val item = CustomItemManager[event.itemInHand] as? CustomBlockItem ?: return@handler
 				event.block.setBlockData(item.customBlock.blockData, false)
 			}
 
@@ -311,7 +311,7 @@ object InteractListener : SLEventListener() {
 
 		val hand = event.hand
 		val itemStack = player.inventory.getItem(hand)?.clone() ?: return
-		val item: CustomBlockItem = CustomItems[itemStack] as? CustomBlockItem ?: return
+		val item: CustomBlockItem = CustomItemManager[itemStack] as? CustomBlockItem ?: return
 
 		event.block.location.block.setBlockData(item.customBlock.blockData, true)
 	}

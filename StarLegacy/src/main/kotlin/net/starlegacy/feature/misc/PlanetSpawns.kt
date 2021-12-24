@@ -11,7 +11,6 @@ import net.starlegacy.database.schema.misc.SLPlayer
 import net.starlegacy.database.schema.nations.Settlement
 import net.starlegacy.database.schema.nations.Territory
 import net.starlegacy.feature.customitem.CustomItemManager
-import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.feature.nations.region.Regions
 import net.starlegacy.feature.nations.region.types.RegionTerritory
