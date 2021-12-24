@@ -2,6 +2,8 @@ package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.feature.customitem.type.CustomItem
+import net.starlegacy.feature.customitem.type.GenericCustomItem
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
@@ -33,9 +35,10 @@ class CustomItemManager: Listener {
 		}
 		fun all(): Collection<CustomItem> = customItems.values
 		fun getCustomItem(id: String?): CustomItem? = customItems[id]
-		fun getCustomItem(stack: ItemStack?): CustomItem? = customItems[stack?.itemMeta.persistentDataContainer.get(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING)]
+		fun getCustomItem(stack: ItemStack?): CustomItem? = customItems[stack?.itemMeta?.persistentDataContainer?.get(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING)]
 		operator fun get(id: String?): CustomItem? = getCustomItem(id)
 		operator fun get(item: ItemStack?): CustomItem? = getCustomItem(item)
+		val blankItem = GenericCustomItem("blank_item", 0, "Blank Custom Item", Material.EMERALD)
 	}
 
 	init {

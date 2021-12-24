@@ -3,7 +3,6 @@ package net.starlegacy.feature.gear.blaster
 import net.md_5.bungee.api.ChatColor
 import net.starlegacy.cache.nations.NationCache
 import net.starlegacy.cache.nations.PlayerCache
-import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.util.updateMeta

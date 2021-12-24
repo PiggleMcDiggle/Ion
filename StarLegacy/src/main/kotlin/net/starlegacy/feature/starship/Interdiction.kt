@@ -4,7 +4,7 @@ import net.starlegacy.SLComponent
 import net.starlegacy.cache.nations.PlayerCache
 import net.starlegacy.cache.nations.RelationCache
 import net.starlegacy.database.schema.nations.NationRelation
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.multiblock.gravitywell.GravityWellMultiblock
 import net.starlegacy.feature.space.SpaceWorlds
@@ -79,7 +79,7 @@ object Interdiction : SLComponent() {
 
 		val input = GravityWellMultiblock.getInput(sign)
 
-		if (LegacyItemUtils.getTotalItems(input, CustomItems.MINERAL_CHETHERITE.singleItem()) < 2) {
+		if (LegacyItemUtils.getTotalItems(input, CustomItemManager["mineral_chetherite"]!!.getItem()) < 2) {
 			player msg "&cNot enough hypermatter in the dropper. Two chetherite shards are required!"
 			return
 		}
@@ -111,7 +111,7 @@ object Interdiction : SLComponent() {
 			cruisingShip.sendMessage("&cQuantum fluctuations detected - velocity has been reduced by 10%.")
 		}
 
-		input.removeItem(CustomItems.MINERAL_CHETHERITE.itemStack(2))
+		input.removeItem(CustomItemManager["mineral_chetherite"]!!.getItem(2))
 		starship.sendMessage("&5Gravity pulse has been invoked by ${player.name}.")
 	}
 

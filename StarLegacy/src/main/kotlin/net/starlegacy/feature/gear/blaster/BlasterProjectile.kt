@@ -1,6 +1,7 @@
 package net.starlegacy.feature.gear.blaster
 
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.type.EnergySwordItem
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.enumValueOfOrNull
 import org.bukkit.Color
@@ -147,7 +148,7 @@ class BlasterProjectile(
 			if (entity.isBlocking && entity.getCooldown(SHIELD) == 0) {
 				for (slot in arrayOf(EquipmentSlot.HAND, EquipmentSlot.OFF_HAND)) {
 					// check if sword
-					CustomItems[entity.inventory.getItem(slot)] as? CustomItems.EnergySwordItem
+					CustomItemManager[entity.inventory.getItem(slot)] as? EnergySwordItem
 						?: continue
 					entity.world.playSound(entity.location, "energy_sword.strike", 5.0f, 1.0f)
 					velocity = velocity.getCrossProduct(entity.location.direction).normalize()

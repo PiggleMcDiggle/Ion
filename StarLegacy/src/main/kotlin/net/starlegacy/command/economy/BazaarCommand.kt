@@ -6,6 +6,7 @@ import net.starlegacy.database.schema.economy.BazaarItem
 import net.starlegacy.database.schema.economy.CityNPC
 import net.starlegacy.database.schema.nations.Settlement
 import net.starlegacy.database.slPlayerId
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.economy.bazaar.Merchants
 import net.starlegacy.feature.economy.city.CityNPCs
@@ -222,7 +223,7 @@ object BazaarCommand : SLCommand() {
 				val territory: RegionTerritory = Regions[territoryId]
 
 				// attempt to get the planet icon, just use a blank item
-				val item: CustomItem = Space.getPlanet(territory.world)?.planetIcon ?: GenericCustomItem("blank_bazaar_icon", 0, "Missing planet icon!", Material.APPLE)
+				val item: CustomItem = Space.getPlanet(territory.world)?.planetIcon ?: CustomItemManager.blankItem
 
 				return@map guiButton(item.getItem(1)) {
 					val clicker: Player = playerClicker

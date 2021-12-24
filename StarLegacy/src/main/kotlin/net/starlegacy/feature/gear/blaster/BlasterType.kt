@@ -1,10 +1,11 @@
 package net.starlegacy.feature.gear.blaster
 
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.CustomItemManager
+import net.starlegacy.feature.customitem.type.CustomItem
 import org.bukkit.Sound
 
 enum class BlasterType(
-	val item: CustomItems.BlasterItem,
+	val item: CustomItem, // TODO: change
 	val speed: Double,
 	val range: Int,
 	val thickness: Double,
@@ -17,7 +18,7 @@ enum class BlasterType(
 	val explosionPower: Float? = null
 ) {
 	PISTOL(
-		CustomItems.BLASTER_PISTOL,
+		CustomItemManager["blaster_pistol"],
 		speed = 1100.0,
 		range = 50,
 		thickness = 0.1,
@@ -29,7 +30,7 @@ enum class BlasterType(
 		pitchRange = 0.2
 	),
 	RIFLE(
-		CustomItems.BLASTER_RIFLE,
+		CustomItemManager["blaster_rifle"],
 		speed = 650.0,
 		range = 75,
 		thickness = 0.1,
@@ -41,7 +42,7 @@ enum class BlasterType(
 		pitchRange = 0.3
 	),
 	SNIPER(
-		CustomItems.BLASTER_SNIPER,
+		CustomItemManager["blaster_sniper"],
 		speed = 1100.0,
 		range = 250,
 		thickness = 0.2,
@@ -53,7 +54,7 @@ enum class BlasterType(
 		pitchRange = 0.1
 	),
 	CANNON(
-		CustomItems.BLASTER_CANNON,
+		CustomItemManager["blaster_cannon"],
 		speed = 450.0,
 		range = 200,
 		thickness = 0.2,
