@@ -31,6 +31,7 @@ class CustomItemManager: Listener {
 			}
 			item.onItemRegistered()
 		}
+		fun all(): List<CustomItem> = customItems.values.toList()
 		fun getCustomItem(id: String): CustomItem? = customItems[id]
 		fun getCustomItem(stack: ItemStack): CustomItem? = customItems[stack.itemMeta.persistentDataContainer.get(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING)]
 	}

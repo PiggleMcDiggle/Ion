@@ -13,7 +13,7 @@ import net.starlegacy.feature.economy.city.TradeCities
 import net.starlegacy.feature.economy.city.TradeCityData
 import net.starlegacy.feature.economy.city.TradeCityType
 import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.feature.nations.region.Regions
 import net.starlegacy.feature.nations.region.types.RegionTerritory
@@ -21,6 +21,7 @@ import net.starlegacy.feature.space.Sector
 import net.starlegacy.feature.space.Space
 import net.starlegacy.util.*
 import org.bukkit.DyeColor
+import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -220,10 +221,10 @@ object BazaarCommand : SLCommand() {
 				val territoryId = city.territoryId
 				val territory: RegionTerritory = Regions[territoryId]
 
-				// attempt to get the planet icon, just use a detonator if unavailable
-				val item: CustomItem = Space.getPlanet(territory.world)?.planetIcon ?: CustomItems.DETONATOR
+				// attempt to get the planet icon, just use a blank item
+				val item: CustomItem = Space.getPlanet(territory.world)?.planetIcon ?: GenericCustomItem("blank_bazaar_icon", 0, "Missing planet icon!", Material.APPLE)
 
-				return@map guiButton(item.itemStack(1)) {
+				return@map guiButton(item.getItem(1)) {
 					val clicker: Player = playerClicker
 					val remote: Boolean = Regions.findFirstOf<RegionTerritory>(clicker.location)?.id != territoryId
 					Bazaars.openMainMenu(territoryId, clicker, remote)

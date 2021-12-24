@@ -35,7 +35,7 @@ fun getPower(itemStack: ItemStack): Int {
  * @return The item's max power if it is powerable, otherwise -1
  */
 fun getMaxPower(itemStack: ItemStack): Int {
-	val poweredCustomItem = CustomItems[itemStack] as? PoweredCustomItem ?: return -1
+	val poweredCustomItem = CustomItemManager.getCustomItem(itemStack) as? PowerItem ?: return -1
 	return poweredCustomItem.maxPower
 }
 
@@ -45,7 +45,7 @@ fun getMaxPower(itemStack: ItemStack): Int {
  * @return The old power if it was a powerable item, otherwise -1
  */
 fun setPower(itemStack: ItemStack, power: Int): Int {
-	val poweredCustomItem = CustomItems[itemStack] as? PoweredCustomItem ?: return -1
+	val poweredCustomItem = CustomItemManager.getCustomItem(itemStack) as? PowerItem ?: return -1
 
 	val oldPower = getPower(itemStack)
 	val newPower = max(min(power, poweredCustomItem.maxPower), 0)

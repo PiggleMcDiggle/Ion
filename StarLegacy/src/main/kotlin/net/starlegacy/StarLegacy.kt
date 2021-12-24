@@ -55,8 +55,6 @@ import net.starlegacy.feature.machine.PowerMachines
 import net.starlegacy.feature.machine.Turrets
 import net.starlegacy.feature.misc.*
 import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.CustomRecipes
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.nations.NationsBalancing
 import net.starlegacy.feature.nations.NationsMap
@@ -143,7 +141,6 @@ class StarLegacy : JavaPlugin() {
 			CombatNPCs,
 
 			CryoPods,
-			CustomRecipes,
 			GameplayTweaks,
 
 			SpaceWorlds,
@@ -222,11 +219,9 @@ class StarLegacy : JavaPlugin() {
 			InventoryListener,
 
 			BlasterListener,
-			DetonatorListener,
 			DoubleJumpListener,
 			PowerArmorListener,
 			PowerToolListener,
-			SwordListener,
 		)
 
 	override fun onEnable() {
@@ -381,7 +376,7 @@ class StarLegacy : JavaPlugin() {
 
 		// Add static tab completions
 		mapOf(
-			"customitems" to CustomItems.all().joinToString("|") { it.id },
+			"customitems" to CustomItemManager.all().joinToString("|") { it.id },
 			"npctypes" to CityNPC.Type.values().joinToString("|") { it.name }
 		).forEach { manager.commandCompletions.registerStaticCompletion(it.key, it.value) }
 

@@ -13,6 +13,7 @@ import org.bukkit.inventory.RecipeChoice
 import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.inventory.ShapelessRecipe
 
+/*
 object CustomRecipes : SLComponent() {
 	override fun onEnable() {
 		Tasks.syncDelay(1) {
@@ -318,3 +319,4 @@ object CustomRecipes : SLComponent() {
 		)
 	}
 }
+*/

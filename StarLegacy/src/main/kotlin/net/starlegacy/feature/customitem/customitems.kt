@@ -19,7 +19,7 @@ import org.bukkit.Material.LEATHER_BOOTS
 import org.bukkit.Material.LEATHER_CHESTPLATE
 import org.bukkit.Material.LEATHER_HELMET
 import org.bukkit.Material.LEATHER_LEGGINGS
-
+/*
 
 @Suppress("unused")
 object CustomItems {
@@ -149,3 +149,4 @@ object CustomItems {
 
 	val ROCKET_ORIOMIUM = makeItem("rocket_oriomium", "Oriomium Rocket", Material.STICK, 3)
 }
+*/
