@@ -21,7 +21,7 @@ object CustomItemCommand : SLCommand() {
 		val player = target?.player ?: sender as? Player ?: fail { "Console must specify a target player" }
 		failIf(amount <= 0) { "Amount cannot be <= 0" }
 
-		val item = customItem.itemStack(amount)
+		val item = customItem.getItem(amount)
 		val result = player.inventory.addItem(item)
 
 		if (result.isEmpty()) {

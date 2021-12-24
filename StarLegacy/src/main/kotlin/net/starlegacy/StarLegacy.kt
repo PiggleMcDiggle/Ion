@@ -41,6 +41,7 @@ import net.starlegacy.database.schema.starships.Blueprint
 import net.starlegacy.database.slPlayerId
 import net.starlegacy.feature.chat.ChannelSelections
 import net.starlegacy.feature.chat.ChatChannel
+import net.starlegacy.feature.customitem.CustomItemManager
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.economy.bazaar.Merchants
 import net.starlegacy.feature.economy.city.CityNPCs
@@ -350,7 +351,7 @@ class StarLegacy : JavaPlugin() {
 		manager.commandContexts.run {
 			registerContext(CustomItem::class.java) { c: BukkitCommandExecutionContext ->
 				val arg = c.popFirstArg()
-				return@registerContext CustomItems[arg]
+				return@registerContext CustomItemManager.getCustomItem(arg)
 					?: throw InvalidCommandArgument("No custom item $arg found!")
 			}
 
