@@ -23,7 +23,7 @@ abstract class CustomItem() {
 	/**
 	 * Returns [amount] of this item in an ItemStack
 	 */
-	fun getItem(amount: Int = 1): ItemStack {
+	open fun getItem(amount: Int = 1): ItemStack {
 		return ItemStack(material, amount).updateMeta {
 			it.setCustomModelData(model)
 			it.isUnbreakable = unbreakable
