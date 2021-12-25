@@ -21,43 +21,6 @@ import org.bukkit.Material.LEATHER_HELMET
 import org.bukkit.Material.LEATHER_LEGGINGS
 /*
 
-	//region Power Armor
-	private fun registerPowerArmor(piece: String, pieceName: String, material: Material): PowerArmorItem = register(
-		PowerArmorItem("power_armor_$piece", "${GOLD}Power$GRAY $pieceName", material, 1, 50000)
-	)
-
-	class PowerArmorItem(
-		id: String,
-		displayName: String,
-		material: Material,
-		model: Int,
-		maxPower: Int
-	) : PoweredCustomItem(id, displayName, material, model, true, maxPower)
-
-	val POWER_ARMOR_HELMET = registerPowerArmor("helmet", "Helmet", LEATHER_HELMET)
-	val POWER_ARMOR_CHESTPLATE = registerPowerArmor("chestplate", "Chestplate", LEATHER_CHESTPLATE)
-	val POWER_ARMOR_LEGGINGS = registerPowerArmor("leggings", "Leggings", LEATHER_LEGGINGS)
-	val POWER_ARMOR_BOOTS = registerPowerArmor("boots", "Boots", LEATHER_BOOTS)
-	//endregion Power Armor
-
-	//region Power Modules
-	private fun registerModule(type: String, typeName: String, model: Int): PowerModuleItem =
-		register(PowerModuleItem("power_module_$type", "$GRAY$typeName$GOLD Module", FLINT_AND_STEEL, model))
-
-	class PowerModuleItem(
-		id: String,
-		displayName: String,
-		material: Material,
-		model: Int
-	) : CustomItem(id, displayName, material, model, true)
-
-	val POWER_MODULE_SHOCK_ABSORBING = registerModule("shock_absorbing", "Shock Absorbing", 1)
-	val POWER_MODULE_SPEED_BOOSTING = registerModule("speed_boosting", "Speed Boosting", 2)
-	val POWER_MODULE_ROCKET_BOOSTING = registerModule("rocket_boosting", "Rocket Boosting", 3)
-	val POWER_MODULE_NIGHT_VISION = registerModule("night_vision", "Night Vision", 4)
-	val POWER_MODULE_ENVIRONMENT = registerModule("environment", "Environment", 5)
-	val POWER_MODULE_PRESSURE_FIELD = registerModule("pressure_field", "Pressure Field", 6)
-	//endregion Power Modules
 
 	//region Power Tools
 	private fun registerPowerTool(type: String, name: String, mat: Material, model: Int, maxPower: Int) =
@@ -116,11 +79,5 @@ import org.bukkit.Material.LEATHER_LEGGINGS
 	//endregion Minerals
 
 
-	//region Rockets
-	val ROCKET_BASE = makeItem("rocket_base", "Rocket Base", Material.STICK, 1)
-
-	val ROCKET_WARHEAD_ORIOMIUM = makeItem("rocket_warhead_oriomium", "Oriomium Warhead", Material.STICK, 2)
-
-	val ROCKET_ORIOMIUM = makeItem("rocket_oriomium", "Oriomium Rocket", Material.STICK, 3)
 }
 */

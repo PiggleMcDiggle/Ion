@@ -62,6 +62,8 @@ class CustomItems: Listener {
 		BatteryItems.register()
 		EnergySwords.register()
 		BlasterItems.register()
+		PowerArmorItems.register()
+		PowerModuleItems.register()
 	}
 
 	@EventHandler

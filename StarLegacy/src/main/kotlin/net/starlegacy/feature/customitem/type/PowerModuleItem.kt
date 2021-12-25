@@ -7,6 +7,5 @@ class PowerModuleItem(
 	override val model: Int,
 	override val displayName: String,
 	override val material: Material,
-	override val maxPower: Int
-) : PowerItem() {
+) : CustomItem() {
 }
