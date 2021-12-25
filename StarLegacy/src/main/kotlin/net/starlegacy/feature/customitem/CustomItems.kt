@@ -68,13 +68,7 @@ class CustomItems: Listener {
 
 	@EventHandler
 	fun onInteract(event: PlayerInteractEvent) {
-		if (event.item == null) return
-		val item = customItems[
-				event.item!!.itemMeta.persistentDataContainer.get(
-					NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING
-				) ?: return]
-			?: return
-
+		val item = getCustomItem(event.item) ?: return
 		when (event.action) {
 			Action.LEFT_CLICK_BLOCK, Action.LEFT_CLICK_AIR -> {
 				 item.onLeftClick(event)
@@ -87,22 +81,12 @@ class CustomItems: Listener {
 	}
 	@EventHandler
 	fun onDrop(event: PlayerDropItemEvent) {
-		val item = customItems[
-				event.itemDrop.itemStack.itemMeta.persistentDataContainer.get(
-					NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING
-				) ?: return]
-			?: return
-
+		val item = getCustomItem(event.itemDrop.itemStack) ?: return
 		item.onDropped(event)
 	}
 	@EventHandler
 	fun onCraft(event: PrepareItemCraftEvent) {
-		val item = customItems[
-				event.inventory.result!!.itemMeta.persistentDataContainer.get(
-					NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING
-				) ?: return]
-			?: return
-
+		val item = getCustomItem(event.inventory.result) ?: return
 		item.onPrepareCraft(event)
 	}
 	@EventHandler
