@@ -22,7 +22,17 @@ class BlasterItem(
 	override val model: Int,
 	override val displayName: String,
 	override val material: Material,
-	override val maxPower: Int
+	override val maxPower: Int,
+	val speed: Double,
+	val range: Int,
+	val thickness: Double,
+	val cooldown: Int,
+	val power: Int,
+	val damage: Double,
+	val sound: String,
+	val pitchBase: Double,
+	val pitchRange: Double,
+	val explosionPower: Float? = null
 ) : PowerItem(), Listener {
 
 	init {
