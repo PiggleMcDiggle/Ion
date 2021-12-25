@@ -1,6 +1,5 @@
 package net.starlegacy.feature.customitem
 
-import com.destroystokyo.paper.event.player.PlayerJumpEvent
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
@@ -17,7 +16,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import kotlin.math.max
