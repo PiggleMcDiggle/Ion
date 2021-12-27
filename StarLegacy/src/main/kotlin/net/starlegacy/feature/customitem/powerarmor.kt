@@ -1,13 +1,14 @@
 package net.starlegacy.feature.customitem
 
 import net.starlegacy.feature.customitem.type.BlasterItem
+import net.starlegacy.feature.customitem.type.PowerArmorItem
 import net.starlegacy.feature.customitem.type.PowerModuleItem
 import org.bukkit.Material
 
 
 object PowerArmorItems {
-	private fun registerPowerArmor(piece: String, model: Int, maxPower: Int, mat: Material): BlasterItem {
-		val item = BlasterItem(
+	private fun registerPowerArmor(piece: String, model: Int, maxPower: Int, mat: Material): PowerArmorItem {
+		val item = PowerArmorItem(
 			id = "power_armor_${piece.lowercase().replace(" ", "_")}",
 			displayName = "Power $piece",
 			material = mat,

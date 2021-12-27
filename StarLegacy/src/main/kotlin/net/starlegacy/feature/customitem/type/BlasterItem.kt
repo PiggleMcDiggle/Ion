@@ -40,7 +40,7 @@ class BlasterItem(
 	}
 
 	override fun onLeftClick(event: PlayerInteractEvent) {
-		Blasters.fireBlaster(event.player, event.item!!, Blasters.getBlasterType(this))
+		Blasters.fireBlaster(event.player, event.item!!)
 	}
 
 	// The rest of this is copied from the old SL BlasterListener.kt
@@ -57,7 +57,7 @@ class BlasterItem(
 		val blaster = Blasters.getBlaster(bow) ?: return
 
 		event.isCancelled = true
-		Blasters.fireBlaster(entity, bow, Blasters.getBlasterType(blaster))
+		Blasters.fireBlaster(entity, bow)
 	}
 
 	override fun onPrepareCraft(event: PrepareItemCraftEvent) {
