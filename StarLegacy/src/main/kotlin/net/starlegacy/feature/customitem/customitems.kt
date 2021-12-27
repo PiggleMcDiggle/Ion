@@ -1,24 +1,5 @@
 package net.starlegacy.feature.customitem
 
-import com.google.common.collect.HashBasedTable
-import com.google.common.collect.Table
-import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.util.set
-import org.bukkit.ChatColor.GOLD
-import org.bukkit.ChatColor.GRAY
-import org.bukkit.ChatColor.RED
-import org.bukkit.Material
-import org.bukkit.Material.BOW
-import org.bukkit.Material.DIAMOND_AXE
-import org.bukkit.Material.DIAMOND_PICKAXE
-import org.bukkit.Material.FLINT_AND_STEEL
-import org.bukkit.Material.IRON_BLOCK
-import org.bukkit.Material.IRON_INGOT
-import org.bukkit.Material.IRON_ORE
-import org.bukkit.Material.LEATHER_BOOTS
-import org.bukkit.Material.LEATHER_CHESTPLATE
-import org.bukkit.Material.LEATHER_HELMET
-import org.bukkit.Material.LEATHER_LEGGINGS
 /*
 
 

@@ -16,7 +16,7 @@ class EnergySwordItem(
 	override val model: Int,
 	override val displayName: String,
 	override val material: Material,
-): CustomItem() {
+) : CustomItem() {
 
 	override fun onLeftClick(event: PlayerInteractEvent) {
 		if (event.player.gameMode == GameMode.CREATIVE && event.action == Action.LEFT_CLICK_BLOCK) {

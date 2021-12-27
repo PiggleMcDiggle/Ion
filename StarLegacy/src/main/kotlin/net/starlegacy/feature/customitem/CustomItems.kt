@@ -21,13 +21,13 @@ import org.bukkit.persistence.PersistentDataType
 import kotlin.math.max
 import kotlin.math.min
 
-class CustomItems: Listener {
+class CustomItems : Listener {
 	companion object {
 		val customItems = mutableMapOf<String, CustomItem>()
 
 		fun register(item: CustomItem) {
 			// Check for duplicate custom model data
-			customItems.forEach{ (id, customItem) ->
+			customItems.forEach { (id, customItem) ->
 				if (customItem.model == item.model && customItem.material == item.material) {
 					plugin.logger.warning("Multiple custom items have registered for the same material and model data!")
 					plugin.logger.warning("${customItem.id} and ${item.id} are both using ${customItem.material.name} and ${customItem.model}")
@@ -39,9 +39,14 @@ class CustomItems: Listener {
 			item.onItemRegistered()
 			plugin.logger.warning("Registered custom item ${item.id}")
 		}
+
 		fun all(): Collection<CustomItem> = customItems.values
 		fun getCustomItem(id: String?): CustomItem? = customItems[id]
-		fun getCustomItem(stack: ItemStack?): CustomItem? = customItems[stack?.itemMeta?.persistentDataContainer?.get(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING)]
+		fun getCustomItem(stack: ItemStack?): CustomItem? = customItems[stack?.itemMeta?.persistentDataContainer?.get(
+			NamespacedKey(plugin, "custom-item-id"),
+			PersistentDataType.STRING
+		)]
+
 		operator fun get(id: String?): CustomItem? = getCustomItem(id)
 		operator fun get(item: ItemStack?): CustomItem? = getCustomItem(item)
 		val blankItem = GenericCustomItem("blank_item", 0, "Blank Custom Item", Material.EMERALD)
@@ -69,7 +74,7 @@ class CustomItems: Listener {
 		val item = getCustomItem(event.item) ?: return
 		when (event.action) {
 			Action.LEFT_CLICK_BLOCK, Action.LEFT_CLICK_AIR -> {
-				 item.onLeftClick(event)
+				item.onLeftClick(event)
 			}
 			Action.RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK -> {
 				item.onRightClick(event)
@@ -77,22 +82,26 @@ class CustomItems: Listener {
 			else -> return // ugh
 		}
 	}
+
 	@EventHandler
 	fun onDrop(event: PlayerDropItemEvent) {
 		val item = getCustomItem(event.itemDrop.itemStack) ?: return
 		item.onDropped(event)
 	}
+
 	@EventHandler
 	fun onCraft(event: PrepareItemCraftEvent) {
 		val item = getCustomItem(event.inventory.result) ?: return
 		item.onPrepareCraft(event)
 	}
+
 	@EventHandler
 	fun onHit(event: EntityDamageByEntityEvent) {
 		val damager = event.damager as? LivingEntity ?: return
 		val itemInHand = damager.equipment?.itemInMainHand ?: return
 		getCustomItem(itemInHand)?.onHitEntity(event) ?: return
 	}
+
 	@EventHandler
 	fun onHitWhileHolding(event: EntityDamageByEntityEvent) {
 		val damaged = event.entity as? LivingEntity ?: return

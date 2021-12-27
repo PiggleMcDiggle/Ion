@@ -1,6 +1,5 @@
 package net.starlegacy.feature.customitem
 
-import net.starlegacy.feature.customitem.type.BlasterItem
 import net.starlegacy.feature.customitem.type.PowerArmorItem
 import net.starlegacy.feature.customitem.type.PowerModuleItem
 import org.bukkit.Material
@@ -38,6 +37,7 @@ object PowerModuleItems {
 		CustomItems.register(item)
 		return item
 	}
+
 	fun register() {
 		registerModuleItem("shock_absorbing", "Shock Absorbing", 1)
 		registerModuleItem("speed_boosting", "Speed Boosting", 2)

@@ -1,7 +1,7 @@
 package net.starlegacy.feature.customitem
 
 import net.starlegacy.feature.customitem.type.EnergySwordItem
-import org.bukkit.Material;
+import org.bukkit.Material
 
 object EnergySwords {
 

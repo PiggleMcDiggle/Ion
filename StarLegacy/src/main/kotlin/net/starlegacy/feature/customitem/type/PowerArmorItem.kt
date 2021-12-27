@@ -8,5 +8,4 @@ class PowerArmorItem(
 	override val displayName: String,
 	override val material: Material,
 	override val maxPower: Int
-) : PowerItem() {
-}
+) : PowerItem()
