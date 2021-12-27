@@ -2,17 +2,6 @@ package net.starlegacy.feature.customitem
 
 /*
 
-
-	//region Power Tools
-	private fun registerPowerTool(type: String, name: String, mat: Material, model: Int, maxPower: Int) =
-		makePoweredItem("power_tool_$type", "${GOLD}Power$GRAY $name", mat, model, maxPower)
-
-	val POWER_TOOL_DRILL = registerPowerTool("drill", "Drill", DIAMOND_PICKAXE, 1, 50000)
-
-	init {
-		idMap["power_tool_pickaxe"] = POWER_TOOL_DRILL
-	}
-
 	val POWER_TOOL_CHAINSAW = registerPowerTool("chainsaw", "Chainsaw", DIAMOND_AXE, 1, 100000)
 	//endregion Power Tools
 

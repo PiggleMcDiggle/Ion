@@ -49,7 +49,6 @@ import net.starlegacy.feature.economy.city.TradeCities
 import net.starlegacy.feature.economy.collectors.CollectionMissions
 import net.starlegacy.feature.economy.collectors.Collectors
 import net.starlegacy.feature.gas.Gasses
-import net.starlegacy.feature.gear.Gear
 import net.starlegacy.feature.machine.AreaShields
 import net.starlegacy.feature.machine.PowerMachines
 import net.starlegacy.feature.machine.Turrets
@@ -169,8 +168,6 @@ class StarLegacy : JavaPlugin() {
 			Filters,
 			Wires,
 
-			Gear,
-
 			TradeCities,
 
 			CollectionMissions,
@@ -221,7 +218,6 @@ class StarLegacy : JavaPlugin() {
 
 			DoubleJumpListener,
 			PowerArmorListener,
-			PowerToolListener,
 		)
 
 	override fun onEnable() {

@@ -2,6 +2,7 @@ package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.feature.customitem.type.CustomItem
+import net.starlegacy.feature.customitem.type.DrillItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerItem
 import net.starlegacy.util.colorize
@@ -67,6 +68,7 @@ class CustomItems : Listener {
 		BlasterItems.register()
 		PowerArmorItems.register()
 		PowerModuleItems.register()
+		ToolItems.register()
 	}
 
 	@EventHandler
