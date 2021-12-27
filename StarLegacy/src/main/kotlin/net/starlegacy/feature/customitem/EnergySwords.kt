@@ -2,7 +2,6 @@ package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.feature.customitem.type.EnergySwordItem
-import net.starlegacy.feature.gear.Gear
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
 import org.bukkit.Material
