@@ -69,6 +69,7 @@ class CustomItems : Listener {
 		PowerArmorItems.register()
 		PowerModuleItems.register()
 		ToolItems.register()
+		Minerals.register()
 	}
 
 	@EventHandler
