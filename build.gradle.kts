@@ -1,7 +1,7 @@
 plugins {
 	java
 	id("org.jetbrains.kotlin.jvm") version "1.6.10"
-	id("io.papermc.paperweight.userdev") version "1.2.0"
+	id("io.papermc.paperweight.userdev") version "1.3.4-SNAPSHOT"
 	id("com.github.johnrengelman.shadow") version "7.1.1"
 }
 
@@ -18,8 +18,8 @@ repositories {
 }
 
 dependencies {
-	compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
-	paperDevBundle("1.17.1-R0.1-SNAPSHOT")
+	compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+	paperDevBundle("1.18.1-R0.1-SNAPSHOT")
 
 	compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.8") // https://github.com/EngineHub/WorldEdit
 	compileOnly("com.github.bloodmc:GriefDefenderAPI:master") // https://github.com/bloodmc/GriefDefender/
@@ -60,7 +60,7 @@ sourceSets {
 }
 
 java {
-	toolchain.languageVersion.set(JavaLanguageVersion.of(16))
+	toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 tasks.reobfJar {

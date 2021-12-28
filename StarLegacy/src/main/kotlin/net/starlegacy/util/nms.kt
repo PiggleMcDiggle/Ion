@@ -13,14 +13,13 @@ import org.bukkit.inventory.ItemStack
 //region Aliases
 
 // cb = craftbukkit
-typealias CBAdvancement = org.bukkit.craftbukkit.v1_17_R1.advancement.CraftAdvancement
-
-typealias CBPlayer = org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer
-typealias CBItemStack = org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack
-typealias CBWorld = org.bukkit.craftbukkit.v1_17_R1.CraftWorld
-typealias CBChunk = org.bukkit.craftbukkit.v1_17_R1.CraftChunk
-typealias CBMagicNumbers = org.bukkit.craftbukkit.v1_17_R1.util.CraftMagicNumbers
-typealias CBBlockData = org.bukkit.craftbukkit.v1_17_R1.block.data.CraftBlockData
+typealias CBAdvancement = org.bukkit.craftbukkit.v1_18_R1.advancement.CraftAdvancement
+typealias CBPlayer = org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer
+typealias CBItemStack = org.bukkit.craftbukkit.v1_18_R1.inventory.CraftItemStack
+typealias CBWorld = org.bukkit.craftbukkit.v1_18_R1.CraftWorld
+typealias CBChunk = org.bukkit.craftbukkit.v1_18_R1.CraftChunk
+typealias CBMagicNumbers = org.bukkit.craftbukkit.v1_18_R1.util.CraftMagicNumbers
+typealias CBBlockData = org.bukkit.craftbukkit.v1_18_R1.block.data.CraftBlockData
 // nms = net.minecraft.server
 typealias NMSItemStack = net.minecraft.world.item.ItemStack
 
@@ -115,7 +114,7 @@ fun Material.toNMSBlockData(): NMSBlockData = createBlockData().nms
 val NMSBlockData.bukkitMaterial: Material get() = CBMagicNumbers.getMaterial(this.block)
 
 fun Block.getNMSBlockData(): NMSBlockData {
-	return world.nms.getChunk(x shr 4, z shr 4).getBlockData(x and 15, y, z and 15)
+	return world.nms.getChunk(x shr 4, z shr 4).getBlockState(x and 15, y, z and 15)
 }
 
 /**
@@ -130,7 +129,7 @@ fun getNMSBlockDataSafe(world: World, x: Int, y: Int, z: Int): NMSBlockData? {
 	return try {
 		val chunk: NMSChunk = world.nms.getChunkIfLoaded(x shr 4, z shr 4) ?: return null
 
-		chunk.getBlockData(x and 15, y, z and 15)
+		chunk.getBlockState(x and 15, y, z and 15)
 	} catch (indexOutOfBounds: IndexOutOfBoundsException) {
 		null
 	}
