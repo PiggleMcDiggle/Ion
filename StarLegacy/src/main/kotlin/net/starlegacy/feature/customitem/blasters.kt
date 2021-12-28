@@ -109,19 +109,6 @@ object BlasterItems {
 			pitchRange = 0.1,
 			explosionPower = 2.0f
 		)
-		registerBlaster(
-			"Nuke Launcher", model = 4, 200000,
-			speed = 1000.0,
-			range = 500,
-			thickness = 0.5,
-			cooldown = -1,
-			power = 500,
-			damage = 9001.0,
-			sound = Sound.ENTITY_SNOW_GOLEM_HURT.name,
-			pitchBase = 0.6,
-			pitchRange = 0.1,
-			explosionPower = 100.0f
-		)
 	}
 }
 
