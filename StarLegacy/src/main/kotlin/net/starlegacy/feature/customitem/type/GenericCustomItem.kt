@@ -11,7 +11,4 @@ class GenericCustomItem(
 	override val material: Material
 
 ) : CustomItem() {
-	init {
-		CustomItems.register(this)
-	}
 }
