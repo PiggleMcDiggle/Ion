@@ -27,7 +27,7 @@ class DrillItem(
 		if (blockType == Material.BEDROCK || blockType == Material.BARRIER) return
 		if (!BlockBreakEvent(block, event.player).callEvent()) return
 
-		Tasks.syncDelay(4) {
+		Tasks.syncDelay(4) { // Figure out why this delay exists?
 			if (blockType != block.type) return@syncDelay
 			if (getPower(event.item!!) < 20) {
 				event.player.sendMessage(ChatColor.RED.toString() + "Out of power.")
