@@ -2,6 +2,7 @@ package net.starlegacy.feature.customitem
 
 import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
+import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapelessRecipe
 import net.starlegacy.feature.customitem.type.DetonatorItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.util.Tasks
@@ -26,7 +27,7 @@ object MiscItems {
 				't' to recipeChoice(CustomItems["titanium"]!!),
 				'u' to recipeChoice(CustomItems["uranium"]!!)))
 		}
-		CustomItems.register(
+		val base = CustomItems.register(
 			GenericCustomItem(
 				id = "rocket_base",
 				displayName = "Rocket Base",
@@ -34,7 +35,7 @@ object MiscItems {
 				model = 1
 			)
 		)
-		CustomItems.register(
+		val warhead = CustomItems.register(
 			GenericCustomItem(
 				id = "rocket_warhead_oriomium",
 				displayName = "Oriomium Warhead",
@@ -42,7 +43,7 @@ object MiscItems {
 				model = 2
 			)
 		)
-		CustomItems.register(
+		val rocket = CustomItems.register(
 			GenericCustomItem(
 				id = "rocket_oriomium",
 				displayName = "Oriomium Rocket",
@@ -50,5 +51,27 @@ object MiscItems {
 				model = 3
 			)
 		)
+		Tasks.syncDelay(1){
+			registerShapelessRecipe(
+				rocket.id,
+				rocket.getItem(),
+				recipeChoice(base),
+				recipeChoice(warhead)
+			)
+			registerShapedRecipe(
+				base.id, base.getItem(3), "t t", "tht", "tgt", ingredients = mapOf(
+					't' to recipeChoice(CustomItems["titanium"]!!),
+					'h' to recipeChoice(CustomItems["gas_canister_helium"]!!),
+					'g' to recipeChoice(Material.HOPPER),
+				)
+			)
+
+			registerShapedRecipe(
+				warhead.id, warhead.getItem(3), " a ", "aoa", " a ", ingredients = mapOf(
+					'a' to recipeChoice(CustomItems["aluminum"]!!),
+					'o' to recipeChoice(CustomItems["oriomium_block"]!!)
+				)
+			)
+		}
 	}
 }
