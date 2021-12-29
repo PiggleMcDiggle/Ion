@@ -1,5 +1,6 @@
 package net.starlegacy.feature.customitem
 
+import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.type.CustomBlockItem
 import net.starlegacy.feature.customitem.type.MineralItem
 import org.bukkit.Material
@@ -33,6 +34,10 @@ object Minerals {
 		CustomItems.register(block)
 		CustomItems.register(ore)
 		CustomItems.register(item)
+		// Not doing a shapeless recipe.
+		// The result is the same, and I can't figure out a cleaner way to do it then just spam recipeChoice() 9 times for the ingredients
+		CustomItems.registerShapedRecipe(block.id, block.getItem(), "aaa", "aaa", "aaa", ingredients = mapOf('a' to recipeChoice(item)))
+		CustomItems.registerShapelessRecipe(item.id, item.getItem(9), ingredients = arrayOf(recipeChoice(block)))
 		return item
 
 	}

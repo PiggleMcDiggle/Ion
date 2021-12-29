@@ -1,27 +1,6 @@
 package net.starlegacy.feature.customitem
 
 /*
-	private fun registerBatteryRecipes() {
-
-	}
-
-	private fun registerMineralRecipes() = listOf(
-		CustomItems.MINERAL_COPPER,
-		CustomItems.MINERAL_ALUMINUM,
-		CustomItems.MINERAL_TITANIUM,
-		CustomItems.MINERAL_URANIUM,
-		CustomItems.MINERAL_CHETHERITE,
-		CustomItems.MINERAL_ORIOMIUM
-	).forEach { mineral: CustomItems.MineralCustomItem ->
-		createShapelessRecipe(
-			mineral,
-			customItemChoice(mineral.fullBlock),
-			amount = 9
-		)
-		createRecipe(
-			mineral.fullBlock, "aaa", "aaa", "aaa", ingredients = mapOf('a' to customItemChoice(mineral))
-		)
-	}
 
 	private fun registerBlasterRecipes() {
 		createRecipe(
