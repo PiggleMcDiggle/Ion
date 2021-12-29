@@ -1,12 +1,14 @@
 package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
+import net.starlegacy.PLUGIN
 import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.DrillItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerItem
 import net.starlegacy.util.colorize
 import net.starlegacy.util.updateMeta
+import org.bukkit.Bukkit.addRecipe
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.LivingEntity
@@ -18,6 +20,9 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.RecipeChoice
+import org.bukkit.inventory.ShapedRecipe
+import org.bukkit.inventory.ShapelessRecipe
 import org.bukkit.persistence.PersistentDataType
 import kotlin.math.max
 import kotlin.math.min
@@ -51,6 +56,41 @@ class CustomItems : Listener {
 		operator fun get(id: String?): CustomItem? = getCustomItem(id)
 		operator fun get(item: ItemStack?): CustomItem? = getCustomItem(item)
 		val blankItem = GenericCustomItem("blank_item", 0, "Blank Custom Item", Material.EMERALD)
+
+		// region Recipes
+		// The original StarLegacy code had a custom addRecipe that had delays and attempts.
+		// If for some reason this doesn't work as expected, check that.
+
+		fun registerShapedRecipe(
+			id: String, output: ItemStack, vararg shape: String, ingredients: Map<Char, RecipeChoice>): ShapedRecipe {
+			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, id), output)
+			recipe.shape(*shape)
+			ingredients.forEach{ (char, ingredient) ->
+				recipe.setIngredient(char, ingredient)
+			}
+			addRecipe(recipe)
+			return recipe
+		}
+
+		fun registerShapelessRecipe(
+			id: String, output: ItemStack, vararg ingredients: RecipeChoice): ShapelessRecipe {
+			check(ingredients.isNotEmpty())
+			val recipe = ShapelessRecipe(NamespacedKey(PLUGIN, id), output)
+
+			ingredients.forEach {
+				recipe.addIngredient(it)
+			}
+			addRecipe(recipe)
+			return recipe
+		}
+
+		fun recipeChoice(customItem: CustomItem): RecipeChoice {
+			return RecipeChoice.ExactChoice(customItem.getItem())
+		}
+		fun recipeChoice(material: Material): RecipeChoice {
+			return RecipeChoice.MaterialChoice(material)
+		}
+		// endregion
 	}
 
 	init {
@@ -71,6 +111,7 @@ class CustomItems : Listener {
 		ToolItems.register()
 		Minerals.register()
 	}
+	// region Custom Item Hooks
 
 	@EventHandler
 	fun onInteract(event: PlayerInteractEvent) {
@@ -111,10 +152,10 @@ class CustomItems : Listener {
 		val itemInHand = damaged.equipment?.itemInMainHand ?: return
 		getCustomItem(itemInHand)?.onHitWhileHolding(event) ?: return
 	}
+	// endregion
 }
 
-
-// region power
+// region Power
 // Funcions for dealing with powerable items
 
 val ITEM_POWER_PREFIX = "&8Power: &7".colorize()
