@@ -1,27 +1,6 @@
 package net.starlegacy.feature.customitem
 
 /*
-
-	private fun registerPowerToolRecipes() {
-		createRecipe(
-			CustomItems.POWER_TOOL_DRILL, "i  ", " bt", " ts", ingredients = mapOf(
-				'i' to materialChoice(Material.IRON_INGOT),
-				'b' to customItemChoice(CustomItems.BATTERY_MEDIUM),
-				't' to customItemChoice(CustomItems.MINERAL_TITANIUM),
-				's' to materialChoice(Material.STICK)
-			)
-		)
-	}
-
-	private fun registerGasCanisterRecipe() {
-		createRecipe(
-			CustomItems.GAS_CANISTER_EMPTY, " i ", "igi", " i ", ingredients = mapOf(
-				'i' to customItemChoice(CustomItems.MINERAL_TITANIUM),
-				'g' to materialChoice(Material.GLASS_PANE)
-			)
-		)
-	}
-
 	private fun registerDetonatorRecipe() {
 		createRecipe(
 			CustomItems.DETONATOR, " r ", "tut", " t ", ingredients = mapOf(
