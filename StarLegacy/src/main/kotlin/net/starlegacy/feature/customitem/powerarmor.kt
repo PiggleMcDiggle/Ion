@@ -1,5 +1,7 @@
 package net.starlegacy.feature.customitem
 
+import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
+import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.type.PowerArmorItem
 import net.starlegacy.feature.customitem.type.PowerModuleItem
 import org.bukkit.Material
@@ -16,13 +18,22 @@ object PowerArmorItems {
 		)
 		CustomItems.register(item)
 		return item
+
 	}
 
 	fun register() {
-		registerPowerArmor("Helmet", 1, 50000, Material.LEATHER_HELMET)
-		registerPowerArmor("Chestplate", 1, 50000, Material.LEATHER_CHESTPLATE)
-		registerPowerArmor("Leggings", 1, 50000, Material.LEATHER_LEGGINGS)
-		registerPowerArmor("Boots", 1, 50000, Material.LEATHER_BOOTS)
+		val items = mapOf(
+			'*' to recipeChoice(CustomItems["titanium"]!!),
+			'b' to recipeChoice(CustomItems["battery_g"]!!)
+		)
+		val helmet = registerPowerArmor("Helmet", 1, 50000, Material.LEATHER_HELMET)
+		registerShapedRecipe(helmet.id, helmet.getItem(), "*b*", "* *", ingredients = items)
+		val chestplate = registerPowerArmor("Chestplate", 1, 50000, Material.LEATHER_CHESTPLATE)
+		registerShapedRecipe(chestplate.id, chestplate.getItem(), "* *", "*b*", "***", ingredients = items)
+		val leggings = registerPowerArmor("Leggings", 1, 50000, Material.LEATHER_LEGGINGS)
+		registerShapedRecipe(leggings.id, leggings.getItem(), "*b*", "* *", "* *", ingredients = items)
+		val boots = registerPowerArmor("Boots", 1, 50000, Material.LEATHER_BOOTS)
+		registerShapedRecipe(boots.id, boots.getItem(), "* *", "*b*", ingredients = items)
 	}
 }
 

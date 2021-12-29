@@ -3,15 +3,7 @@ package net.starlegacy.feature.customitem
 /*
 
 	private fun registerArmorRecipes() {
-		val items = mapOf(
-			'*' to customItemChoice(CustomItems.MINERAL_TITANIUM),
-			'b' to customItemChoice(CustomItems.BATTERY_LARGE)
-		)
 
-		createRecipe(CustomItems.POWER_ARMOR_HELMET, "*b*", "* *", ingredients = items)
-		createRecipe(CustomItems.POWER_ARMOR_CHESTPLATE, "* *", "*b*", "***", ingredients = items)
-		createRecipe(CustomItems.POWER_ARMOR_LEGGINGS, "*b*", "* *", "* *", ingredients = items)
-		createRecipe(CustomItems.POWER_ARMOR_BOOTS, "* *", "*b*", ingredients = items)
 	}
 
 	private fun registerModuleRecipes() = mapOf(
