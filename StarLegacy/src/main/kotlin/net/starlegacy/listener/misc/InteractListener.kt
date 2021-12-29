@@ -183,7 +183,7 @@ object InteractListener : SLEventListener() {
 	// Put power into the sign if right clicking with a battery
 	@EventHandler
 	fun onPowerSignRecharge(event: PlayerInteractEvent) {
-		if (event.action == Action.RIGHT_CLICK_BLOCK && CustomItems[event.item] is CustomItems.BatteryItem) {
+		if (event.action == Action.RIGHT_CLICK_BLOCK && CustomItems[event.item] is BatteryItem) {
 			val sign = event.clickedBlock?.getState(false) as? Sign ?: return
 			val multiblock = Multiblocks[sign] as? PowerStoringMultiblock ?: return
 

@@ -60,6 +60,7 @@ import net.starlegacy.database.slPlayerId
 import net.starlegacy.feature.chat.ChannelSelections
 import net.starlegacy.feature.chat.ChatChannel
 import net.starlegacy.feature.customitem.CustomItems
+import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.economy.bazaar.Merchants
 import net.starlegacy.feature.economy.city.CityNPCs
@@ -73,9 +74,6 @@ import net.starlegacy.feature.machine.Turrets
 import net.starlegacy.feature.misc.AutoRestart
 import net.starlegacy.feature.misc.CombatNPCs
 import net.starlegacy.feature.misc.CryoPods
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
-import net.starlegacy.feature.misc.CustomRecipes
 import net.starlegacy.feature.misc.Decomposers
 import net.starlegacy.feature.misc.GameplayTweaks
 import net.starlegacy.feature.misc.PlanetSpawns
@@ -117,12 +115,7 @@ import net.starlegacy.feature.transport.pipe.Pipes
 import net.starlegacy.feature.transport.pipe.filter.Filters
 import net.starlegacy.listener.DoubleJumpListener
 import net.starlegacy.listener.SLEventListener
-import net.starlegacy.listener.gear.BlasterListener
-import net.starlegacy.listener.gear.DetonatorListener
-import net.starlegacy.listener.gear.DoubleJumpListener
 import net.starlegacy.listener.gear.PowerArmorListener
-import net.starlegacy.listener.gear.PowerToolListener
-import net.starlegacy.listener.gear.SwordListener
 import net.starlegacy.listener.misc.BlockListener
 import net.starlegacy.listener.misc.ChatListener
 import net.starlegacy.listener.misc.EntityListener
