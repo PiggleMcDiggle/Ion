@@ -123,6 +123,7 @@ class CustomItems : Listener {
 		PowerModuleItems.register()
 		ToolItems.register()
 		Minerals.register()
+		MiscRecipes.register()
 	}
 	// region Custom Item Hooks
 

@@ -1,39 +1,6 @@
 package net.starlegacy.feature.customitem
 
 /*
-	private fun registerWireRecipe() {
-		registerShapelessRecipe(
-			"wire",
-			ItemStack(Material.END_ROD, 16),
-			customItemChoice(CustomItems.MINERAL_COPPER),
-			customItemChoice(CustomItems.MINERAL_COPPER),
-			customItemChoice(CustomItems.MINERAL_COPPER)
-		)
-	}
-
-	private fun registerSeaLanternRecipe() {
-		registerShapelessRecipe(
-			"sea_lantern",
-			ItemStack(Material.SEA_LANTERN, 1),
-			materialChoice(Material.PRISMARINE_CRYSTALS),
-			materialChoice(Material.PRISMARINE_CRYSTALS),
-			materialChoice(Material.PRISMARINE_CRYSTALS),
-			materialChoice(Material.PRISMARINE_CRYSTALS)
-		)
-	}
-
-	private fun registerEndPortalFrameRecipe() {
-		registerShapedRecipe(
-			"end_portal_frame",
-			ItemStack(Material.END_PORTAL_FRAME, 1),
-			"wow", "sss",
-			ingredients = mapOf(
-				'w' to materialChoice(Material.WARPED_PLANKS),
-				'o' to materialChoice(Material.ENDER_PEARL),
-				's' to materialChoice(Material.END_STONE)
-			)
-		)
-	}
 
 	private fun registerRocketRecipes() {
 		createRecipe(
