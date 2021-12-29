@@ -11,18 +11,29 @@ import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.misc.Shuttle
 import net.starlegacy.feature.nations.gui.openConfirmMenu
 import net.starlegacy.feature.nations.gui.playerClicker
-import net.starlegacy.util.*
+import net.starlegacy.util.VAULT_ECO
+import net.starlegacy.util.Vec3i
+import net.starlegacy.util.action
+import net.starlegacy.util.actionAndMsg
+import net.starlegacy.util.colorize
+import net.starlegacy.util.getChunkAtIfLoaded
+import net.starlegacy.util.isInRange
+import net.starlegacy.util.msg
+import net.starlegacy.util.placeSchematicEfficiently
+import net.starlegacy.util.readSchematic
+import net.starlegacy.util.setDisplayNameAndGet
+import net.starlegacy.util.setLoreAndGet
+import net.starlegacy.util.toCreditsString
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Sign
 import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import java.io.File
-import java.time.Instant
 import java.util.*
-import kotlin.collections.set
 
 object Shuttles : SLComponent() {
 	const val TICKET_COST = 20
@@ -47,44 +58,41 @@ object Shuttles : SLComponent() {
 
 		// run updateShuttles() every minute
 		//Tasks.asyncRepeat(20 * 60, 20 * 60, ::updateShuttles)
-
-		signEvents()
 	}
 
-	private fun signEvents() {
-		val line1 = "&b&lShuttle".colorize()
-		val line2 = "&b&lTicket".colorize()
-		val line3 = "&b&lVendor".colorize()
-		val line4 = "&d&o[Right Click]".colorize()
+	private val line1 = "&b&lShuttle".colorize()
+	private val line2 = "&b&lTicket".colorize()
+	private val line3 = "&b&lVendor".colorize()
+	private val line4 = "&d&o[Right Click]".colorize()
 
-		subscribe<PlayerInteractEvent>()
-			.filtered { it.player.isOp }
-			.filtered { (it.clickedBlock?.state as? Sign)?.getLine(0) == "[ticketvendor]" }
-			.handler { event ->
-				val sign = event.clickedBlock?.state as? Sign ?: return@handler
-				sign.setLine(0, line1)
-				sign.setLine(1, line2)
-				sign.setLine(2, line3)
-				sign.setLine(3, line4)
-				sign.update()
-			}
+	@EventHandler
+	fun ticketVendorCreate(event: PlayerInteractEvent) {
+		if (!event.player.isOp || (event.clickedBlock?.state as? Sign)?.getLine(0) == "[ticketvendor]") return
 
-		subscribe<PlayerInteractEvent> { event ->
-			val sign = event.clickedBlock?.state as? Sign ?: return@subscribe
-			if (sign.getLine(0) == line1 && sign.getLine(1) == line2 && sign.getLine(2) == line3 && sign.getLine(3) == line4) {
-				val player = event.player
-				player.openConfirmMenu("Buy ticket for ${TICKET_COST.toCreditsString()}?", onConfirm = {
-					playerClicker.also { p ->
-						if (!VAULT_ECO.has(p, TICKET_COST.toDouble())) {
-							p msg "You don't have enough credits! Cost: ${TICKET_COST.toCreditsString()}"
-						} else {
-							VAULT_ECO.withdrawPlayer(p, TICKET_COST.toDouble())
-							p.world.dropItem(p.eyeLocation, createTicket())
-						}
-						p.closeInventory()
+		val sign = event.clickedBlock?.state as? Sign ?: return
+		sign.setLine(0, line1)
+		sign.setLine(1, line2)
+		sign.setLine(2, line3)
+		sign.setLine(3, line4)
+		sign.update()
+	}
+
+	@EventHandler
+	fun ticketVendorInteract(event: PlayerInteractEvent) {
+		val sign = event.clickedBlock?.state as? Sign ?: return
+		if (sign.getLine(0) == line1 && sign.getLine(1) == line2 && sign.getLine(2) == line3 && sign.getLine(3) == line4) {
+			val player = event.player
+			player.openConfirmMenu("Buy ticket for ${TICKET_COST.toCreditsString()}?", onConfirm = {
+				playerClicker.also { p ->
+					if (!VAULT_ECO.has(p, TICKET_COST.toDouble())) {
+						p msg "You don't have enough credits! Cost: ${TICKET_COST.toCreditsString()}"
+					} else {
+						VAULT_ECO.withdrawPlayer(p, TICKET_COST.toDouble())
+						p.world.dropItem(p.eyeLocation, createTicket())
 					}
-				}, onCancel = {})
-			}
+					p.closeInventory()
+				}
+			}, onCancel = {})
 		}
 	}
 
@@ -94,60 +102,6 @@ object Shuttles : SLComponent() {
 		for (player in location.world.players) {
 			if (player.location.isInRange(location, 250.0)) {
 				player msg message
-			}
-		}
-	}
-
-	private fun updateShuttles() {
-		if (true) {
-			return
-		}
-
-		for (shuttle in Shuttle.all()) {
-			if (shuttle.destinations.none()) {
-				continue
-			}
-
-			val currentPosition = shuttle.currentPosition
-
-			val currentDest = shuttle.destinations[currentPosition]
-
-			// only update shuttles with the world loaded on this server
-			val world = Bukkit.getWorld(currentDest.world) ?: continue
-			val currentLoc =
-				Location(world, currentDest.x.toDouble(), currentDest.y.toDouble(), currentDest.z.toDouble())
-
-			val minutes = (Instant.now().epochSecond - shuttle.lastMove.toInstant().epochSecond).toInt() / 60
-
-			// don't do the same phase twice for one shuttle
-			if (previousMinuteCache[shuttle._id] == minutes) {
-				continue
-			}
-
-			previousMinuteCache[shuttle._id] = minutes
-
-			val nextDest = shuttle.destinations[shuttle.nextPosition()].name
-
-			val shuttleName = shuttle.name
-
-			when (minutes) {
-				0 -> messageNearby(currentLoc, "&6Shuttle &b$shuttleName&6 departing to &d$nextDest&6 in &a3 minutes")
-				1 -> messageNearby(currentLoc, "&6Shuttle &b$shuttleName&6 departing to &d$nextDest&6 in &e2 minutes")
-				2 -> messageNearby(currentLoc, "&6Shuttle &b$shuttleName&6 departing to &d$nextDest&6 in &c1 minute")
-				// 3 or more (unless it's somehow negative)
-				else -> {
-					previousMinuteCache.remove(shuttle._id)
-					moveShuttle(shuttle, shuttle.nextPosition())
-					val time = (shuttle.destinations.size - 1) * 5
-
-					// run after a second delay so that it doesn't message passengers
-					Tasks.syncDelay(20) {
-						messageNearby(
-							currentLoc,
-							"&6Shuttle &b$shuttleName&6 departed. Scheduled return in $time minutes"
-						)
-					}
-				}
 			}
 		}
 	}
