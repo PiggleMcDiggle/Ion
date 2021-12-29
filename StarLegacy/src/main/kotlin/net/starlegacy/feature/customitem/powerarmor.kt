@@ -4,7 +4,9 @@ import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.type.PowerArmorItem
 import net.starlegacy.feature.customitem.type.PowerModuleItem
+import net.starlegacy.util.Tasks
 import org.bukkit.Material
+import org.bukkit.inventory.ItemStack
 
 
 object PowerArmorItems {
@@ -38,7 +40,7 @@ object PowerArmorItems {
 }
 
 object PowerModuleItems {
-	private fun registerModuleItem(type: String, typeName: String, model: Int): PowerModuleItem {
+	private fun registerModuleItem(type: String, typeName: String, model: Int, craft: String): PowerModuleItem {
 		val item = PowerModuleItem(
 			id = "power_module_$type",
 			displayName = "$typeName Module",
@@ -46,15 +48,23 @@ object PowerModuleItems {
 			model = model,
 		)
 		CustomItems.register(item)
+		Tasks.syncDelay(1){
+			registerShapedRecipe(item.id, item.getItem(), "aga", "g*g", "aga", ingredients = mapOf(
+				'a' to recipeChoice(CustomItems["aluminum"]!!),
+				'g' to recipeChoice(Material.GLASS_PANE),
+				'*' to recipeChoice(CustomItems[craft]?.getItem() ?: ItemStack(Material.getMaterial(craft.uppercase())!!) )
+			))
+		}
+
 		return item
 	}
 
 	fun register() {
-		registerModuleItem("shock_absorbing", "Shock Absorbing", 1)
-		registerModuleItem("speed_boosting", "Speed Boosting", 2)
-		registerModuleItem("rocket_boosting", "Rocket Boosting", 3)
-		registerModuleItem("night_vision", "Night Vision", 4)
-		registerModuleItem("environment", "Environment", 5)
-		registerModuleItem("pressure_field", "Pressure Field", 6)
+		registerModuleItem("shock_absorbing", "Shock Absorbing", 1, "titanium")
+		registerModuleItem("speed_boosting", "Speed Boosting", 2, "feather")
+		registerModuleItem("rocket_boosting", "Rocket Boosting", 3, "firework_rocket")
+		registerModuleItem("night_vision", "Night Vision", 4, "spider_eye")
+		registerModuleItem("environment", "Environment", 5, "chainmail_helmet")
+		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen")
 	}
 }

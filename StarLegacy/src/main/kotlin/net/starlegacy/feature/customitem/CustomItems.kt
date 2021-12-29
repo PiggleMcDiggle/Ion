@@ -90,6 +90,9 @@ class CustomItems : Listener {
 		fun recipeChoice(material: Material): RecipeChoice {
 			return RecipeChoice.MaterialChoice(material)
 		}
+		fun recipeChoice(itemStack: ItemStack): RecipeChoice {
+			return RecipeChoice.ExactChoice(itemStack) // exactchoice might cause issues?
+		}
 		// endregion
 	}
 
