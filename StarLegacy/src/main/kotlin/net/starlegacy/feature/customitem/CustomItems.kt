@@ -47,7 +47,7 @@ class CustomItems : Listener {
 		}
 
 		fun all(): Collection<CustomItem> = customItems.values
-		fun getCustomItem(id: String?): CustomItem? = customItems[id]
+		fun getCustomItem(id: String?): CustomItem? = customItems[id?.lowercase()]
 		fun getCustomItem(stack: ItemStack?): CustomItem? = customItems[stack?.itemMeta?.persistentDataContainer?.get(
 			NamespacedKey(plugin, "custom-item-id"),
 			PersistentDataType.STRING
@@ -95,6 +95,10 @@ class CustomItems : Listener {
 		fun recipeChoice(itemStack: ItemStack): RecipeChoice {
 			return RecipeChoice.ExactChoice(itemStack) // exactchoice might cause issues?
 		}
+
+		/**
+		 * @return the itemstack of the custom item or material with [id], with [count] items
+		 */
 		fun itemStackFromId(id: String, count: Int = 1): ItemStack? {
 			return CustomItems[id]?.getItem(count) ?: ItemStack(Material.getMaterial(id.uppercase()) ?: return null, count)
 		}
