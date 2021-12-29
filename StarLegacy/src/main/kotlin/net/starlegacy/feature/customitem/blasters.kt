@@ -79,9 +79,9 @@ object BlasterItems {
 		Tasks.syncDelay(1) {
 			registerShapedRecipe(
 				pistol.id, pistol.getItem(), " bg", " t ", ingredients = mapOf(
-					'b' to recipeChoice(CustomItems["battery_a"]!!), // todo find and replace battery_small etc
+					'b' to recipeChoice(CustomItems["battery_a"]!!),
 					'g' to recipeChoice(Material.GLASS_PANE),
-					't' to recipeChoice(CustomItems["titanium"]!!) // todo find and replace mineral_<name>
+					't' to recipeChoice(CustomItems["titanium"]!!)
 				)
 			)
 		}

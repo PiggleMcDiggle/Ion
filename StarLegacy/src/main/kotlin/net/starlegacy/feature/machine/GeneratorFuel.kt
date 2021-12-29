@@ -12,7 +12,7 @@ enum class GeneratorFuel(private val item: ItemStack, val cooldown: Int, val pow
 	HYDROGEN(customItem(CustomItems["gas_canister_hydrogen"]!!), cooldown = 200, power = 300),
 	OXYGEN(customItem(CustomItems["gas_canister_oxygen"]!!), cooldown = 150, power = 100),
 	NITROGEN(customItem(CustomItems["gas_canister_nitrogen"]!!), cooldown = 100, power = 250),
-	URANIUM(customItem(CustomItems["mineral_uranium"]!!), cooldown = 2000, power = 5000),
+	URANIUM(customItem(CustomItems["uranium"]!!), cooldown = 2000, power = 5000),
 	COAL(itemStack(Material.COAL), cooldown = 40, power = 500),
 	CHARCOAL(itemStack(Material.CHARCOAL), cooldown = 40, power = 400),
 	COAL_BLOCK(itemStack(Material.COAL_BLOCK), cooldown = 300, power = 4000),

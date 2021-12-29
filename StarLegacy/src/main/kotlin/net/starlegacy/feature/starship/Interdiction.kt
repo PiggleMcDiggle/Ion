@@ -79,7 +79,7 @@ object Interdiction : SLComponent() {
 
 		val input = GravityWellMultiblock.getInput(sign)
 
-		if (LegacyItemUtils.getTotalItems(input, CustomItems["mineral_chetherite"]!!.getItem()) < 2) {
+		if (LegacyItemUtils.getTotalItems(input, CustomItems["chetherite"]!!.getItem()) < 2) {
 			player msg "&cNot enough hypermatter in the dropper. Two chetherite shards are required!"
 			return
 		}
@@ -111,7 +111,7 @@ object Interdiction : SLComponent() {
 			cruisingShip.sendMessage("&cQuantum fluctuations detected - velocity has been reduced by 10%.")
 		}
 
-		input.removeItem(CustomItems["mineral_chetherite"]!!.getItem(2))
+		input.removeItem(CustomItems["chetherite"]!!.getItem(2))
 		starship.sendMessage("&5Gravity pulse has been invoked by ${player.name}.")
 	}
 

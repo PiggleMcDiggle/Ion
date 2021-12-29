@@ -44,8 +44,8 @@ class HyperdriveSubsystem(starship: ActiveStarship, sign: Sign, multiblock: Hype
 	}
 
 	fun restoreFuel(): Unit = getHoppers().forEach { hopper ->
-		hopper.inventory.addItem(CustomItems["mineral_chetherite"]!!.getItem(Hyperspace.HYPERMATTER_AMOUNT))
+		hopper.inventory.addItem(CustomItems["chetherite"]!!.getItem(Hyperspace.HYPERMATTER_AMOUNT))
 	}
 
-	private fun isHypermatter(item: ItemStack) = CustomItems[item] == CustomItems["mineral_chetherite"]!!
+	private fun isHypermatter(item: ItemStack) = CustomItems[item] == CustomItems["chetherite"]!!
 }
