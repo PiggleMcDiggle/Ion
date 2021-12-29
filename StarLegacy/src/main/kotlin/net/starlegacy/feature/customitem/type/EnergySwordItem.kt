@@ -23,7 +23,7 @@ class EnergySwordItem(
 			// Prevent block breaking while in creative mode
 			event.isCancelled = true
 		}
-		if (event.action == Action.LEFT_CLICK_BLOCK && event.action == Action.LEFT_CLICK_AIR) {
+		if (event.action == Action.LEFT_CLICK_BLOCK || event.action == Action.LEFT_CLICK_AIR) { // was &&???
 			event.player.world.playSound(event.player.location, "energy_sword.swing", 1.0f, 1.0f)
 		}
 	}
