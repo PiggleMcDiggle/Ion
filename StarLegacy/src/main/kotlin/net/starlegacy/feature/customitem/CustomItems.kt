@@ -124,6 +124,7 @@ class CustomItems : Listener {
 		ToolItems.register()
 		Minerals.register()
 		MiscRecipes.register()
+		RocketItems.register()
 	}
 	// region Custom Item Hooks
 
