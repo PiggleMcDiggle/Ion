@@ -1,6 +1,9 @@
 package net.starlegacy.feature.customitem
 
 import net.horizonsend.ion.Ion.Companion.plugin
+import net.starlegacy.feature.customitem.CustomItems.Companion.itemStackFromId
+import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
+import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.type.EnergySwordItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
@@ -8,7 +11,7 @@ import org.bukkit.Material
 
 object EnergySwords {
 
-	private fun registerEnergySword(name: String, model: Int): EnergySwordItem {
+	private fun registerEnergySword(name: String, model: Int, craft: String): EnergySwordItem {
 		val item = EnergySwordItem(
 			id = "energy_sword_${name.lowercase().replace(" ", "_")}",
 			displayName = "Energy Sword - $name",
@@ -16,6 +19,14 @@ object EnergySwords {
 			model = model
 		)
 		CustomItems.register(item)
+		Tasks.syncDelay(1){
+			registerShapedRecipe(item.id, item.getItem(), "aga", "a*a", "ata", ingredients = mapOf(
+				'a' to recipeChoice(itemStackFromId("aluminum")!!),
+				'g' to recipeChoice(itemStackFromId("glass_pane")!!),
+				'*' to recipeChoice(itemStackFromId(craft)!!),
+				't' to recipeChoice(itemStackFromId("titanium")!!)
+			))
+		}
 		return item
 	}
 
