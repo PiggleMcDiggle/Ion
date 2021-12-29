@@ -1,16 +1,6 @@
 package net.starlegacy.feature.customitem
 
 /*
-	private fun registerDetonatorRecipe() {
-		createRecipe(
-			CustomItems.DETONATOR, " r ", "tut", " t ", ingredients = mapOf(
-				'r' to materialChoice(Material.REDSTONE),
-				't' to customItemChoice(CustomItems.MINERAL_TITANIUM),
-				'u' to customItemChoice(CustomItems.MINERAL_URANIUM)
-			)
-		)
-	}
-
 	private fun registerWireRecipe() {
 		registerShapelessRecipe(
 			"wire",
