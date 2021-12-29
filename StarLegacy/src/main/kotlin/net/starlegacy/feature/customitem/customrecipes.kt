@@ -2,24 +2,6 @@ package net.starlegacy.feature.customitem
 
 /*
 
-	private fun registerSwordRecipes() = mapOf(
-		CustomItems.ENERGY_SWORD_BLUE to materialChoice(Material.DIAMOND),
-		CustomItems.ENERGY_SWORD_RED to materialChoice(Material.REDSTONE),
-		CustomItems.ENERGY_SWORD_YELLOW to materialChoice(Material.COAL),
-		CustomItems.ENERGY_SWORD_GREEN to materialChoice(Material.EMERALD),
-		CustomItems.ENERGY_SWORD_PURPLE to customItemChoice(CustomItems.MINERAL_CHETHERITE),
-		CustomItems.ENERGY_SWORD_ORANGE to customItemChoice(CustomItems.MINERAL_COPPER)
-	).forEach { (sword, specialItem) ->
-		createRecipe(
-			sword, "aga", "a*a", "ata", ingredients = mapOf(
-				'a' to customItemChoice(CustomItems.MINERAL_ALUMINUM),
-				'g' to materialChoice(Material.GLASS_PANE),
-				'*' to specialItem,
-				't' to customItemChoice(CustomItems.MINERAL_TITANIUM)
-			)
-		)
-	}
-
 	private fun registerPowerToolRecipes() {
 		createRecipe(
 			CustomItems.POWER_TOOL_DRILL, "i  ", " bt", " ts", ingredients = mapOf(

@@ -31,7 +31,7 @@ class CustomItems : Listener {
 	companion object {
 		val customItems = mutableMapOf<String, CustomItem>()
 
-		fun register(item: CustomItem) {
+		fun register(item: CustomItem): CustomItem{
 			// Check for duplicate custom model data
 			customItems.forEach { (id, customItem) ->
 				if (customItem.model == item.model && customItem.material == item.material) {
@@ -44,6 +44,7 @@ class CustomItems : Listener {
 			}
 			item.onItemRegistered()
 			plugin.logger.warning("Registered custom item ${item.id}")
+			return item
 		}
 
 		fun all(): Collection<CustomItem> = customItems.values
