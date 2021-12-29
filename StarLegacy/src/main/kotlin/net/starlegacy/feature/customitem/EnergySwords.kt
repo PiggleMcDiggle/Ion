@@ -31,12 +31,12 @@ object EnergySwords {
 	}
 
 	fun register() {
-		registerEnergySword("blue", 1)
-		registerEnergySword("red", 2)
-		registerEnergySword("yellow", 3)
-		registerEnergySword("green", 4)
-		registerEnergySword("purple", 5)
-		registerEnergySword("orange", 6)
+		registerEnergySword("blue", 1, "diamond")
+		registerEnergySword("red", 2, "redstone")
+		registerEnergySword("yellow", 3, "coal")
+		registerEnergySword("green", 4, "emerald")
+		registerEnergySword("purple", 5, "chetherite")
+		registerEnergySword("orange", 6, "copper")
 
 		// Energy sword idle sound
 		// Use async task and while loop with thread sleep so when it lags it doesnt sound weird
