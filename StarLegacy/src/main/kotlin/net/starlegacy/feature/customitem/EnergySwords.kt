@@ -36,8 +36,7 @@ object EnergySwords {
 		registerEnergySword("yellow", 3, "coal")
 		registerEnergySword("green", 4, "emerald")
 		registerEnergySword("purple", 5, "chetherite")
-		registerEnergySword("orange", 6, "copper")
-
+		registerEnergySword("orange", 6, "copper_ingot")
 		// Energy sword idle sound
 		// Use async task and while loop with thread sleep so when it lags it doesnt sound weird
 		// The timing of the sounds is very important
