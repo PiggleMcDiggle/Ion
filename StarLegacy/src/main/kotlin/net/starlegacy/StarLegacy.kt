@@ -303,6 +303,8 @@ class StarLegacy : JavaPlugin() {
 
 		registerCommands()
 
+		CustomItems()
+
 		if (isMaster()) {
 			// 20 ticks * 60 = 1 minute, 20 ticks * 60 * 60 = 1 hour
 			Tasks.asyncRepeat(20 * 60, 20 * 60 * 60) {
