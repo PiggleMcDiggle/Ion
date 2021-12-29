@@ -2,7 +2,7 @@ plugins {
 	java
 	id("org.jetbrains.kotlin.jvm") version "1.6.10"
 	id("io.papermc.paperweight.userdev") version "1.3.3"
-	id("com.github.johnrengelman.shadow") version "7.1.1"
+	id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 repositories {
@@ -18,7 +18,6 @@ repositories {
 }
 
 dependencies {
-	compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
 	paperDevBundle("1.18.1-R0.1-SNAPSHOT")
 
 	compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.8") // https://github.com/EngineHub/WorldEdit
