@@ -3,6 +3,8 @@ package net.starlegacy.feature.customitem
 import net.md_5.bungee.api.ChatColor
 import net.starlegacy.cache.nations.NationCache
 import net.starlegacy.cache.nations.PlayerCache
+import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
+import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.type.BlasterItem
 import net.starlegacy.feature.customitem.type.EnergySwordItem
 import net.starlegacy.util.Tasks
@@ -63,7 +65,7 @@ object BlasterItems {
 	}
 
 	fun register() {
-		registerBlaster(
+		val pistol = registerBlaster(
 			"Blaster Pistol", model = 1, maxPower = 2500, speed = 1100.0,
 			range = 50,
 			thickness = 0.1,
@@ -74,7 +76,17 @@ object BlasterItems {
 			pitchBase = 0.7,
 			pitchRange = 0.2
 		)
-		registerBlaster(
+		Tasks.syncDelay(1){
+			registerShapedRecipe(
+				pistol.id, pistol.getItem(), " bg", " t ", ingredients = mapOf(
+					'b' to recipeChoice(CustomItems["battery_a"]!!), // todo find and replace battery_small etc
+					'g' to recipeChoice(Material.GLASS_PANE),
+					't' to recipeChoice(CustomItems["titanium"]!!) // todo find and replace mineral_<name>
+				)
+			)
+		}
+
+		val rifle = registerBlaster(
 			"Blaster Rifle", model = 2, maxPower = 7500, speed = 650.0,
 			range = 75,
 			thickness = 0.1,
@@ -85,7 +97,17 @@ object BlasterItems {
 			pitchBase = 0.7,
 			pitchRange = 0.3
 		)
-		registerBlaster(
+		Tasks.syncDelay(1){
+			registerShapedRecipe(
+				rifle.id, rifle.getItem(), "btg", "t  ", ingredients = mapOf(
+					'b' to recipeChoice(CustomItems["battery_a"]!!),
+					'g' to recipeChoice(Material.GLASS_PANE),
+					't' to recipeChoice(CustomItems["titanium"]!!)
+				)
+			)
+		}
+
+		val sniper = registerBlaster(
 			"Blaster Sniper", model = 3, maxPower = 20000, speed = 1100.0,
 			range = 250,
 			thickness = 0.2,
@@ -96,7 +118,17 @@ object BlasterItems {
 			pitchBase = 0.6,
 			pitchRange = 0.1
 		)
-		registerBlaster(
+		Tasks.syncDelay(1){
+			registerShapedRecipe(
+				sniper.id, sniper.getItem(), " t ", "btg", "t  ", ingredients = mapOf(
+					'b' to recipeChoice(CustomItems["battery_a"]!!),
+					'g' to recipeChoice(Material.GLASS_PANE),
+					't' to recipeChoice(CustomItems["titanium"]!!)
+				)
+			)
+		}
+
+		val cannon = registerBlaster(
 			"Blaster Cannon", model = 4, maxPower = 25000,
 			speed = 450.0,
 			range = 200,
@@ -109,6 +141,15 @@ object BlasterItems {
 			pitchRange = 0.1,
 			explosionPower = 2.0f
 		)
+		Tasks.syncDelay(1){
+			registerShapedRecipe(
+				cannon.id, cannon.getItem(), "brt", "t  ", ingredients = mapOf(
+					'b' to recipeChoice(CustomItems["battery_a"]!!),
+					'r' to recipeChoice(Material.REDSTONE),
+					't' to recipeChoice(CustomItems["titanium"]!!)
+				)
+			)
+		}
 	}
 }
 
