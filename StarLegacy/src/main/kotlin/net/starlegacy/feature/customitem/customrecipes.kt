@@ -2,27 +2,6 @@ package net.starlegacy.feature.customitem
 
 /*
 
-	private fun registerArmorRecipes() {
-
-	}
-
-	private fun registerModuleRecipes() = mapOf(
-		CustomItems.POWER_MODULE_SHOCK_ABSORBING to customItemChoice(CustomItems.MINERAL_TITANIUM),
-		CustomItems.POWER_MODULE_SPEED_BOOSTING to materialChoice(Material.FEATHER),
-		CustomItems.POWER_MODULE_ROCKET_BOOSTING to materialChoice(Material.FIREWORK_ROCKET),
-		CustomItems.POWER_MODULE_NIGHT_VISION to materialChoice(Material.SPIDER_EYE),
-		CustomItems.POWER_MODULE_ENVIRONMENT to materialChoice(Material.CHAINMAIL_HELMET),
-		CustomItems.POWER_MODULE_PRESSURE_FIELD to customItemChoice(CustomItems.GAS_CANISTER_OXYGEN)
-	).forEach { (piece, center) ->
-		createRecipe(
-			piece, "aga", "g*g", "aga", ingredients = mapOf(
-				'a' to customItemChoice(CustomItems.MINERAL_ALUMINUM),
-				'g' to materialChoice(Material.GLASS_PANE),
-				'*' to center
-			)
-		)
-	}
-
 	private fun registerSwordRecipes() = mapOf(
 		CustomItems.ENERGY_SWORD_BLUE to materialChoice(Material.DIAMOND),
 		CustomItems.ENERGY_SWORD_RED to materialChoice(Material.REDSTONE),
