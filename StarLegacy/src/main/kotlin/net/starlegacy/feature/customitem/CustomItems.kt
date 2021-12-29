@@ -69,6 +69,7 @@ class CustomItems : Listener {
 				recipe.setIngredient(char, ingredient)
 			}
 			addRecipe(recipe)
+			plugin.logger.warning("Created shaped recipe $id for ${output.displayName()}")
 			return recipe
 		}
 
@@ -81,6 +82,7 @@ class CustomItems : Listener {
 				recipe.addIngredient(it)
 			}
 			addRecipe(recipe)
+			plugin.logger.warning("Created shapeless recipe $id for ${output.displayName()}")
 			return recipe
 		}
 
