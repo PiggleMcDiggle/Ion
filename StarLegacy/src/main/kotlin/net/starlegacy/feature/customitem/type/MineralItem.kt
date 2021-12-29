@@ -9,6 +9,4 @@ class MineralItem(
 	override val material: Material,
 	val ore: CustomBlockItem,
 	val block: CustomBlockItem
-) : CustomItem() {
-
-}
+) : CustomItem()

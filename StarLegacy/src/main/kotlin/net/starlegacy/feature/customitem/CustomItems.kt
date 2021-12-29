@@ -3,7 +3,6 @@ package net.starlegacy.feature.customitem
 import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.PLUGIN
 import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.type.DrillItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerItem
 import net.starlegacy.util.colorize
@@ -31,7 +30,7 @@ class CustomItems : Listener {
 	companion object {
 		val customItems = mutableMapOf<String, CustomItem>()
 
-		fun register(item: CustomItem): CustomItem{
+		fun register(item: CustomItem): CustomItem {
 			// Check for duplicate custom model data
 			customItems.forEach { (id, customItem) ->
 				if (customItem.model == item.model && customItem.material == item.material) {
@@ -63,10 +62,11 @@ class CustomItems : Listener {
 		// If for some reason this doesn't work as expected, check that.
 
 		fun registerShapedRecipe(
-			id: String, output: ItemStack, vararg shape: String, ingredients: Map<Char, RecipeChoice>): ShapedRecipe {
+			id: String, output: ItemStack, vararg shape: String, ingredients: Map<Char, RecipeChoice>
+		): ShapedRecipe {
 			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, id), output)
 			recipe.shape(*shape)
-			ingredients.forEach{ (char, ingredient) ->
+			ingredients.forEach { (char, ingredient) ->
 				recipe.setIngredient(char, ingredient)
 			}
 			addRecipe(recipe)
@@ -75,7 +75,8 @@ class CustomItems : Listener {
 		}
 
 		fun registerShapelessRecipe(
-			id: String, output: ItemStack, vararg ingredients: RecipeChoice): ShapelessRecipe {
+			id: String, output: ItemStack, vararg ingredients: RecipeChoice
+		): ShapelessRecipe {
 			check(ingredients.isNotEmpty())
 			val recipe = ShapelessRecipe(NamespacedKey(PLUGIN, id), output)
 
@@ -90,9 +91,11 @@ class CustomItems : Listener {
 		fun recipeChoice(customItem: CustomItem): RecipeChoice {
 			return RecipeChoice.ExactChoice(customItem.getItem())
 		}
+
 		fun recipeChoice(material: Material): RecipeChoice {
 			return RecipeChoice.MaterialChoice(material)
 		}
+
 		fun recipeChoice(itemStack: ItemStack): RecipeChoice {
 			return RecipeChoice.ExactChoice(itemStack) // exactchoice might cause issues?
 		}
@@ -101,7 +104,10 @@ class CustomItems : Listener {
 		 * @return the itemstack of the custom item or material with [id], with [count] items
 		 */
 		fun itemStackFromId(id: String, count: Int = 1): ItemStack? {
-			return CustomItems[id]?.getItem(count) ?: ItemStack(Material.getMaterial(id.uppercase()) ?: return null, count)
+			return CustomItems[id]?.getItem(count) ?: ItemStack(
+				Material.getMaterial(id.uppercase()) ?: return null,
+				count
+			)
 		}
 		// endregion
 	}

@@ -1,6 +1,5 @@
 package net.starlegacy.feature.customitem.type
 
-import net.starlegacy.feature.customitem.CustomItems
 import org.bukkit.Material
 
 class GenericCustomItem(
@@ -10,5 +9,4 @@ class GenericCustomItem(
 	override val displayName: String,
 	override val material: Material
 
-) : CustomItem() {
-}
+) : CustomItem()

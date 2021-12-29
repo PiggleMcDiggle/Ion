@@ -20,11 +20,13 @@ object BatteryItems {
 		)
 		CustomItems.register(item)
 		// Delay one tick so other items can register first, before trying to use them for crafting
-		Tasks.syncDelay(1){
-			registerShapedRecipe(item.id, item.getItem(), "aba", "aba", "aba", ingredients = mapOf(
-				'a' to recipeChoice(CustomItems["aluminum"]!!),
-				'b' to recipeChoice(craft)
-			))
+		Tasks.syncDelay(1) {
+			registerShapedRecipe(
+				item.id, item.getItem(), "aba", "aba", "aba", ingredients = mapOf(
+					'a' to recipeChoice(CustomItems["aluminum"]!!),
+					'b' to recipeChoice(craft)
+				)
+			)
 		}
 		return item
 	}

@@ -19,13 +19,15 @@ object EnergySwords {
 			model = model
 		)
 		CustomItems.register(item)
-		Tasks.syncDelay(1){
-			registerShapedRecipe(item.id, item.getItem(), "aga", "a*a", "ata", ingredients = mapOf(
-				'a' to recipeChoice(itemStackFromId("aluminum")!!),
-				'g' to recipeChoice(itemStackFromId("glass_pane")!!),
-				'*' to recipeChoice(itemStackFromId(craft)!!),
-				't' to recipeChoice(itemStackFromId("titanium")!!)
-			))
+		Tasks.syncDelay(1) {
+			registerShapedRecipe(
+				item.id, item.getItem(), "aga", "a*a", "ata", ingredients = mapOf(
+					'a' to recipeChoice(itemStackFromId("aluminum")!!),
+					'g' to recipeChoice(itemStackFromId("glass_pane")!!),
+					'*' to recipeChoice(itemStackFromId(craft)!!),
+					't' to recipeChoice(itemStackFromId("titanium")!!)
+				)
+			)
 		}
 		return item
 	}

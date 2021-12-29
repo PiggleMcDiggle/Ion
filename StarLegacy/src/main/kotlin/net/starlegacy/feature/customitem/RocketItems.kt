@@ -5,7 +5,7 @@ import net.starlegacy.util.Tasks
 import org.bukkit.Material
 
 object RocketItems {
-	fun register(){
+	fun register() {
 		val base = CustomItems.register(
 			GenericCustomItem(
 				id = "rocket_base",
@@ -30,7 +30,7 @@ object RocketItems {
 				model = 3
 			)
 		)
-		Tasks.syncDelay(1){
+		Tasks.syncDelay(1) {
 			CustomItems.registerShapelessRecipe(
 				rocket.id,
 				rocket.getItem(),

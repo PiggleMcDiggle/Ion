@@ -7,7 +7,7 @@ import org.bukkit.Material
 
 object Minerals {
 
-	fun registerMineral(name: String, model: Int): MineralItem{
+	fun registerMineral(name: String, model: Int): MineralItem {
 		val id = name.lowercase().replace(" ", "_")
 		val ore = CustomBlockItem(
 			id = "${id}_ore",
@@ -36,7 +36,14 @@ object Minerals {
 		CustomItems.register(item)
 		// Not doing a shapeless recipe.
 		// The result is the same, and I can't figure out a cleaner way to do it then just spam recipeChoice() 9 times for the ingredients
-		CustomItems.registerShapedRecipe(block.id, block.getItem(), "aaa", "aaa", "aaa", ingredients = mapOf('a' to recipeChoice(item)))
+		CustomItems.registerShapedRecipe(
+			block.id,
+			block.getItem(),
+			"aaa",
+			"aaa",
+			"aaa",
+			ingredients = mapOf('a' to recipeChoice(item))
+		)
 		CustomItems.registerShapelessRecipe(item.id, item.getItem(9), ingredients = arrayOf(recipeChoice(block)))
 		return item
 
@@ -46,7 +53,7 @@ object Minerals {
 		registerMineral("Aluminum", 2)
 		registerMineral("Chetherite", 3)
 		registerMineral("Titanium", 4)
-		registerMineral("Uranium",5)
+		registerMineral("Uranium", 5)
 		registerMineral("Oriomium", 6)
 	}
 }

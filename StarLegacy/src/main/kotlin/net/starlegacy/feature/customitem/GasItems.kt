@@ -23,11 +23,13 @@ object GasItems {
 
 	fun register() {
 		val empty = registerGas("${ChatColor.WHITE}Empty", model = 1)
-		Tasks.syncDelay(1){
-			registerShapedRecipe(empty.id, empty.getItem(), " i ", "igi", " i ", ingredients = mapOf(
-				'i' to recipeChoice(CustomItems["titanium"]!!),
-				'g' to recipeChoice(Material.GLASS_PANE)
-			))
+		Tasks.syncDelay(1) {
+			registerShapedRecipe(
+				empty.id, empty.getItem(), " i ", "igi", " i ", ingredients = mapOf(
+					'i' to recipeChoice(CustomItems["titanium"]!!),
+					'g' to recipeChoice(Material.GLASS_PANE)
+				)
+			)
 		}
 		registerGas("${ChatColor.YELLOW}Helium", model = 2)
 		registerGas("${ChatColor.AQUA}Oxygen", model = 3)

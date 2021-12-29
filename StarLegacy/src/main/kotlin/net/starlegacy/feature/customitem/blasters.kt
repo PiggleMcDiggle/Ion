@@ -76,7 +76,7 @@ object BlasterItems {
 			pitchBase = 0.7,
 			pitchRange = 0.2
 		)
-		Tasks.syncDelay(1){
+		Tasks.syncDelay(1) {
 			registerShapedRecipe(
 				pistol.id, pistol.getItem(), " bg", " t ", ingredients = mapOf(
 					'b' to recipeChoice(CustomItems["battery_a"]!!), // todo find and replace battery_small etc
@@ -97,7 +97,7 @@ object BlasterItems {
 			pitchBase = 0.7,
 			pitchRange = 0.3
 		)
-		Tasks.syncDelay(1){
+		Tasks.syncDelay(1) {
 			registerShapedRecipe(
 				rifle.id, rifle.getItem(), "btg", "t  ", ingredients = mapOf(
 					'b' to recipeChoice(CustomItems["battery_a"]!!),
@@ -118,7 +118,7 @@ object BlasterItems {
 			pitchBase = 0.6,
 			pitchRange = 0.1
 		)
-		Tasks.syncDelay(1){
+		Tasks.syncDelay(1) {
 			registerShapedRecipe(
 				sniper.id, sniper.getItem(), " t ", "btg", "t  ", ingredients = mapOf(
 					'b' to recipeChoice(CustomItems["battery_a"]!!),
@@ -141,7 +141,7 @@ object BlasterItems {
 			pitchRange = 0.1,
 			explosionPower = 2.0f
 		)
-		Tasks.syncDelay(1){
+		Tasks.syncDelay(1) {
 			registerShapedRecipe(
 				cannon.id, cannon.getItem(), "brt", "t  ", ingredients = mapOf(
 					'b' to recipeChoice(CustomItems["battery_a"]!!),

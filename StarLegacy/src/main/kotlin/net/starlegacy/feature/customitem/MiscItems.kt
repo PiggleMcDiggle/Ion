@@ -2,9 +2,7 @@ package net.starlegacy.feature.customitem
 
 import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
-import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapelessRecipe
 import net.starlegacy.feature.customitem.type.DetonatorItem
-import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.util.Tasks
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -21,11 +19,14 @@ object MiscItems {
 				model = 1
 			)
 		)
-		Tasks.syncDelay(1){
-			registerShapedRecipe(detonator.id, detonator.getItem(), " r ", "tut", " t ", ingredients = mapOf(
-				'r' to recipeChoice(Material.REDSTONE),
-				't' to recipeChoice(CustomItems["titanium"]!!),
-				'u' to recipeChoice(CustomItems["uranium"]!!)))
+		Tasks.syncDelay(1) {
+			registerShapedRecipe(
+				detonator.id, detonator.getItem(), " r ", "tut", " t ", ingredients = mapOf(
+					'r' to recipeChoice(Material.REDSTONE),
+					't' to recipeChoice(CustomItems["titanium"]!!),
+					'u' to recipeChoice(CustomItems["uranium"]!!)
+				)
+			)
 		}
 	}
 }

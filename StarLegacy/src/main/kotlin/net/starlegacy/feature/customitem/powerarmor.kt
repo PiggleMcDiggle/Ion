@@ -7,7 +7,6 @@ import net.starlegacy.feature.customitem.type.PowerArmorItem
 import net.starlegacy.feature.customitem.type.PowerModuleItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
-import org.bukkit.inventory.ItemStack
 
 
 object PowerArmorItems {
@@ -51,12 +50,14 @@ object PowerModuleItems {
 			model = model,
 		)
 		CustomItems.register(item)
-		Tasks.syncDelay(1){
-			registerShapedRecipe(item.id, item.getItem(), "aga", "g*g", "aga", ingredients = mapOf(
-				'a' to recipeChoice(CustomItems["aluminum"]!!),
-				'g' to recipeChoice(Material.GLASS_PANE),
-				'*' to recipeChoice(itemStackFromId(craft)!!)
-			))
+		Tasks.syncDelay(1) {
+			registerShapedRecipe(
+				item.id, item.getItem(), "aga", "g*g", "aga", ingredients = mapOf(
+					'a' to recipeChoice(CustomItems["aluminum"]!!),
+					'g' to recipeChoice(Material.GLASS_PANE),
+					'*' to recipeChoice(itemStackFromId(craft)!!)
+				)
+			)
 		}
 
 		return item
