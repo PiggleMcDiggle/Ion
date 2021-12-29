@@ -1,5 +1,6 @@
 package net.starlegacy.feature.customitem
 
+import net.starlegacy.feature.customitem.CustomItems.Companion.itemStackFromId
 import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.type.PowerArmorItem
@@ -54,7 +55,7 @@ object PowerModuleItems {
 			registerShapedRecipe(item.id, item.getItem(), "aga", "g*g", "aga", ingredients = mapOf(
 				'a' to recipeChoice(CustomItems["aluminum"]!!),
 				'g' to recipeChoice(Material.GLASS_PANE),
-				'*' to recipeChoice(CustomItems[craft]?.getItem() ?: ItemStack(Material.getMaterial(craft.uppercase())!!) )
+				'*' to recipeChoice(itemStackFromId(craft)!!)
 			))
 		}
 

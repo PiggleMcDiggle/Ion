@@ -95,6 +95,9 @@ class CustomItems : Listener {
 		fun recipeChoice(itemStack: ItemStack): RecipeChoice {
 			return RecipeChoice.ExactChoice(itemStack) // exactchoice might cause issues?
 		}
+		fun itemStackFromId(id: String, count: Int = 1): ItemStack? {
+			return CustomItems[id]?.getItem(count) ?: ItemStack(Material.getMaterial(id.uppercase()) ?: return null, count)
+		}
 		// endregion
 	}
 
