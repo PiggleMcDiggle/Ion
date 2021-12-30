@@ -62,12 +62,13 @@ object PowerArmorItems {
 }
 
 object PowerModuleItems {
-	private fun registerModuleItem(type: String, typeName: String, model: Int, craft: String): PowerModuleItem {
+	private fun registerModuleItem(type: String, typeName: String, model: Int, craft: String, type: PowerArmorType): PowerModuleItem {
 		val item = PowerModuleItem(
 			id = "power_module_$type",
 			displayName = "$typeName Module",
 			material = Material.FLINT_AND_STEEL,
 			model = model,
+			type = type
 		)
 		CustomItems.register(item)
 		Tasks.syncDelay(1) {
@@ -84,12 +85,12 @@ object PowerModuleItems {
 	}
 
 	fun register() {
-		registerModuleItem("shock_absorbing", "Shock Absorbing", 1, "titanium")
-		registerModuleItem("speed_boosting", "Speed Boosting", 2, "feather")
-		registerModuleItem("rocket_boosting", "Rocket Boosting", 3, "firework_rocket")
-		registerModuleItem("night_vision", "Night Vision", 4, "spider_eye")
-		registerModuleItem("environment", "Environment", 5, "chainmail_helmet")
-		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen")
+		registerModuleItem("shock_absorbing", "Shock Absorbing", 1, "titanium", PowerArmorType.CHESTPLATE)
+		registerModuleItem("speed_boosting", "Speed Boosting", 2, "feather", PowerArmorType.LEGGINGS)
+		registerModuleItem("rocket_boosting", "Rocket Boosting", 3, "firework_rocket", PowerArmorType.BOOTS)
+		registerModuleItem("night_vision", "Night Vision", 4, "spider_eye", PowerArmorType.HELMET)
+		registerModuleItem("environment", "Environment", 5, "chainmail_helmet", PowerArmorType.HELMET)
+		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen", PowerArmorType.HELMET)
 	}
 }
 
