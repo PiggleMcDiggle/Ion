@@ -115,7 +115,7 @@ import net.starlegacy.feature.transport.pipe.Pipes
 import net.starlegacy.feature.transport.pipe.filter.Filters
 import net.starlegacy.listener.DoubleJumpListener
 import net.starlegacy.listener.SLEventListener
-import net.starlegacy.listener.gear.PowerArmorListener
+import net.starlegacy.feature.customitem.powerarmor.PowerArmorListener
 import net.starlegacy.listener.misc.BlockListener
 import net.starlegacy.listener.misc.ChatListener
 import net.starlegacy.listener.misc.EntityListener

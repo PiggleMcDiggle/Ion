@@ -25,6 +25,8 @@ import org.bukkit.inventory.ShapelessRecipe
 import org.bukkit.persistence.PersistentDataType
 import kotlin.math.max
 import kotlin.math.min
+import net.starlegacy.feature.customitem.powerarmor.PowerArmorItems
+import net.starlegacy.feature.customitem.powerarmor.PowerModuleItems
 
 class CustomItems : Listener {
 	companion object {

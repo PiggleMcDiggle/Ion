@@ -1,10 +1,9 @@
-package net.starlegacy.feature.gear.powerarmor
+package net.starlegacy.feature.customitem.powerarmor
 
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.feature.customitem.type.PowerArmorItem
-import net.starlegacy.listener.gear.hasMovedInLastSecond
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
 import org.bukkit.Material.LEATHER_BOOTS

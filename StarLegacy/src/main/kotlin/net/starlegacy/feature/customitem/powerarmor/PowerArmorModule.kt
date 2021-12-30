@@ -1,4 +1,4 @@
-package net.starlegacy.feature.gear.powerarmor
+package net.starlegacy.feature.customitem.powerarmor
 
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.customitem.type.PowerModuleItem

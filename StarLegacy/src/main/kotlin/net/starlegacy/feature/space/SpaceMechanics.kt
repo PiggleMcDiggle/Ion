@@ -1,8 +1,8 @@
 package net.starlegacy.feature.space
 
 import net.starlegacy.SLComponent
-import net.starlegacy.feature.gear.powerarmor.PowerArmorManager
-import net.starlegacy.feature.gear.powerarmor.PowerArmorModule
+import net.starlegacy.feature.customitem.powerarmor.PowerArmorManager
+import net.starlegacy.feature.customitem.powerarmor.PowerArmorModule
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.util.*
