@@ -1,7 +1,6 @@
 package net.horizonsend.ion
 
 import co.aikar.commands.PaperCommandManager
-import kotlinx.serialization.ExperimentalSerializationApi
 import net.starlegacy.PLUGIN
 import org.bukkit.Bukkit.getScheduler
 import org.dynmap.DynmapAPI
@@ -16,11 +15,10 @@ class Ion {
 			private set
 	}
 
-	@ExperimentalSerializationApi
 	fun onEnable() {
-		getScheduler().runTaskAsynchronously(plugin, Runnable {
-			DynmapCommonAPIListener.register(Listener())
+		DynmapCommonAPIListener.register(Listener())
 
+		getScheduler().runTaskAsynchronously(plugin, Runnable {
 			PaperCommandManager(plugin).apply {
 				registerCommand(QuickBalance)
 
