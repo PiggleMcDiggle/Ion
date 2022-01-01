@@ -12,17 +12,23 @@ import net.minecraft.world.phys.Vec3
 import org.bukkit.Location
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
+import org.bukkit.util.Vector
+
+// Based on a modernised version from https://www.spigotmc.org/threads/teleport-player-smoothly.317416/page-2
+// Thanks "andrew121410", if only I found this sooner.
 
 object ConnectionUtils {
 	private val OFFSET_DIRECTION = setOf(X_ROT, Y_ROT)
 	private val OFFSET_ALL = setOf(X_ROT, Y_ROT, X, Y, Z)
 
-	private var justTeleportedField = getField("justTeleported") // I do not know the obfuscated name of this field, lets hope this just works/
-	private var teleportPosField = getField("y") // awaitingPositionFromClient / teleportPos
-	private var lastPosXField = getField("o") // lastPosX / lastGoodX
-	private var lastPosYField = getField("u") // lastPosY / lastGoodY
-	private var lastPosZField = getField("q") // lastPosZ / lastGoodZ
-	private var teleportAwaitField = getField("z") // awaitingTeleport / teleportAwait
+	private var justTeleportedField = getField("justTeleported")
+	private var awaitingPositionFromClientField = getField("y")
+	private var lastPosXField = getField("lastPosX")
+	private var lastPosYField = getField("lastPosY")
+	private var lastPosZField = getField("lastPosZ")
+	private var awaitingTeleportField = getField("z")
+	private var awaitingTeleportTimeField = getField("A")
+	private var aboveGroundVehicleTickCountField = getField("E")
 
 	@Throws(NoSuchFieldException::class)
 	private fun getField(name: String): Field {
@@ -31,33 +37,60 @@ object ConnectionUtils {
 		return field
 	}
 
-	fun move(player: Player, targetLocation: Location, yawOffset: Float = 0.0f) {
-		val serverPlayer = (player as CraftPlayer).handle
-		val connection = serverPlayer.connection
+	fun move(player: Player, loc: Location, theta: Float = 0.0f, offsetPos: Vector? = null) {
+		val handle = (player as CraftPlayer).handle
+		val x = loc.x
+		val y = loc.y
+		val z = loc.z
 
-		if (serverPlayer.containerMenu !== serverPlayer.inventoryMenu) serverPlayer.closeContainer()
+		if (handle.containerMenu !== handle.inventoryMenu) handle.closeContainer()
+
+		handle.absMoveTo(x, y, z, handle.yRot + theta, handle.xRot)
+
+		val connection = handle.connection
+
+		var teleportAwait = 0
 
 		justTeleportedField.set(connection, true)
-		teleportPosField.set(connection, Vec3(targetLocation.x, targetLocation.y, targetLocation.z))
-		lastPosXField.set(connection, serverPlayer.x)
-		lastPosYField.set(connection, serverPlayer.y)
-		lastPosZField.set(connection, serverPlayer.z)
+		awaitingPositionFromClientField.set(connection, Vec3(x, y, z))
+		lastPosXField.set(connection, x)
+		lastPosYField.set(connection, y)
+		lastPosZField.set(connection, z)
 
-		var teleportAwait = teleportAwaitField.getInt(connection) + 1
+		teleportAwait = awaitingTeleportField.getInt(connection) + 1
 		if (teleportAwait == 2147483647) teleportAwait = 0
-		teleportAwaitField.set(connection, teleportAwait)
+		awaitingTeleportField.set(connection, teleportAwait);
 
-		serverPlayer.setPos(targetLocation.x, targetLocation.y, targetLocation.z)
-		serverPlayer.setRot(serverPlayer.yRot + yawOffset, serverPlayer.xRot)
+		awaitingTeleportTimeField.set(connection, aboveGroundVehicleTickCountField.get(connection))
 
-		connection.send(ClientboundPlayerPositionPacket(targetLocation.x, targetLocation.y, targetLocation.z, yawOffset, 0f, OFFSET_DIRECTION, 0, true))
+		val px: Double
+		val py: Double
+		val pz: Double
+
+		if (offsetPos == null) {
+			px = x
+			py = y
+			pz = z
+		} else {
+			px = offsetPos.x
+			py = offsetPos.y
+			pz = offsetPos.z
+		}
+
+		val flags = if (offsetPos != null) OFFSET_ALL else OFFSET_DIRECTION
+		val packet = ClientboundPlayerPositionPacket(px, py, pz, theta, 0f, flags, teleportAwait, false)
+		connection.send(packet)
 	}
 
 	fun teleport(player: Player, loc: Location) {
-		move(player, loc, 0.0f)
+		move(player, loc, 0.0f, null)
 	}
 
 	fun teleportRotate(player: Player, loc: Location, theta: Float) {
-		move(player, loc, theta)
+		move(player, loc, theta, null)
+	}
+
+	fun move(player: Player, loc: Location, dx: Double, dy: Double, dz: Double) {
+		move(player, loc, 0.0f, Vector(dx, dy, dz))
 	}
 }
