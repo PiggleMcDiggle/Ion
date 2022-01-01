@@ -1,6 +1,6 @@
 package net.starlegacy.feature.customitem.type
 
-import net.horizonsend.ion.Ion.Companion.plugin
+import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.feature.customitem.Blasters
 import org.bukkit.DyeColor
 import org.bukkit.GameMode
@@ -36,7 +36,7 @@ class BlasterItem(
 ) : PowerItem(), Listener {
 
 	init {
-		plugin.server.pluginManager.registerEvents(this, plugin)
+		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
 	}
 
 	override fun onLeftClick(event: PlayerInteractEvent) {

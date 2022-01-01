@@ -1,7 +1,7 @@
 package net.starlegacy.feature.customitem.type
 
-import net.horizonsend.ion.Ion.Companion.plugin
 import net.kyori.adventure.text.Component
+import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.util.updateMeta
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -27,7 +27,7 @@ abstract class CustomItem {
 		return ItemStack(material, amount).updateMeta {
 			it.setCustomModelData(model)
 			it.isUnbreakable = unbreakable
-			it.persistentDataContainer.set(NamespacedKey(plugin, "custom-item-id"), PersistentDataType.STRING, id)
+			it.persistentDataContainer.set(NamespacedKey(PLUGIN, "custom-item-id"), PersistentDataType.STRING, id)
 			it.lore(lore)
 			it.displayName(Component.text(displayName))
 		}

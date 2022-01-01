@@ -1,6 +1,6 @@
 package net.starlegacy.feature.customitem
 
-import net.horizonsend.ion.Ion.Companion.plugin
+import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.feature.customitem.CustomItems.Companion.itemStackFromId
 import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
@@ -43,7 +43,7 @@ object EnergySwords {
 		// Use async task and while loop with thread sleep so when it lags it doesnt sound weird
 		// The timing of the sounds is very important
 		Tasks.async {
-			while (plugin.isEnabled) {
+			while (PLUGIN.isEnabled) {
 				Tasks.sync {
 					for (player in Bukkit.getOnlinePlayers()) {
 						val main = player.inventory.itemInMainHand

@@ -1,6 +1,5 @@
 package net.starlegacy.feature.customitem
 
-import net.horizonsend.ion.Ion.Companion.plugin
 import net.starlegacy.PLUGIN
 import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
@@ -36,22 +35,22 @@ class CustomItems : Listener {
 			// Check for duplicate custom model data
 			customItems.forEach { (id, customItem) ->
 				if (customItem.model == item.model && customItem.material == item.material) {
-					plugin.logger.warning("Multiple custom items have registered for the same material and model data!")
-					plugin.logger.warning("${customItem.id} and ${item.id} are both using ${customItem.material.name} and ${customItem.model}")
+					PLUGIN.logger.warning("Multiple custom items have registered for the same material and model data!")
+					PLUGIN.logger.warning("${customItem.id} and ${item.id} are both using ${customItem.material.name} and ${customItem.model}")
 				}
 			}
 			if (customItems.put(item.id, item) != null) {
-				plugin.logger.warning("Multiple custom items with id ${item.id} have been registered!")
+				PLUGIN.logger.warning("Multiple custom items with id ${item.id} have been registered!")
 			}
 			item.onItemRegistered()
-			plugin.logger.warning("Registered custom item ${item.id}")
+			PLUGIN.logger.warning("Registered custom item ${item.id}")
 			return item
 		}
 
 		fun all(): Collection<CustomItem> = customItems.values
 		fun getCustomItem(id: String?): CustomItem? = customItems[id?.lowercase()]
 		fun getCustomItem(stack: ItemStack?): CustomItem? = customItems[stack?.itemMeta?.persistentDataContainer?.get(
-			NamespacedKey(plugin, "custom-item-id"),
+			NamespacedKey(PLUGIN, "custom-item-id"),
 			PersistentDataType.STRING
 		)]
 
@@ -72,7 +71,7 @@ class CustomItems : Listener {
 				recipe.setIngredient(char, ingredient)
 			}
 			addRecipe(recipe)
-			plugin.logger.warning("Created shaped recipe $id")
+			PLUGIN.logger.warning("Created shaped recipe $id")
 			return recipe
 		}
 
@@ -86,7 +85,7 @@ class CustomItems : Listener {
 				recipe.addIngredient(it)
 			}
 			addRecipe(recipe)
-			plugin.logger.warning("Created shapeless recipe $id")
+			PLUGIN.logger.warning("Created shapeless recipe $id")
 			return recipe
 		}
 
@@ -116,7 +115,7 @@ class CustomItems : Listener {
 	}
 
 	init {
-		plugin.server.pluginManager.registerEvents(this, plugin)
+		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
 		registerItems()
 	}
 

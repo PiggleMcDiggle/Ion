@@ -2,7 +2,7 @@ package net.starlegacy.feature.customitem.type
 
 import kotlin.math.max
 import kotlin.math.min
-import net.horizonsend.ion.Ion
+import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.util.colorize
 import net.starlegacy.util.updateMeta
@@ -37,7 +37,7 @@ var ItemStack.power: Int
 	get() {
 		if (!this.isPowerableCustomItem) throw NotPowerableException()
 		return this.itemMeta.persistentDataContainer.get(
-			NamespacedKey(Ion.plugin, "item-power"),
+			NamespacedKey(PLUGIN, "item-power"),
 			PersistentDataType.INTEGER
 		) ?: 0
 	}
@@ -51,7 +51,7 @@ var ItemStack.power: Int
 		this.lore = lore
 		this.updateMeta {
 			it.persistentDataContainer.set(
-				NamespacedKey(Ion.plugin, "item-power"),
+				NamespacedKey(PLUGIN, "item-power"),
 				PersistentDataType.INTEGER,
 				newPower
 			)
