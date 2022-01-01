@@ -28,6 +28,7 @@ import java.time.Instant
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import net.starlegacy.feature.customitem.type.power
 
 object BlasterItems {
 	private fun registerBlaster(
@@ -181,13 +182,13 @@ object Blasters {
 		if (entity is Player) {
 			val powerUsage = type.power
 
-			if (getPower(blaster) < powerUsage) {
+			if (blaster.power < powerUsage) {
 				entity.sendMessage(ChatColor.RED.toString() + "Out of power!")
 				return
 			}
 
 			if (!entity.getWorld().name.lowercase().contains("arena")) {
-				removePower(blaster, powerUsage)
+				blaster.power -= powerUsage
 			}
 
 			entity.setCooldown(blaster.type, (type.cooldown / 1000.0f * 20.0f).toInt())

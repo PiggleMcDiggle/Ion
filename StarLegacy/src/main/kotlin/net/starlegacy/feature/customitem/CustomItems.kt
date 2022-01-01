@@ -101,6 +101,7 @@ class CustomItems : Listener {
 		fun recipeChoice(itemStack: ItemStack): RecipeChoice {
 			return RecipeChoice.ExactChoice(itemStack) // exactchoice might cause issues?
 		}
+		// TODO: delete custom items that aren't registered from inventories
 
 		/**
 		 * @return the itemstack of the custom item or material with [id], with [count] items
@@ -178,87 +179,6 @@ class CustomItems : Listener {
 	// endregion
 }
 
-// region Power
-// Funcions for dealing with powerable items
 
-val ITEM_POWER_PREFIX = "&8Power: &7".colorize()
-
-fun isPowerable(itemStack: ItemStack): Boolean {
-	return CustomItems.getCustomItem(itemStack) is PowerItem
-}
-
-/**
- * Get the power of the item
- * @return The item's power if it is powerable, otherwise -1
- */
-fun getPower(itemStack: ItemStack): Int {
-	if (!isPowerable(itemStack)) {
-		return -1
-	}
-	return itemStack.itemMeta.persistentDataContainer.get(
-		NamespacedKey(plugin, "item-power"),
-		PersistentDataType.INTEGER
-	)
-		?: 0
-}
-
-/**
- * Get the maximum amount of power an item can hold
- * @return The item's max power if it is powerable, otherwise -1
- */
-fun getMaxPower(itemStack: ItemStack): Int {
-	val poweredCustomItem = CustomItems.getCustomItem(itemStack) as? PowerItem ?: return -1
-	return poweredCustomItem.maxPower
-}
-
-/**
- * Set the power of the item to the new power if it is powerable
- * Automatically limits to max power
- * @return The old power if it was a powerable item, otherwise -1
- */
-fun setPower(itemStack: ItemStack, power: Int): Int {
-	val poweredCustomItem = CustomItems.getCustomItem(itemStack) as? PowerItem ?: return -1
-
-	val oldPower = getPower(itemStack)
-	val newPower = max(min(power, poweredCustomItem.maxPower), 0)
-
-	val lore: MutableList<String> = itemStack.lore ?: mutableListOf()
-	val text = "$ITEM_POWER_PREFIX$newPower"
-	if (lore.size == 0) lore.add(text)
-	else lore[0] = text
-	itemStack.lore = lore
-
-	itemStack.updateMeta {
-		it.persistentDataContainer.set(
-			NamespacedKey(plugin, "item-power"),
-			PersistentDataType.INTEGER,
-			newPower
-		)
-	}
-	return oldPower
-}
-
-/**
- * Adds the given amount of power to the item if it is powerable
- * Automatically limits to max power
- * @return The old power if it was powerable, otherwise -1
- */
-fun addPower(itemStack: ItemStack, amount: Int): Int {
-	val power = getPower(itemStack)
-	if (power == -1) return -1
-
-	return setPower(itemStack, power + amount)
-}
-
-/**
- * removes the given amount of power to the item if it is powerable
- * Automatically limits to max power
- * @return The old power if it was powerable, otherwise -1
- */
-fun removePower(itemStack: ItemStack, amount: Int): Int {
-	val power = getPower(itemStack)
-	if (power == -1) return -1
-
-	return setPower(itemStack, power - amount)
-}
-// endregion
+val ItemStack.isCustomItem: Boolean get() = CustomItems[this] != null
+val ItemStack.customItem: CustomItem? get() = CustomItems[this]

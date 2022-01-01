@@ -3,10 +3,10 @@ package net.starlegacy.listener.misc
 import net.starlegacy.feature.machine.PowerMachines
 import net.starlegacy.feature.misc.*
 import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.getPower
-import net.starlegacy.feature.customitem.setPower
 import net.starlegacy.feature.customitem.type.BatteryItem
 import net.starlegacy.feature.customitem.type.CustomBlockItem
+import net.starlegacy.feature.customitem.type.isPowerableCustomItem
+import net.starlegacy.feature.customitem.type.power
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.multiblock.PowerStoringMultiblock
 import net.starlegacy.feature.multiblock.dockingtube.ConnectedDockingTubeMultiblock
@@ -179,7 +179,8 @@ object InteractListener : SLEventListener() {
 
 			val item = event.item ?: return
 
-			val power = getPower(item)
+			if (!item.isPowerableCustomItem) return
+			val power = item.power
 			var powerToTransfer = power * item.amount
 			if (powerToTransfer == 0) {
 				return
@@ -191,7 +192,7 @@ object InteractListener : SLEventListener() {
 				powerToTransfer = maxMachinePower - machinePower
 			}
 
-			setPower(item, power - powerToTransfer / item.amount)
+			item.power = power - powerToTransfer / item.amount
 			PowerMachines.addPower(sign, powerToTransfer)
 		}
 	}

@@ -1,10 +1,9 @@
 package net.starlegacy.feature.multiblock.charger
 
+import net.starlegacy.feature.customitem.type.isPowerableCustomItem
+import net.starlegacy.feature.customitem.type.maxPower
+import net.starlegacy.feature.customitem.type.power
 import net.starlegacy.feature.machine.PowerMachines
-import net.starlegacy.feature.customitem.addPower
-import net.starlegacy.feature.customitem.getMaxPower
-import net.starlegacy.feature.customitem.getPower
-import net.starlegacy.feature.customitem.isPowerable
 import net.starlegacy.feature.multiblock.FurnaceMultiblock
 import net.starlegacy.feature.multiblock.MultiblockShape
 import net.starlegacy.feature.multiblock.PowerStoringMultiblock
@@ -12,6 +11,7 @@ import org.bukkit.Material
 import org.bukkit.block.Furnace
 import org.bukkit.block.Sign
 import org.bukkit.event.inventory.FurnaceBurnEvent
+import org.litote.kmongo.mul
 
 abstract class ChargerMultiblock(val tierText: String) : PowerStoringMultiblock(), FurnaceMultiblock {
 	protected abstract val tierMaterial: Material
@@ -74,10 +74,10 @@ abstract class ChargerMultiblock(val tierText: String) : PowerStoringMultiblock(
 		if (power == 0) {
 			return
 		}
-		if (!isPowerable(item)) {
+		if (!item.isPowerableCustomItem) {
 			return
 		}
-		if (getMaxPower(item) == getPower(item)) {
+		if (item.maxPower == item.power) {
 			val result = inventory.result
 			if (result != null && result.type != Material.AIR) return
 			inventory.result = event.fuel
@@ -87,7 +87,7 @@ abstract class ChargerMultiblock(val tierText: String) : PowerStoringMultiblock(
 		var multiplier = powerPerSecond
 		multiplier /= item.amount
 		if (item.amount * multiplier > power) return
-		addPower(item, multiplier)
+		item.power += multiplier
 		PowerMachines.setPower(sign, power - multiplier * item.amount)
 		furnace.cookTime = 20.toShort()
 		event.isCancelled = false

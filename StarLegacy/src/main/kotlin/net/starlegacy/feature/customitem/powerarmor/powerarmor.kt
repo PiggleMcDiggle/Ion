@@ -1,23 +1,12 @@
 package net.starlegacy.feature.customitem.powerarmor
 
-import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
-import java.time.Instant
-import java.util.HashMap
-import java.util.UUID
-import net.starlegacy.cache.nations.NationCache
-import net.starlegacy.cache.nations.PlayerCache
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.customitem.CustomItems.Companion.itemStackFromId
 import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
-import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.type.PowerArmorItem
 import net.starlegacy.feature.customitem.type.PowerModuleItem
-import net.starlegacy.feature.customitem.removePower
-import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
-import net.starlegacy.util.action
-import org.bukkit.Color
 import org.bukkit.Material
 
 

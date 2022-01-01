@@ -1,7 +1,5 @@
 package net.starlegacy.feature.customitem.type
 
-import net.starlegacy.feature.customitem.getPower
-import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.util.Tasks
 import org.bukkit.ChatColor
 import org.bukkit.Effect
@@ -29,11 +27,11 @@ class DrillItem(
 
 		Tasks.syncDelay(4) { // Figure out why this delay exists?
 			if (blockType != block.type) return@syncDelay
-			if (getPower(event.item!!) < 20) {
+			if (event.item!!.power < 20) {
 				event.player.sendMessage(ChatColor.RED.toString() + "Out of power.")
 				return@syncDelay
 			}
-			removePower(event.item!!, 10)
+			event.item!!.power -= 10
 			event.player.world.playSound(event.player.location, Sound.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 0.1f, 1.5f)
 			block.world.playEffect(block.location, Effect.STEP_SOUND, blockType)
 			block.breakNaturally(ItemStack(Material.DIAMOND_PICKAXE))
