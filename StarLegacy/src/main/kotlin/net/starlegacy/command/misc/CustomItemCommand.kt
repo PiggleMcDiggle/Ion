@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Optional
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import net.starlegacy.command.SLCommand
-import net.starlegacy.feature.misc.CustomItem
+import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.util.green
 import net.starlegacy.util.msg
 import net.starlegacy.util.plus
