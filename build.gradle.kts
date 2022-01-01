@@ -10,7 +10,7 @@ repositories {
 	maven { url = uri("https://nexus.scarsz.me/content/groups/public/") }
 	maven { url = uri("https://repo.aikar.co/content/groups/aikar/"); content{ excludeModule("org.bukkit", "bukkit") } }
 	maven { url = uri("https://www.myget.org/F/egg82-java/maven/") }
-	maven { url = uri("https://maven.sk89q.com/repo/") }
+	maven { url = uri("https://maven.enginehub.org/repo/") }
 	maven { url = uri("https://repo.citizensnpcs.co/") }
 	maven { url = uri("https://repo.mikeprimm.com/") }
 	maven { url = uri("https://jitpack.io") }
@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-	compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
+	compileOnly("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT") // This has to be here otherwise it tries to use Bukkit 1.7.10... thanks Dynmap.
 	paperDevBundle("1.18.1-R0.1-SNAPSHOT")
 
 	compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.8") // https://github.com/EngineHub/WorldEdit
@@ -51,7 +51,6 @@ sourceSets {
 			srcDir("Ion/src/main/resources")
 		}
 	}
-
 }
 
 java {

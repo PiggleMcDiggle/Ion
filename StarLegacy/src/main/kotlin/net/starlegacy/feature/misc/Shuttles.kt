@@ -67,14 +67,14 @@ object Shuttles : SLComponent() {
 
 	@EventHandler
 	fun ticketVendorCreate(event: PlayerInteractEvent) {
-		if (!event.player.isOp || (event.clickedBlock?.state as? Sign)?.getLine(0) == "[ticketvendor]") return
-
-		val sign = event.clickedBlock?.state as? Sign ?: return
-		sign.setLine(0, line1)
-		sign.setLine(1, line2)
-		sign.setLine(2, line3)
-		sign.setLine(3, line4)
-		sign.update()
+		if (event.player.isOp && (event.clickedBlock?.state as? Sign)?.getLine(0) == "[ticketvendor]") {
+			val sign = event.clickedBlock?.state as? Sign ?: return
+			sign.setLine(0, line1)
+			sign.setLine(1, line2)
+			sign.setLine(2, line3)
+			sign.setLine(3, line4)
+			sign.update()
+		}
 	}
 
 	@EventHandler

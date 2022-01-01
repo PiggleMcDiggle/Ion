@@ -4,6 +4,7 @@ import com.google.common.cache.CacheBuilder
 import com.google.common.cache.CacheLoader
 import com.google.common.cache.LoadingCache
 import net.starlegacy.feature.customitem.CustomItems
+import java.util.Optional
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.misc.CustomBlocks
 import net.starlegacy.feature.customitem.type.CustomItem
@@ -12,7 +13,6 @@ import org.bukkit.block.data.BlockData
 import org.bukkit.block.data.type.Slab
 import org.bukkit.block.data.type.WallSign
 import org.bukkit.inventory.ItemStack
-import java.util.Optional
 
 data class PrintItem(val itemString: String) {
 	constructor(itemStack: ItemStack) : this(Bazaars.toItemString(itemStack))

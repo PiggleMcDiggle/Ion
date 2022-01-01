@@ -7,7 +7,6 @@ import net.starlegacy.feature.starship.hyperspace.Hyperspace
 import org.bukkit.block.Hopper
 import org.bukkit.block.Sign
 import org.bukkit.inventory.ItemStack
-import kotlin.math.min
 
 
 class HyperdriveSubsystem(starship: ActiveStarship, sign: Sign, multiblock: HyperdriveMultiblock) :

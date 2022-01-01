@@ -17,7 +17,6 @@ import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
-import java.util.concurrent.TimeUnit
 
 class RocketWeaponSubsystem(
 	starship: ActiveStarship,

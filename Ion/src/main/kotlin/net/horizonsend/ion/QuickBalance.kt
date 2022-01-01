@@ -5,13 +5,12 @@ import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandCompletion
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Subcommand
-import kotlinx.serialization.ExperimentalSerializationApi
+import java.io.File
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import net.horizonsend.ion.Ion.Companion.plugin
 import org.bukkit.command.CommandSender
-import java.io.File
 
 @CommandPermission("ion.quickbalance")
 @CommandAlias("quickbalance")
@@ -24,6 +23,9 @@ object QuickBalance: BaseCommand() {
 		"TriTurretProjectileSpeed" to 125.0,
 		"TriTurretExplosionPower" to 6.0,
 		"TriTurretShieldDamageMultiplier" to 3.0,
+		"AllowPowerModeOvercharging" to 0.0,
+		"PowerModeOverchargingPointLimit" to 2000.0,
+		"PowerModeOverchargingFailureInterval" to 100.0,
 	)
 
 	private var customBalancedValues = mutableMapOf<String, Double> ()
