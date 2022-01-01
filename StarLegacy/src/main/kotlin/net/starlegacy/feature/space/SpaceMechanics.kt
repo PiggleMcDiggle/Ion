@@ -1,8 +1,6 @@
 package net.starlegacy.feature.space
 
 import net.starlegacy.SLComponent
-import net.starlegacy.feature.customitem.powerarmor.PowerArmorManager
-import net.starlegacy.feature.customitem.powerarmor.PowerArmorModule
 import net.starlegacy.feature.customitem.getPower
 import net.starlegacy.feature.customitem.removePower
 import net.starlegacy.util.*
@@ -161,9 +159,10 @@ object SpaceMechanics : SLComponent() {
 		val helmet = player.inventory.helmet
 			?: return false
 
-		if (!PowerArmorManager.hasModule(helmet, PowerArmorModule.PRESSURE_FIELD)) {
-			return false
-		}
+		//if (!PowerArmorManager.hasModule(helmet, PowerArmorModule.PRESSURE_FIELD)) {
+		//	return false
+		//}
+		// todo: add again
 
 		val powerUsage = 10
 
