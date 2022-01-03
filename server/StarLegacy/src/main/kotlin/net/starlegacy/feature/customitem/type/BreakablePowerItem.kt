@@ -40,8 +40,8 @@ var ItemStack.uses: Int
 			newUses = maxUses
 		}
 		val lore: MutableList<String> = this.lore ?: mutableListOf()
-		while (lore.size >= 2) lore.add(" ")
-		lore[1] = "$ITEM_USES_PREFIX$newUses / $maxUses"
+		if (lore.size < 2) lore.add("$ITEM_USES_PREFIX$newUses / $maxUses")
+		else lore[1] = "$ITEM_USES_PREFIX$newUses / $maxUses"
 		this.lore = lore
 		this.updateMeta{
 			it.persistentDataContainer.set(
