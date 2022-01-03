@@ -2,12 +2,14 @@ package net.starlegacy.feature.customitem.type
 
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.util.colorize
 import net.starlegacy.util.updateMeta
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.Damageable
 import org.bukkit.persistence.PersistentDataType
 
 
@@ -55,5 +57,9 @@ var ItemStack.power: Int
 				PersistentDataType.INTEGER,
 				newPower
 			)
+			// In order to update the durability bar we need to set it to *not* be unbreakable
+			it.isUnbreakable = false
+			(it as Damageable).damage =
+				(this.type.maxDurability - newPower.toFloat() / this.powerableCustomItem!!.maxPower * this.type.maxDurability).roundToInt()
 		}
 	}
