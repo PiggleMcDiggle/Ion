@@ -29,10 +29,8 @@ abstract class PowerItem : CustomItem() {
 class NotPowerableException(message: String? = null) : Exception(message)
 val ITEM_POWER_PREFIX = "&8Power: &7".colorize()
 val ItemStack.isPowerableCustomItem: Boolean get() = CustomItems.getCustomItem(this) is PowerItem
-val ItemStack.powerableCustomItem: PowerItem? get(){
-	if (!this.isPowerableCustomItem) throw NotPowerableException()
-	return CustomItems[this] as PowerItem
-}
+val ItemStack.powerableCustomItem: PowerItem? get() = CustomItems[this] as? PowerItem
+
 val ItemStack.maxPower: Int? get(){
 	if (!this.isPowerableCustomItem) throw NotPowerableException()
 	return this.powerableCustomItem!!.maxPower
