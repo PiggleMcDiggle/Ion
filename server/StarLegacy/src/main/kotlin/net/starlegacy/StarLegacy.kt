@@ -18,7 +18,6 @@ import net.starlegacy.command.economy.CityNpcCommand
 import net.starlegacy.command.economy.CollectedItemCommand
 import net.starlegacy.command.economy.CollectorCommand
 import net.starlegacy.command.economy.EcoStationCommand
-import net.starlegacy.command.misc.APCommand
 import net.starlegacy.command.misc.BatteryCommand
 import net.starlegacy.command.misc.CustomItemCommand
 import net.starlegacy.command.misc.DyeCommand
@@ -111,7 +110,6 @@ import net.starlegacy.feature.starship.hyperspace.Hyperspace
 import net.starlegacy.feature.starship.subsystem.shield.StarshipShields
 import net.starlegacy.feature.transport.Extractors
 import net.starlegacy.feature.transport.TransportConfig
-import net.starlegacy.feature.transport.Wires
 import net.starlegacy.feature.transport.pipe.Pipes
 import net.starlegacy.feature.transport.pipe.filter.Filters
 import net.starlegacy.listener.DoubleJumpListener
@@ -199,16 +197,12 @@ class StarLegacy : JavaPlugin() {
 			StationSieges,
 
 			Multiblocks,
-			PowerMachines,
-			AreaShields,
-//			BaseShields,
 			Gasses,
 
 			TransportConfig.Companion,
 			Extractors,
 			Pipes,
 			Filters,
-			Wires,
 
 			TradeCities,
 
@@ -326,7 +320,6 @@ class StarLegacy : JavaPlugin() {
 			DyeCommand,
 			GlobalGameRuleCommand,
 
-			APCommand,
 			BatteryCommand,
 			CustomItemCommand,
 			TransportDebugCommand,

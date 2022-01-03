@@ -43,7 +43,7 @@ object QuickBalance: BaseCommand() {
 		"AllowPowerModeOvercharging" to 0.0,
 		"PowerModeOverchargingPointLimit" to 2000.0,
 		"PowerModeOverchargingFailureInterval" to 100.0,
-		//Sorry Sciath here im listening torpedos as TorpedoProjectile as that's where the original file name of the variables was.
+		"TorpedoBoostChargeNanos" to 10.0,
 		"TorpedoProjectileRange" to 100.0,
 		"TorpedoProjectileSpeed" to 70.0,
 		"TorpedoProjectileshieldDamageMultiplier" to 2.0,
@@ -57,16 +57,54 @@ object QuickBalance: BaseCommand() {
 		"PlasmaLaserProjectileSpeed" to 400.0,
 		"PlasmaLaserProjectileShieldDamageMultiplier" to 3.0,
 		"PlasmaLaserProjectileThickness" to 0.3,
+		"PlasmaArc" to 15.0,
 		"PlasmaLaserProjectileParticleThickness" to 0.5,
 		"PlasmaLaserProjectileExplosionPower" to 4.0,
 		"PlasmaLaserProjectileVolume" to 10.0,
         "MaxPlasmaPerShot" to 2.0,
-		)
+		"PointDefensePowerUsage" to 500.0,
+	    "PointDefenseRange" to 120.0,
+		"PointDefenseSpeed" to 150.0,
+		"PointDefenseShieldDamageMultiplier" to 0.0,
+		"PointDefenseThickness" to 0.2,
+		"PointDefenseParticleThickness" to 0.35,
+		"PointDefenseExplosionPower" to 0.0,
+		"HeavyLaserPowerUsage" to 30000.0,
+		"HeavyLaserBoostChargeTime" to 5.0,
+		"HeavyLaserRequiredAmmo" to 2.0,
+		"HeavyLaserShieldDamageMultiplier" to 2.0,
+		"HeavyLaserMaxDegrees" to 25.0,
+		"HeavyLaserRange" to 200.0,
+		"HeavyLaserSpeed" to 50.0,
+		"HeavyLaserThickness" to 0.35,
+		"HeavyLaserParticleThickness" to 1.0,
+		"HeavyLaserExplosionPower" to 12.0,
+		"PhaserProjectileRange" to 140.0,
+		"PhaserAmmoRequirement" to 4.0,
+		"PhaserBoostChargeTime" to 3.0,
+		"PhaserProjectileShieldDamageMultiplier" to 55.0,
+		"PhaserProjectileThickness" to 0.2,
+		"PhaserProjectileExplosionPower" to 2.0,
+		//No idea what either of the two below do tbh but speed it hates me when I mess with phaserprojectilespeed
+		//so I left it as it was as phasers have infinite spped.
+		"PhaserProjectileSpeedUpSpeed" to 1000.0,
+		"PhaserProjectileSpeedUpTime" to 500.0,
+		"RocketPowerUsage" to 50000.0,
+        "RocketRange" to 300.0,
+		"RocketSpeed" to 5.0,
+		"RocketShieldDamageMultiplier" to 5.0,
+		"RocketThickness" to 1.0,
+		"RocketExplosionPower" to 30.0,
+		"RocketVolume" to 10.0,
+		"CruisePulsingSlowDown" to 0.9,
+		"CombatNPCDespawnTime" to 1.0,
+		"DecomposersMaxLength" to 100.0,
+	)
 
 	private var customBalancedValues = mutableMapOf<String, Double> ()
 
-	// This is dumb... this will cause us to spend a lot of time moving around data for no reason
-	val balancedValues get() = defaultBalancedValues.toMutableMap().apply { putAll(customBalancedValues) }.toMap()
+	var balancedValues = defaultBalancedValues.toMutableMap()
+		private set
 
 	fun getBalancedValue(name: String) = balancedValues[name] ?: throw IllegalArgumentException("No balanced value for $name")
 
@@ -77,54 +115,56 @@ object QuickBalance: BaseCommand() {
 			ionInstance.log4JLogger.warn("Failed to load custom balanced values. Creating new file.")
 			saveBalancedValues()
 		}
+		updateBalancedValues()
+	}
+
+	private fun updateBalancedValues() {
+		balancedValues = defaultBalancedValues.toMutableMap().apply { putAll(customBalancedValues) }
 	}
 
 	private fun saveBalancedValues() {
 		Json.encodeToStream(customBalancedValues, File(ionInstance.dataFolder, "values.json").outputStream())
+
+		updateBalancedValues()
 	}
 
 	@Subcommand("list")
-	fun list(sender: CommandSender): Boolean {
-		sender.sendMessage("QuickBalance Values:\n" + balancedValues.map{"${it.key.padEnd(balancedValues.keys.sortedBy{it.length}.size)} = ${it.value}"}.joinToString("\n"))
-		return true
-	}
+	fun list(sender: CommandSender) = sender.sendMessage("QuickBalance Values:\n" + balancedValues.map{"${it.key} = ${it.value}${if (customBalancedValues.contains(it.key)) "*" else ""}"}.joinToString("\n"))
 
 	@Subcommand("get")
 	@CommandCompletion("@valueNames")
-	fun get(sender: CommandSender, name: String): Boolean {
-		if (!balancedValues.containsKey(name)) {
-			sender.sendMessage("Balance value $name does not exist.")
-			return false
-		}
+	fun get(sender: CommandSender, name: String) {
+		if (!balancedValues.containsKey(name)) sender.sendMessage("Balance value $name does not exist.")
 
-		sender.sendMessage("$name = ${balancedValues[name]}")
-		return true
+		sender.sendMessage("$name = ${balancedValues[name]}${if (customBalancedValues.contains(name)) "*" else ""}")
 	}
 
 	@Subcommand("set")
-	@CommandCompletion("@valueNames")
-	fun set(sender: CommandSender, name: String, value: Double): Boolean {
-		if (!balancedValues.containsKey(name)) {
-			sender.sendMessage("Balance value $name does not exist.")
-			return false
-		}
+	@CommandCompletion("@valueNames 0.0")
+	fun set(sender: CommandSender, name: String, value: Double) {
+		if (!balancedValues.containsKey(name)) sender.sendMessage("Balance value $name does not exist.")
 
 		customBalancedValues[name] = value
 		saveBalancedValues()
 
 		sender.sendMessage("$name has been set to ${balancedValues[name]}")
-
-		return true
 	}
 
 	@Subcommand("clear")
 	@CommandCompletion("@valueNames")
-	fun clear(sender: CommandSender, name: String): Boolean {
-		customBalancedValues.remove(name)
-		saveBalancedValues()
+	fun clear(sender: CommandSender, name: String) {
+		if (name == "*") {
+			customBalancedValues.clear()
+			saveBalancedValues()
 
-		sender.sendMessage("$name has been cleared")
+			sender.sendMessage("All custom values have been cleared.")
 
-		return true
+		} else {
+			customBalancedValues.remove(name)
+			saveBalancedValues()
+
+			sender.sendMessage("$name has been cleared")
+
+		}
 	}
 }
