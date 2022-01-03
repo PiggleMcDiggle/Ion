@@ -23,6 +23,7 @@ import net.starlegacy.command.misc.CustomItemCommand
 import net.starlegacy.command.misc.DyeCommand
 import net.starlegacy.command.misc.GToggleCommand
 import net.starlegacy.command.misc.GlobalGameRuleCommand
+import net.starlegacy.command.misc.ItemUsesCommand
 import net.starlegacy.command.misc.PlanetSpawnMenuCommand
 import net.starlegacy.command.misc.PlayerInfoCommand
 import net.starlegacy.command.misc.SLTimeConvertCommand
@@ -319,6 +320,7 @@ class StarLegacy : JavaPlugin() {
 			GlobalGameRuleCommand,
 
 			BatteryCommand,
+			ItemUsesCommand,
 			CustomItemCommand,
 			TransportDebugCommand,
 			PlanetSpawnMenuCommand,
