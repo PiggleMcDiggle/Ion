@@ -6,6 +6,7 @@ import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.util.colorize
 import net.starlegacy.util.updateMeta
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
@@ -42,7 +43,7 @@ var ItemStack.uses: Int
 		val lore: MutableList<String> = this.lore ?: mutableListOf()
 		if (lore.size < 2) lore.add("$ITEM_USES_PREFIX$newUses / $maxUses")
 		else lore[1] = "$ITEM_USES_PREFIX$newUses / $maxUses"
-		this.lore = lore
+		try {this.lore = lore} catch (e: IllegalStateException) {return} // https://discord.com/channels/916891217596395631/916921073193320448/927671629776031765
 		this.updateMeta{
 			it.persistentDataContainer.set(
 				NamespacedKey(PLUGIN, "item-uses"),
