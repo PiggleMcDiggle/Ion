@@ -26,6 +26,7 @@ import kotlin.math.max
 import kotlin.math.min
 import net.starlegacy.feature.customitem.powerarmor.PowerArmorItems
 import net.starlegacy.feature.customitem.powerarmor.PowerModuleItems
+import net.starlegacy.feature.customitem.type.PowerItemBreakCanceller
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent
 import org.bukkit.event.inventory.PrepareAnvilEvent
@@ -119,6 +120,7 @@ class CustomItems : Listener {
 
 	init {
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
+		PLUGIN.server.pluginManager.registerEvents(PowerItemBreakCanceller(), PLUGIN)
 		registerItems()
 	}
 
