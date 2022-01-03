@@ -29,10 +29,15 @@ import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import net.starlegacy.feature.customitem.type.power
+import net.starlegacy.feature.customitem.type.uses
 
 object BlasterItems {
 	private fun registerBlaster(
-		name: String, model: Int, maxPower: Int, speed: Double,
+		name: String,
+		model: Int,
+		maxPower: Int,
+		maxUses: Int,
+		speed: Double,
 		range: Int,
 		thickness: Double,
 		cooldown: Int,
@@ -50,6 +55,7 @@ object BlasterItems {
 			material = Material.BOW,
 			model = model,
 			maxPower = maxPower,
+			maxUses = maxUses,
 			speed = speed,
 			range = range,
 			thickness = thickness,
@@ -67,7 +73,11 @@ object BlasterItems {
 
 	fun register() {
 		val pistol = registerBlaster(
-			"Blaster Pistol", model = 1, maxPower = 2500, speed = 1100.0,
+			"Blaster Pistol",
+			model = 1,
+			maxPower = 2500,
+			maxUses = 2500,
+			speed = 1100.0,
 			range = 50,
 			thickness = 0.1,
 			cooldown = 300,
@@ -88,7 +98,11 @@ object BlasterItems {
 		}
 
 		val rifle = registerBlaster(
-			"Blaster Rifle", model = 2, maxPower = 7500, speed = 650.0,
+			"Blaster Rifle",
+			model = 2,
+			maxPower = 7500,
+			maxUses = 5000,
+			speed = 650.0,
 			range = 75,
 			thickness = 0.1,
 			cooldown = 600,
@@ -109,7 +123,11 @@ object BlasterItems {
 		}
 
 		val sniper = registerBlaster(
-			"Blaster Sniper", model = 3, maxPower = 20000, speed = 1100.0,
+			"Blaster Sniper",
+			model = 3,
+			maxPower = 20000,
+			maxUses = 5000,
+			speed = 1100.0,
 			range = 250,
 			thickness = 0.2,
 			cooldown = 2000,
@@ -130,7 +148,10 @@ object BlasterItems {
 		}
 
 		val cannon = registerBlaster(
-			"Blaster Cannon", model = 4, maxPower = 25000,
+			"Blaster Cannon",
+			model = 4,
+			maxPower = 25000,
+			maxUses = 5000,
 			speed = 450.0,
 			range = 200,
 			thickness = 0.2,
@@ -198,6 +219,7 @@ object Blasters {
 			}
 		}
 		lastFired[uniqueId] = Instant.now().toEpochMilli()
+		blaster.uses++
 		BlasterProjectile.scheduler.submit {
 			val location = entity.eyeLocation
 			val lore = blaster.itemMeta.lore

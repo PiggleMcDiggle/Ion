@@ -23,6 +23,7 @@ class BlasterItem(
 	override val displayName: String,
 	override val material: Material,
 	override val maxPower: Int,
+	override val maxUses: Int,
 	val speed: Double,
 	val range: Int,
 	val thickness: Double,
@@ -33,7 +34,7 @@ class BlasterItem(
 	val pitchBase: Double,
 	val pitchRange: Double,
 	val explosionPower: Float? = null
-) : PowerItem(), Listener {
+) : BreakablePowerItem(), Listener {
 
 	init {
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
