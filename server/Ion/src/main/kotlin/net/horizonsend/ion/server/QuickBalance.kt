@@ -40,9 +40,6 @@ object QuickBalance: BaseCommand() {
 		"LightTurretExplosionPower" to 4.0,
 		"LightTurretShieldDamageMultiplier" to 2.0,
 		"LightTurretProjectileThickness" to 0.3,
-		"AllowPowerModeOvercharging" to 0.0,
-		"PowerModeOverchargingPointLimit" to 2000.0,
-		"PowerModeOverchargingFailureInterval" to 100.0,
 		"TorpedoBoostChargeNanos" to 10.0,
 		"TorpedoProjectileRange" to 100.0,
 		"TorpedoProjectileSpeed" to 70.0,
@@ -61,9 +58,9 @@ object QuickBalance: BaseCommand() {
 		"PlasmaLaserProjectileParticleThickness" to 0.5,
 		"PlasmaLaserProjectileExplosionPower" to 4.0,
 		"PlasmaLaserProjectileVolume" to 10.0,
-        "MaxPlasmaPerShot" to 2.0,
+		"MaxPlasmaPerShot" to 2.0,
 		"PointDefensePowerUsage" to 500.0,
-	    "PointDefenseRange" to 120.0,
+		"PointDefenseRange" to 120.0,
 		"PointDefenseSpeed" to 150.0,
 		"PointDefenseShieldDamageMultiplier" to 0.0,
 		"PointDefenseThickness" to 0.2,
@@ -79,18 +76,17 @@ object QuickBalance: BaseCommand() {
 		"HeavyLaserThickness" to 0.35,
 		"HeavyLaserParticleThickness" to 1.0,
 		"HeavyLaserExplosionPower" to 12.0,
+		"PhaserPowerUsage" to 50000.0,
 		"PhaserProjectileRange" to 140.0,
 		"PhaserAmmoRequirement" to 4.0,
 		"PhaserBoostChargeTime" to 3.0,
 		"PhaserProjectileShieldDamageMultiplier" to 55.0,
 		"PhaserProjectileThickness" to 0.2,
 		"PhaserProjectileExplosionPower" to 2.0,
-		//No idea what either of the two below do tbh but speed it hates me when I mess with phaserprojectilespeed
-		//so I left it as it was as phasers have infinite spped.
 		"PhaserProjectileSpeedUpSpeed" to 1000.0,
 		"PhaserProjectileSpeedUpTime" to 500.0,
 		"RocketPowerUsage" to 50000.0,
-        "RocketRange" to 300.0,
+		"RocketRange" to 300.0,
 		"RocketSpeed" to 5.0,
 		"RocketShieldDamageMultiplier" to 5.0,
 		"RocketThickness" to 1.0,
@@ -123,6 +119,8 @@ object QuickBalance: BaseCommand() {
 	}
 
 	private fun saveBalancedValues() {
+		ionInstance.dataFolder.mkdir() // Ensure the directory exists
+
 		Json.encodeToStream(customBalancedValues, File(ionInstance.dataFolder, "values.json").outputStream())
 
 		updateBalancedValues()
