@@ -26,6 +26,9 @@ import kotlin.math.max
 import kotlin.math.min
 import net.starlegacy.feature.customitem.powerarmor.PowerArmorItems
 import net.starlegacy.feature.customitem.powerarmor.PowerModuleItems
+import org.bukkit.enchantments.Enchantment
+import org.bukkit.event.enchantment.PrepareItemEnchantEvent
+import org.bukkit.event.inventory.PrepareAnvilEvent
 
 class CustomItems : Listener {
 	companion object {
@@ -176,6 +179,23 @@ class CustomItems : Listener {
 		getCustomItem(itemInHand)?.onHitWhileHolding(event) ?: return
 	}
 	// endregion
+	@Suppress("USELESS_ELVIS") // check docs for event.offers. It is in fact nullable
+	@EventHandler
+	fun onTableEnchant(event: PrepareItemEnchantEvent) {
+		val item = getCustomItem(event.item) ?: return
+		for (i in 0..2) {
+			val offer = event.offers[i] ?: continue
+			if (offer.enchantment !in item.allowedEnchants) event.offers[i] = null // oh but it can be :evil_grin:
+		}
+	}
+	@EventHandler
+	fun onAnvilEnchant(event: PrepareAnvilEvent) {
+		val item = event.result?.customItem ?: return
+		event.result!!.enchantments.keys.forEach {
+			if (it !in item.allowedEnchants) event.result = null
+			return
+		}
+	}
 }
 
 

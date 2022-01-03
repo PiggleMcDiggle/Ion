@@ -5,6 +5,7 @@ import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.util.updateMeta
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
@@ -17,6 +18,7 @@ abstract class CustomItem {
 	abstract val model: Int
 	abstract val displayName: String
 	abstract val material: Material
+	open val allowedEnchants: MutableSet<Enchantment> = mutableSetOf()
 	open val lore = mutableListOf<Component>()
 	open val unbreakable = true
 
