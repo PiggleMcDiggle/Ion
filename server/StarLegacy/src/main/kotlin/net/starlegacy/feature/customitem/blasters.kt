@@ -210,16 +210,12 @@ object Blasters {
 
 			if (!entity.getWorld().name.lowercase().contains("arena")) {
 				blaster.power -= powerUsage
+				blaster.uses--
 			}
 
 			entity.setCooldown(blaster.type, (type.cooldown / 1000.0f * 20.0f).toInt())
-
-			blaster.updateMeta {
-				(it as Damageable).damage++
-			}
 		}
 		lastFired[uniqueId] = Instant.now().toEpochMilli()
-		blaster.uses++
 		BlasterProjectile.scheduler.submit {
 			val location = entity.eyeLocation
 			val lore = blaster.itemMeta.lore

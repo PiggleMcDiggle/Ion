@@ -35,7 +35,7 @@ var ItemStack.uses: Int
 		if (!this.isBreakablePowerableCustomItem) throw NotBreakablePowerableException()
 		val maxUses = this.breakablePowerableCustomItem!!.maxUses
 		var newUses = max(min(value, maxUses), 0)
-		if (newUses > maxUses) {
+		if (newUses <= 0) {
 			this.amount--
 			newUses = maxUses
 		}
