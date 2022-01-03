@@ -179,6 +179,7 @@ class CustomItems : Listener {
 		getCustomItem(itemInHand)?.onHitWhileHolding(event) ?: return
 	}
 	// endregion
+	// region Disable enchanting
 	@Suppress("USELESS_ELVIS") // check docs for event.offers. It is in fact nullable
 	@EventHandler
 	fun onTableEnchant(event: PrepareItemEnchantEvent) {
@@ -196,6 +197,7 @@ class CustomItems : Listener {
 			return
 		}
 	}
+	// endregion
 }
 
 
