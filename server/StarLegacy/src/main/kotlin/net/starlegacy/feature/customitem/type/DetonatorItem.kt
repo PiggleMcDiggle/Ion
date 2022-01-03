@@ -1,9 +1,6 @@
 package net.starlegacy.feature.customitem.type
 
 import net.starlegacy.PLUGIN
-import net.starlegacy.feature.machine.AreaShields
-import net.starlegacy.feature.misc.CustomItems
-import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
 import org.bukkit.Sound
