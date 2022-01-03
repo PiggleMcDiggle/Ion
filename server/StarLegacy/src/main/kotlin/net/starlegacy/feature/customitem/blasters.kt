@@ -218,11 +218,8 @@ object Blasters {
 		lastFired[uniqueId] = Instant.now().toEpochMilli()
 		BlasterProjectile.scheduler.submit {
 			val location = entity.eyeLocation
-			val lore = blaster.itemMeta.lore
 
-			val color = if (lore != null && lore.size > 1) {
-				DyeColor.valueOf(lore[1]).color
-			} else when (entity) {
+			val color = when (entity) {
 				is Player -> getColor(entity)
 				else -> getRandomColor(entity.uniqueId)
 			}
