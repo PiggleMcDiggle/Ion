@@ -406,7 +406,6 @@ class StarLegacy : JavaPlugin() {
 				"customitems" to CustomItems.all().joinToString("|") { it.id },
 				"npctypes" to CityNPC.Type.values().joinToString("|") { it.name }
 			).forEach { manager.commandCompletions.registerStaticCompletion(it.key, it.value) }
-
 		}
 		// Add async tab completions
 		@Suppress("RedundantLambdaArrow")
