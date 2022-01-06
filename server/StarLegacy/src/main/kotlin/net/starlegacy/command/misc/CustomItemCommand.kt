@@ -8,6 +8,9 @@ import co.aikar.commands.annotation.Optional
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import net.starlegacy.command.SLCommand
 import net.starlegacy.feature.customitem.type.CustomItem
+import net.starlegacy.feature.customitem.type.isPowerableCustomItem
+import net.starlegacy.feature.customitem.type.maxPower
+import net.starlegacy.feature.customitem.type.power
 import net.starlegacy.util.green
 import net.starlegacy.util.msg
 import net.starlegacy.util.plus
@@ -31,6 +34,7 @@ object CustomItemCommand : SLCommand() {
         failIf(player != sender && !sender.hasPermission("ion.customitem.other")) {"You cannot send others custom items. Reason: lacking permission node ion.customitem.other"}
 
 		val item = customItem.getItem(amount)
+		if (item.isPowerableCustomItem) item.power = item.maxPower!!
 		val result = player.inventory.addItem(item)
 
 		if (result.isEmpty()) {
