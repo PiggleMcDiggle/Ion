@@ -77,8 +77,10 @@ abstract class Screen : Listener {
             // Player editable slot
             // In one server tick (once the item transfer takes place) trigger any actions based on the old slot contents
             // and the new slot contents. Honestly, we don't care about the player's cursor.
-            PlayerMoveItemTask(event.slot, this, event.currentItem).runTaskLater(PLUGIN, 1)
-            // It calls onScreenUpdate() later
+            Tasks.syncDelay(1){
+                onPlayerChangeItem(event.slot, event.currentItem, screen.getItem(event.slot))
+                onScreenUpdate()
+            }
         }
         else{
             // Not a player-editable slot, it's probably a button
@@ -100,15 +102,5 @@ abstract class Screen : Listener {
     @EventHandler
     fun onPlayerCloseScreenEvent(event: InventoryCloseEvent) {
         if (event.inventory == screen) closeScreen()
-    }
-}
-
-class PlayerMoveItemTask(private val slot: Int, private val screen: Screen, private val oldItems: ItemStack?) : BukkitRunnable() {
-    // Exists so we can compare what was in the inventory slot before the InventoryClickEvent with what is in it a tick later.
-    // You could probably figure this out by getting the InventoryAction and comparing the slot contents before with the
-    // cursor contents before, but this is easier.
-    override fun run() {
-        screen.onPlayerChangeItem(slot, oldItems, screen.screen.getItem(slot))
-        screen.onScreenUpdate()
     }
 }
