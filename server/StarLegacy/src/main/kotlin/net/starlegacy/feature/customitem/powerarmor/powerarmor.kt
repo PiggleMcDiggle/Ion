@@ -1,14 +1,22 @@
 package net.starlegacy.feature.customitem.powerarmor
 
+import net.starlegacy.StarLegacy
 import net.starlegacy.feature.customitem.CustomItems
 import net.starlegacy.feature.customitem.CustomItems.Companion.itemStackFromId
 import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
+import net.starlegacy.feature.customitem.customItem
+import net.starlegacy.feature.customitem.powerarmor.modules.PowerArmorModule
 import net.starlegacy.feature.customitem.type.PowerArmorItem
-import net.starlegacy.feature.customitem.type.PowerModuleItem
+import net.starlegacy.feature.customitem.type.module.PowerModuleItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
-
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.entity.PlayerDeathEvent
+import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.inventory.ItemStack
 
 
 object PowerArmorItems {
@@ -74,3 +82,52 @@ object PowerModuleItems {
 		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen")
 	}
 }
+
+class PowerArmor: Listener {
+	var powerArmorModules = mutableSetOf<PowerArmorModule>()
+
+
+	private lateinit var runnable: ArmorActivatorRunnable
+
+	init {
+		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
+	}
+
+	@EventHandler
+	fun onPlayerInteractEvent(event: PlayerInteractEvent) {
+		// Bring up the power armor menu
+		if (event.item.isPowerArmor) {
+			ModuleScreen(event.player)
+			event.isCancelled = true
+		}
+	}
+
+	@EventHandler
+	fun onPlayerDeath(event: PlayerDeathEvent) {
+		// Drop the player's current power armor modules, if keepInventory is off
+		if (event.keepInventory) return
+
+		event.player.armorModules.forEach {
+			event.entity.world.dropItem(event.entity.location, it.item)
+		}
+		event.player.armorModules = mutableSetOf<PowerArmorModule>()
+		// Remove armor power
+		event.player.armorPower = 0
+	}
+
+	@EventHandler
+	fun onPlayerDisconnect(event: PlayerQuitEvent) {
+		// Shouldn't be needed, but just in case
+		// Doesn't hurt anything to have it.
+		event.player.armorModules.forEach { it.disableModule(event.player) }
+	}
+}
+
+
+var maxPower = 1 // The max power a set can store
+var maxModuleWeight = 1
+var powerItems = mutableMapOf<Material, Int>() // The items that can be placed in the GUI to power the armor
+
+val ItemStack.isPowerArmor: Boolean
+	get() = customItem is PowerArmorItem
+val ItemStack.armorModule: PowerArmorModule? get() = customItem as? PowerArmorModule
