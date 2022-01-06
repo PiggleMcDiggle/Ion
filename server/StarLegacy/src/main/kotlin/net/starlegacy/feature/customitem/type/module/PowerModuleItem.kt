@@ -1,5 +1,6 @@
-package net.starlegacy.feature.customitem.type
+package net.starlegacy.feature.customitem.type.module
 
+import net.starlegacy.feature.customitem.type.CustomItem
 import org.bukkit.Material
 
 class PowerModuleItem(
