@@ -10,11 +10,10 @@ class ArmorActivatorRunnable : BukkitRunnable() {
 		// if they're wearing a full set of power armor and have power left.
 		// Disable them otherwise
 		getServer().onlinePlayers.forEach { player ->
-			val playerManager = PlayerPowerArmor(player)
-			if (playerManager.wearingPowerArmor && playerManager.armorEnabled && playerManager.armorPower > 0 && playerManager.moduleWeight <= PowerArmorManager.maxModuleWeight) {
-				playerManager.modules.forEach { module -> module.enableModule(player) }
+			if (player.isWearingPowerArmor && player.armorEnabled && player.armorPower > 0 && player.armorModuleWeight <= maxModuleWeight) {
+				player.armorModules.forEach { module -> module.enableModule(player) }
 			} else {
-				playerManager.modules.forEach { module -> module.disableModule(player) }
+				player.armorModules.forEach { module -> module.disableModule(player) }
 			}
 		}
 	}

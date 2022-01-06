@@ -3,7 +3,7 @@ package net.starlegacy.feature.customitem.powerarmor.modules
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.starlegacy.StarLegacy.Companion.PLUGIN
-import net.starlegacy.feature.customitem.powerarmor.PlayerPowerArmor
+import net.starlegacy.feature.customitem.powerarmor.armorPower
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -35,12 +35,11 @@ abstract class PowerArmorModule {
 
 	fun drainPower(player: Player, powerToDrain: Int) {
 		// Drain powerToDrain power from the player, and disable if we run out
-		val playerArmor = PlayerPowerArmor(player)
-		if (playerArmor.armorPower <= 0) {
+		if (player.armorPower <= 0) {
 			// Out of power, disable the module
 			disableModule(player)
 		} else {
-			playerArmor.armorPower -= powerToDrain
+			player.armorPower -= powerToDrain
 		}
 	}
 

@@ -1,6 +1,6 @@
-package net.starlegacy.feature.customitem.type.module
+package net.starlegacy.feature.customitem.type
 
-import net.starlegacy.feature.customitem.type.CustomItem
+import net.starlegacy.feature.customitem.powerarmor.modules.PowerArmorModule
 import org.bukkit.Material
 
 class PowerModuleItem(
@@ -8,4 +8,5 @@ class PowerModuleItem(
 	override val model: Int,
 	override val displayName: String,
 	override val material: Material,
+	val module: PowerArmorModule
 ) : CustomItem()
