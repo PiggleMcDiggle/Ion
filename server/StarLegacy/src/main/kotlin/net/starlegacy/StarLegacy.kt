@@ -400,11 +400,14 @@ class StarLegacy : JavaPlugin() {
 		}
 
 		// Add static tab completions
-		mapOf(
-			"customitems" to CustomItems.all().joinToString("|") { it.id },
-			"npctypes" to CityNPC.Type.values().joinToString("|") { it.name }
-		).forEach { manager.commandCompletions.registerStaticCompletion(it.key, it.value) }
+		// Delayed for two ticks so items have a chance to register
+		Tasks.syncDelay(2){
+			mapOf(
+				"customitems" to CustomItems.all().joinToString("|") { it.id },
+				"npctypes" to CityNPC.Type.values().joinToString("|") { it.name }
+			).forEach { manager.commandCompletions.registerStaticCompletion(it.key, it.value) }
 
+		}
 		// Add async tab completions
 		@Suppress("RedundantLambdaArrow")
 		mapOf<String, (BukkitCommandCompletionContext) -> List<String>>(
