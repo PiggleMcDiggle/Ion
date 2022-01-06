@@ -39,11 +39,12 @@ var ItemStack.uses: Int
 		if (newUses <= 0) {
 			this.amount--
 			newUses = maxUses
+			return
 		}
 		val lore: MutableList<String> = this.lore ?: mutableListOf()
 		if (lore.size < 2) lore.add("$ITEM_USES_PREFIX$newUses / $maxUses")
 		else lore[1] = "$ITEM_USES_PREFIX$newUses / $maxUses"
-		try {this.lore = lore} catch (e: IllegalStateException) {return} // https://discord.com/channels/916891217596395631/916921073193320448/927671629776031765
+		this.lore = lore
 		this.updateMeta{
 			it.persistentDataContainer.set(
 				NamespacedKey(PLUGIN, "item-uses"),
