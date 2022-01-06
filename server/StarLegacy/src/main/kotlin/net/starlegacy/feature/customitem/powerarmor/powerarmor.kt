@@ -29,7 +29,9 @@ var powerItems = mutableMapOf<Material, Int>() // The items that can be placed i
 val ItemStack.isPowerArmor: Boolean
 	get() = customItem is PowerArmorItem
 val ItemStack.armorModule: PowerArmorModule? get() = (customItem as? PowerModuleItem)?.module
-
+fun getArmorModuleFromName(name: String): PowerArmorModule? {
+	TODO()
+}
 
 object PowerArmorItems {
 	private fun registerPowerArmor(piece: String, model: Int, maxPower: Int, mat: Material): PowerArmorItem {
@@ -64,12 +66,13 @@ object PowerArmorItems {
 }
 
 object PowerModuleItems {
-	private fun registerModuleItem(type: String, typeName: String, model: Int, craft: String): PowerModuleItem {
+	private fun registerModuleItem(type: String, typeName: String, model: Int, craft: String, module: PowerArmorModule): PowerModuleItem {
 		val item = PowerModuleItem(
 			id = "power_module_$type",
 			displayName = "$typeName Module",
 			material = Material.FLINT_AND_STEEL,
-			model = model
+			model = model,
+			module = module
 		)
 		CustomItems.register(item)
 		Tasks.syncDelay(1) {
@@ -98,7 +101,6 @@ object PowerModuleItems {
 class PowerArmor: Listener {
 	var powerArmorModules = mutableSetOf<PowerArmorModule>()
 
-
 	private lateinit var runnable: ArmorActivatorRunnable
 
 	init {
@@ -108,7 +110,7 @@ class PowerArmor: Listener {
 	@EventHandler
 	fun onPlayerInteractEvent(event: PlayerInteractEvent) {
 		// Bring up the power armor menu
-		if (event.item.isPowerArmor) {
+		if (event.item?.isPowerArmor == true) {
 			ModuleScreen(event.player)
 			event.isCancelled = true
 		}
@@ -144,7 +146,7 @@ val Player.isWearingPowerArmor: Boolean
 
 
 
-var Player.armorModules = mutableSetOf<PowerArmorModule>()
+var Player.armorModules: MutableSet<PowerArmorModule>
 	// The player's currently equipped modules.
 	get() {
 		// Load the player's modules from their PersistentDataContainer
@@ -155,7 +157,7 @@ var Player.armorModules = mutableSetOf<PowerArmorModule>()
 		val moduleNames = moduleCSV.split(",")
 		val modules = mutableSetOf<PowerArmorModule>()
 		moduleNames.forEach {
-			val module = PowerArmorManager.getModuleFromName(it)
+			val module = getArmorModuleFromName(it)
 			if (module != null) {
 				modules.add(module)
 			}
@@ -169,7 +171,7 @@ var Player.armorModules = mutableSetOf<PowerArmorModule>()
 		value.forEach {
 			moduleCSV += it.name + ","
 		}
-		player.persistentDataContainer.set(
+		persistentDataContainer.set(
 			NamespacedKey(StarLegacy.PLUGIN, "equipped-power-armor-modules"),
 			PersistentDataType.STRING,
 			moduleCSV
@@ -184,7 +186,7 @@ var Player.armorPower: Int
 
 	set(value) {
 		var newPower = value // can't modify val
-		if (newPower > maxPower) newPower = maxPower
+		if (newPower > maxArmorPower) newPower = maxArmorPower
 		persistentDataContainer.set(
 			NamespacedKey(StarLegacy.PLUGIN, "power-armor-power"),
 			PersistentDataType.INTEGER,

@@ -38,7 +38,7 @@ class ModuleScreen(player: Player) : Screen() {
 		val slots = arrayOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21)
 		var weight = 0
 		slots.forEach {
-			val module = screen.getItem(it).armorModule
+			val module = screen.getItem(it)?.armorModule
 			if (module != null) weight += module.weight
 		}
 		// Figure out what color to make the status bar
