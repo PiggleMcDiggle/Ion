@@ -1,6 +1,9 @@
 package net.starlegacy.feature.customitem.powerarmor
 
 import net.kyori.adventure.text.Component
+import net.starlegacy.feature.customitem.type.isPowerableCustomItem
+import net.starlegacy.feature.customitem.type.power
+import net.starlegacy.feature.customitem.type.powerableCustomItem
 import net.starlegacy.util.Screen
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -24,7 +27,7 @@ class ModuleScreen(player: Player) : Screen() {
 		// Clear their modules, they get added back on screen close
 		// Don't just set their modules to empty or the modules won't disable
 		player.armorModules.forEach {
-			screen.setItem(slots[index], it.item)
+			screen.setItem(slots[index], it.customItem.getItem())
 			player.removeArmorModule(it)
 			index++
 		}
@@ -104,15 +107,11 @@ class ModuleScreen(player: Player) : Screen() {
 	}
 
 	override fun onPlayerChangeItem(slot: Int, oldItems: ItemStack?, newItems: ItemStack?) {
-		if (slot == 26 && newItems != null && powerItems.containsKey(newItems.type)) {
-			// Player added fuel to the power input slot
-			for (i in 0..newItems.amount) {
-				val currentPower = player.armorPower
-				if (currentPower < maxArmorPower) {
-					player.armorPower = currentPower + powerItems[newItems.type]!!
-					newItems.amount--
-				}
-			}
+		if (slot == 26 && newItems != null && newItems.isPowerableCustomItem) {
+			// Player added an item containing power to the power input slot
+			val powerNeeded = maxArmorPower - player.armorPower
+			player.armorPower += newItems.power
+			newItems.power -= powerNeeded // should be automatically clamped to positive
 		}
 	}
 }

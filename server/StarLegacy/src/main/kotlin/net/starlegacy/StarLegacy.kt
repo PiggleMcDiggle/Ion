@@ -18,17 +18,7 @@ import net.starlegacy.command.economy.CityNpcCommand
 import net.starlegacy.command.economy.CollectedItemCommand
 import net.starlegacy.command.economy.CollectorCommand
 import net.starlegacy.command.economy.EcoStationCommand
-import net.starlegacy.command.misc.BatteryCommand
-import net.starlegacy.command.misc.CustomItemCommand
-import net.starlegacy.command.misc.DyeCommand
-import net.starlegacy.command.misc.GToggleCommand
-import net.starlegacy.command.misc.GlobalGameRuleCommand
-import net.starlegacy.command.misc.ItemUsesCommand
-import net.starlegacy.command.misc.PlanetSpawnMenuCommand
-import net.starlegacy.command.misc.PlayerInfoCommand
-import net.starlegacy.command.misc.SLTimeConvertCommand
-import net.starlegacy.command.misc.ShuttleCommand
-import net.starlegacy.command.misc.TransportDebugCommand
+import net.starlegacy.command.misc.*
 import net.starlegacy.command.nations.NationCommand
 import net.starlegacy.command.nations.NationRelationCommand
 import net.starlegacy.command.nations.NationSpaceStationCommand
@@ -356,6 +346,8 @@ class StarLegacy : JavaPlugin() {
 			CollectedItemCommand,
 			CollectorCommand,
 			EcoStationCommand,
+
+			PowerArmorCommand,
 
 			MiscStarshipCommands,
 			BlueprintCommand,

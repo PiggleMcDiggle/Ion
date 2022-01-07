@@ -24,9 +24,8 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffectType
 import java.lang.Integer.max
 
-var maxArmorPower = 1 // The max power a set can store
-var maxModuleWeight = 1
-var powerItems = mutableMapOf<Material, Int>() // The items that can be placed in the GUI to power the armor
+var maxArmorPower = 500000 // The max power a set can store
+var maxModuleWeight = 5
 var powerArmorModules = mutableSetOf<PowerArmorModule>()
 
 val ItemStack.isPowerArmor: Boolean
@@ -113,7 +112,6 @@ class PowerArmor: Listener {
 	private lateinit var runnable: ArmorActivatorRunnable
 
 	init {
-		powerArmorModules = mutableSetOf<PowerArmorModule>()
 		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
 	}
 
