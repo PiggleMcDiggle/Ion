@@ -31,20 +31,20 @@ var powerArmorModules = mutableSetOf<PowerArmorModule>()
 
 val ItemStack.isPowerArmor: Boolean
 	get() = customItem is PowerArmorItem
-val ItemStack.armorModule: PowerArmorModule? get() = (customItem as? PowerModuleItem)?.module
-fun getArmorModuleFromName(name: String): PowerArmorModule? {
-	powerArmorModules.forEach{ if (it.name == name) return it }
+val ItemStack.armorModule: PowerArmorModule? get() = getArmorModuleFromId(this.customItem?.id)
+fun getArmorModuleFromId(id: String?): PowerArmorModule? {
+	powerArmorModules.forEach{ if (it.customItem.id == id) return it }
 	return null
 }
 
+
 object PowerArmorItems {
-	private fun registerPowerArmor(piece: String, model: Int, maxPower: Int, mat: Material): PowerArmorItem {
+	private fun registerPowerArmor(piece: String, model: Int, mat: Material): PowerArmorItem {
 		val item = PowerArmorItem(
 			id = "power_armor_${piece.lowercase().replace(" ", "_")}",
 			displayName = "Power $piece",
 			material = mat,
-			model = model,
-			maxPower = maxPower
+			model = model
 		)
 		CustomItems.register(item)
 		return item
@@ -52,10 +52,10 @@ object PowerArmorItems {
 	}
 
 	fun register() {
-		val helmet = registerPowerArmor("Helmet", 1, 50000, Material.LEATHER_HELMET)
-		val chestplate = registerPowerArmor("Chestplate", 1, 50000, Material.LEATHER_CHESTPLATE)
-		val leggings = registerPowerArmor("Leggings", 1, 50000, Material.LEATHER_LEGGINGS)
-		val boots = registerPowerArmor("Boots", 1, 50000, Material.LEATHER_BOOTS)
+		val helmet = registerPowerArmor("Helmet", 1, Material.LEATHER_HELMET)
+		val chestplate = registerPowerArmor("Chestplate", 1,  Material.LEATHER_CHESTPLATE)
+		val leggings = registerPowerArmor("Leggings", 1, Material.LEATHER_LEGGINGS)
+		val boots = registerPowerArmor("Boots", 1, Material.LEATHER_BOOTS)
 		Tasks.syncDelay(1) {
 			val items = mapOf(
 				'*' to recipeChoice(CustomItems["titanium"]!!),
@@ -164,10 +164,10 @@ var Player.armorModules: MutableSet<PowerArmorModule>
 			NamespacedKey(StarLegacy.PLUGIN, "equipped-power-armor-modules"),
 			PersistentDataType.STRING
 		) ?: return mutableSetOf<PowerArmorModule>()
-		val moduleNames = moduleCSV.split(",")
+		val moduleIds = moduleCSV.split(",")
 		val modules = mutableSetOf<PowerArmorModule>()
-		moduleNames.forEach {
-			val module = getArmorModuleFromName(it)
+		moduleIds.forEach {
+			val module = getArmorModuleFromId(it)
 			if (module != null) {
 				modules.add(module)
 			}
@@ -179,7 +179,7 @@ var Player.armorModules: MutableSet<PowerArmorModule>
 		var moduleCSV = "" // Comma separated values of all the module names
 
 		value.forEach {
-			moduleCSV += it.name + ","
+			moduleCSV += it.customItem.id + ","
 		}
 		persistentDataContainer.set(
 			NamespacedKey(StarLegacy.PLUGIN, "equipped-power-armor-modules"),
