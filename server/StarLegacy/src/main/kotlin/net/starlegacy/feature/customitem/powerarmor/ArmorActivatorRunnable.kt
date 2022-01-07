@@ -11,7 +11,7 @@ class ArmorActivatorRunnable : BukkitRunnable() {
 		// Disable them otherwise
 		getServer().onlinePlayers.forEach { player ->
 			if (player.isWearingPowerArmor && player.armorEnabled && player.armorPower > 0 && player.armorModuleWeight <= maxModuleWeight) {
-				player.armorModules.forEach { module -> module.enableModule(player) }
+				player.armorModules.forEach { module -> module.tickModule(player) }
 			} else {
 				player.armorModules.forEach { module -> module.disableModule(player) }
 			}

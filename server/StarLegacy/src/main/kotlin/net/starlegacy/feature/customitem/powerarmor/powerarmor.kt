@@ -6,9 +6,10 @@ import net.starlegacy.feature.customitem.CustomItems.Companion.itemStackFromId
 import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.customItem
+import net.starlegacy.feature.customitem.powerarmor.modules.EffectModule
 import net.starlegacy.feature.customitem.powerarmor.modules.PowerArmorModule
+import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerArmorItem
-import net.starlegacy.feature.customitem.type.PowerModuleItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -20,17 +21,20 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-
+import org.bukkit.potion.PotionEffectType
+import java.lang.Integer.max
 
 var maxArmorPower = 1 // The max power a set can store
 var maxModuleWeight = 1
 var powerItems = mutableMapOf<Material, Int>() // The items that can be placed in the GUI to power the armor
+var powerArmorModules = mutableSetOf<PowerArmorModule>()
 
 val ItemStack.isPowerArmor: Boolean
 	get() = customItem is PowerArmorItem
 val ItemStack.armorModule: PowerArmorModule? get() = (customItem as? PowerModuleItem)?.module
 fun getArmorModuleFromName(name: String): PowerArmorModule? {
-	TODO()
+	powerArmorModules.forEach{ if (it.name == name) return it }
+	return null
 }
 
 object PowerArmorItems {
@@ -66,13 +70,12 @@ object PowerArmorItems {
 }
 
 object PowerModuleItems {
-	private fun registerModuleItem(type: String, typeName: String, model: Int, craft: String, module: PowerArmorModule): PowerModuleItem {
-		val item = PowerModuleItem(
+	private fun registerModuleItem(type: String, typeName: String, model: Int, craft: String): GenericCustomItem {
+		val item = GenericCustomItem(
 			id = "power_module_$type",
 			displayName = "$typeName Module",
 			material = Material.FLINT_AND_STEEL,
 			model = model,
-			module = module
 		)
 		CustomItems.register(item)
 		Tasks.syncDelay(1) {
@@ -92,18 +95,25 @@ object PowerModuleItems {
 		registerModuleItem("shock_absorbing", "Shock Absorbing", 1, "titanium")
 		registerModuleItem("speed_boosting", "Speed Boosting", 2, "feather")
 		registerModuleItem("rocket_boosting", "Rocket Boosting", 3, "firework_rocket")
-		registerModuleItem("night_vision", "Night Vision", 4, "spider_eye")
+		EffectModule(
+			1,
+			registerModuleItem("night_vision", "Night Vision", 4, "spider_eye"),
+			PotionEffectType.NIGHT_VISION,
+			0,
+			200,
+			1
+		)
 		registerModuleItem("environment", "Environment", 5, "chainmail_helmet")
 		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen")
 	}
 }
 
 class PowerArmor: Listener {
-	var powerArmorModules = mutableSetOf<PowerArmorModule>()
 
 	private lateinit var runnable: ArmorActivatorRunnable
 
 	init {
+		powerArmorModules = mutableSetOf<PowerArmorModule>()
 		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
 	}
 
@@ -122,7 +132,7 @@ class PowerArmor: Listener {
 		if (event.keepInventory) return
 
 		event.player.armorModules.forEach {
-			event.entity.world.dropItem(event.entity.location, it.item)
+			event.entity.world.dropItem(event.entity.location, it.customItem.getItem())
 		}
 		event.player.armorModules = mutableSetOf<PowerArmorModule>()
 		// Remove armor power
@@ -185,18 +195,17 @@ var Player.armorPower: Int
 		PersistentDataType.INTEGER) ?: 0
 
 	set(value) {
-		var newPower = value // can't modify val
-		if (newPower > maxArmorPower) newPower = maxArmorPower
 		persistentDataContainer.set(
 			NamespacedKey(StarLegacy.PLUGIN, "power-armor-power"),
 			PersistentDataType.INTEGER,
-			newPower
+			max(value, 0).coerceAtMost(maxArmorPower) // IntelliJ recommended coerceAtMost() over min()
 		)
 	}
 
 val Player.armorModuleWeight: Int
 	// The player's total combined module weight
 	get() {
+		// I bet kotlin has a neater way to go about this
 		var weight = 0
 		armorModules.forEach {
 			weight += it.weight
