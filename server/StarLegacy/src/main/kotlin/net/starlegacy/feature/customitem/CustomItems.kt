@@ -1,6 +1,7 @@
 package net.starlegacy.feature.customitem
 
 import net.starlegacy.PLUGIN
+import net.starlegacy.feature.customitem.powerarmor.PowerArmor
 import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerItem
@@ -121,6 +122,7 @@ class CustomItems : Listener {
 	init {
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
 		PLUGIN.server.pluginManager.registerEvents(PowerItemBreakCanceller(), PLUGIN)
+		PLUGIN.server.pluginManager.registerEvents(PowerArmor(), PLUGIN)
 		registerItems()
 	}
 
