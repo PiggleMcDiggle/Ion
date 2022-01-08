@@ -70,16 +70,16 @@ class ModuleScreen(player: Player) : Screen() {
 		val power = player.armorPower
 		val item = ItemStack(
 			when {
-				power >= maxArmorPower -> Material.BLUE_STAINED_GLASS_PANE
-				power >= (maxArmorPower / 4) * 3 -> Material.GREEN_STAINED_GLASS_PANE
-				power >= maxArmorPower / 2 -> Material.LIME_STAINED_GLASS_PANE
-				power >= maxArmorPower / 4 -> Material.YELLOW_STAINED_GLASS_PANE
+				power >= player.maxArmorPower -> Material.BLUE_STAINED_GLASS_PANE
+				power >= (player.maxArmorPower / 4) * 3 -> Material.GREEN_STAINED_GLASS_PANE
+				power >= player.maxArmorPower / 2 -> Material.LIME_STAINED_GLASS_PANE
+				power >= player.maxArmorPower / 4 -> Material.YELLOW_STAINED_GLASS_PANE
 				power > 0 -> Material.ORANGE_STAINED_GLASS_PANE
 				else -> Material.RED_STAINED_GLASS_PANE
 			}
 		)
 		val meta = item.itemMeta
-		meta.displayName(Component.text("Power: $power/${maxArmorPower}"))
+		meta.displayName(Component.text("Power: $power/${player.maxArmorPower}"))
 		item.itemMeta = meta
 		screen.setItem(17, item)
 	}
@@ -114,7 +114,7 @@ class ModuleScreen(player: Player) : Screen() {
 	override fun onPlayerChangeItem(slot: Int, oldItems: ItemStack?, newItems: ItemStack?) {
 		if (slot == 26 && newItems != null && newItems.isPowerableCustomItem) {
 			// Player added an item containing power to the power input slot
-			val powerNeeded = maxArmorPower - player.armorPower
+			val powerNeeded = player.maxArmorPower - player.armorPower
 			player.armorPower += newItems.power
 			newItems.power -= powerNeeded // should be automatically clamped to positive
 		}

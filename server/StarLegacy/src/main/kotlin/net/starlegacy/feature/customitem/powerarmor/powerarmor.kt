@@ -220,6 +220,15 @@ var Player.armorPower: Int
 		}
 	}
 
+
+val Player.maxArmorPower: Int get() {
+	var maxPower = 0
+	inventory.armorContents.forEach{
+		if (it.isPowerArmor) maxPower += it.maxPower!!
+	}
+	return maxPower
+}
+
 val Player.armorModuleWeight: Int
 	// The player's total combined module weight
 	get() {
