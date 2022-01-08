@@ -12,6 +12,8 @@ import net.starlegacy.feature.customitem.powerarmor.modules.RocketModule
 import net.starlegacy.feature.customitem.powerarmor.modules.SpeedModule
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerArmorItem
+import net.starlegacy.feature.customitem.type.maxPower
+import net.starlegacy.feature.customitem.type.power
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -24,9 +26,8 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffectType
-import java.lang.Integer.max
+import java.lang.Integer.min
 
-var maxArmorPower = 500000 // The max power a set can store
 var maxModuleWeight = 5
 var powerArmorModules = mutableSetOf<PowerArmorModule>()
 
@@ -40,12 +41,13 @@ fun getArmorModuleFromId(id: String?): PowerArmorModule? {
 
 
 object PowerArmorItems {
-	private fun registerPowerArmor(piece: String, model: Int, mat: Material): PowerArmorItem {
+	private fun registerPowerArmor(piece: String, model: Int, mat: Material, maxPower: Int): PowerArmorItem {
 		val item = PowerArmorItem(
 			id = "power_armor_${piece.lowercase().replace(" ", "_")}",
 			displayName = "Power $piece",
 			material = mat,
-			model = model
+			model = model,
+			maxPower = maxPower
 		)
 		CustomItems.register(item)
 		return item
@@ -53,10 +55,10 @@ object PowerArmorItems {
 	}
 
 	fun register() {
-		val helmet = registerPowerArmor("Helmet", 1, Material.LEATHER_HELMET)
-		val chestplate = registerPowerArmor("Chestplate", 1, Material.LEATHER_CHESTPLATE)
-		val leggings = registerPowerArmor("Leggings", 1, Material.LEATHER_LEGGINGS)
-		val boots = registerPowerArmor("Boots", 1, Material.LEATHER_BOOTS)
+		val helmet = registerPowerArmor("Helmet", 1, Material.LEATHER_HELMET, 50000)
+		val chestplate = registerPowerArmor("Chestplate", 1, Material.LEATHER_CHESTPLATE, 50000)
+		val leggings = registerPowerArmor("Leggings", 1, Material.LEATHER_LEGGINGS, 50000)
+		val boots = registerPowerArmor("Boots", 1, Material.LEATHER_BOOTS, 50000)
 		Tasks.syncDelay(1) {
 			val items = mapOf(
 				'*' to recipeChoice(CustomItems["titanium"]!!),
@@ -200,16 +202,22 @@ var Player.armorModules: MutableSet<PowerArmorModule>
 
 var Player.armorPower: Int
 	// The current power of the player's armor. Shared between all armor pieces.
-	get() = persistentDataContainer.get(
-		NamespacedKey(StarLegacy.PLUGIN, "power-armor-power"),
-		PersistentDataType.INTEGER
-	) ?: 0
+	get() {
+		var power = 0
+		inventory.armorContents.forEach{
+			if (it.isPowerArmor) power += it.power
+		}
+		return power
+	}
 	set(value) {
-		persistentDataContainer.set(
-			NamespacedKey(StarLegacy.PLUGIN, "power-armor-power"),
-			PersistentDataType.INTEGER,
-			max(value, 0).coerceAtMost(maxArmorPower) // IntelliJ recommended coerceAtMost() over min()
-		)
+		var powerLeft = value
+		inventory.armorContents.forEach {
+			if (it.isPowerArmor) {
+				val powerToAdd = min(powerLeft, it.maxPower!!)
+				it.power = powerToAdd
+				powerLeft -= powerToAdd
+			}
+		}
 	}
 
 val Player.armorModuleWeight: Int
