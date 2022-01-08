@@ -6,12 +6,12 @@ import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class EffectModule(
+open class EffectModule(
 	override val weight: Int,
 	override val customItem: CustomItem,
 	val effect: PotionEffectType,
-	val effectMultiplier: Int,
-	val effectDuration: Int,
+	open val effectMultiplier: Int,
+	open val effectDuration: Int,
 	val powerDrain: Int,
 ) : PowerArmorModule() {
 	// Represents a power armor module that grants a potion effect to the player.
