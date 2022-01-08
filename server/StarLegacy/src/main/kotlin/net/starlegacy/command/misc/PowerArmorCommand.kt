@@ -8,7 +8,6 @@ import org.bukkit.entity.Player
 object PowerArmorCommand : SLCommand() {
 	@CommandAlias("powerarmor")
 	fun onExecute(sender: Player) {
-		sender.sendMessage("Opening Power Armor GUI...")
 		ModuleScreen(sender)
 	}
 
