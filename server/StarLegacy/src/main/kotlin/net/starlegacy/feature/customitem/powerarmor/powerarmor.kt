@@ -94,14 +94,14 @@ object PowerModuleItems {
 		registerModuleItem("shock_absorbing", "Shock Absorbing", 1, "titanium")
 		registerModuleItem("speed_boosting", "Speed Boosting", 2, "feather")
 		registerModuleItem("rocket_boosting", "Rocket Boosting", 3, "firework_rocket")
-		EffectModule(
+		powerArmorModules.add(EffectModule(
 			1,
 			registerModuleItem("night_vision", "Night Vision", 4, "spider_eye"),
 			PotionEffectType.NIGHT_VISION,
 			0,
 			200,
 			1
-		)
+		))
 		registerModuleItem("environment", "Environment", 5, "chainmail_helmet")
 		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen")
 	}
