@@ -10,8 +10,4 @@ object PowerArmorCommand : SLCommand() {
 	fun onExecute(sender: Player) {
 		ModuleScreen(sender)
 	}
-
-	override fun supportsVanilla(): Boolean {
-		return true
-	}
 }
