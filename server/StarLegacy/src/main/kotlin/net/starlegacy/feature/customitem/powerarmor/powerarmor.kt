@@ -93,7 +93,6 @@ object PowerModuleItems {
 	}
 
 	fun register() {
-		registerModuleItem("shock_absorbing", "Shock Absorbing", 1, "titanium")
 		powerArmorModules.add(
 			RocketModule(
 				3,
@@ -119,8 +118,6 @@ object PowerModuleItems {
 				0
 			)
 		)
-		registerModuleItem("environment", "Environment", 5, "chainmail_helmet")
-		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen")
 	}
 }
 
