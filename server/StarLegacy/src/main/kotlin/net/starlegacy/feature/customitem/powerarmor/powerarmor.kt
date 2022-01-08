@@ -8,6 +8,7 @@ import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRec
 import net.starlegacy.feature.customitem.customItem
 import net.starlegacy.feature.customitem.powerarmor.modules.EffectModule
 import net.starlegacy.feature.customitem.powerarmor.modules.PowerArmorModule
+import net.starlegacy.feature.customitem.powerarmor.modules.RocketModule
 import net.starlegacy.feature.customitem.powerarmor.modules.SpeedModule
 import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerArmorItem
@@ -93,7 +94,12 @@ object PowerModuleItems {
 
 	fun register() {
 		registerModuleItem("shock_absorbing", "Shock Absorbing", 1, "titanium")
-		registerModuleItem("rocket_boosting", "Rocket Boosting", 3, "firework_rocket")
+		powerArmorModules.add(
+			RocketModule(
+				3,
+				registerModuleItem("rocket_boosting", "Rocket Boosting", 3, "firework_rocket")
+			)
+		)
 		powerArmorModules.add(
 			SpeedModule(
 				3,
