@@ -20,7 +20,7 @@ class RocketModule(override val weight: Int, override val customItem: CustomItem
 	val players = mutableMapOf<UUID, Boolean>()
 
 	override fun tickModule(player: Player) {
-		if (player.uniqueId in players) {
+		if (players[player.uniqueId] == true) {
 			if (player.uniqueId !in ArmorActivatorRunnable.activatedPlayers) {
 				players[player.uniqueId] = false
 				player.isGliding = false
