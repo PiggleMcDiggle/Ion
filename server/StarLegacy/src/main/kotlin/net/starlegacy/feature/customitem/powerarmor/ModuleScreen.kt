@@ -3,7 +3,6 @@ package net.starlegacy.feature.customitem.powerarmor
 import net.kyori.adventure.text.Component
 import net.starlegacy.feature.customitem.type.isPowerableCustomItem
 import net.starlegacy.feature.customitem.type.power
-import net.starlegacy.feature.customitem.type.powerableCustomItem
 import net.starlegacy.util.Screen
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -45,7 +44,13 @@ class ModuleScreen(player: Player) : Screen() {
 			if (module != null) weight += module.weight
 		}
 		// Figure out what color to make the status bar
-		val color = ItemStack(if (weight <= maxModuleWeight) { green } else { red })
+		val color = ItemStack(
+			if (weight <= maxModuleWeight) {
+				green
+			} else {
+				red
+			}
+		)
 		// Name it
 		val colorMeta = color.itemMeta
 		colorMeta.displayName(Component.text("Weight: $weight / $maxModuleWeight"))

@@ -2,11 +2,11 @@ package net.starlegacy.feature.customitem
 
 import net.starlegacy.PLUGIN
 import net.starlegacy.feature.customitem.powerarmor.PowerArmor
+import net.starlegacy.feature.customitem.powerarmor.PowerArmorItems
+import net.starlegacy.feature.customitem.powerarmor.PowerModuleItems
 import net.starlegacy.feature.customitem.type.CustomItem
 import net.starlegacy.feature.customitem.type.GenericCustomItem
-import net.starlegacy.feature.customitem.type.PowerItem
-import net.starlegacy.util.colorize
-import net.starlegacy.util.updateMeta
+import net.starlegacy.feature.customitem.type.PowerItemBreakCanceller
 import org.bukkit.Bukkit.addRecipe
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -14,7 +14,9 @@ import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.enchantment.PrepareItemEnchantEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.inventory.PrepareAnvilEvent
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
@@ -23,14 +25,6 @@ import org.bukkit.inventory.RecipeChoice
 import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.inventory.ShapelessRecipe
 import org.bukkit.persistence.PersistentDataType
-import kotlin.math.max
-import kotlin.math.min
-import net.starlegacy.feature.customitem.powerarmor.PowerArmorItems
-import net.starlegacy.feature.customitem.powerarmor.PowerModuleItems
-import net.starlegacy.feature.customitem.type.PowerItemBreakCanceller
-import org.bukkit.enchantments.Enchantment
-import org.bukkit.event.enchantment.PrepareItemEnchantEvent
-import org.bukkit.event.inventory.PrepareAnvilEvent
 
 class CustomItems : Listener {
 	companion object {
@@ -179,6 +173,7 @@ class CustomItems : Listener {
 		val itemInHand = damaged.equipment?.itemInMainHand ?: return
 		getCustomItem(itemInHand)?.onHitWhileHolding(event) ?: return
 	}
+
 	// endregion
 	// region Disable enchanting
 	@Suppress("USELESS_ELVIS") // check docs for event.offers. It is in fact nullable
@@ -190,6 +185,7 @@ class CustomItems : Listener {
 			if (offer.enchantment !in item.allowedEnchants) event.offers[i] = null // oh but it can be :evil_grin:
 		}
 	}
+
 	@EventHandler
 	fun onAnvilEnchant(event: PrepareAnvilEvent) {
 		val item = event.result?.customItem ?: return

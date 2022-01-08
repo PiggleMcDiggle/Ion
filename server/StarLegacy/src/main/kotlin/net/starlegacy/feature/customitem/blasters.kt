@@ -7,11 +7,11 @@ import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
 import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.type.BlasterItem
 import net.starlegacy.feature.customitem.type.EnergySwordItem
+import net.starlegacy.feature.customitem.type.power
+import net.starlegacy.feature.customitem.type.uses
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.enumValueOfOrNull
-import net.starlegacy.util.updateMeta
 import org.bukkit.Color
-import org.bukkit.DyeColor
 import org.bukkit.FluidCollisionMode
 import org.bukkit.Location
 import org.bukkit.Material
@@ -22,14 +22,11 @@ import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.Damageable
 import org.bukkit.util.Vector
 import java.time.Instant
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-import net.starlegacy.feature.customitem.type.power
-import net.starlegacy.feature.customitem.type.uses
 
 object BlasterItems {
 	private fun registerBlaster(

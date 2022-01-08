@@ -33,7 +33,7 @@ val ItemStack.isPowerArmor: Boolean
 	get() = customItem is PowerArmorItem
 val ItemStack.armorModule: PowerArmorModule? get() = getArmorModuleFromId(this.customItem?.id)
 fun getArmorModuleFromId(id: String?): PowerArmorModule? {
-	powerArmorModules.forEach{ if (it.customItem.id == id) return it }
+	powerArmorModules.forEach { if (it.customItem.id == id) return it }
 	return null
 }
 
@@ -53,7 +53,7 @@ object PowerArmorItems {
 
 	fun register() {
 		val helmet = registerPowerArmor("Helmet", 1, Material.LEATHER_HELMET)
-		val chestplate = registerPowerArmor("Chestplate", 1,  Material.LEATHER_CHESTPLATE)
+		val chestplate = registerPowerArmor("Chestplate", 1, Material.LEATHER_CHESTPLATE)
 		val leggings = registerPowerArmor("Leggings", 1, Material.LEATHER_LEGGINGS)
 		val boots = registerPowerArmor("Boots", 1, Material.LEATHER_BOOTS)
 		Tasks.syncDelay(1) {
@@ -101,21 +101,24 @@ object PowerModuleItems {
 				effectMultiplier = 1,
 				effectDuration = 2,
 				power = 1,
-			))
-		powerArmorModules.add(EffectModule(
-			1,
-			registerModuleItem("night_vision", "Night Vision", 4, "spider_eye"),
-			PotionEffectType.NIGHT_VISION,
-			0,
-			300,
-			0
-		))
+			)
+		)
+		powerArmorModules.add(
+			EffectModule(
+				1,
+				registerModuleItem("night_vision", "Night Vision", 4, "spider_eye"),
+				PotionEffectType.NIGHT_VISION,
+				0,
+				300,
+				0
+			)
+		)
 		registerModuleItem("environment", "Environment", 5, "chainmail_helmet")
 		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen")
 	}
 }
 
-class PowerArmor: Listener {
+class PowerArmor : Listener {
 
 	init {
 		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
@@ -160,7 +163,6 @@ val Player.isWearingPowerArmor: Boolean
 			inventory.boots?.isPowerArmor ?: false
 
 
-
 var Player.armorModules: MutableSet<PowerArmorModule>
 	// The player's currently equipped modules.
 	get() {
@@ -197,8 +199,8 @@ var Player.armorPower: Int
 	// The current power of the player's armor. Shared between all armor pieces.
 	get() = persistentDataContainer.get(
 		NamespacedKey(StarLegacy.PLUGIN, "power-armor-power"),
-		PersistentDataType.INTEGER) ?: 0
-
+		PersistentDataType.INTEGER
+	) ?: 0
 	set(value) {
 		persistentDataContainer.set(
 			NamespacedKey(StarLegacy.PLUGIN, "power-armor-power"),
@@ -223,8 +225,8 @@ var Player.armorEnabled: Boolean
 	// Whether the player has enabled power armor in the GUI
 	get() = this.persistentDataContainer.get(
 		NamespacedKey(StarLegacy.PLUGIN, "power-armor-enabled"),
-		PersistentDataType.INTEGER) == 1
-
+		PersistentDataType.INTEGER
+	) == 1
 	set(value) {
 		persistentDataContainer.set(
 			NamespacedKey(StarLegacy.PLUGIN, "power-armor-enabled"),
