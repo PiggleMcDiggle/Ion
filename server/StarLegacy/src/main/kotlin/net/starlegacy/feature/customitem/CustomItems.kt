@@ -123,10 +123,6 @@ class CustomItems : Listener {
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
 		PLUGIN.server.pluginManager.registerEvents(PowerItemBreakCanceller(), PLUGIN)
 		PLUGIN.server.pluginManager.registerEvents(PowerArmor(), PLUGIN)
-		registerItems()
-	}
-
-	private fun registerItems() {
 		// Register items here
 		PlanetIcons.register()
 		MiscItems.register()
@@ -141,6 +137,7 @@ class CustomItems : Listener {
 		MiscRecipes.register()
 		RocketItems.register()
 	}
+
 	// region Custom Item Hooks
 
 	@EventHandler
