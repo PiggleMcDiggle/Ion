@@ -27,7 +27,9 @@ class RocketModule(override val weight: Int, override val customItem: CustomItem
 				return
 			}
 			if (player.isOnGround) {
+				players[player.uniqueId] = false
 				player.isGliding = false
+				return
 			}
 
 			player.armorPower -= 5
