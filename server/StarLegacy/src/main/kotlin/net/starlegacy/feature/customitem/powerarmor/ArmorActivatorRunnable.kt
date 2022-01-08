@@ -16,12 +16,12 @@ class ArmorActivatorRunnable : BukkitRunnable() {
 		// Disable them otherwise
 		getServer().onlinePlayers.forEach { player ->
 			activatedPlayers = mutableSetOf<UUID>() // purging it is easier than handling disconnects and such
-			player.sendMessage("\n \n \n \n \n \n \nEnabled: ${player.armorEnabled}\nWearing: ${player.isWearingPowerArmor}\nPower: ${player.armorPower}/${maxArmorPower}\nWeight: ${player.armorModuleWeight}/$maxModuleWeight\n")
+			// player.sendMessage("\n \n \n \n \n \n \nEnabled: ${player.armorEnabled}\nWearing: ${player.isWearingPowerArmor}\nPower: ${player.armorPower}/${maxArmorPower}\nWeight: ${player.armorModuleWeight}/$maxModuleWeight\n")
 			if (player.isWearingPowerArmor && player.armorEnabled && player.armorPower > 0 && player.armorModuleWeight <= maxModuleWeight) {
 				activatedPlayers.add(player.uniqueId)
 				player.armorModules.forEach { module ->
 					module.tickModule(player)
-					player.sendMessage("Ticked module: ${module.customItem.id}")
+					// player.sendMessage("Ticked module: ${module.customItem.id}")
 				}
 			} else {
 				player.armorModules.forEach { module -> module.disableModule(player) }
