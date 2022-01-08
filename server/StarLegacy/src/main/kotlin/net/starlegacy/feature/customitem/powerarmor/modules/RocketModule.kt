@@ -41,7 +41,7 @@ class RocketModule(override val weight: Int, override val customItem: CustomItem
 	@EventHandler
 	fun onToggleRocket(event: PlayerToggleSneakEvent) {
 		if (event.player.uniqueId in ArmorActivatorRunnable.activatedPlayers) {
-			players[event.player.uniqueId] = players[event.player.uniqueId] ?: false
+			players[event.player.uniqueId] = !(players[event.player.uniqueId] ?: true)
 		}
 	}
 }
