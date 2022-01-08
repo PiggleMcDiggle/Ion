@@ -109,10 +109,9 @@ object PowerModuleItems {
 
 class PowerArmor: Listener {
 
-	private lateinit var runnable: ArmorActivatorRunnable
-
 	init {
 		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
+		ArmorActivatorRunnable().runTaskTimer(StarLegacy.PLUGIN, 2, 1)
 	}
 
 	@EventHandler
