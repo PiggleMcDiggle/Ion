@@ -42,7 +42,7 @@ class CustomItems : Listener {
 				PLUGIN.logger.warning("Multiple custom items with id ${item.id} have been registered!")
 			}
 			item.onItemRegistered()
-			PLUGIN.logger.warning("Registered custom item ${item.id}")
+			//PLUGIN.logger.warning("Registered custom item ${item.id}")
 			return item
 		}
 
@@ -70,7 +70,7 @@ class CustomItems : Listener {
 				recipe.setIngredient(char, ingredient)
 			}
 			addRecipe(recipe)
-			PLUGIN.logger.warning("Created shaped recipe $id")
+			//PLUGIN.logger.warning("Created shaped recipe $id")
 			return recipe
 		}
 
@@ -84,7 +84,7 @@ class CustomItems : Listener {
 				recipe.addIngredient(it)
 			}
 			addRecipe(recipe)
-			PLUGIN.logger.warning("Created shapeless recipe $id")
+			//PLUGIN.logger.warning("Created shapeless recipe $id")
 			return recipe
 		}
 
