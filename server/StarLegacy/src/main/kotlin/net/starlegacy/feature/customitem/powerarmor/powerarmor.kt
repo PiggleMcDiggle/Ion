@@ -108,7 +108,7 @@ object PowerModuleItems {
 			PotionEffectType.NIGHT_VISION,
 			0,
 			300,
-			1
+			0
 		))
 		registerModuleItem("environment", "Environment", 5, "chainmail_helmet")
 		registerModuleItem("pressure_field", "Pressure Field", 6, "gas_canister_oxygen")
