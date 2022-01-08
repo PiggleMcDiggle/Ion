@@ -244,7 +244,7 @@ class StarLegacy : JavaPlugin() {
 
 	override fun onEnable() {
 		manager = PaperCommandManager(this)
-		Ion().onEnable()
+		Ion()
 
 		saveDefaultConfig()
 		reloadConfig()
