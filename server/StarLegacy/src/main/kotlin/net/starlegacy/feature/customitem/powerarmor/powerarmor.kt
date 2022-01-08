@@ -99,7 +99,7 @@ object PowerModuleItems {
 			registerModuleItem("night_vision", "Night Vision", 4, "spider_eye"),
 			PotionEffectType.NIGHT_VISION,
 			0,
-			200,
+			300,
 			1
 		))
 		registerModuleItem("environment", "Environment", 5, "chainmail_helmet")
