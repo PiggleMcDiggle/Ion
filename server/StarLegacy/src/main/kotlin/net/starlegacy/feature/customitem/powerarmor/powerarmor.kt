@@ -25,7 +25,7 @@ class PowerArmorListener : Listener {
 
 	companion object {
 		val playersInCombat = mutableMapOf<UUID, Long>()
-		val guiCombatCooldownSeconds: Int = 30
+		val guiCombatCooldownSeconds: Int = 20
 	}
 
 	init {
