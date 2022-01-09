@@ -2,6 +2,7 @@ package net.horizonsend.ion.proxy
 
 import co.aikar.commands.VelocityCommandManager
 import com.google.inject.Inject
+import com.velocitypowered.api.event.EventTask
 import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent
 import com.velocitypowered.api.plugin.Plugin
@@ -31,51 +32,54 @@ import net.horizonsend.ion.proxy.database.MongoManager
 import org.slf4j.Logger
 
 @Plugin(id = "ion", name = "Ion (Proxy)", version = "1.0.0", description = "Ion (Proxy)", authors = ["PeterCrawley"], url = "https://horizonsend.net")
-class Ion @Inject constructor(val server: ProxyServer, logger: Logger, @DataDirectory val dataDirectory: Path) {
+class Ion @Inject constructor(val server: ProxyServer, private val logger: Logger, @DataDirectory val dataDirectory: Path) {
 	companion object {
 		lateinit var ionInstance: Ion
 			private set
 
 		val server get() = ionInstance.server
 
-		lateinit var ionConfig: Config
+		var ionConfig: Config = Config()
 			private set
 
-		lateinit var jda: JDA
+		var jda: JDA? = null
 			private set
-	}
-
-	init {
-		ionInstance = this
-
-		// Loading of config
-		val configPath = dataDirectory.resolve("config.json")
-
-		dataDirectory.createDirectories() // Ensure the directories exist
-
-		if (!configPath.exists()) {
-			logger.warn("Failed to find the config file, creating a new one.")
-			configPath.writeText(Json.encodeToString(Config()))
-		}
-
-		ionConfig = Json.decodeFromString(configPath.readText())
-
-		// Connect to discord
-		jda = JDABuilder.create(ionConfig.discordToken, DIRECT_MESSAGES).apply {
-			disableCache(ACTIVITY, VOICE_STATE, EMOTE, CLIENT_STATUS, ONLINE_STATUS)
-
-		}.build().apply {
-			addEventListener(JDAListener)
-
-		}
-
-		// Init MongoDB
-		MongoManager
 	}
 
 	@Subscribe
 	@Suppress("UNUSED_PARAMETER") // Parameter is required to indicate what event to subscribe to
-	fun onStart(event: ProxyInitializeEvent) {
+	fun onStart(event: ProxyInitializeEvent): EventTask = EventTask.async {
+		ionInstance = this
+
+		dataDirectory.createDirectories() // Ensure the directories exist
+
+		// Loading of config
+		dataDirectory.resolve("config.json").apply {
+			if (!exists()) {
+				logger.warn("Failed to find the config file, creating a new one.")
+				writeText(Json.encodeToString(ionConfig))
+			}
+
+			else ionConfig = Json.decodeFromString(readText())
+		}
+
+		if (ionConfig.discordToken == "")
+			logger.error("Unable to start JDA, the bot token is likely invalid. The plugin will continue with reduced functionality.")
+
+		// Connect to discord
+		else try {
+			jda = JDABuilder.create(ionConfig.discordToken, DIRECT_MESSAGES).apply {
+				disableCache(ACTIVITY, VOICE_STATE, EMOTE, CLIENT_STATUS, ONLINE_STATUS)
+			}.build().apply {
+				addEventListener(JDAListener)
+			}
+		} catch (e: Exception) {
+			logger.error("Unable to start JDA, the bot token is likely invalid. The plugin will continue with reduced functionality.")
+		}
+
+		// Init MongoDB
+		MongoManager
+
 		VelocityCommandManager(server, this).apply {
 			setOf(Link, Move, Server, Unlink).forEach { registerCommand(it) }
 
