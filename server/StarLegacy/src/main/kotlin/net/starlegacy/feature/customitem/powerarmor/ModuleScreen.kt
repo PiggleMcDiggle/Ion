@@ -1,7 +1,7 @@
 package net.starlegacy.feature.customitem.powerarmor
 
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.Component.text
+import net.horizonsend.ion.server.asInt
 import net.starlegacy.feature.customitem.type.isPowerableCustomItem
 import net.starlegacy.feature.customitem.type.power
 import net.starlegacy.util.Screen
@@ -19,7 +19,7 @@ class ModuleScreen(player: Player) : Screen() {
 	init {
 		val secondsToWait =
 			PowerArmorListener.guiCombatCooldownSeconds -
-					((Instant.now().toEpochMilli() - (PowerArmorListener.playersInCombat[player.uniqueId]?:0)) / 1000).toInt()
+					((Instant.now().toEpochMilli() - (PowerArmorListener.playersInCombat[player.uniqueId]?:0)) / 1000)
 		if (secondsToWait <= 0) {
 			createScreen(player, InventoryType.CHEST, "Power Armor Modules")
 			playerEditableSlots.addAll(mutableSetOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26))
