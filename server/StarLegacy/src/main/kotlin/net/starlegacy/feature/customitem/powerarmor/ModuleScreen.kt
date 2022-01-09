@@ -1,7 +1,6 @@
 package net.starlegacy.feature.customitem.powerarmor
 
 import net.kyori.adventure.text.Component
-import net.horizonsend.ion.server.asInt
 import net.starlegacy.feature.customitem.type.isPowerableCustomItem
 import net.starlegacy.feature.customitem.type.power
 import net.starlegacy.util.Screen
