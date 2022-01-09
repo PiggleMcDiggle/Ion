@@ -60,49 +60,7 @@ class BlasterItem(
 		event.isCancelled = true
 		Blasters.fireBlaster(entity, bow)
 	}
-
-	override fun onPrepareCraft(event: PrepareItemCraftEvent) {
-		var color: DyeColor? = null
-		var dye: ItemStack? = null
-		for (item: ItemStack? in event.inventory.matrix) {
-			if (item != null && item.data is Colorable) {
-				color = (item.data as Colorable).color
-				dye = item
-				break
-			}
-		}
-
-		if (dye == null || color == null) {
-			return
-		}
-
-		for (item: ItemStack? in event.inventory.matrix) {
-			if (item == null) {
-				continue
-			}
-
-			Blasters.getBlaster(item) ?: continue
-			val lore = item.lore ?: mutableListOf()
-
-			if (lore.size < 2) {
-				lore.add(color.name)
-			} else {
-				lore[1] = color.name
-			}
-
-			if (lore == item.lore) {
-				return
-			}
-
-			if (item.lore == lore) {
-				return
-			}
-
-			item.lore = lore
-			dye.amount = dye.amount - 1
-			return
-		}
-	}
+	
 
 	@EventHandler
 	fun onEntityDamage(event: EntityDamageByEntityEvent) {
