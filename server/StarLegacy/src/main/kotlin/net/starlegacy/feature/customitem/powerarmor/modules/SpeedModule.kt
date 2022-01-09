@@ -24,7 +24,7 @@ class SpeedModule(
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
 	}
 
-	val lastMoved = HashMap<UUID, Long>()
+	val lastMoved = mutableMapOf<UUID, Long>()
 
 	override fun tickModule(player: Player) {
 		super.tickModule(player)
