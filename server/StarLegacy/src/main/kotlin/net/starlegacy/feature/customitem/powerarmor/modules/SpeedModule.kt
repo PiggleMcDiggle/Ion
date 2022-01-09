@@ -40,7 +40,7 @@ class SpeedModule(
 		lastMoved[event.player.uniqueId] = Instant.now().toEpochMilli()
 	}
 
-	fun hasMovedInLastSecond(player: Player): Boolean {
+	private fun hasMovedInLastSecond(player: Player): Boolean {
 		return lastMoved.containsKey(player.uniqueId) && Instant.now().toEpochMilli() - (lastMoved[player.uniqueId]
 			?: 0) < 1000
 	}

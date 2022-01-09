@@ -6,7 +6,9 @@ import java.util.UUID
 
 class ArmorActivatorRunnable : BukkitRunnable() {
 
-	companion object {var activatedPlayers = mutableSetOf<UUID>()}
+	companion object {
+		var activatedPlayers = mutableSetOf<UUID>()
+	}
 
 	override fun run() {
 		// Iterate through all the players and activate their armor modules
