@@ -44,7 +44,6 @@ object RocketItems {
 					'g' to CustomItems.recipeChoice(Material.HOPPER),
 				)
 			)
-
 			CustomItems.registerShapedRecipe(
 				warhead.id, warhead.getItem(3), " a ", "aoa", " a ", ingredients = mapOf(
 					'a' to CustomItems.recipeChoice(CustomItems["aluminum"]!!),

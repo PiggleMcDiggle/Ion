@@ -16,7 +16,6 @@ object PowerArmorItems {
 		)
 		CustomItems.register(item)
 		return item
-
 	}
 
 	fun register() {
