@@ -6,7 +6,7 @@ import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-open class EffectModule(
+open class PotionEffectModule(
 	override val weight: Int,
 	override val customItem: CustomItem,
 	private val effect: PotionEffectType,

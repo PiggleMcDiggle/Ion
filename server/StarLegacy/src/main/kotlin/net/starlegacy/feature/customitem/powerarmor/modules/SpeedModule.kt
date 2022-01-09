@@ -18,8 +18,8 @@ class SpeedModule(
 	override val effectDuration: Int,
 	val power: Int
 ) :
-	EffectModule(weight, customItem, PotionEffectType.SPEED, effectMultiplier, effectDuration, 0), Listener {
-	// Not using an EffectModule so that it doesn't drain power while standing still
+	PotionEffectModule(weight, customItem, PotionEffectType.SPEED, effectMultiplier, effectDuration, 0), Listener {
+	// Not using a PotionEffectModule so that it doesn't drain power while standing still
 	init {
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
 	}

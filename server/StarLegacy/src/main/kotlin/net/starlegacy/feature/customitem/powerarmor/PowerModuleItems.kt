@@ -1,7 +1,7 @@
 package net.starlegacy.feature.customitem.powerarmor
 
 import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.powerarmor.modules.EffectModule
+import net.starlegacy.feature.customitem.powerarmor.modules.PotionEffectModule
 import net.starlegacy.feature.customitem.powerarmor.modules.RocketModule
 import net.starlegacy.feature.customitem.powerarmor.modules.SpeedModule
 import net.starlegacy.feature.customitem.type.GenericCustomItem
@@ -49,7 +49,7 @@ object PowerModuleItems {
 			)
 		)
 		powerArmorModules.add(
-			EffectModule(
+			PotionEffectModule(
 				1,
 				registerModuleItem("night_vision", "Night Vision", 4, "spider_eye"),
 				PotionEffectType.NIGHT_VISION,
