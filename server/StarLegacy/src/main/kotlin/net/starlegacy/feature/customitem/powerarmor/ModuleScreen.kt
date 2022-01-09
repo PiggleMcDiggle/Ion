@@ -17,8 +17,10 @@ class ModuleScreen(player: Player) : Screen() {
 	private val green = ItemStack(Material.LIME_STAINED_GLASS_PANE)
 
 	init {
-		if (PowerArmorListener.playersInCombat.containsKey(player.uniqueId) && Instant.now().toEpochMilli() - (PowerArmorListener.playersInCombat[player.uniqueId]
-			?: 0) < PowerArmorListener.guiCombatCooldownSeconds * 1000) {
+		val secondsToWait =
+			PowerArmorListener.guiCombatCooldownSeconds -
+					((Instant.now().toEpochMilli() - (PowerArmorListener.playersInCombat[player.uniqueId]?:0)) / 1000).toInt()
+		if (secondsToWait <= 0) {
 			createScreen(player, InventoryType.CHEST, "Power Armor Modules")
 			playerEditableSlots.addAll(mutableSetOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26))
 
@@ -39,7 +41,7 @@ class ModuleScreen(player: Player) : Screen() {
 			updateStatus()
 		}
 		else {
-			player.sendMessage(red("You need to be out of combat for ${PowerArmorListener.guiCombatCooldownSeconds} seconds before editing power armor!"))
+			player.sendMessage(red("You need to be out of combat for $secondsToWait more seconds before editing power armor!"))
 		}
 	}
 
