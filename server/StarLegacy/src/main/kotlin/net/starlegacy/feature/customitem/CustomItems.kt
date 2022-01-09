@@ -177,7 +177,7 @@ class CustomItems : Listener {
 
 	// endregion
 	// region Disable enchanting
-	@Suppress("USELESS_ELVIS") // check docs for event.offers. It is in fact nullable
+	@Suppress("USELESS_ELVIS") // check docs for event.offers. It can be null if there's no offer at that index
 	@EventHandler
 	fun onTableEnchant(event: PrepareItemEnchantEvent) {
 		val item = getCustomItem(event.item) ?: return
