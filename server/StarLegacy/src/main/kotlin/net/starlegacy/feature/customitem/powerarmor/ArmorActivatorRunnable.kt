@@ -2,7 +2,7 @@ package net.starlegacy.feature.customitem.powerarmor
 
 import org.bukkit.Bukkit.getServer
 import org.bukkit.scheduler.BukkitRunnable
-import java.util.*
+import java.util.UUID
 
 class ArmorActivatorRunnable : BukkitRunnable() {
 

@@ -9,7 +9,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.potion.PotionEffectType
 import java.time.Instant
-import java.util.*
+import java.util.UUID
 
 class SpeedModule(
 	override val weight: Int,

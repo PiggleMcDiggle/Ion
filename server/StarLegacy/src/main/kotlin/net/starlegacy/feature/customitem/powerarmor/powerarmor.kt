@@ -204,7 +204,7 @@ var Player.armorPower: Int
 	// The current power of the player's armor. Shared between all armor pieces.
 	get() {
 		var power = 0
-		inventory.armorContents.forEach{
+		inventory.armorContents.forEach {
 			if (it?.isPowerArmor == true) power += it.power // yet, if the player wears nothing, it is null
 		}
 		return power
@@ -221,13 +221,14 @@ var Player.armorPower: Int
 	}
 
 
-val Player.maxArmorPower: Int get() {
-	var maxPower = 0
-	inventory.armorContents.forEach{
-		if (it?.isPowerArmor == true) maxPower += it.maxPower!! // it can be null if it's empty
+val Player.maxArmorPower: Int
+	get() {
+		var maxPower = 0
+		inventory.armorContents.forEach {
+			if (it?.isPowerArmor == true) maxPower += it.maxPower!! // it can be null if it's empty
+		}
+		return maxPower
 	}
-	return maxPower
-}
 
 val Player.armorModuleWeight: Int
 	// The player's total combined module weight
