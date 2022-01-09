@@ -1,7 +1,7 @@
 package net.starlegacy.feature.customitem.type
 
 import net.starlegacy.StarLegacy.Companion.PLUGIN
-import net.starlegacy.feature.customitem.Blasters
+import net.starlegacy.feature.customitem.blaster.Blasters
 import org.bukkit.DyeColor
 import org.bukkit.GameMode
 import org.bukkit.Material

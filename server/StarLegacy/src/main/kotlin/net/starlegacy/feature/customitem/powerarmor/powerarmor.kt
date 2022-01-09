@@ -1,21 +1,11 @@
 package net.starlegacy.feature.customitem.powerarmor
 
 import net.starlegacy.StarLegacy
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.CustomItems.Companion.itemStackFromId
-import net.starlegacy.feature.customitem.CustomItems.Companion.recipeChoice
-import net.starlegacy.feature.customitem.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.customItem
-import net.starlegacy.feature.customitem.powerarmor.modules.EffectModule
 import net.starlegacy.feature.customitem.powerarmor.modules.PowerArmorModule
-import net.starlegacy.feature.customitem.powerarmor.modules.RocketModule
-import net.starlegacy.feature.customitem.powerarmor.modules.SpeedModule
-import net.starlegacy.feature.customitem.type.GenericCustomItem
 import net.starlegacy.feature.customitem.type.PowerArmorItem
 import net.starlegacy.feature.customitem.type.maxPower
 import net.starlegacy.feature.customitem.type.power
-import net.starlegacy.util.Tasks
-import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -25,103 +15,8 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-import org.bukkit.potion.PotionEffectType
 import java.lang.Integer.min
 
-var maxModuleWeight = 5
-var powerArmorModules = mutableSetOf<PowerArmorModule>()
-
-val ItemStack.isPowerArmor: Boolean
-	get() = customItem is PowerArmorItem
-val ItemStack.armorModule: PowerArmorModule? get() = getArmorModuleFromId(this.customItem?.id)
-fun getArmorModuleFromId(id: String?): PowerArmorModule? {
-	powerArmorModules.forEach { if (it.customItem.id == id) return it }
-	return null
-}
-
-
-object PowerArmorItems {
-	private fun registerPowerArmor(piece: String, model: Int, mat: Material, maxPower: Int): PowerArmorItem {
-		val item = PowerArmorItem(
-			id = "power_armor_${piece.lowercase().replace(" ", "_")}",
-			displayName = "Power $piece",
-			material = mat,
-			model = model,
-			maxPower = maxPower
-		)
-		CustomItems.register(item)
-		return item
-
-	}
-
-	fun register() {
-		val helmet = registerPowerArmor("Helmet", 1, Material.LEATHER_HELMET, 50000)
-		val chestplate = registerPowerArmor("Chestplate", 1, Material.LEATHER_CHESTPLATE, 50000)
-		val leggings = registerPowerArmor("Leggings", 1, Material.LEATHER_LEGGINGS, 50000)
-		val boots = registerPowerArmor("Boots", 1, Material.LEATHER_BOOTS, 50000)
-		Tasks.syncDelay(1) {
-			val items = mapOf(
-				'*' to recipeChoice(CustomItems["titanium"]!!),
-				'b' to recipeChoice(CustomItems["battery_g"]!!)
-			)
-			registerShapedRecipe(helmet.id, helmet.getItem(), "*b*", "* *", ingredients = items)
-			registerShapedRecipe(chestplate.id, chestplate.getItem(), "* *", "*b*", "***", ingredients = items)
-			registerShapedRecipe(leggings.id, leggings.getItem(), "*b*", "* *", "* *", ingredients = items)
-			registerShapedRecipe(boots.id, boots.getItem(), "* *", "*b*", ingredients = items)
-		}
-	}
-}
-
-object PowerModuleItems {
-	private fun registerModuleItem(type: String, typeName: String, model: Int, craft: String): GenericCustomItem {
-		val item = GenericCustomItem(
-			id = "power_module_$type",
-			displayName = "$typeName Module",
-			material = Material.FLINT_AND_STEEL,
-			model = model,
-		)
-		CustomItems.register(item)
-		Tasks.syncDelay(1) {
-			registerShapedRecipe(
-				item.id, item.getItem(), "aga", "g*g", "aga", ingredients = mapOf(
-					'a' to recipeChoice(CustomItems["aluminum"]!!),
-					'g' to recipeChoice(Material.GLASS_PANE),
-					'*' to recipeChoice(itemStackFromId(craft)!!)
-				)
-			)
-		}
-
-		return item
-	}
-
-	fun register() {
-		powerArmorModules.add(
-			RocketModule(
-				3,
-				registerModuleItem("rocket_boosting", "Rocket Boosting", 3, "firework_rocket")
-			)
-		)
-		powerArmorModules.add(
-			SpeedModule(
-				3,
-				registerModuleItem("speed_boosting", "Speed Boosting", 2, "feather"),
-				effectMultiplier = 1,
-				effectDuration = 2,
-				power = 1,
-			)
-		)
-		powerArmorModules.add(
-			EffectModule(
-				1,
-				registerModuleItem("night_vision", "Night Vision", 4, "spider_eye"),
-				PotionEffectType.NIGHT_VISION,
-				0,
-				300,
-				0
-			)
-		)
-	}
-}
 
 class PowerArmor : Listener {
 
@@ -159,6 +54,18 @@ class PowerArmor : Listener {
 		event.player.armorModules.forEach { it.disableModule(event.player) }
 	}
 }
+
+var maxModuleWeight = 5
+var powerArmorModules = mutableSetOf<PowerArmorModule>()
+
+val ItemStack.isPowerArmor: Boolean
+	get() = customItem is PowerArmorItem
+val ItemStack.armorModule: PowerArmorModule? get() = getArmorModuleFromId(this.customItem?.id)
+fun getArmorModuleFromId(id: String?): PowerArmorModule? {
+	powerArmorModules.forEach { if (it.customItem.id == id) return it }
+	return null
+}
+
 
 val Player.isWearingPowerArmor: Boolean
 	// True if the player is wearing a full set of power armor.

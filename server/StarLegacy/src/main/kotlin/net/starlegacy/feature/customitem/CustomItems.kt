@@ -1,6 +1,7 @@
 package net.starlegacy.feature.customitem
 
 import net.starlegacy.PLUGIN
+import net.starlegacy.feature.customitem.blaster.BlasterItems
 import net.starlegacy.feature.customitem.powerarmor.PowerArmor
 import net.starlegacy.feature.customitem.powerarmor.PowerArmorItems
 import net.starlegacy.feature.customitem.powerarmor.PowerModuleItems
