@@ -224,7 +224,7 @@ var Player.armorPower: Int
 val Player.maxArmorPower: Int get() {
 	var maxPower = 0
 	inventory.armorContents.forEach{
-		if (it.isPowerArmor) maxPower += it.maxPower!!
+		if (it?.isPowerArmor == true) maxPower += it.maxPower!! // it can be null if it's empty
 	}
 	return maxPower
 }
