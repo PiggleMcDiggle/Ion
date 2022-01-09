@@ -205,7 +205,7 @@ var Player.armorPower: Int
 	get() {
 		var power = 0
 		inventory.armorContents.forEach{
-			if (it.isPowerArmor) power += it.power
+			if (it?.isPowerArmor == true) power += it.power // yet, if the player wears nothing, it is null
 		}
 		return power
 	}
