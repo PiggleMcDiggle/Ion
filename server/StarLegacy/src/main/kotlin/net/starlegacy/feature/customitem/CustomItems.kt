@@ -2,7 +2,7 @@ package net.starlegacy.feature.customitem
 
 import net.starlegacy.PLUGIN
 import net.starlegacy.feature.customitem.blaster.BlasterItems
-import net.starlegacy.feature.customitem.powerarmor.PowerArmor
+import net.starlegacy.feature.customitem.powerarmor.PowerArmorListener
 import net.starlegacy.feature.customitem.powerarmor.PowerArmorItems
 import net.starlegacy.feature.customitem.powerarmor.PowerModuleItems
 import net.starlegacy.feature.customitem.type.CustomItem
@@ -117,7 +117,7 @@ class CustomItems : Listener {
 	init {
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
 		PLUGIN.server.pluginManager.registerEvents(PowerItemBreakCanceller(), PLUGIN)
-		PLUGIN.server.pluginManager.registerEvents(PowerArmor(), PLUGIN)
+		PLUGIN.server.pluginManager.registerEvents(PowerArmorListener(), PLUGIN)
 		// Register items here
 		PlanetIcons.register()
 		MiscItems.register()

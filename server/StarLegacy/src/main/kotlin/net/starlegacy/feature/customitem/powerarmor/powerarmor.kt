@@ -18,7 +18,7 @@ import org.bukkit.persistence.PersistentDataType
 import java.lang.Integer.min
 
 
-class PowerArmor : Listener {
+class PowerArmorListener : Listener {
 
 	init {
 		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
