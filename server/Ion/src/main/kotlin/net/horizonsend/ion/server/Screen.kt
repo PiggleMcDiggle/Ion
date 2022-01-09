@@ -1,7 +1,8 @@
-package net.starlegacy.util
+package net.horizonsend.ion.server
 
 import net.kyori.adventure.text.Component.text
 import net.starlegacy.StarLegacy.Companion.PLUGIN
+import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -76,10 +77,10 @@ abstract class Screen : Listener {
             // Player editable slot
             // In one server tick (once the item transfer takes place) trigger any actions based on the old slot contents
             // and the new slot contents. Honestly, we don't care about the player's cursor.
-            Tasks.syncDelay(1){
-                onPlayerChangeItem(event.slot, event.currentItem, screen.getItem(event.slot))
-                onScreenUpdate()
-            }
+			Tasks.syncDelay(1) {
+				onPlayerChangeItem(event.slot, event.currentItem, screen.getItem(event.slot))
+				onScreenUpdate()
+			}
         }
         else{
             // Not a player-editable slot, it's probably a button

@@ -3,7 +3,7 @@ package net.horizonsend.ion.server.powerarmor
 import net.kyori.adventure.text.Component
 import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
 import net.horizonsend.ion.server.customitems.types.power
-import net.starlegacy.util.Screen
+import net.horizonsend.ion.server.Screen
 import net.starlegacy.util.red
 import org.bukkit.Material
 import org.bukkit.entity.Player
