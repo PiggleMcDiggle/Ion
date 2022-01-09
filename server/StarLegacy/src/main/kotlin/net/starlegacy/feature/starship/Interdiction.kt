@@ -2,7 +2,7 @@ package net.starlegacy.feature.starship
 
 import net.horizonsend.ion.server.commands.QuickBalance
 import net.starlegacy.SLComponent
-import net.starlegacy.feature.customitem.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.multiblock.gravitywell.GravityWellMultiblock
 import net.starlegacy.feature.space.SpaceWorlds

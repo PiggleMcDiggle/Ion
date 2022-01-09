@@ -3,11 +3,11 @@ package net.starlegacy.feature.starship.factory
 import com.google.common.cache.CacheBuilder
 import com.google.common.cache.CacheLoader
 import com.google.common.cache.LoadingCache
-import net.starlegacy.feature.customitem.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
 import java.util.Optional
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.misc.CustomBlocks
-import net.starlegacy.feature.customitem.type.CustomItem
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import org.bukkit.Material
 import org.bukkit.block.data.BlockData
 import org.bukkit.block.data.type.Slab

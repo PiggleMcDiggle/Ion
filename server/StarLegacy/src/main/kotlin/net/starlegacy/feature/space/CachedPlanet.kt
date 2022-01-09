@@ -2,8 +2,8 @@ package net.starlegacy.feature.space
 
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.space.Planet
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.type.CustomItem
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.starlegacy.util.NMSBlockData
 import net.starlegacy.util.NMSBlocks
 import net.starlegacy.util.Vec3i

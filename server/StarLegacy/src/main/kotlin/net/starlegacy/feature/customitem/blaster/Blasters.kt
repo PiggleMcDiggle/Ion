@@ -3,10 +3,10 @@ package net.starlegacy.feature.customitem.blaster
 import net.md_5.bungee.api.ChatColor
 import net.starlegacy.cache.nations.NationCache
 import net.starlegacy.cache.nations.PlayerCache
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.type.BlasterItem
-import net.starlegacy.feature.customitem.type.power
-import net.starlegacy.feature.customitem.type.uses
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.BlasterItem
+import net.horizonsend.ion.server.customitems.types.power
+import net.horizonsend.ion.server.customitems.types.uses
 import org.bukkit.Color
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player

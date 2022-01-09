@@ -1,8 +1,8 @@
 package net.starlegacy.feature.gas;
 
-import net.starlegacy.feature.customitem.CustomItems;
+import net.horizonsend.ion.server.customitems.CustomItems;
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor;
-import net.starlegacy.feature.customitem.type.CustomItem;
+import net.horizonsend.ion.server.customitems.types.CustomItem;
 import org.bukkit.Location;
 
 import java.util.List;

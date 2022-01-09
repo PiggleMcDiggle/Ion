@@ -1,7 +1,7 @@
 package net.starlegacy.feature.machine
 
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.type.CustomItem
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 

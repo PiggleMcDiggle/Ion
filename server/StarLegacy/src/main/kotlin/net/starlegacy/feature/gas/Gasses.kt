@@ -3,7 +3,7 @@ package net.starlegacy.feature.gas
 import java.io.File
 import kotlin.collections.set
 import net.starlegacy.SLComponent
-import net.starlegacy.feature.customitem.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor
 import net.starlegacy.util.*
 import org.bukkit.Location

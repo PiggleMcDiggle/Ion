@@ -1,7 +1,7 @@
 package net.starlegacy.listener.misc
 
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.type.CustomBlockItem
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomBlockItem
 import net.starlegacy.feature.misc.CustomBlocks
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.multiblock.dockingtube.ConnectedDockingTubeMultiblock

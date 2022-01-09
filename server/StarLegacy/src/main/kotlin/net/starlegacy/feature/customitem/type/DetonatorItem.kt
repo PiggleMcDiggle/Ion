@@ -1,5 +1,6 @@
 package net.starlegacy.feature.customitem.type
 
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.starlegacy.PLUGIN
 import net.starlegacy.util.Tasks
 import org.bukkit.Material

@@ -23,10 +23,10 @@ import net.starlegacy.command.misc.CustomItemCommand
 import net.starlegacy.command.misc.DyeCommand
 import net.starlegacy.command.misc.GToggleCommand
 import net.starlegacy.command.misc.GlobalGameRuleCommand
-import net.starlegacy.command.misc.ItemUsesCommand
+import net.horizonsend.ion.server.commands.misc.ItemUsesCommand
 import net.starlegacy.command.misc.PlanetSpawnMenuCommand
 import net.starlegacy.command.misc.PlayerInfoCommand
-import net.starlegacy.command.misc.PowerArmorCommand
+import net.horizonsend.ion.server.commands.misc.PowerArmorCommand
 import net.starlegacy.command.misc.SLTimeConvertCommand
 import net.starlegacy.command.misc.ShuttleCommand
 import net.starlegacy.command.misc.TransportDebugCommand
@@ -61,8 +61,8 @@ import net.starlegacy.database.schema.starships.Blueprint
 import net.starlegacy.database.slPlayerId
 import net.starlegacy.feature.chat.ChannelSelections
 import net.starlegacy.feature.chat.ChatChannel
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.type.CustomItem
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.economy.bazaar.Merchants
 import net.starlegacy.feature.economy.city.CityNPCs

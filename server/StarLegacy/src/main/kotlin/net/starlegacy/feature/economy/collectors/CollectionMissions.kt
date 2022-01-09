@@ -14,8 +14,8 @@ import net.starlegacy.cache.trade.EcoStations
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.economy.CollectedItem
 import net.starlegacy.database.schema.economy.EcoStation
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.type.CustomItem
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.util.MenuHelper
 import net.starlegacy.util.Tasks

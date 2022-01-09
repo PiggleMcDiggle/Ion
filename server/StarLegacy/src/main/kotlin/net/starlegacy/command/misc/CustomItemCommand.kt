@@ -7,10 +7,10 @@ import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Optional
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import net.starlegacy.command.SLCommand
-import net.starlegacy.feature.customitem.type.CustomItem
-import net.starlegacy.feature.customitem.type.isPowerableCustomItem
-import net.starlegacy.feature.customitem.type.maxPower
-import net.starlegacy.feature.customitem.type.power
+import net.horizonsend.ion.server.customitems.types.CustomItem
+import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
+import net.horizonsend.ion.server.customitems.types.maxPower
+import net.horizonsend.ion.server.customitems.types.power
 import net.starlegacy.util.green
 import net.starlegacy.util.msg
 import net.starlegacy.util.plus

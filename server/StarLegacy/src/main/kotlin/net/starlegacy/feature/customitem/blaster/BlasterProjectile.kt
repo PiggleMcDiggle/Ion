@@ -1,7 +1,7 @@
 package net.starlegacy.feature.customitem.blaster
 
-import net.starlegacy.feature.customitem.CustomItems
-import net.starlegacy.feature.customitem.type.EnergySwordItem
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.EnergySwordItem
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.enumValueOfOrNull
 import org.bukkit.Color

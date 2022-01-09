@@ -1,7 +1,7 @@
 package net.starlegacy.feature.starship.subsystem
 
 import kotlin.math.min
-import net.starlegacy.feature.customitem.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.multiblock.hyperdrive.HyperdriveMultiblock
 import net.starlegacy.feature.starship.active.ActiveStarship
 import net.starlegacy.feature.starship.hyperspace.Hyperspace

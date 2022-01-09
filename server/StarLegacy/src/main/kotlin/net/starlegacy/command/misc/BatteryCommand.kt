@@ -6,8 +6,8 @@ import co.aikar.commands.annotation.CommandCompletion
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Subcommand
 import net.starlegacy.command.SLCommand
-import net.starlegacy.feature.customitem.type.isPowerableCustomItem
-import net.starlegacy.feature.customitem.type.power
+import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
+import net.horizonsend.ion.server.customitems.types.power
 import net.starlegacy.util.displayName
 import net.starlegacy.util.green
 import net.starlegacy.util.msg
