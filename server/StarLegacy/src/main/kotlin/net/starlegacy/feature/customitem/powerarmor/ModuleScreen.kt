@@ -1,37 +1,46 @@
 package net.starlegacy.feature.customitem.powerarmor
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.Component.text
 import net.starlegacy.feature.customitem.type.isPowerableCustomItem
 import net.starlegacy.feature.customitem.type.power
 import net.starlegacy.util.Screen
+import net.starlegacy.util.red
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.ItemStack
+import java.time.Instant
 
 class ModuleScreen(player: Player) : Screen() {
 	private val red = ItemStack(Material.RED_STAINED_GLASS_PANE)
 	private val green = ItemStack(Material.LIME_STAINED_GLASS_PANE)
 
 	init {
-		createScreen(player, InventoryType.CHEST, "Power Armor Modules")
-		playerEditableSlots.addAll(mutableSetOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26))
+		if (PowerArmorListener.playersInCombat.containsKey(player.uniqueId) && Instant.now().toEpochMilli() - (PowerArmorListener.playersInCombat[player.uniqueId]
+			?: 0) < PowerArmorListener.guiCombatCooldownSeconds * 1000) {
+			createScreen(player, InventoryType.CHEST, "Power Armor Modules")
+			playerEditableSlots.addAll(mutableSetOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26))
 
-		setAll(mutableSetOf(5, 6, 7, 14, 15, 16, 17, 23, 24, 25), ItemStack(Material.GRAY_STAINED_GLASS_PANE))
+			setAll(mutableSetOf(5, 6, 7, 14, 15, 16, 17, 23, 24, 25), ItemStack(Material.GRAY_STAINED_GLASS_PANE))
 
-		// Put instances of every module they have in the slots
-		val slots = arrayOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21)
-		var index = 0
+			// Put instances of every module they have in the slots
+			val slots = arrayOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21)
+			var index = 0
 
-		// Clear their modules, they get added back on screen close
-		// Don't just set their modules to empty or the modules won't disable
-		player.armorModules.forEach {
-			screen.setItem(slots[index], it.customItem.getItem())
-			player.removeArmorModule(it)
-			index++
+			// Clear their modules, they get added back on screen close
+			// Don't just set their modules to empty or the modules won't disable
+			player.armorModules.forEach {
+				screen.setItem(slots[index], it.customItem.getItem())
+				player.removeArmorModule(it)
+				index++
+			}
+			// Insert the toggle button, the fuel indicator, and the weight indicators
+			updateStatus()
 		}
-		// Insert the toggle button, the fuel indicator, and the weight indicators
-		updateStatus()
+		else {
+			player.sendMessage(red("You need to be out of combat for ${PowerArmorListener.guiCombatCooldownSeconds} seconds before editing power armor!"))
+		}
 	}
 
 	private fun updateStatus() {

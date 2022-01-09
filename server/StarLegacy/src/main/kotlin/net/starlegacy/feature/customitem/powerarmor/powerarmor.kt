@@ -10,15 +10,23 @@ import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import java.lang.Integer.min
+import java.time.Instant
+import java.util.UUID
 
 
 class PowerArmorListener : Listener {
+
+	companion object {
+		val playersInCombat = mutableMapOf<UUID, Long>()
+		val guiCombatCooldownSeconds: Int = 30
+	}
 
 	init {
 		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
@@ -52,6 +60,12 @@ class PowerArmorListener : Listener {
 		// Shouldn't be needed, but just in case
 		// Doesn't hurt anything to have it.
 		event.player.armorModules.forEach { it.disableModule(event.player) }
+	}
+
+	@EventHandler
+	fun onPlayerTakeDamage(event: EntityDamageByEntityEvent) {
+		if (event.entity !is Player) return
+		playersInCombat[event.entity.uniqueId] = Instant.now().toEpochMilli()
 	}
 }
 
