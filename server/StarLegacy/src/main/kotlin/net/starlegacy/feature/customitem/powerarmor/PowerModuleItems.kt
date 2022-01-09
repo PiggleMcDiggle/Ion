@@ -28,7 +28,6 @@ object PowerModuleItems {
 				)
 			)
 		}
-
 		return item
 	}
 

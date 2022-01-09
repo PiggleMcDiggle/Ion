@@ -142,7 +142,6 @@ class BlasterProjectile(
 			}
 			return
 		}
-
 		var deflected = false
 		if (entity is Player) {
 			if (entity.isBlocking && entity.getCooldown(Material.SHIELD) == 0) {
@@ -158,12 +157,10 @@ class BlasterProjectile(
 				}
 			}
 		}
-
 		entity.damage(damage, shooter)
 		if (entity is Player) {
 			(shooter as? Player)?.playSound(shooter.location, "laserhit", 1f, 0.5f)
 		}
-
 		world.playSound(location, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 0.25f, 1.5f)
 		if (!deflected) {
 			distance = Double.MAX_VALUE

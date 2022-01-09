@@ -31,7 +31,6 @@ class SpeedModule(
 		if (hasMovedInLastSecond(player)) {
 			player.armorPower -= power
 		}
-
 	}
 
 	// onMove and hasMovedInLastSecond copied from original SL armor
@@ -44,5 +43,4 @@ class SpeedModule(
 		return lastMoved.containsKey(player.uniqueId) && Instant.now().toEpochMilli() - (lastMoved[player.uniqueId]
 			?: 0) < 1000
 	}
-
 }

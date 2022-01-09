@@ -10,8 +10,8 @@ class CustomBlockItem(
 	override val displayName: String,
 	override val material: Material,
 	val customBlockId: String
-
 ) : CustomItem() {
+
 	val customBlock: CustomBlock
 		get() = CustomBlocks[customBlockId] ?: error("Custom block $customBlockId not found for custom item $id")
 }

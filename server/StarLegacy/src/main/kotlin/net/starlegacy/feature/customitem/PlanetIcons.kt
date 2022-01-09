@@ -34,5 +34,4 @@ object PlanetIcons {
 		registerPlanetIcon("Titus", 14)
 		registerPlanetIcon("Trunkadis", 15)
 	}
-
 }

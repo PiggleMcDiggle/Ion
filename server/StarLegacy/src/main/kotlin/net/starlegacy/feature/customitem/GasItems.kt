@@ -37,5 +37,4 @@ object GasItems {
 		registerGas("${ChatColor.DARK_PURPLE}Nitrogen", model = 5)
 		registerGas("${ChatColor.RED}Carbon Dioxide", model = 6)
 	}
-
 }

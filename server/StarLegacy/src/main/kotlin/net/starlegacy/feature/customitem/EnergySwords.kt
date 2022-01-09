@@ -59,7 +59,6 @@ object EnergySwords {
 						}
 					}
 				}
-
 				try {
 					Thread.sleep(2000)
 				} catch (e: InterruptedException) {

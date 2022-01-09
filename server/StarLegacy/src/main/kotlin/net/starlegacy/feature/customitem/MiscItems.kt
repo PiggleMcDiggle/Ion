@@ -10,7 +10,7 @@ import org.bukkit.Material
 object MiscItems {
 
 	fun register() {
-		// Detonators
+		// region Detonators
 		val detonator = CustomItems.register(
 			DetonatorItem(
 				id = "detonator",
@@ -28,5 +28,6 @@ object MiscItems {
 				)
 			)
 		}
+		// endregion
 	}
 }

@@ -198,6 +198,5 @@ class CustomItems : Listener {
 	// endregion
 }
 
-
 val ItemStack.isCustomItem: Boolean get() = CustomItems[this] != null
 val ItemStack.customItem: CustomItem? get() = CustomItems[this]
