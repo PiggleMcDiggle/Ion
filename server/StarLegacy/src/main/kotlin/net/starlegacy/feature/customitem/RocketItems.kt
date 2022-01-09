@@ -48,7 +48,7 @@ object RocketItems {
 			CustomItems.registerShapedRecipe(
 				warhead.id, warhead.getItem(3), " a ", "aoa", " a ", ingredients = mapOf(
 					'a' to CustomItems.recipeChoice(CustomItems["aluminum"]!!),
-					'o' to CustomItems.recipeChoice(CustomItems["diamond_block"]!!)
+					'o' to CustomItems.recipeChoice(Material.DIAMOND_BLOCK)
 				)
 			)
 		}
