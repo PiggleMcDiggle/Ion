@@ -54,6 +54,5 @@ object Minerals {
 		registerMineral("Chetherite", 3)
 		registerMineral("Titanium", 4)
 		registerMineral("Uranium", 5)
-		registerMineral("Oriomium", 6)
 	}
 }
