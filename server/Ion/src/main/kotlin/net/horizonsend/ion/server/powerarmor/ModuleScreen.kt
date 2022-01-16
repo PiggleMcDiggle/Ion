@@ -14,6 +14,7 @@ import java.time.Instant
 class ModuleScreen(player: Player) : Screen() {
 	private val red = ItemStack(Material.RED_STAINED_GLASS_PANE)
 	private val green = ItemStack(Material.LIME_STAINED_GLASS_PANE)
+	override val playerEditableSlots = setOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26)
 
 	init {
 		val secondsToWait =
@@ -21,9 +22,8 @@ class ModuleScreen(player: Player) : Screen() {
 					((Instant.now().toEpochMilli() - (PowerArmorListener.playersInCombat[player.uniqueId]?:0)) / 1000)
 		if (secondsToWait <= 0) {
 			createScreen(player, InventoryType.CHEST, "Power Armor Modules")
-			playerEditableSlots.addAll(mutableSetOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26))
 
-			setAll(mutableSetOf(5, 6, 7, 14, 15, 16, 17, 23, 24, 25), ItemStack(Material.GRAY_STAINED_GLASS_PANE))
+			setAll(setOf(5, 6, 7, 14, 15, 16, 17, 23, 24, 25), ItemStack(Material.GRAY_STAINED_GLASS_PANE))
 
 			// Put instances of every module they have in the slots
 			val slots = arrayOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21)
@@ -47,7 +47,7 @@ class ModuleScreen(player: Player) : Screen() {
 	private fun updateStatus() {
 		// Update the colored status bar that tells the player's module weight.
 		// Since we temporarily removed all of their modules, we can't use PlayerPowerArmor.moduleWeight
-		val slots = arrayOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21)
+		val slots = setOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21)
 		var weight = 0
 		slots.forEach {
 			val module = screen.getItem(it)?.armorModule
@@ -66,7 +66,7 @@ class ModuleScreen(player: Player) : Screen() {
 		colorMeta.displayName(Component.text("Weight: $weight / $maxModuleWeight"))
 		color.itemMeta = colorMeta
 		// Set it
-		setAll(mutableSetOf(4, 13, 22), color)
+		setAll(setOf(4, 13, 22), color)
 
 		// Update the color and name of the toggle button in the top left of the GUI
 		var button = ItemStack(Material.RED_STAINED_GLASS)

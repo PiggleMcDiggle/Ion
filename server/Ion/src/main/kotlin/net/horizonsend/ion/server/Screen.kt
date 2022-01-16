@@ -23,7 +23,7 @@ abstract class Screen : Listener {
         private set
 
     // The slots in which the player can place/remove items
-    val playerEditableSlots = mutableSetOf<Int>()
+    open val playerEditableSlots = setOf<Int>()
 
     private fun createScreen(player: Player, inventory: Inventory) {
         this.player = player
@@ -60,7 +60,7 @@ abstract class Screen : Listener {
         onScreenClosed()
     }
 
-    fun setAll(slots: MutableSet<Int>, item: ItemStack){
+    fun setAll(slots: Set<Int>, item: ItemStack){
         slots.forEach{
             screen.setItem(it, item)
         }
