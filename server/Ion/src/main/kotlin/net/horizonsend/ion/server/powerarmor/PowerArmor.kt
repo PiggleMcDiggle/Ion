@@ -91,35 +91,15 @@ val Player.isWearingPowerArmor: Boolean
 
 var Player.armorModules: MutableSet<PowerArmorModule>
 	// The player's currently equipped modules.
-	get() {
-		// Load the player's modules from their PersistentDataContainer
-		val moduleCSV = persistentDataContainer.get(
-			NamespacedKey(StarLegacy.PLUGIN, "equipped-power-armor-modules"),
-			PersistentDataType.STRING
-		) ?: return mutableSetOf<PowerArmorModule>()
-		val moduleIds = moduleCSV.split(",")
-		val modules = mutableSetOf<PowerArmorModule>()
-		moduleIds.forEach {
-			val module = getArmorModuleFromId(it)
-			if (module != null) {
-				modules.add(module)
-			}
-		}
-		return modules
-	}
-	set(value) {
-		// Save the player's modules to their PersistentDataContainer
-		var moduleCSV = "" // Comma separated values of all the module names
+	get() = persistentDataContainer.get(
+			NamespacedKey(StarLegacy.PLUGIN, "current-power-armor-modules"),
+			PowerModulePDC
+		) ?: mutableSetOf<PowerArmorModule>()
+	set(value) = persistentDataContainer.set(
+			NamespacedKey(StarLegacy.PLUGIN, "current-power-armor-modules"),
+			PowerModulePDC,
+			value)
 
-		value.forEach {
-			moduleCSV += it.customItem.id + ","
-		}
-		persistentDataContainer.set(
-			NamespacedKey(StarLegacy.PLUGIN, "equipped-power-armor-modules"),
-			PersistentDataType.STRING,
-			moduleCSV
-		)
-	}
 
 var Player.armorPower: Int
 	// The current power of the player's armor. Shared between all armor pieces.
