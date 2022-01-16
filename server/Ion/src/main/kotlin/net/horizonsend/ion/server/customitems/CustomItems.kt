@@ -137,7 +137,7 @@ class CustomItems : Listener {
 
 	@EventHandler
 	fun onInteract(event: PlayerInteractEvent) {
-		val item = getCustomItem(event.item) ?: return
+		val item = event.item.customItem ?: return
 		when (event.action) {
 			Action.LEFT_CLICK_BLOCK, Action.LEFT_CLICK_AIR -> {
 				item.onLeftClick(event)
@@ -151,13 +151,13 @@ class CustomItems : Listener {
 
 	@EventHandler
 	fun onDrop(event: PlayerDropItemEvent) {
-		val item = getCustomItem(event.itemDrop.itemStack) ?: return
+		val item = event.itemDrop.itemStack.customItem ?: return
 		item.onDropped(event)
 	}
 
 	@EventHandler
 	fun onCraft(event: PrepareItemCraftEvent) {
-		val item = getCustomItem(event.inventory.result) ?: return
+		val item = event.inventory.result.customItem ?: return
 		item.onPrepareCraft(event)
 	}
 
@@ -165,14 +165,14 @@ class CustomItems : Listener {
 	fun onHit(event: EntityDamageByEntityEvent) {
 		val damager = event.damager as? LivingEntity ?: return
 		val itemInHand = damager.equipment?.itemInMainHand ?: return
-		getCustomItem(itemInHand)?.onHitEntity(event) ?: return
+		itemInHand.customItem?.onHitEntity(event) ?: return
 	}
 
 	@EventHandler
 	fun onHitWhileHolding(event: EntityDamageByEntityEvent) {
 		val damaged = event.entity as? LivingEntity ?: return
 		val itemInHand = damaged.equipment?.itemInMainHand ?: return
-		getCustomItem(itemInHand)?.onHitWhileHolding(event) ?: return
+		itemInHand.customItem?.onHitWhileHolding(event) ?: return
 	}
 
 	// endregion
@@ -180,7 +180,7 @@ class CustomItems : Listener {
 	@Suppress("USELESS_ELVIS") // check docs for event.offers. It can be null if there's no offer at that index
 	@EventHandler
 	fun onTableEnchant(event: PrepareItemEnchantEvent) {
-		val item = getCustomItem(event.item) ?: return
+		val item = event.item.customItem ?: return
 		for (i in 0..2) {
 			val offer = event.offers[i] ?: continue
 			if (offer.enchantment !in item.allowedEnchants) event.offers[i] = null // oh but it can be :evil_grin:
