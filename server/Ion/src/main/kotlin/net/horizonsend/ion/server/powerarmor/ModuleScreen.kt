@@ -1,11 +1,19 @@
 package net.horizonsend.ion.server.powerarmor
 
-import net.kyori.adventure.text.Component
+import net.horizonsend.ion.server.Screen
 import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
 import net.horizonsend.ion.server.customitems.types.power
-import net.horizonsend.ion.server.Screen
+import net.kyori.adventure.text.Component
 import net.starlegacy.util.red
-import org.bukkit.Material.*
+import org.bukkit.Material.BLUE_STAINED_GLASS_PANE
+import org.bukkit.Material.GRAY_STAINED_GLASS_PANE
+import org.bukkit.Material.GREEN_STAINED_GLASS_PANE
+import org.bukkit.Material.LIME_STAINED_GLASS
+import org.bukkit.Material.LIME_STAINED_GLASS_PANE
+import org.bukkit.Material.ORANGE_STAINED_GLASS_PANE
+import org.bukkit.Material.RED_STAINED_GLASS
+import org.bukkit.Material.RED_STAINED_GLASS_PANE
+import org.bukkit.Material.YELLOW_STAINED_GLASS_PANE
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryType.CHEST
 import org.bukkit.inventory.ItemStack

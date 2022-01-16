@@ -1,10 +1,10 @@
 package net.horizonsend.ion.server.customitems
 
-import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.itemStackFromId
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
 import net.horizonsend.ion.server.customitems.types.EnergySwordItem
+import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
 import org.bukkit.Material.SHIELD

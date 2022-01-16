@@ -7,10 +7,10 @@ import net.starlegacy.util.SLTextStyle
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.stripColor
 import org.bukkit.Material
-import org.bukkit.Material.SNOWBALL
 import org.bukkit.Material.GLOWSTONE_DUST
 import org.bukkit.Material.REDSTONE
 import org.bukkit.Material.SEA_LANTERN
+import org.bukkit.Material.SNOWBALL
 
 object BatteryItems {
 

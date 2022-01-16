@@ -1,13 +1,14 @@
 package net.horizonsend.ion.server.powerarmor
 
 import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.GenericCustomItem
 import net.horizonsend.ion.server.powerarmor.modules.PotionEffectModule
 import net.horizonsend.ion.server.powerarmor.modules.RocketModule
 import net.horizonsend.ion.server.powerarmor.modules.SpeedModule
-import net.horizonsend.ion.server.customitems.types.GenericCustomItem
 import net.starlegacy.util.Tasks
-import org.bukkit.Material.*
-import org.bukkit.potion.PotionEffectType.*
+import org.bukkit.Material.FLINT_AND_STEEL
+import org.bukkit.Material.GLASS_PANE
+import org.bukkit.potion.PotionEffectType.NIGHT_VISION
 
 
 object PowerModuleItems {

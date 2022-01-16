@@ -4,8 +4,10 @@ import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.type.DetonatorItem
 import net.starlegacy.util.Tasks
-import org.bukkit.ChatColor.*
-import org.bukkit.Material.*
+import org.bukkit.ChatColor.GRAY
+import org.bukkit.ChatColor.RED
+import org.bukkit.Material.REDSTONE
+import org.bukkit.Material.SHEARS
 
 object MiscItems {
 

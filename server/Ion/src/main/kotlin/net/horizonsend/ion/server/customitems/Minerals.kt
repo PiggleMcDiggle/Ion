@@ -3,7 +3,9 @@ package net.horizonsend.ion.server.customitems
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.types.CustomBlockItem
 import net.horizonsend.ion.server.customitems.types.MineralItem
-import org.bukkit.Material.*
+import org.bukkit.Material.IRON_BLOCK
+import org.bukkit.Material.IRON_INGOT
+import org.bukkit.Material.IRON_ORE
 
 object Minerals {
 

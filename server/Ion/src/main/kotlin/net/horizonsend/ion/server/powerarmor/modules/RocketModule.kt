@@ -1,11 +1,11 @@
 package net.horizonsend.ion.server.powerarmor.modules
 
-import net.starlegacy.PLUGIN
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.horizonsend.ion.server.powerarmor.ArmorActivatorRunnable
 import net.horizonsend.ion.server.powerarmor.armorPower
-import net.horizonsend.ion.server.customitems.types.CustomItem
-import org.bukkit.Particle.*
-import org.bukkit.Sound.*
+import net.starlegacy.PLUGIN
+import org.bukkit.Particle.SMOKE_NORMAL
+import org.bukkit.Sound.BLOCK_FIRE_AMBIENT
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

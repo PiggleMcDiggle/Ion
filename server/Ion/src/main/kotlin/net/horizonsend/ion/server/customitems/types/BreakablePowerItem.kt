@@ -1,7 +1,7 @@
 package net.horizonsend.ion.server.customitems.types
 
-import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.horizonsend.ion.server.customitems.CustomItems
+import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.util.colorize
 import net.starlegacy.util.updateMeta
 import org.bukkit.NamespacedKey

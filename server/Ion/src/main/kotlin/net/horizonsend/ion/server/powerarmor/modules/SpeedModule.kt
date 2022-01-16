@@ -1,15 +1,13 @@
 package net.horizonsend.ion.server.powerarmor.modules
 
-import net.starlegacy.PLUGIN
-import net.horizonsend.ion.server.powerarmor.armorPower
 import net.horizonsend.ion.server.customitems.types.CustomItem
+import net.horizonsend.ion.server.powerarmor.armorPower
+import net.starlegacy.PLUGIN
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
-import org.bukkit.potion.PotionEffectType
 import org.bukkit.potion.PotionEffectType.SPEED
-import java.time.Instant
 import java.util.UUID
 
 class SpeedModule(

@@ -1,7 +1,14 @@
 package net.horizonsend.ion.server.customitems
 
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
-import org.bukkit.Material.*
+import org.bukkit.Material.COPPER_INGOT
+import org.bukkit.Material.ENDER_PEARL
+import org.bukkit.Material.END_PORTAL_FRAME
+import org.bukkit.Material.END_ROD
+import org.bukkit.Material.END_STONE
+import org.bukkit.Material.PRISMARINE_CRYSTALS
+import org.bukkit.Material.SEA_LANTERN
+import org.bukkit.Material.WARPED_PLANKS
 import org.bukkit.inventory.ItemStack
 
 object MiscRecipes {

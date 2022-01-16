@@ -1,11 +1,11 @@
 package net.horizonsend.ion.server.powerarmor
 
-import net.starlegacy.StarLegacy
 import net.horizonsend.ion.server.customitems.customItem
-import net.horizonsend.ion.server.powerarmor.modules.PowerArmorModule
 import net.horizonsend.ion.server.customitems.types.PowerArmorItem
 import net.horizonsend.ion.server.customitems.types.maxPower
 import net.horizonsend.ion.server.customitems.types.power
+import net.horizonsend.ion.server.powerarmor.modules.PowerArmorModule
+import net.starlegacy.StarLegacy
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler

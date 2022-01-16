@@ -4,7 +4,10 @@ import net.horizonsend.ion.server.customitems.CustomItems
 import net.horizonsend.ion.server.customitems.types.PowerArmorItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
-import org.bukkit.Material.*
+import org.bukkit.Material.LEATHER_BOOTS
+import org.bukkit.Material.LEATHER_CHESTPLATE
+import org.bukkit.Material.LEATHER_HELMET
+import org.bukkit.Material.LEATHER_LEGGINGS
 
 object PowerArmorItems {
 	private fun registerPowerArmor(piece: String, model: Int, mat: Material, maxPower: Int): PowerArmorItem {

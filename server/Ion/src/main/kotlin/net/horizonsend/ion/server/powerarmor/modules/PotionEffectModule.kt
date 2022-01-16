@@ -1,7 +1,7 @@
 package net.horizonsend.ion.server.powerarmor.modules
 
-import net.horizonsend.ion.server.powerarmor.armorPower
 import net.horizonsend.ion.server.customitems.types.CustomItem
+import net.horizonsend.ion.server.powerarmor.armorPower
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType

@@ -1,14 +1,15 @@
 package net.horizonsend.ion.server.customitems
 
-import net.starlegacy.PLUGIN
-import net.horizonsend.ion.server.powerarmor.PowerArmorListener
-import net.horizonsend.ion.server.powerarmor.PowerArmorItems
-import net.horizonsend.ion.server.powerarmor.PowerModuleItems
 import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.horizonsend.ion.server.customitems.types.GenericCustomItem
 import net.horizonsend.ion.server.customitems.types.PowerItemBreakCanceller
+import net.horizonsend.ion.server.powerarmor.PowerArmorItems
+import net.horizonsend.ion.server.powerarmor.PowerArmorListener
+import net.horizonsend.ion.server.powerarmor.PowerModuleItems
+import net.starlegacy.PLUGIN
 import org.bukkit.Bukkit.addRecipe
 import org.bukkit.Material
+import org.bukkit.Material.EMERALD
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
@@ -25,7 +26,6 @@ import org.bukkit.inventory.RecipeChoice
 import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.inventory.ShapelessRecipe
 import org.bukkit.persistence.PersistentDataType
-import org.bukkit.Material.EMERALD
 
 class CustomItems : Listener {
 	companion object {

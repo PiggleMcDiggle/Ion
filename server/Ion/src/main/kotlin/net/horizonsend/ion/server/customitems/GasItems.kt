@@ -5,8 +5,14 @@ import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShap
 import net.horizonsend.ion.server.customitems.types.GasItem
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.stripColor
-import org.bukkit.ChatColor.*
-import org.bukkit.Material.*
+import org.bukkit.ChatColor.AQUA
+import org.bukkit.ChatColor.DARK_PURPLE
+import org.bukkit.ChatColor.GREEN
+import org.bukkit.ChatColor.RED
+import org.bukkit.ChatColor.WHITE
+import org.bukkit.ChatColor.YELLOW
+import org.bukkit.Material.GLASS_PANE
+import org.bukkit.Material.SNOWBALL
 
 object GasItems {
 

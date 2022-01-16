@@ -4,7 +4,9 @@ import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
 import net.horizonsend.ion.server.customitems.types.DrillItem
 import net.starlegacy.util.Tasks
-import org.bukkit.Material.*
+import org.bukkit.Material.DIAMOND_PICKAXE
+import org.bukkit.Material.IRON_INGOT
+import org.bukkit.Material.STICK
 
 object ToolItems {
 	fun register() {

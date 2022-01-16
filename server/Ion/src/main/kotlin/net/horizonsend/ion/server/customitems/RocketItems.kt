@@ -2,7 +2,9 @@ package net.horizonsend.ion.server.customitems
 
 import net.horizonsend.ion.server.customitems.types.GenericCustomItem
 import net.starlegacy.util.Tasks
-import org.bukkit.Material.*
+import org.bukkit.Material.DIAMOND_BLOCK
+import org.bukkit.Material.HOPPER
+import org.bukkit.Material.STICK
 
 object RocketItems {
 	fun register() {

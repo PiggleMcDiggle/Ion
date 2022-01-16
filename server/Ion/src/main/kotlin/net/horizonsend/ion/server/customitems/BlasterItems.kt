@@ -2,9 +2,11 @@ package net.horizonsend.ion.server.customitems
 
 import net.horizonsend.ion.server.customitems.types.BlasterItem
 import net.starlegacy.util.Tasks
-import org.bukkit.Material
-import org.bukkit.Material.*
-import org.bukkit.Sound.*
+import org.bukkit.Material.BOW
+import org.bukkit.Material.GLASS_PANE
+import org.bukkit.Material.REDSTONE
+import org.bukkit.Sound.ENTITY_FIREWORK_ROCKET_BLAST
+import org.bukkit.Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST
 
 object BlasterItems {
 	private fun registerBlaster(
