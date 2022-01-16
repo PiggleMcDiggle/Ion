@@ -65,7 +65,7 @@ class PowerArmorListener : Listener {
 	@EventHandler
 	fun onPlayerTakeDamage(event: EntityDamageByEntityEvent) {
 		if (event.entity !is Player) return
-		playersInCombat[event.entity.uniqueId] = Instant.now().toEpochMilli()
+		playersInCombat[event.entity.uniqueId] = System.currentTimeMillis()
 	}
 }
 

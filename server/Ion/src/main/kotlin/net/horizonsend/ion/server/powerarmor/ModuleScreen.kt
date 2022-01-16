@@ -25,7 +25,7 @@ class ModuleScreen(player: Player) : Screen() {
 	init {
 		val secondsToWait =
 			PowerArmorListener.guiCombatCooldownSeconds -
-					((Instant.now().toEpochMilli() - (PowerArmorListener.playersInCombat[player.uniqueId]?:0)) / 1000)
+					((System.currentTimeMillis() - (PowerArmorListener.playersInCombat[player.uniqueId]?:0)) / 1000)
 		if (secondsToWait <= 0) {
 			createScreen(player, CHEST, "Power Armor Modules")
 
