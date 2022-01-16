@@ -5,15 +5,13 @@ import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
 import net.horizonsend.ion.server.customitems.types.power
 import net.horizonsend.ion.server.Screen
 import net.starlegacy.util.red
-import org.bukkit.Material
+import org.bukkit.Material.*
 import org.bukkit.entity.Player
-import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.inventory.InventoryType.CHEST
 import org.bukkit.inventory.ItemStack
 import java.time.Instant
 
 class ModuleScreen(player: Player) : Screen() {
-	private val red = ItemStack(Material.RED_STAINED_GLASS_PANE)
-	private val green = ItemStack(Material.LIME_STAINED_GLASS_PANE)
 	override val playerEditableSlots = setOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26)
 
 	init {
@@ -21,9 +19,9 @@ class ModuleScreen(player: Player) : Screen() {
 			PowerArmorListener.guiCombatCooldownSeconds -
 					((Instant.now().toEpochMilli() - (PowerArmorListener.playersInCombat[player.uniqueId]?:0)) / 1000)
 		if (secondsToWait <= 0) {
-			createScreen(player, InventoryType.CHEST, "Power Armor Modules")
+			createScreen(player, CHEST, "Power Armor Modules")
 
-			setAll(setOf(5, 6, 7, 14, 15, 16, 17, 23, 24, 25), ItemStack(Material.GRAY_STAINED_GLASS_PANE))
+			setAll(setOf(5, 6, 7, 14, 15, 16, 17, 23, 24, 25), ItemStack(GRAY_STAINED_GLASS_PANE))
 
 			// Put instances of every module they have in the slots
 			val slots = arrayOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21)
@@ -56,9 +54,9 @@ class ModuleScreen(player: Player) : Screen() {
 		// Figure out what color to make the status bar
 		val color = ItemStack(
 			if (weight <= maxModuleWeight) {
-				green
+				RED_STAINED_GLASS_PANE
 			} else {
-				red
+				LIME_STAINED_GLASS_PANE
 			}
 		)
 		// Name it
@@ -69,8 +67,8 @@ class ModuleScreen(player: Player) : Screen() {
 		setAll(setOf(4, 13, 22), color)
 
 		// Update the color and name of the toggle button in the top left of the GUI
-		var button = ItemStack(Material.RED_STAINED_GLASS)
-		if (player.armorEnabled) button = ItemStack(Material.LIME_STAINED_GLASS)
+		var button = ItemStack(RED_STAINED_GLASS)
+		if (player.armorEnabled) button = ItemStack(LIME_STAINED_GLASS)
 		val buttonMeta = button.itemMeta
 		buttonMeta.displayName(Component.text(if (player.armorEnabled) "Enabled" else "Disabled"))
 		button.itemMeta = buttonMeta
@@ -80,12 +78,12 @@ class ModuleScreen(player: Player) : Screen() {
 		val power = player.armorPower
 		val item = ItemStack(
 			when {
-				power >= player.maxArmorPower -> Material.BLUE_STAINED_GLASS_PANE
-				power >= (player.maxArmorPower / 4) * 3 -> Material.GREEN_STAINED_GLASS_PANE
-				power >= player.maxArmorPower / 2 -> Material.LIME_STAINED_GLASS_PANE
-				power >= player.maxArmorPower / 4 -> Material.YELLOW_STAINED_GLASS_PANE
-				power > 0 -> Material.ORANGE_STAINED_GLASS_PANE
-				else -> Material.RED_STAINED_GLASS_PANE
+				power >= player.maxArmorPower -> BLUE_STAINED_GLASS_PANE
+				power >= (player.maxArmorPower / 4) * 3 -> GREEN_STAINED_GLASS_PANE
+				power >= player.maxArmorPower / 2 -> LIME_STAINED_GLASS_PANE
+				power >= player.maxArmorPower / 4 -> YELLOW_STAINED_GLASS_PANE
+				power > 0 -> ORANGE_STAINED_GLASS_PANE
+				else -> RED_STAINED_GLASS_PANE
 			}
 		)
 		val meta = item.itemMeta

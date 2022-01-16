@@ -2,7 +2,7 @@ package net.horizonsend.ion.server.customitems
 
 import net.horizonsend.ion.server.customitems.types.GenericCustomItem
 import net.starlegacy.util.Tasks
-import org.bukkit.Material
+import org.bukkit.Material.*
 
 object RocketItems {
 	fun register() {
@@ -10,7 +10,7 @@ object RocketItems {
 			GenericCustomItem(
 				id = "rocket_base",
 				displayName = "Rocket Base",
-				material = Material.STICK,
+				material = STICK,
 				model = 1
 			)
 		)
@@ -18,7 +18,7 @@ object RocketItems {
 			GenericCustomItem(
 				id = "rocket_warhead_oriomium",
 				displayName = "Oriomium Warhead",
-				material = Material.STICK,
+				material = STICK,
 				model = 2
 			)
 		)
@@ -26,7 +26,7 @@ object RocketItems {
 			GenericCustomItem(
 				id = "rocket_oriomium",
 				displayName = "Oriomium Rocket",
-				material = Material.STICK,
+				material = STICK,
 				model = 3
 			)
 		)
@@ -41,13 +41,13 @@ object RocketItems {
 				base.id, base.getItem(3), "t t", "tht", "tgt", ingredients = mapOf(
 					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!),
 					'h' to CustomItems.recipeChoice(CustomItems["gas_canister_helium"]!!),
-					'g' to CustomItems.recipeChoice(Material.HOPPER),
+					'g' to CustomItems.recipeChoice(HOPPER),
 				)
 			)
 			CustomItems.registerShapedRecipe(
 				warhead.id, warhead.getItem(3), " a ", "aoa", " a ", ingredients = mapOf(
 					'a' to CustomItems.recipeChoice(CustomItems["aluminum"]!!),
-					'o' to CustomItems.recipeChoice(Material.DIAMOND_BLOCK)
+					'o' to CustomItems.recipeChoice(DIAMOND_BLOCK)
 				)
 			)
 		}

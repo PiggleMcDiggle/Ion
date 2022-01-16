@@ -25,6 +25,7 @@ import org.bukkit.inventory.RecipeChoice
 import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.inventory.ShapelessRecipe
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.Material.EMERALD
 
 class CustomItems : Listener {
 	companion object {
@@ -55,7 +56,7 @@ class CustomItems : Listener {
 
 		operator fun get(id: String?): CustomItem? = getCustomItem(id)
 		operator fun get(item: ItemStack?): CustomItem? = getCustomItem(item)
-		val blankItem = GenericCustomItem("blank_item", 0, "Blank Custom Item", Material.EMERALD)
+		val blankItem = GenericCustomItem("blank_item", 0, "Blank Custom Item", EMERALD)
 
 		// region Recipes
 		// The original StarLegacy code had a custom addRecipe that had delays and attempts.

@@ -4,6 +4,7 @@ import net.horizonsend.ion.server.customitems.CustomItems
 import net.horizonsend.ion.server.customitems.types.PowerArmorItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
+import org.bukkit.Material.*
 
 object PowerArmorItems {
 	private fun registerPowerArmor(piece: String, model: Int, mat: Material, maxPower: Int): PowerArmorItem {
@@ -19,10 +20,10 @@ object PowerArmorItems {
 	}
 
 	fun register() {
-		val helmet = registerPowerArmor("Helmet", 1, Material.LEATHER_HELMET, 50000)
-		val chestplate = registerPowerArmor("Chestplate", 1, Material.LEATHER_CHESTPLATE, 50000)
-		val leggings = registerPowerArmor("Leggings", 1, Material.LEATHER_LEGGINGS, 50000)
-		val boots = registerPowerArmor("Boots", 1, Material.LEATHER_BOOTS, 50000)
+		val helmet = registerPowerArmor("Helmet", 1, LEATHER_HELMET, 50000)
+		val chestplate = registerPowerArmor("Chestplate", 1, LEATHER_CHESTPLATE, 50000)
+		val leggings = registerPowerArmor("Leggings", 1, LEATHER_LEGGINGS, 50000)
+		val boots = registerPowerArmor("Boots", 1, LEATHER_BOOTS, 50000)
 		Tasks.syncDelay(1) {
 			val items = mapOf(
 				'*' to CustomItems.recipeChoice(CustomItems["titanium"]!!),

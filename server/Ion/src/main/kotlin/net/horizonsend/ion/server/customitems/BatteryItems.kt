@@ -7,6 +7,10 @@ import net.starlegacy.util.SLTextStyle
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.stripColor
 import org.bukkit.Material
+import org.bukkit.Material.SNOWBALL
+import org.bukkit.Material.GLOWSTONE_DUST
+import org.bukkit.Material.REDSTONE
+import org.bukkit.Material.SEA_LANTERN
 
 object BatteryItems {
 
@@ -14,7 +18,7 @@ object BatteryItems {
 		val item = BatteryItem(
 			id = name.stripColor().lowercase().replace(" ", "_"),
 			displayName = name,
-			material = Material.SNOWBALL,
+			material = SNOWBALL,
 			model = model,
 			maxPower = power,
 		)
@@ -32,8 +36,8 @@ object BatteryItems {
 	}
 
 	fun register() {
-		registerBattery("Battery ${SLTextStyle.RED}A", 7, 500, Material.GLOWSTONE_DUST)
-		registerBattery("Battery ${SLTextStyle.GREEN}M", 8, 1000, Material.REDSTONE)
-		registerBattery("Battery ${SLTextStyle.GOLD}G", 9, 2000, Material.SEA_LANTERN)
+		registerBattery("Battery ${SLTextStyle.RED}A", 7, 500, GLOWSTONE_DUST)
+		registerBattery("Battery ${SLTextStyle.GREEN}M", 8, 1000, REDSTONE)
+		registerBattery("Battery ${SLTextStyle.GOLD}G", 9, 2000, SEA_LANTERN)
 	}
 }

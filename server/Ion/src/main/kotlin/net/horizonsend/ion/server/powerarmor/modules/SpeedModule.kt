@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.potion.PotionEffectType
+import org.bukkit.potion.PotionEffectType.SPEED
 import java.time.Instant
 import java.util.UUID
 
@@ -18,7 +19,7 @@ class SpeedModule(
 	override val effectDuration: Int,
 	val power: Int
 ) :
-	PotionEffectModule(weight, customItem, PotionEffectType.SPEED, effectMultiplier, effectDuration, 0), Listener {
+	PotionEffectModule(weight, customItem, SPEED, effectMultiplier, effectDuration, 0), Listener {
 	// Not using a PotionEffectModule so that it doesn't drain power while standing still
 	init {
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)

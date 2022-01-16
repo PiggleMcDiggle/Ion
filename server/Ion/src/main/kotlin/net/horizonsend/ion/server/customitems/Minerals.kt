@@ -3,7 +3,7 @@ package net.horizonsend.ion.server.customitems
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.types.CustomBlockItem
 import net.horizonsend.ion.server.customitems.types.MineralItem
-import org.bukkit.Material
+import org.bukkit.Material.*
 
 object Minerals {
 
@@ -12,21 +12,21 @@ object Minerals {
 		val ore = CustomBlockItem(
 			id = "${id}_ore",
 			displayName = "$name Ore",
-			material = Material.IRON_ORE,
+			material = IRON_ORE,
 			model = model,
 			customBlockId = "${id}_ore"
 		)
 		val block = CustomBlockItem(
 			"${id}_block",
 			displayName = "$name Block",
-			material = Material.IRON_BLOCK,
+			material = IRON_BLOCK,
 			model = model,
 			customBlockId = "${id}_block"
 		)
 		val item = MineralItem(
 			id = id,
 			displayName = name,
-			material = Material.IRON_INGOT,
+			material = IRON_INGOT,
 			model = model,
 			ore = ore,
 			block = block

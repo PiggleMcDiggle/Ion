@@ -2,7 +2,7 @@ package net.horizonsend.ion.server.customitems
 
 import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.horizonsend.ion.server.customitems.types.GenericCustomItem
-import org.bukkit.Material
+import org.bukkit.Material.APPLE
 
 object PlanetIcons {
 
@@ -10,7 +10,7 @@ object PlanetIcons {
 		val item = GenericCustomItem(
 			id = "planet_icon_${name.lowercase().replace(" ", "_")}",
 			displayName = name,
-			material = Material.APPLE,
+			material = APPLE,
 			model = model
 		)
 		CustomItems.register(item)

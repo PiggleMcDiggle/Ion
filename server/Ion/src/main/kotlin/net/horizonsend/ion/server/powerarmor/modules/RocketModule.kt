@@ -4,8 +4,8 @@ import net.starlegacy.PLUGIN
 import net.horizonsend.ion.server.powerarmor.ArmorActivatorRunnable
 import net.horizonsend.ion.server.powerarmor.armorPower
 import net.horizonsend.ion.server.customitems.types.CustomItem
-import org.bukkit.Particle
-import org.bukkit.Sound
+import org.bukkit.Particle.*
+import org.bukkit.Sound.*
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -34,9 +34,9 @@ class RocketModule(override val weight: Int, override val customItem: CustomItem
 
 			player.armorPower -= 5
 			player.isGliding = true
-			player.world.playSound(player.location, Sound.BLOCK_FIRE_AMBIENT, 1.0f, 2.0f)
+			player.world.playSound(player.location, BLOCK_FIRE_AMBIENT, 1.0f, 2.0f)
 			player.velocity = player.velocity.midpoint(player.location.direction.multiply(0.6))
-			player.world.spawnParticle(Particle.SMOKE_NORMAL, player.location, 5)
+			player.world.spawnParticle(SMOKE_NORMAL, player.location, 5)
 		}
 	}
 

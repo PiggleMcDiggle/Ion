@@ -7,7 +7,7 @@ import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShap
 import net.horizonsend.ion.server.customitems.types.EnergySwordItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Bukkit
-import org.bukkit.Material
+import org.bukkit.Material.SHIELD
 
 object EnergySwords {
 
@@ -15,7 +15,7 @@ object EnergySwords {
 		val item = EnergySwordItem(
 			id = "energy_sword_${name.lowercase().replace(" ", "_")}",
 			displayName = "Energy Sword - $name",
-			material = Material.SHIELD,
+			material = SHIELD,
 			model = model
 		)
 		CustomItems.register(item)

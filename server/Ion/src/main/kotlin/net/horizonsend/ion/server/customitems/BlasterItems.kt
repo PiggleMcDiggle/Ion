@@ -3,7 +3,8 @@ package net.horizonsend.ion.server.customitems
 import net.horizonsend.ion.server.customitems.types.BlasterItem
 import net.starlegacy.util.Tasks
 import org.bukkit.Material
-import org.bukkit.Sound
+import org.bukkit.Material.*
+import org.bukkit.Sound.*
 
 object BlasterItems {
 	private fun registerBlaster(
@@ -26,7 +27,7 @@ object BlasterItems {
 		val item = BlasterItem(
 			id = name.lowercase().replace(" ", "_"),
 			displayName = name,
-			material = Material.BOW,
+			material = BOW,
 			model = model,
 			maxPower = maxPower,
 			maxUses = maxUses,
@@ -57,7 +58,7 @@ object BlasterItems {
 			cooldown = 300,
 			power = 10,
 			damage = 6.0,
-			sound = Sound.ENTITY_FIREWORK_ROCKET_BLAST.name,
+			sound = ENTITY_FIREWORK_ROCKET_BLAST.name,
 			pitchBase = 0.7,
 			pitchRange = 0.2
 		)
@@ -65,7 +66,7 @@ object BlasterItems {
 			CustomItems.registerShapedRecipe(
 				pistol.id, pistol.getItem(), " bg", " t ", ingredients = mapOf(
 					'b' to CustomItems.recipeChoice(CustomItems["battery_a"]!!),
-					'g' to CustomItems.recipeChoice(Material.GLASS_PANE),
+					'g' to CustomItems.recipeChoice(GLASS_PANE),
 					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!)
 				)
 			)
@@ -90,7 +91,7 @@ object BlasterItems {
 			CustomItems.registerShapedRecipe(
 				rifle.id, rifle.getItem(), "btg", "t  ", ingredients = mapOf(
 					'b' to CustomItems.recipeChoice(CustomItems["battery_a"]!!),
-					'g' to CustomItems.recipeChoice(Material.GLASS_PANE),
+					'g' to CustomItems.recipeChoice(GLASS_PANE),
 					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!)
 				)
 			)
@@ -115,7 +116,7 @@ object BlasterItems {
 			CustomItems.registerShapedRecipe(
 				sniper.id, sniper.getItem(), " t ", "btg", "t  ", ingredients = mapOf(
 					'b' to CustomItems.recipeChoice(CustomItems["battery_a"]!!),
-					'g' to CustomItems.recipeChoice(Material.GLASS_PANE),
+					'g' to CustomItems.recipeChoice(GLASS_PANE),
 					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!)
 				)
 			)
@@ -132,7 +133,7 @@ object BlasterItems {
 			cooldown = 500,
 			power = 50,
 			damage = 7.0,
-			sound = Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST.name,
+			sound = ENTITY_FIREWORK_ROCKET_LARGE_BLAST.name,
 			pitchBase = 0.6,
 			pitchRange = 0.1,
 			explosionPower = 2.0f
@@ -141,7 +142,7 @@ object BlasterItems {
 			CustomItems.registerShapedRecipe(
 				cannon.id, cannon.getItem(), "brt", "t  ", ingredients = mapOf(
 					'b' to CustomItems.recipeChoice(CustomItems["battery_a"]!!),
-					'r' to CustomItems.recipeChoice(Material.REDSTONE),
+					'r' to CustomItems.recipeChoice(REDSTONE),
 					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!)
 				)
 			)
