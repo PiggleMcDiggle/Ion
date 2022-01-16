@@ -137,7 +137,7 @@ class CustomItems : Listener {
 
 	@EventHandler
 	fun onInteract(event: PlayerInteractEvent) {
-		val item = event.item.customItem ?: return
+		val item = event.item?.customItem ?: return
 		when (event.action) {
 			Action.LEFT_CLICK_BLOCK, Action.LEFT_CLICK_AIR -> {
 				item.onLeftClick(event)
@@ -157,7 +157,7 @@ class CustomItems : Listener {
 
 	@EventHandler
 	fun onCraft(event: PrepareItemCraftEvent) {
-		val item = event.inventory.result.customItem ?: return
+		val item = event.inventory.result?.customItem ?: return
 		item.onPrepareCraft(event)
 	}
 
