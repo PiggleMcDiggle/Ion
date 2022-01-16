@@ -36,11 +36,10 @@ class SpeedModule(
 	// onMove and hasMovedInLastSecond copied from original SL armor
 	@EventHandler
 	fun onMove(event: PlayerMoveEvent) {
-		lastMoved[event.player.uniqueId] = Instant.now().toEpochMilli()
+		lastMoved[event.player.uniqueId] = System.currentTimeMillis()
 	}
-
 	private fun hasMovedInLastSecond(player: Player): Boolean {
-		return lastMoved.containsKey(player.uniqueId) && Instant.now().toEpochMilli() - (lastMoved[player.uniqueId]
+		return lastMoved.containsKey(player.uniqueId) && System.currentTimeMillis() - (lastMoved[player.uniqueId]
 			?: 0) < 1000
 	}
 }
