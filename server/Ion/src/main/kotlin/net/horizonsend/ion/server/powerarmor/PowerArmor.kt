@@ -32,15 +32,7 @@ class PowerArmorListener : Listener {
 		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
 		ArmorActivatorRunnable().runTaskTimer(StarLegacy.PLUGIN, 2, 1)
 	}
-
-	@EventHandler
-	fun onPlayerInteractEvent(event: PlayerInteractEvent) {
-		// Bring up the power armor menu
-		if (event.item?.isPowerArmor == true) {
-			ModuleScreen(event.player)
-			event.isCancelled = true
-		}
-	}
+	
 
 	@EventHandler
 	fun onPlayerDeath(event: PlayerDeathEvent) {
