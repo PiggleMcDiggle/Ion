@@ -38,7 +38,7 @@ object PowerModuleItems {
 		powerArmorModules.add(
 			RocketModule(
 				3,
-				registerModuleItem("rocket_boosting", "Rocket Boosting", 3, 3, "firework_rocket")
+				registerModuleItem("rocket_boosting", "Rocket Boosting", 3, 1, "firework_rocket")
 			)
 		)
 		powerArmorModules.add(
@@ -53,7 +53,7 @@ object PowerModuleItems {
 		powerArmorModules.add(
 			PotionEffectModule(
 				1,
-				registerModuleItem("night_vision", "Night Vision", 1, 4, "spider_eye"),
+				registerModuleItem("night_vision", "Night Vision", 1, 3, "spider_eye"),
 				NIGHT_VISION,
 				0,
 				300,
