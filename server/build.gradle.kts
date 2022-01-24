@@ -8,6 +8,7 @@ plugins {
 repositories {
 	maven("https://repo.mikeprimm.com/") // Has to be first because of Dynmap
 
+	maven("https://oss.sonatype.org/content/repositories/snapshots/")
 	maven("https://repo.codemc.io/repository/maven-snapshots/")
 	maven("https://papermc.io/repo/repository/maven-public/")
 	maven("https://nexus.scarsz.me/content/groups/public/")
@@ -28,14 +29,12 @@ dependencies {
 	compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.8")
 	compileOnly("net.citizensnpcs:citizens:2.0.27-SNAPSHOT")
 	compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
+	compileOnly("us.dynmap:dynmap-api:3.1")
 	compileOnly("net.luckperms:api:5.3")
-
-	compileOnly("us.dynmap:dynmap-api:3.1") {
-		exclude("org.bukkit:bukkit:1.7.10")
-	}
 
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 	implementation("com.github.stefvanschie.inventoryframework:IF:0.10.3")
+	implementation("net.kyori:adventure-text-minimessage:4.10.0-SNAPSHOT")
 	implementation("com.daveanthonythomas.moshipack:moshipack:1.0.1")
 	implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.0")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.10")
@@ -46,7 +45,7 @@ dependencies {
 	implementation("redis.clients:jedis:3.7.1") // Newer version changed stuff, I am too lazy to fix it.
 
 	implementation("net.wesjd:anvilgui-1_18_R1:1.5.3-SNAPSHOT")
-	implementation("net.wesjd:anvilgui:1.5.2-SNAPSHOT") // 1.5.3-SNAPSHOT is broken
+	implementation("net.wesjd:anvilgui:1.5.3-SNAPSHOT") // 1.5.3-SNAPSHOT is broken
 }
 
 sourceSets {

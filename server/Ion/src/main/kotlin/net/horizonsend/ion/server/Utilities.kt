@@ -1,5 +1,9 @@
 package net.horizonsend.ion.server
 
+import kotlin.math.round
+import net.kyori.adventure.text.minimessage.MiniMessage.miniMessage
+import org.bukkit.command.CommandSender
+
 fun niceTimeFormatting(time: Long): String {
 	val seconds = time / 1000
 	val minutes = seconds / 60
@@ -16,3 +20,8 @@ fun niceTimeFormatting(time: Long): String {
 		else -> "now"
 	}
 }
+
+fun CommandSender.sendMiniMessage(message: String) = sendMessage(miniMessage().deserialize(message.trimIndent()))
+
+val Double.asInt get() = round(this).toInt()
+val Float.asInt get() = round(this).toInt()
