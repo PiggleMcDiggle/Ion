@@ -1,5 +1,6 @@
 package net.horizonsend.ion.server
 
+import net.kyori.adventure.text.Component
 import kotlin.math.round
 import net.kyori.adventure.text.minimessage.MiniMessage.miniMessage
 import org.bukkit.command.CommandSender
@@ -21,7 +22,8 @@ fun niceTimeFormatting(time: Long): String {
 	}
 }
 
-fun CommandSender.sendMiniMessage(message: String) = sendMessage(miniMessage().deserialize(message.trimIndent()))
+fun CommandSender.sendMiniMessage(message: String) = sendMessage(message.toMiniMessage())
+fun String.toMiniMessage(): Component = miniMessage().deserialize(this.trimIndent())
 
 val Double.asInt get() = round(this).toInt()
 val Float.asInt get() = round(this).toInt()
