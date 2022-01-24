@@ -1,5 +1,6 @@
 package net.horizonsend.ion.server.customitems.types
 
+import net.horizonsend.ion.server.toMiniMessage
 import net.kyori.adventure.text.Component
 import net.starlegacy.StarLegacy.Companion.PLUGIN
 import net.starlegacy.util.updateMeta
@@ -19,19 +20,21 @@ abstract class CustomItem {
 	abstract val displayName: String
 	abstract val material: Material
 	open val allowedEnchants: MutableSet<Enchantment> = mutableSetOf()
-	open val lore = mutableListOf<Component>()
+	open val lore = mutableListOf<String>()
 	open val unbreakable = true
 
 	/**
 	 * Returns [amount] of this item in an ItemStack
 	 */
 	open fun getItem(amount: Int = 1): ItemStack {
+		val loreComponents = mutableListOf<Component>()
+		lore.forEach{loreComponents.add(it.toMiniMessage())}
 		return ItemStack(material, amount).updateMeta {
 			it.setCustomModelData(model)
 			it.isUnbreakable = unbreakable
 			it.persistentDataContainer.set(NamespacedKey(PLUGIN, "custom-item-id"), PersistentDataType.STRING, id)
-			it.lore(lore)
-			it.displayName(Component.text(displayName))
+			it.lore(loreComponents)
+			it.displayName(displayName.toMiniMessage())
 		}
 	}
 
