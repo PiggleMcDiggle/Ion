@@ -19,6 +19,7 @@ import com.velocitypowered.api.proxy.server.ServerPing.SamplePlayer
 import com.velocitypowered.api.proxy.server.ServerPing.Version
 import java.net.URL
 import java.nio.file.Path
+import java.util.concurrent.TimeUnit
 import kotlin.io.path.createDirectories
 import kotlin.io.path.exists
 import kotlin.io.path.readText
@@ -56,7 +57,8 @@ class Ion @Inject constructor(val server: ProxyServer, private val logger: Logge
 		var jda: JDA? = null
 			private set
 
-		val motds: Set<String> = URL("https://raw.githubusercontent.com/HorizonsEndMC/MOTDs/main/MOTD").readText().split("\n").filter { it.isNotEmpty() }.toSet()
+		var motds: Set<String> = setOf()
+			private set
 	}
 
 	@Subscribe
@@ -85,6 +87,13 @@ class Ion @Inject constructor(val server: ProxyServer, private val logger: Logge
 	@Suppress("UNUSED_PARAMETER") // Parameter is required to indicate what event to subscribe to
 	fun onStart(event: ProxyInitializeEvent): EventTask = EventTask.async {
 		ionInstance = this
+
+		server.scheduler.buildTask(this) {
+			motds = URL("https://raw.githubusercontent.com/HorizonsEndMC/MOTDs/main/MOTD").readText().split("\n").filter { it.isNotEmpty() }.toSet()
+		}.apply {
+			repeat(5L, TimeUnit.MINUTES)
+			schedule()
+		}
 
 		dataDirectory.createDirectories() // Ensure the directories exist
 
