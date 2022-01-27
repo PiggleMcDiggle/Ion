@@ -3,6 +3,7 @@ package net.horizonsend.ion.server.powerarmor
 import net.horizonsend.ion.server.Screen
 import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
 import net.horizonsend.ion.server.customitems.types.power
+import net.horizonsend.ion.server.sendMiniMessage
 import net.kyori.adventure.text.Component
 import net.starlegacy.util.red
 import org.bukkit.Material.BLUE_STAINED_GLASS_PANE
@@ -17,7 +18,7 @@ import org.bukkit.Material.YELLOW_STAINED_GLASS_PANE
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryType.CHEST
 import org.bukkit.inventory.ItemStack
-import java.time.Instant
+
 
 class ModuleScreen(player: Player) : Screen() {
 	override val playerEditableSlots = setOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26)
@@ -46,7 +47,7 @@ class ModuleScreen(player: Player) : Screen() {
 			updateStatus()
 		}
 		else {
-			player.sendMessage(red("You need to be out of combat for $secondsToWait more seconds before editing power armor!"))
+			player.sendMiniMessage("<red>You need to be out of combat for $secondsToWait more seconds before editing power armor!"))
 		}
 	}
 
