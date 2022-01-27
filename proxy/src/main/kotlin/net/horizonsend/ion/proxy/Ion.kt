@@ -3,11 +3,21 @@ package net.horizonsend.ion.proxy
 import co.aikar.commands.VelocityCommandManager
 import com.google.inject.Inject
 import com.velocitypowered.api.event.EventTask
+import com.velocitypowered.api.event.ResultedEvent.ComponentResult
 import com.velocitypowered.api.event.Subscribe
+import com.velocitypowered.api.event.connection.LoginEvent
+import com.velocitypowered.api.event.connection.PreLoginEvent
+import com.velocitypowered.api.event.connection.PreLoginEvent.PreLoginComponentResult
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent
+import com.velocitypowered.api.event.proxy.ProxyPingEvent
 import com.velocitypowered.api.plugin.Plugin
 import com.velocitypowered.api.plugin.annotation.DataDirectory
 import com.velocitypowered.api.proxy.ProxyServer
+import com.velocitypowered.api.proxy.server.ServerPing
+import com.velocitypowered.api.proxy.server.ServerPing.Players
+import com.velocitypowered.api.proxy.server.ServerPing.SamplePlayer
+import com.velocitypowered.api.proxy.server.ServerPing.Version
+import java.net.URL
 import java.nio.file.Path
 import kotlin.io.path.createDirectories
 import kotlin.io.path.exists
@@ -29,6 +39,7 @@ import net.horizonsend.ion.proxy.commands.Move
 import net.horizonsend.ion.proxy.commands.Server
 import net.horizonsend.ion.proxy.commands.Unlink
 import net.horizonsend.ion.proxy.database.MongoManager
+import net.kyori.adventure.text.minimessage.MiniMessage.miniMessage
 import org.slf4j.Logger
 
 @Plugin(id = "ion", name = "Ion (Proxy)", version = "1.0.0", description = "Ion (Proxy)", authors = ["PeterCrawley"], url = "https://horizonsend.net")
@@ -44,6 +55,30 @@ class Ion @Inject constructor(val server: ProxyServer, private val logger: Logge
 
 		var jda: JDA? = null
 			private set
+
+		val motds: Set<String> = URL("https://raw.githubusercontent.com/HorizonsEndMC/MOTDs/main/MOTD").readText().split("\n").filter { it.isNotEmpty() }.toSet()
+	}
+
+	@Subscribe
+	fun onPreLoginEvent(event: PreLoginEvent): EventTask = EventTask.async {
+		if (event.connection.protocolVersion.protocol != 757) event.result =
+			PreLoginComponentResult.denied(miniMessage().deserialize("<red><bold>Sorry, only 1.18(.1) clients can play on Horizon's End!"))
+	}
+
+	@Subscribe
+	fun onLoginEvent(event: LoginEvent): EventTask = EventTask.async {
+		if (server.playerCount > 30 && !event.player.hasPermission("ion.maxPlayerBypass")) event.result =
+			ComponentResult.denied(miniMessage().deserialize("<red><bold>Sorry, the server is full!"))
+	}
+
+	@Subscribe
+	fun onProxyPingEvent(event: ProxyPingEvent): EventTask = EventTask.async {
+		event.ping = ServerPing(
+			Version(757, "1.18.1"),
+			Players(server.playerCount, 30, server.allPlayers.map { SamplePlayer(it.username, it.uniqueId) }),
+			miniMessage().deserialize("<gold><bold>Horizon's End</bold><gray> - <italic>A continuation of Star Legacy.<reset>\n${motds.random()}"),
+			null
+		)
 	}
 
 	@Subscribe

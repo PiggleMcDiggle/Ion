@@ -1,7 +1,7 @@
 plugins {
 	java
 	kotlin("jvm") version "1.6.10"
-	id("io.papermc.paperweight.userdev") version "1.3.3"
+	id("io.papermc.paperweight.userdev") version "1.3.4"
 	id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
@@ -39,13 +39,12 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.0")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.10")
 	implementation("com.googlecode.cqengine:cqengine:3.6.0")
+	implementation("net.wesjd:anvilgui:1.5.2-SNAPSHOT") // AnvilGUI 1.5.3 is broken on the repository. :/
 	implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
 	implementation("com.github.jkcclemens:khttp:0.1.0")
 	implementation("org.litote.kmongo:kmongo:4.4.0")
 	implementation("redis.clients:jedis:3.7.1") // Newer version changed stuff, I am too lazy to fix it.
 
-	implementation("net.wesjd:anvilgui-1_18_R1:1.5.3-SNAPSHOT")
-	implementation("net.wesjd:anvilgui:1.5.3-SNAPSHOT") // 1.5.3-SNAPSHOT is broken
 }
 
 sourceSets {
