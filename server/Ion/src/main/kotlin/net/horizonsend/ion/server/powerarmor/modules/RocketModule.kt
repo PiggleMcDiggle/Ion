@@ -12,11 +12,17 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerToggleSneakEvent
 import java.util.UUID
 
+/**
+ * Implements a rocket boosting armor module
+ */
 class RocketModule(override val weight: Int, override val customItem: CustomItem) : PowerArmorModule(), Listener {
 	init {
 		PLUGIN.server.pluginManager.registerEvents(this, PLUGIN)
 	}
 
+	/**
+	 * Map of Player to whether they are currently using rockets.
+	 */
 	val players = mutableMapOf<UUID, Boolean>()
 
 	override fun tickModule(player: Player) {

@@ -8,6 +8,9 @@ import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.persistence.PersistentDataType.STRING
 
+/**
+ * Stores a [MutableSet] of [PowerArmorModule] to a PersistentDataContainer
+ */
 object PowerModulePDC : PersistentDataType<Array<PersistentDataContainer>, MutableSet<PowerArmorModule>> {
 	override fun getPrimitiveType(): Class<Array<PersistentDataContainer>> {
 		return Array<PersistentDataContainer>::class.java

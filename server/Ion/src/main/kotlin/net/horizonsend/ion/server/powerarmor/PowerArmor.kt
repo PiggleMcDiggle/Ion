@@ -21,10 +21,20 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
+/**
+ * Handles power armor events
+ */
 class PowerArmorListener : Listener {
 
 	companion object {
+		/**
+		 * The players currently in combat
+		 */
 		val playersInCombat = mutableMapOf<UUID, Long>()
+
+		/**
+		 * The number of seconds the player must be out of combat for before they can open the module menu
+		 */
 		val guiCombatCooldownSeconds: Int = 20
 	}
 
@@ -32,8 +42,10 @@ class PowerArmorListener : Listener {
 		ionInstance.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
 		ArmorActivatorRunnable().runTaskTimer(StarLegacy.PLUGIN, 2, 1)
 	}
-	
 
+	/**
+	 * Drops [event.player]'s power armor modules if [event.keepInventory] is false
+	 */
 	@EventHandler
 	fun onPlayerDeath(event: PlayerDeathEvent) {
 		// Drop the player's current power armor modules, if keepInventory is off
@@ -47,6 +59,10 @@ class PowerArmorListener : Listener {
 		event.player.armorPower = 0
 	}
 
+	/**
+	 * Force disable the player's power armor modules.
+	 * Shouldn't be necessary, but good to have just in case
+	 */
 	@EventHandler
 	fun onPlayerDisconnect(event: PlayerQuitEvent) {
 		// Shouldn't be needed, but just in case
@@ -54,6 +70,9 @@ class PowerArmorListener : Listener {
 		event.player.armorModules.forEach { it.disableModule(event.player) }
 	}
 
+	/**
+	 * If [event.entity] is a [Player], put them in the [playersInCombat] map with an updated timestamp
+	 */
 	@EventHandler
 	fun onPlayerTakeDamage(event: EntityDamageByEntityEvent) {
 		if (event.entity !is Player) return
@@ -61,26 +80,51 @@ class PowerArmorListener : Listener {
 	}
 }
 
+/**
+ * The maximum module weight a player can have. Exceeding this value results in their modules being disabled.
+ */
 var maxModuleWeight = 5
+
+/**
+ * All available power armor modules should be part of this set
+ */
 var powerArmorModules = mutableSetOf<PowerArmorModule>()
 
+/**
+ * Whether this is a piece of power armor
+ */
 val ItemStack.isPowerArmor: Boolean
 	get() = customItem is PowerArmorItem
+
+/**
+ * The [PowerArmorModule] this itemStack represents
+ * @see getArmorModuleFromId
+ */
 val ItemStack.armorModule: PowerArmorModule? get() = getArmorModuleFromId(this.customItem?.id)
+
+/**
+ * @return the [PowerArmorModule] that [id] corresponds to
+ * @see [ItemStack.armorModule]
+ */
 fun getArmorModuleFromId(id: String?): PowerArmorModule? {
 	powerArmorModules.forEach { if (it.customItem.id == id) return it }
 	return null
 }
 
-
+/**
+ * Whether the player is wearing a full set of power armor
+ */
 val Player.isWearingPowerArmor: Boolean
-	// True if the player is wearing a full set of power armor.
 	get() = inventory.helmet?.isPowerArmor ?: false &&
 			inventory.chestplate?.isPowerArmor ?: false &&
 			inventory.leggings?.isPowerArmor ?: false &&
 			inventory.boots?.isPowerArmor ?: false
 
-
+/**
+ * The Player's currently equipped [PowerArmorModule]s
+ *
+ * Backed bt the player's PersistentDataContainer
+ */
 var Player.armorModules: MutableSet<PowerArmorModule>
 	// The player's currently equipped modules.
 	get() = persistentDataContainer.get(
@@ -93,6 +137,11 @@ var Player.armorModules: MutableSet<PowerArmorModule>
 			value)
 
 
+/**
+ * The player's current armor power.
+ *
+ * Calculated as the sum of the player's current armor pieces' power values
+ */
 var Player.armorPower: Int
 	// The current power of the player's armor. Shared between all armor pieces.
 	get() {
@@ -113,7 +162,11 @@ var Player.armorPower: Int
 		}
 	}
 
-
+/**
+ * The player's maximum armor power.
+ *
+ * Calculated as the sum of the power capacity of all the player's current armor pieces
+ */
 val Player.maxArmorPower: Int
 	get() {
 		var maxPower = 0
@@ -123,8 +176,10 @@ val Player.maxArmorPower: Int
 		return maxPower
 	}
 
+/**
+ * The sum of the weights of the player's current [armorModules].
+ */
 val Player.armorModuleWeight: Int
-	// The player's total combined module weight
 	get() {
 		// I bet kotlin has a neater way to go about this
 		var weight = 0
@@ -135,6 +190,11 @@ val Player.armorModuleWeight: Int
 	}
 
 
+/**
+ * Whether the player has their power armor enabled.
+ *
+ * Backed by PersistentDataContainer
+ */
 var Player.armorEnabled: Boolean
 	// Whether the player has enabled power armor in the GUI
 	get() = this.persistentDataContainer.get(
@@ -149,15 +209,23 @@ var Player.armorEnabled: Boolean
 		)
 	}
 
+/**
+ * Makes it easier to add a module, so you don't have to do
+ * val modules = [Player.armorModules]
+ * modules.add(module)
+ * [Player.armorModules] = modules
+ * Which is very verbose and generally terrible.
+ *
+ * @see removeArmorModule
+ */
 fun Player.addArmorModule(module: PowerArmorModule) {
-	// Just makes it easier to add a module, so you don't have to do
-	// val modules = PlayerArmor(player).modules
-	// modules.add(module)
-	// PlayerArmor(player).modules = modules
-	// Which is very verbose and generally terrible.
 	armorModules = (armorModules + module).toMutableSet()
 }
 
+/**
+ * Same purpose as [addArmorModule]
+ * @see addArmorModule
+ */
 fun Player.removeArmorModule(module: PowerArmorModule) {
 	// Same reason as addArmorModule
 	module.disableModule(this)

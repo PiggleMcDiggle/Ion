@@ -4,6 +4,10 @@ import org.bukkit.Bukkit.getServer
 import org.bukkit.scheduler.BukkitRunnable
 import java.util.UUID
 
+/**
+ * The runnable that iterates through online players and ticks their armor modules.
+ * @see [PowerArmorModule.tickModule]
+ */
 class ArmorActivatorRunnable : BukkitRunnable() {
 
 	companion object {

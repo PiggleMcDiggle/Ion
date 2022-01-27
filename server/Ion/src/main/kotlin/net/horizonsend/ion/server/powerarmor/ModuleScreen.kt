@@ -19,7 +19,9 @@ import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryType.CHEST
 import org.bukkit.inventory.ItemStack
 
-
+/**
+ * A GUI in which [player] can add and remove power armor modules.
+ */
 class ModuleScreen(player: Player) : Screen() {
 	override val playerEditableSlots = setOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 26)
 
@@ -51,8 +53,10 @@ class ModuleScreen(player: Player) : Screen() {
 		}
 	}
 
+	/**
+	 * Update the module weight status bar
+	 */
 	private fun updateStatus() {
-		// Update the colored status bar that tells the player's module weight.
 		// Since we temporarily removed all of their modules, we can't use PlayerPowerArmor.moduleWeight
 		val slots = setOf(0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21)
 		var weight = 0

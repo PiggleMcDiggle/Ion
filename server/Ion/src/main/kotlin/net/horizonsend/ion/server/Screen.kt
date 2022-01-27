@@ -16,13 +16,23 @@ import org.bukkit.inventory.ItemStack
 
 
 abstract class Screen : Listener {
+    /**
+     * The player who this screen is displayed to
+     */
     lateinit var player: Player
         private set
 
+    /**
+     * A reference to the inventory
+     */
     lateinit var screen: Inventory
         private set
 
-    // The slots in which the player can place/remove items
+    /**
+     *  The slots in which the player can place/remove items
+     *
+     *  In other slots any item move event is cancelled
+     */
     open val playerEditableSlots = setOf<Int>()
 
     private fun createScreen(player: Player, inventory: Inventory) {
@@ -41,12 +51,27 @@ abstract class Screen : Listener {
         createScreen(player, Bukkit.createInventory(player, size, text(name)))
     }
 
+    /**
+     * Called often when the state of the screen changes
+     */
     open fun onScreenUpdate() {}
 
+    /**
+     * Called when the player clicks in [slot]
+     */
     open fun onScreenButtonClicked(slot: Int) {}
 
+    /**
+     * Called when the player changes the item in [slot].
+     *
+     * @param newItems the items currently in the slot
+     * @param oldItems the items that used to be in the slot
+     */
     open fun onPlayerChangeItem(slot: Int, oldItems: ItemStack?, newItems: ItemStack?) {}
 
+    /**
+     * Called when the screen is closed
+     */
     open fun onScreenClosed() {}
 
     fun closeScreen() {
@@ -60,6 +85,9 @@ abstract class Screen : Listener {
         onScreenClosed()
     }
 
+    /**
+     * Set the item in [slots] to be [item]
+     */
     fun setAll(slots: Set<Int>, item: ItemStack){
         slots.forEach{
             screen.setItem(it, item)
