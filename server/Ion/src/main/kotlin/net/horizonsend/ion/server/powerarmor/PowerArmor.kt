@@ -1,5 +1,9 @@
 package net.horizonsend.ion.server.powerarmor
 
+import java.lang.Integer.min
+import java.lang.System.currentTimeMillis
+import java.util.UUID
+import net.horizonsend.ion.server.Ion.Companion.ionInstance
 import net.horizonsend.ion.server.customitems.customItem
 import net.horizonsend.ion.server.customitems.types.PowerArmorItem
 import net.horizonsend.ion.server.customitems.types.maxPower
@@ -16,10 +20,6 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-import java.lang.Integer.min
-import java.time.Instant
-import java.util.UUID
-
 
 class PowerArmorListener : Listener {
 
@@ -29,7 +29,7 @@ class PowerArmorListener : Listener {
 	}
 
 	init {
-		StarLegacy.PLUGIN.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
+		ionInstance.server.pluginManager.registerEvents(this, StarLegacy.PLUGIN)
 		ArmorActivatorRunnable().runTaskTimer(StarLegacy.PLUGIN, 2, 1)
 	}
 	
@@ -42,7 +42,7 @@ class PowerArmorListener : Listener {
 		event.player.armorModules.forEach {
 			event.entity.world.dropItem(event.entity.location, it.customItem.getItem())
 		}
-		event.player.armorModules = mutableSetOf<PowerArmorModule>()
+		event.player.armorModules = mutableSetOf()
 		// Remove armor power
 		event.player.armorPower = 0
 	}
@@ -57,7 +57,7 @@ class PowerArmorListener : Listener {
 	@EventHandler
 	fun onPlayerTakeDamage(event: EntityDamageByEntityEvent) {
 		if (event.entity !is Player) return
-		playersInCombat[event.entity.uniqueId] = System.currentTimeMillis()
+		playersInCombat[event.entity.uniqueId] = currentTimeMillis()
 	}
 }
 
@@ -86,7 +86,7 @@ var Player.armorModules: MutableSet<PowerArmorModule>
 	get() = persistentDataContainer.get(
 			NamespacedKey(StarLegacy.PLUGIN, "current-power-armor-modules"),
 			PowerModulePDC
-		) ?: mutableSetOf<PowerArmorModule>()
+		) ?: mutableSetOf()
 	set(value) = persistentDataContainer.set(
 			NamespacedKey(StarLegacy.PLUGIN, "current-power-armor-modules"),
 			PowerModulePDC,
@@ -97,15 +97,15 @@ var Player.armorPower: Int
 	// The current power of the player's armor. Shared between all armor pieces.
 	get() {
 		var power = 0
-		inventory.armorContents.forEach {
+		inventory.armorContents?.forEach {
 			if (it?.isPowerArmor == true) power += it.power // yet, if the player wears nothing, it is null
 		}
 		return power
 	}
 	set(value) {
 		var powerLeft = value
-		inventory.armorContents.forEach {
-			if (it.isPowerArmor) {
+		inventory.armorContents?.forEach {
+			if (it!!.isPowerArmor) {
 				val powerToAdd = min(powerLeft, it.maxPower!!)
 				it.power = powerToAdd
 				powerLeft -= powerToAdd
@@ -117,7 +117,7 @@ var Player.armorPower: Int
 val Player.maxArmorPower: Int
 	get() {
 		var maxPower = 0
-		inventory.armorContents.forEach {
+		inventory.armorContents?.forEach {
 			if (it?.isPowerArmor == true) maxPower += it.maxPower!! // it can be null if it's empty
 		}
 		return maxPower
