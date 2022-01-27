@@ -3,7 +3,6 @@ package net.horizonsend.ion.server.customitems
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
 import net.horizonsend.ion.server.customitems.types.BatteryItem
-import net.starlegacy.util.SLTextStyle
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.stripColor
 import org.bukkit.Material
@@ -36,8 +35,8 @@ object BatteryItems {
 	}
 
 	fun register() {
-		registerBattery("Battery ${SLTextStyle.RED}A", 7, 500, GLOWSTONE_DUST)
-		registerBattery("Battery ${SLTextStyle.GREEN}M", 8, 1000, REDSTONE)
-		registerBattery("Battery ${SLTextStyle.GOLD}G", 9, 2000, SEA_LANTERN)
+		registerBattery("Battery <red>A", 7, 500, GLOWSTONE_DUST)
+		registerBattery("Battery <green>M", 8, 1000, REDSTONE)
+		registerBattery("Battery <gold>G", 9, 2000, SEA_LANTERN)
 	}
 }

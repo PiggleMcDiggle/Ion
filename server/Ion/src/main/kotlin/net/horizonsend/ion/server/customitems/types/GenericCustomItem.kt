@@ -2,8 +2,11 @@ package net.horizonsend.ion.server.customitems.types
 
 import org.bukkit.Material
 
+/**
+ * Adds no additional functionality over [CustomItem]
+ * Exists for simple custom items that are basically just named items
+ */
 class GenericCustomItem(
-	// Represents a generic custom item with no frills
 	override val id: String,
 	override val model: Int,
 	override val displayName: String,

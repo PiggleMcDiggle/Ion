@@ -2,10 +2,12 @@ package net.horizonsend.ion.server.customitems.types
 
 import org.bukkit.Material
 
+/**
+ * Represents a Gas Canister.
+ * Only exists to distinguish gas canisters from other items, contains no additional functionality.
+ * Exists to match the original StarLegacy system
+ */
 class GasItem(
-	// This only exists to separate gas canisters from other items. They have no extra functionality.
-	// Basically identical to GenericCustomItem
-	// Mostly doing this to match the old SL systen.
 	override val id: String,
 	override val model: Int,
 	override val displayName: String,

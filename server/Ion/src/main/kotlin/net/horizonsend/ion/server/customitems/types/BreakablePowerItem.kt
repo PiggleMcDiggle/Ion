@@ -10,6 +10,10 @@ import org.bukkit.persistence.PersistentDataType
 import kotlin.math.max
 import kotlin.math.min
 
+/**
+ * A powerable item with [maxUses].
+ * When it is used [maxUses] times an item is removed from the itemstack
+ */
 abstract class BreakablePowerItem : PowerItem() {
 	abstract val maxUses: Int
 	override fun getItem(amount: Int): ItemStack {
@@ -19,13 +23,29 @@ abstract class BreakablePowerItem : PowerItem() {
 	}
 }
 
+/**
+ * The prefix that precedes the uses number in the item lore
+ */
 val ITEM_USES_PREFIX = "&8Uses: &7".colorize()
 
 class NotBreakablePowerableException(message: String? = null) : Exception(message)
 
+/**
+ * Whether the ItemStack is a [BreakablePowerItem]
+ */
 val ItemStack.isBreakablePowerableCustomItem: Boolean get() = CustomItems.getCustomItem(this) is BreakablePowerItem
+
+/**
+ * Attempts to get the [CustomItem] for this ItemStack and cast it to a [BreakablePowerItem]
+ */
 val ItemStack.breakablePowerableCustomItem: BreakablePowerItem? get() = CustomItems[this] as? BreakablePowerItem
 
+/**
+ * The number of times this ItemStack has been used. Only exists for [BreakablePowerItem]s
+ * If this ItemStack is not a [BreakablePowerItem], [NotBreakablePowerableException] will be thrown
+ * Backed by the ItemStack's PersistentDataContainer
+ * @throws NotBreakablePowerableException
+ */
 var ItemStack.uses: Int
 	get() {
 		if (!this.isBreakablePowerableCustomItem) throw NotBreakablePowerableException()

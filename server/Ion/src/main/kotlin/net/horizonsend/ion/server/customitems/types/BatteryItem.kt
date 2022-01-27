@@ -2,6 +2,9 @@ package net.horizonsend.ion.server.customitems.types
 
 import org.bukkit.Material
 
+/**
+ * A powerable item. Only exists to differentiate batteries from other [PowerItem]
+ */
 class BatteryItem(
 	override val id: String,
 	override val model: Int,

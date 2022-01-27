@@ -10,6 +10,9 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 
+/**
+ * Implements functionality for a Power Drill
+ */
 class DrillItem(
 	override val id: String,
 	override val model: Int,

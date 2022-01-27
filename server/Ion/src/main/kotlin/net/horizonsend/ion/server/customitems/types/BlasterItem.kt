@@ -13,6 +13,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.event.player.PlayerInteractEvent
 
+/**
+ * Holds values required for blasters
+ */
 class BlasterItem(
 	override val id: String,
 	override val model: Int,
@@ -20,15 +23,45 @@ class BlasterItem(
 	override val material: Material,
 	override val maxPower: Int,
 	override val maxUses: Int,
+	/**
+	 * The speed at which the projectile travels
+	 */
 	val speed: Double,
+	/**
+	 * The maximum number of blocks the projectile can travel
+	 */
 	val range: Int,
+	/**
+	 * The thickness of the projectile's particles
+	 */
 	val thickness: Double,
+	/**
+	 * The item cooldown between shots
+	 */
 	val cooldown: Int,
+	/**
+	 * The power consumed with each shot
+	 */
 	val power: Int,
+	/**
+	 * The damage the projectile deals to entities
+	 */
 	val damage: Double,
+	/**
+	 * The sound played when the blaster is fired
+	 */
 	val sound: String,
+	/**
+	 * Base pitch for the [sound]
+	 */
 	val pitchBase: Double,
+	/**
+	 * Range of the [sound]
+	 */
 	val pitchRange: Double,
+	/**
+	 * The power of the explosion when the projectile hits a block
+	 */
 	val explosionPower: Float? = null
 ) : BreakablePowerItem(), Listener {
 

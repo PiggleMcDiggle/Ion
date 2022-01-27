@@ -27,10 +27,23 @@ import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.inventory.ShapelessRecipe
 import org.bukkit.persistence.PersistentDataType
 
+/**
+ * Handles [CustomItem]s
+ */
 class CustomItems : Listener {
 	companion object {
+		/**
+		 * The map of [String] to [CustomItem] ids.
+		 * Don't add custom items to this, use [register] instead.
+		 */
 		val customItems = mutableMapOf<String, CustomItem>()
 
+		/**
+		 * Registers the customitem. Will warn the console if the [item]'s ID is already in use
+		 * or if it's [Material], [CustomItem.model] pair is already in use
+		 *
+		 * @return [item]
+		 */
 		fun register(item: CustomItem): CustomItem {
 			// Check for duplicate custom model data
 			customItems.forEach { (id, customItem) ->
@@ -47,8 +60,26 @@ class CustomItems : Listener {
 			return item
 		}
 
+		/**
+		 * @return a [Collection] of all the values in the [customItems] map.
+		 */
 		fun all(): Collection<CustomItem> = customItems.values
+
+		/**
+		 * It is recommended to use [CustomItems.get] or [ItemStack.customItem] instead for
+		 * readability and clarity.
+		 *
+		 * @return the custom item from [id]
+		 * @see [ItemStack.customItem]
+		 */
 		fun getCustomItem(id: String?): CustomItem? = customItems[id?.lowercase()]
+		/**
+		 * It is recommended to use [CustomItems.get] or [ItemStack.customItem] instead for
+		 * readability and clarity.
+		 *
+		 * @return the custom item that [stack] represents
+		 * @see [ItemStack.customItem]
+		 */
 		fun getCustomItem(stack: ItemStack?): CustomItem? = customItems[stack?.itemMeta?.persistentDataContainer?.get(
 			NamespacedKey(PLUGIN, "custom-item-id"),
 			PersistentDataType.STRING
@@ -56,12 +87,25 @@ class CustomItems : Listener {
 
 		operator fun get(id: String?): CustomItem? = getCustomItem(id)
 		operator fun get(item: ItemStack?): CustomItem? = getCustomItem(item)
+
+		/**
+		 * A blank custom item, can be used as filler or a default value
+		 */
 		val blankItem = GenericCustomItem("blank_item", 0, "Blank Custom Item", EMERALD)
 
 		// region Recipes
 		// The original StarLegacy code had a custom addRecipe that had delays and attempts.
 		// If for some reason this doesn't work as expected, check that.
 
+		/**
+		 * Registers a [ShapedRecipe] for [output]
+		 *
+		 * [shape] should be a series of 3 3 character strings.
+		 * [map] maps the characters in [shape] to [RecipeChoice]s
+		 *
+		 * @return the recipe
+		 * @see registerShapelessRecipe
+		 */
 		fun registerShapedRecipe(
 			id: String, output: ItemStack, vararg shape: String, ingredients: Map<Char, RecipeChoice>
 		): ShapedRecipe {
@@ -75,6 +119,12 @@ class CustomItems : Listener {
 			return recipe
 		}
 
+		/**
+		 * Registers a [ShapelessRecipe] for [output]
+		 * @return the recipe
+		 * @see registerShapedRecipe
+		 * @see recipeChoice
+		 */
 		fun registerShapelessRecipe(
 			id: String, output: ItemStack, vararg ingredients: RecipeChoice
 		): ShapelessRecipe {
@@ -89,18 +139,29 @@ class CustomItems : Listener {
 			return recipe
 		}
 
+		/**
+		 * Uses [RecipeChoice.ExactChoice]
+		 * @return a [RecipeChoice] that represents [customItem].
+		 */
 		fun recipeChoice(customItem: CustomItem): RecipeChoice {
 			return RecipeChoice.ExactChoice(customItem.getItem())
 		}
 
+		/**
+		 * Uses [RecipeChoice.MaterialChoice]
+		 * @return a [RecipeChoice] that represents [material]
+		 */
 		fun recipeChoice(material: Material): RecipeChoice {
 			return RecipeChoice.MaterialChoice(material)
 		}
 
+		/**
+		 * Uses [RecipeChoice.ExactChoice] which might cause issues, use the recipeChoice for [Material] if possible
+		 * @return a [RecipeChoice] that represents [itemStack].
+		 */
 		fun recipeChoice(itemStack: ItemStack): RecipeChoice {
 			return RecipeChoice.ExactChoice(itemStack) // exactchoice might cause issues?
 		}
-		// TODO: delete custom items that aren't registered from inventories
 
 		/**
 		 * @return the itemstack of the custom item or material with [id], with [count] items
@@ -135,6 +196,12 @@ class CustomItems : Listener {
 
 	// region Custom Item Hooks
 
+	/**
+	 * Calls custom item onClick hooks.
+	 *
+	 * @see [CustomItem.onRightClick]
+	 * @see [CustomItem.onLeftClick]
+	 */
 	@EventHandler
 	fun onInteract(event: PlayerInteractEvent) {
 		val item = event.item?.customItem ?: return
@@ -149,18 +216,31 @@ class CustomItems : Listener {
 		}
 	}
 
+	/**
+	 * Calls onDrop hooks for custom items
+	 * @see [CustomItem.onDropped]
+	 */
 	@EventHandler
 	fun onDrop(event: PlayerDropItemEvent) {
 		val item = event.itemDrop.itemStack.customItem ?: return
 		item.onDropped(event)
 	}
 
+	/**
+	 * Calls onCraft hooks for custom items
+	 * @see [CustomItem.onPrepareCraft]
+	 */
 	@EventHandler
 	fun onCraft(event: PrepareItemCraftEvent) {
 		val item = event.inventory.result?.customItem ?: return
 		item.onPrepareCraft(event)
 	}
 
+	/**
+	 * Calls onHit hooks for custom items
+	 * @see [CustomItem.onHitEntity]
+	 * @see [onHitWhileHolding]
+	 */
 	@EventHandler
 	fun onHit(event: EntityDamageByEntityEvent) {
 		val damager = event.damager as? LivingEntity ?: return
@@ -168,6 +248,11 @@ class CustomItems : Listener {
 		itemInHand.customItem?.onHitEntity(event) ?: return
 	}
 
+	/**
+	 * Calls onHit hooks for custom items
+	 * @see [CustomItem.onHitWhileHolding]
+	 * @see [onHit]
+	 */
 	@EventHandler
 	fun onHitWhileHolding(event: EntityDamageByEntityEvent) {
 		val damaged = event.entity as? LivingEntity ?: return
@@ -177,6 +262,10 @@ class CustomItems : Listener {
 
 	// endregion
 	// region Disable enchanting
+	/**
+	 * Handles cancelling enchants for custom items, allows only those in [CustomItem.allowedEnchants]
+	 * @see [onAnvilEnchant]
+	 */
 	@Suppress("USELESS_ELVIS") // check docs for event.offers. It can be null if there's no offer at that index
 	@EventHandler
 	fun onTableEnchant(event: PrepareItemEnchantEvent) {
@@ -187,6 +276,10 @@ class CustomItems : Listener {
 		}
 	}
 
+	/**
+	 * Handles cancelling enchants for custom items, allows only those in [CustomItem.allowedEnchants]
+	 * @see [onTableEnchant]
+	 */
 	@EventHandler
 	fun onAnvilEnchant(event: PrepareAnvilEvent) {
 		val item = event.result?.customItem ?: return
@@ -198,5 +291,13 @@ class CustomItems : Listener {
 	// endregion
 }
 
+/**
+ * Whether this ItemStack represents a [CustomItem]
+ */
 val ItemStack.isCustomItem: Boolean get() = CustomItems[this] != null
+
+/**
+ * The [customItem] this ItemStack represents, if [isCustomItem]
+ * @see [CustomItems.getCustomItem]
+ */
 val ItemStack.customItem: CustomItem? get() = CustomItems[this]

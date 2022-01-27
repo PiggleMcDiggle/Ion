@@ -16,7 +16,9 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-
+/**
+ * Represents an item that holds power
+ */
 abstract class PowerItem : CustomItem() {
 	abstract val maxPower: Int
 	override fun getItem(amount: Int): ItemStack {
@@ -32,12 +34,21 @@ val ITEM_POWER_PREFIX = "&8Power: &7".colorize()
 val ItemStack.isPowerableCustomItem: Boolean get() = CustomItems.getCustomItem(this) is PowerItem
 val ItemStack.powerableCustomItem: PowerItem? get() = CustomItems[this] as? PowerItem
 
+/**
+ * The maximum power this item can hold.
+ * Only exists for [PowerItem]s
+ *
+ * @throws NotPowerableException if this ItemStack is not a [PowerItem]
+ */
 val ItemStack.maxPower: Int?
 	get() {
 		if (!this.isPowerableCustomItem) throw NotPowerableException()
 		return this.powerableCustomItem!!.maxPower
 	}
 
+/**
+ * Update this item's durability to match the current [power]/[maxPower]
+ */
 fun ItemStack.updatePowerDurability() {
 	if (!this.isPowerableCustomItem) throw NotPowerableException()
 	this.updateMeta {
@@ -48,6 +59,16 @@ fun ItemStack.updatePowerDurability() {
 	}
 }
 
+/**
+ * The amount of power this item is currently holding.
+ * Only exists for [PowerItem]s.
+ *
+ * Clamped between 0 and this item's [maxPower]
+ *
+ * Backed by this ItemStack's PersistentDataContainer
+ *
+ * @throws NotPowerableException if this ItemStack is not a [PowerItem]
+ */
 var ItemStack.power: Int
 	get() {
 		if (!this.isPowerableCustomItem) throw NotPowerableException()
@@ -74,6 +95,11 @@ var ItemStack.power: Int
 		this.updatePowerDurability()
 	}
 
+/**
+ * Cancels [PowerItem]s breaking, as their item durability is set by the [power]
+ *
+ * If the item needs to have durability, use [BreakablePowerItem] and their "use" system.
+ */
 class PowerItemBreakCanceller : Listener {
 	// Have to cancel damage on powerable items, otherwise ones at 0 power will break
 	@EventHandler

@@ -11,6 +11,10 @@ import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerInteractEvent
 
+/**
+ * Implements Energy Sword functionality, albeit in a very messy way.
+ * Mostly taken from original StarLegacy code
+ */
 class EnergySwordItem(
 	override val id: String,
 	override val model: Int,
