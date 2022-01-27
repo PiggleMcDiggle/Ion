@@ -49,7 +49,7 @@ class ModuleScreen(player: Player) : Screen() {
 			updateStatus()
 		}
 		else {
-			player.sendMiniMessage("<red>You need to be out of combat for $secondsToWait more seconds before editing power armor!"))
+			player.sendMiniMessage("<red>You need to be out of combat for $secondsToWait more seconds before editing power armor!")
 		}
 	}
 

@@ -17,7 +17,7 @@ object PowerModuleItems {
 		val item = GenericCustomItem(
 			id = "power_module_$type",
 			displayName = "$typeName Module",
-			lore = mutableListOf(Component.text("Weight: $weight")),
+			lore = mutableListOf("Weight: $weight"),
 			material = FLINT_AND_STEEL,
 			model = model,
 		)
