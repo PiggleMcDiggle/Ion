@@ -11,6 +11,7 @@ import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
 import net.horizonsend.ion.server.customitems.types.maxPower
 import net.horizonsend.ion.server.customitems.types.power
+import net.horizonsend.ion.server.sendMiniMessage
 import net.starlegacy.util.green
 import net.starlegacy.util.msg
 import net.starlegacy.util.plus
@@ -38,12 +39,10 @@ object CustomItemCommand : SLCommand() {
 		val result = player.inventory.addItem(item)
 
 		if (result.isEmpty()) {
-			sender msg green("Gave ") +
-					white("${amount}x ${customItem.displayName}") +
-					green(" to ${player.name}")
+			sender.sendMiniMessage("<green>Gave <white>${amount}x ${customItem.displayName}<green> to ${player.name}")
 		} else {
 			val extra = result.values.sumOf { it.amount }
-			sender msg red("Could not fit $extra out of the $amount items in ${player.name}'s inventory!")
+			sender.sendMiniMessage("<red>Could not fit $extra out of the $amount items in ${player.name}'s inventory!")
 		}
 	}
 }

@@ -8,6 +8,7 @@ import co.aikar.commands.annotation.Subcommand
 import net.starlegacy.command.SLCommand
 import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
 import net.horizonsend.ion.server.customitems.types.power
+import net.horizonsend.ion.server.sendMiniMessage
 import net.starlegacy.util.displayName
 import net.starlegacy.util.green
 import net.starlegacy.util.msg
@@ -29,7 +30,7 @@ object BatteryCommand : SLCommand() {
 	@Subcommand("get")
 	fun onGet(sender: Player){
 		val item = getPowerableItemInHand(sender)
-		sender.msg("${item.displayName} currently has ${item.power} power.")
+		sender.sendMiniMessage("<green>${item.displayName} currently has ${item.power} power.")
 	}
 
 	@Subcommand("set")
@@ -37,20 +38,20 @@ object BatteryCommand : SLCommand() {
 	fun onSet(sender: Player, amount: Int) {
 		val item = getPowerableItemInHand(sender)
 		item.power = amount
-		sender msg green("Set power of ${item.displayName} to $amount")
+		sender.sendMiniMessage("<green>Set power of ${item.displayName} to $amount")
 	}
 
 	@Subcommand("add")
 	fun onAdd(sender: Player, amount: Int) {
 		val item = getPowerableItemInHand(sender)
 		item.power += amount
-		sender msg green("Added $amount power to ${item.displayName}")
+		sender.sendMiniMessage("<green>Added $amount power to ${item.displayName}")
 	}
 
 	@Subcommand("remove")
 	fun onRemove(sender: Player, amount: Int) {
 		val item = getPowerableItemInHand(sender)
 		item.power -= amount
-		sender msg green("Removed $amount power from ${item.displayName}")
+		sender.sendMiniMessage("<green>Removed $amount power from ${item.displayName}")
 	}
 }
