@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component
 import kotlin.math.round
 import net.kyori.adventure.text.minimessage.MiniMessage.miniMessage
 import org.bukkit.command.CommandSender
+import java.util.Locale
 
 fun niceTimeFormatting(time: Long): String {
 	val seconds = time / 1000
@@ -27,3 +28,8 @@ fun String.toMiniMessage(): Component = miniMessage().deserialize(this.trimInden
 
 val Double.asInt get() = round(this).toInt()
 val Float.asInt get() = round(this).toInt()
+
+/**
+ * @return a copy of this string with the first character capitalized
+ */
+fun String.capitalized(): String = this.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }

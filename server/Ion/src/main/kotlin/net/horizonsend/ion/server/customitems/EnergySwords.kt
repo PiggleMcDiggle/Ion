@@ -1,5 +1,6 @@
 package net.horizonsend.ion.server.customitems
 
+import net.horizonsend.ion.server.capitalized
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.itemStackFromId
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
@@ -10,12 +11,11 @@ import org.bukkit.Bukkit
 import org.bukkit.Material.SHIELD
 
 object EnergySwords {
-
-	@Suppress("DEPRECATION") // I want to use .capitalize() lol
+	
 	private fun registerEnergySword(name: String, displayColor: String, model: Int, craft: String): EnergySwordItem {
 		val item = EnergySwordItem(
 			id = "energy_sword_${name.lowercase().replace(" ", "_")}",
-			displayName = "<red>Energy Sword <gray>- <$displayColor>${name.capitalize()}",
+			displayName = "<red>Energy Sword <gray>- <$displayColor>${name.capitalized()}",
 			material = SHIELD,
 			model = model
 		)
