@@ -18,12 +18,10 @@ import net.starlegacy.command.economy.CityNpcCommand
 import net.starlegacy.command.economy.CollectedItemCommand
 import net.starlegacy.command.economy.CollectorCommand
 import net.starlegacy.command.economy.EcoStationCommand
-import net.starlegacy.command.misc.BatteryCommand
 import net.starlegacy.command.misc.CustomItemCommand
 import net.starlegacy.command.misc.DyeCommand
 import net.starlegacy.command.misc.GToggleCommand
 import net.starlegacy.command.misc.GlobalGameRuleCommand
-import net.horizonsend.ion.server.commands.misc.ItemUsesCommand
 import net.starlegacy.command.misc.PlanetSpawnMenuCommand
 import net.starlegacy.command.misc.PlayerInfoCommand
 import net.horizonsend.ion.server.commands.misc.PowerArmorCommand
@@ -320,8 +318,6 @@ class StarLegacy : JavaPlugin() {
 			DyeCommand,
 			GlobalGameRuleCommand,
 
-			BatteryCommand,
-			ItemUsesCommand,
 			CustomItemCommand,
 			TransportDebugCommand,
 			PlanetSpawnMenuCommand,
