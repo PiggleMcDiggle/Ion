@@ -11,10 +11,11 @@ import org.bukkit.Material.SHIELD
 
 object EnergySwords {
 
-	private fun registerEnergySword(name: String, model: Int, craft: String): EnergySwordItem {
+	@Suppress("DEPRECATION") // I want to use .capitalize() lol
+	private fun registerEnergySword(name: String, displayColor: String, model: Int, craft: String): EnergySwordItem {
 		val item = EnergySwordItem(
 			id = "energy_sword_${name.lowercase().replace(" ", "_")}",
-			displayName = "Energy Sword - $name",
+			displayName = "<red>Energy Sword <gray>- <$displayColor>${name.capitalize()}",
 			material = SHIELD,
 			model = model
 		)
@@ -33,12 +34,12 @@ object EnergySwords {
 	}
 
 	fun register() {
-		registerEnergySword("blue", 1, "diamond")
-		registerEnergySword("red", 2, "redstone")
-		registerEnergySword("yellow", 3, "coal")
-		registerEnergySword("green", 4, "emerald")
-		registerEnergySword("purple", 5, "chetherite")
-		registerEnergySword("orange", 6, "copper_ingot")
+		registerEnergySword("blue", "blue",1, "diamond")
+		registerEnergySword("red", "red",2, "redstone")
+		registerEnergySword("yellow", "yellow",3, "coal")
+		registerEnergySword("green", "green",4, "emerald")
+		registerEnergySword("purple", "dark_purple",5, "chetherite")
+		registerEnergySword("orange", "gold", 6, "copper_ingot")
 		// Energy sword idle sound
 		// Use async task and while loop with thread sleep so when it lags it doesnt sound weird
 		// The timing of the sounds is very important

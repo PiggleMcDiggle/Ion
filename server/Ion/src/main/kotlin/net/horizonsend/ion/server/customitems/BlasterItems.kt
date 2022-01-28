@@ -28,7 +28,7 @@ object BlasterItems {
 	): BlasterItem {
 		val item = BlasterItem(
 			id = name.lowercase().replace(" ", "_"),
-			displayName = name,
+			displayName = "<red>$name",
 			material = BOW,
 			model = model,
 			maxPower = maxPower,

@@ -13,9 +13,9 @@ import org.bukkit.Material.SNOWBALL
 
 object BatteryItems {
 
-	private fun registerBattery(name: String, model: Int, power: Int, craft: Material): BatteryItem {
+	private fun registerBattery(id: String, name: String, model: Int, power: Int, craft: Material): BatteryItem {
 		val item = BatteryItem(
-			id = name.stripColor().lowercase().replace(" ", "_"),
+			id = id,
 			displayName = name,
 			material = SNOWBALL,
 			model = model,
@@ -35,8 +35,8 @@ object BatteryItems {
 	}
 
 	fun register() {
-		registerBattery("Battery <red>A", 7, 500, GLOWSTONE_DUST)
-		registerBattery("Battery <green>M", 8, 1000, REDSTONE)
-		registerBattery("Battery <gold>G", 9, 2000, SEA_LANTERN)
+		registerBattery("battery_a", "Battery <red>A", 7, 500, GLOWSTONE_DUST)
+		registerBattery("battery_m","Battery <green>M", 8, 1000, REDSTONE)
+		registerBattery("battery_g","Battery <gold>G", 9, 2000, SEA_LANTERN)
 	}
 }

@@ -16,7 +16,7 @@ object PowerModuleItems {
 	private fun registerModuleItem(type: String, typeName: String, weight: Int,  model: Int, craft: String): GenericCustomItem {
 		val item = GenericCustomItem(
 			id = "power_module_$type",
-			displayName = "$typeName Module",
+			displayName = "<green>$typeName Module",
 			lore = mutableListOf("Weight: $weight"),
 			material = FLINT_AND_STEEL,
 			model = model,

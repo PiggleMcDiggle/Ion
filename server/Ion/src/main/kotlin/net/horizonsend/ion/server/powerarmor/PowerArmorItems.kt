@@ -13,7 +13,7 @@ object PowerArmorItems {
 	private fun registerPowerArmor(piece: String, model: Int, mat: Material, maxPower: Int): PowerArmorItem {
 		val item = PowerArmorItem(
 			id = "power_armor_${piece.lowercase().replace(" ", "_")}",
-			displayName = "Power $piece",
+			displayName = "<gold>Power $piece",
 			material = mat,
 			model = model,
 			maxPower = maxPower

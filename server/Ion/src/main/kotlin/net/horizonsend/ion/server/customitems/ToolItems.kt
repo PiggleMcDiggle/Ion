@@ -11,7 +11,7 @@ import org.bukkit.Material.STICK
 object ToolItems {
 	fun register() {
 		val drill =
-			CustomItems.register(DrillItem("power_tool_drill", 1, "Power Drill", DIAMOND_PICKAXE, 50000))
+			CustomItems.register(DrillItem("power_tool_drill", 1, "<gold>Power Drill", DIAMOND_PICKAXE, 50000))
 		Tasks.syncDelay(1) {
 			registerShapedRecipe(
 				drill.id, drill.getItem(), "i  ", " bt", " ts", ingredients = mapOf(
