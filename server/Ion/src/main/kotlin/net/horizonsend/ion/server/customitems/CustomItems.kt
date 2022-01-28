@@ -73,6 +73,7 @@ class CustomItems : Listener {
 		 * @see [ItemStack.customItem]
 		 */
 		fun getCustomItem(id: String?): CustomItem? = customItems[id?.lowercase()]
+
 		/**
 		 * It is recommended to use [CustomItems.get] or [ItemStack.customItem] instead for
 		 * readability and clarity.

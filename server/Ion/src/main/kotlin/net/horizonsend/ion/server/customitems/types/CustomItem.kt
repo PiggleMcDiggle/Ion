@@ -62,7 +62,7 @@ abstract class CustomItem {
 	 */
 	open fun getItem(amount: Int = 1): ItemStack {
 		val loreComponents = mutableListOf<Component>()
-		lore.forEach{loreComponents.add(it.toMiniMessage())}
+		lore.forEach { loreComponents.add(it.toMiniMessage()) }
 		return ItemStack(material, amount).updateMeta {
 			it.setCustomModelData(model)
 			it.isUnbreakable = unbreakable

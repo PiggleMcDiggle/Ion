@@ -5,13 +5,11 @@ import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandCompletion
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Subcommand
-import net.starlegacy.command.SLCommand
 import net.horizonsend.ion.server.customitems.types.isBreakablePowerableCustomItem
 import net.horizonsend.ion.server.customitems.types.uses
 import net.horizonsend.ion.server.sendMiniMessage
+import net.starlegacy.command.SLCommand
 import net.starlegacy.util.displayName
-import net.starlegacy.util.green
-import net.starlegacy.util.msg
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
@@ -27,8 +25,9 @@ object ItemUsesCommand : SLCommand() {
 
 		return item
 	}
+
 	@Subcommand("get")
-	fun onGet(sender: Player){
+	fun onGet(sender: Player) {
 		val item = getBreakablePowerableItemInHand(sender)
 		sender.sendMiniMessage("<green>${item.displayName} currently has ${item.uses} uses.")
 	}

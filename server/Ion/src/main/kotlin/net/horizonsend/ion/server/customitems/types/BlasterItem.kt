@@ -89,7 +89,7 @@ class BlasterItem(
 		event.isCancelled = true
 		Blasters.fireBlaster(entity, bow)
 	}
-	
+
 
 	@EventHandler
 	fun onEntityDamage(event: EntityDamageByEntityEvent) {

@@ -4,7 +4,6 @@ import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
 import net.horizonsend.ion.server.customitems.types.BatteryItem
 import net.starlegacy.util.Tasks
-import net.starlegacy.util.stripColor
 import org.bukkit.Material
 import org.bukkit.Material.GLOWSTONE_DUST
 import org.bukkit.Material.REDSTONE
@@ -36,7 +35,7 @@ object BatteryItems {
 
 	fun register() {
 		registerBattery("battery_a", "Battery <red>A", 7, 500, GLOWSTONE_DUST)
-		registerBattery("battery_m","Battery <green>M", 8, 1000, REDSTONE)
-		registerBattery("battery_g","Battery <gold>G", 9, 2000, SEA_LANTERN)
+		registerBattery("battery_m", "Battery <green>M", 8, 1000, REDSTONE)
+		registerBattery("battery_g", "Battery <gold>G", 9, 2000, SEA_LANTERN)
 	}
 }
