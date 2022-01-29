@@ -1,8 +1,8 @@
 package net.starlegacy.feature.gas;
 
+import net.horizonsend.ion.server.customitems.CustomItems;
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor;
-import net.starlegacy.feature.misc.CustomItem;
-import net.starlegacy.feature.misc.CustomItems;
+import net.horizonsend.ion.server.customitems.types.CustomItem;
 import org.bukkit.Location;
 
 import java.util.List;
@@ -67,7 +67,7 @@ public class Gas {
 
 
 	public CustomItem getItem() {
-		return CustomItems.INSTANCE.get(getItemId());
+		return CustomItems.Companion.getCustomItem(getItemId());
 	}
 
 	public List<List<CollectionFactor>> getFactors() {

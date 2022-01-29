@@ -2,7 +2,7 @@ package net.starlegacy.feature.starship.subsystem.weapon.secondary
 
 import net.horizonsend.ion.server.commands.QuickBalance
 import java.util.concurrent.TimeUnit
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.multiblock.starshipweapon.heavy.RocketStarshipWeaponMultiblock
 import net.starlegacy.feature.starship.active.ActiveStarship
 import net.starlegacy.feature.starship.subsystem.DirectionalSubsystem
@@ -85,6 +85,6 @@ class RocketWeaponSubsystem(
 	}
 
 	override fun getRequiredAmmo(): ItemStack {
-		return CustomItems.ROCKET_ORIOMIUM.singleItem()
+		return CustomItems["rocket_oriomium"]!!.getItem()
 	}
 }

@@ -18,13 +18,13 @@ import net.starlegacy.command.economy.CityNpcCommand
 import net.starlegacy.command.economy.CollectedItemCommand
 import net.starlegacy.command.economy.CollectorCommand
 import net.starlegacy.command.economy.EcoStationCommand
-import net.starlegacy.command.misc.BatteryCommand
 import net.starlegacy.command.misc.CustomItemCommand
 import net.starlegacy.command.misc.DyeCommand
 import net.starlegacy.command.misc.GToggleCommand
 import net.starlegacy.command.misc.GlobalGameRuleCommand
 import net.starlegacy.command.misc.PlanetSpawnMenuCommand
 import net.starlegacy.command.misc.PlayerInfoCommand
+import net.horizonsend.ion.server.commands.misc.PowerArmorCommand
 import net.starlegacy.command.misc.SLTimeConvertCommand
 import net.starlegacy.command.misc.ShuttleCommand
 import net.starlegacy.command.misc.TransportDebugCommand
@@ -59,6 +59,8 @@ import net.starlegacy.database.schema.starships.Blueprint
 import net.starlegacy.database.slPlayerId
 import net.starlegacy.feature.chat.ChannelSelections
 import net.starlegacy.feature.chat.ChatChannel
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.economy.bazaar.Merchants
 import net.starlegacy.feature.economy.city.CityNPCs
@@ -66,14 +68,10 @@ import net.starlegacy.feature.economy.city.TradeCities
 import net.starlegacy.feature.economy.collectors.CollectionMissions
 import net.starlegacy.feature.economy.collectors.Collectors
 import net.starlegacy.feature.gas.Gasses
-import net.starlegacy.feature.gear.Gear
 import net.starlegacy.feature.machine.Turrets
 import net.starlegacy.feature.misc.AutoRestart
 import net.starlegacy.feature.misc.CombatNPCs
 import net.starlegacy.feature.misc.CryoPods
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
-import net.starlegacy.feature.misc.CustomRecipes
 import net.starlegacy.feature.misc.Decomposers
 import net.starlegacy.feature.misc.GameplayTweaks
 import net.starlegacy.feature.misc.PlanetSpawns
@@ -112,13 +110,8 @@ import net.starlegacy.feature.transport.Extractors
 import net.starlegacy.feature.transport.TransportConfig
 import net.starlegacy.feature.transport.pipe.Pipes
 import net.starlegacy.feature.transport.pipe.filter.Filters
+import net.starlegacy.listener.DoubleJumpListener
 import net.starlegacy.listener.SLEventListener
-import net.starlegacy.listener.gear.BlasterListener
-import net.starlegacy.listener.gear.DetonatorListener
-import net.starlegacy.listener.gear.DoubleJumpListener
-import net.starlegacy.listener.gear.PowerArmorListener
-import net.starlegacy.listener.gear.PowerToolListener
-import net.starlegacy.listener.gear.SwordListener
 import net.starlegacy.listener.misc.BlockListener
 import net.starlegacy.listener.misc.ChatListener
 import net.starlegacy.listener.misc.EntityListener
@@ -186,7 +179,6 @@ class StarLegacy : JavaPlugin() {
 			CombatNPCs,
 
 			CryoPods,
-			CustomRecipes,
 			GameplayTweaks,
 
 			SpaceWorlds,
@@ -209,8 +201,6 @@ class StarLegacy : JavaPlugin() {
 			Extractors,
 			Pipes,
 			Filters,
-
-			Gear,
 
 			TradeCities,
 
@@ -258,12 +248,7 @@ class StarLegacy : JavaPlugin() {
 			InteractListener,
 			InventoryListener,
 
-			BlasterListener,
-			DetonatorListener,
 			DoubleJumpListener,
-			PowerArmorListener,
-			PowerToolListener,
-			SwordListener,
 		)
 
 	override fun onEnable() {
@@ -304,6 +289,8 @@ class StarLegacy : JavaPlugin() {
 
 		registerCommands()
 
+		CustomItems()
+
 		if (isMaster()) {
 			// 20 ticks * 60 = 1 minute, 20 ticks * 60 * 60 = 1 hour
 			Tasks.asyncRepeat(20 * 60, 20 * 60 * 60) {
@@ -331,7 +318,6 @@ class StarLegacy : JavaPlugin() {
 			DyeCommand,
 			GlobalGameRuleCommand,
 
-			BatteryCommand,
 			CustomItemCommand,
 			TransportDebugCommand,
 			PlanetSpawnMenuCommand,
@@ -368,6 +354,8 @@ class StarLegacy : JavaPlugin() {
 			CollectorCommand,
 			EcoStationCommand,
 
+			PowerArmorCommand,
+
 			MiscStarshipCommands,
 			BlueprintCommand,
 			StarshipDebugCommand,
@@ -382,7 +370,7 @@ class StarLegacy : JavaPlugin() {
 		manager.commandContexts.run {
 			registerContext(CustomItem::class.java) { c: BukkitCommandExecutionContext ->
 				val arg = c.popFirstArg()
-				return@registerContext CustomItems[arg]
+				return@registerContext CustomItems.getCustomItem(arg)
 					?: throw InvalidCommandArgument("No custom item $arg found!")
 			}
 
@@ -411,11 +399,13 @@ class StarLegacy : JavaPlugin() {
 		}
 
 		// Add static tab completions
-		mapOf(
-			"customitems" to CustomItems.all().joinToString("|") { it.id },
-			"npctypes" to CityNPC.Type.values().joinToString("|") { it.name }
-		).forEach { manager.commandCompletions.registerStaticCompletion(it.key, it.value) }
-
+		// Delayed for two ticks so items have a chance to register
+		Tasks.syncDelay(2){
+			mapOf(
+				"customitems" to CustomItems.all().joinToString("|") { it.id },
+				"npctypes" to CityNPC.Type.values().joinToString("|") { it.name }
+			).forEach { manager.commandCompletions.registerStaticCompletion(it.key, it.value) }
+		}
 		// Add async tab completions
 		@Suppress("RedundantLambdaArrow")
 		mapOf<String, (BukkitCommandCompletionContext) -> List<String>>(

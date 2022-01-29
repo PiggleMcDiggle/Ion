@@ -14,8 +14,8 @@ import net.starlegacy.cache.trade.EcoStations
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.economy.CollectedItem
 import net.starlegacy.database.schema.economy.EcoStation
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.util.MenuHelper
 import net.starlegacy.util.Tasks
@@ -57,7 +57,7 @@ object CollectionMissions : SLComponent() {
 		?: error("Failed to parse item string ${collectedItem.itemString}")
 
 	fun getItemFromString(itemString: String): ItemStack? {
-		CustomItems[itemString]?.let { return it.itemStack(1) }
+		CustomItems[itemString]?.let { return it.getItem(1) }
 		val material: Material = Material.getMaterial(itemString) ?: return null
 		return ItemStack(material, 1)
 	}

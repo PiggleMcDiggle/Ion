@@ -10,10 +10,10 @@ import net.starlegacy.database.schema.economy.BazaarItem
 import net.starlegacy.database.schema.misc.SLPlayer
 import net.starlegacy.database.schema.nations.Settlement
 import net.starlegacy.database.schema.nations.Territory
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.economy.city.TradeCities
 import net.starlegacy.feature.economy.city.TradeCityData
 import net.starlegacy.feature.economy.city.TradeCityType
-import net.starlegacy.feature.misc.CustomItems
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.feature.nations.region.Regions
 import net.starlegacy.util.MenuHelper
@@ -216,12 +216,12 @@ object Bazaars : SLComponent() {
 	}
 
 	fun toItemString(item: ItemStack): String {
-		return CustomItems[item]?.id ?: item.type.toString()
+		return CustomItems.getCustomItem(item)?.id ?: item.type.toString()
 	}
 
 	fun fromItemString(string: String): ItemStack {
 		// if a custom item is found, use that
-		CustomItems[string]?.let { return it.itemStack(1) }
+		CustomItems.getCustomItem(string)?.let { return it.getItem(1) }
 		val material: Material = Material.valueOf(string)
 		check(material.isItem) { "$material is not an item" }
 		return ItemStack(material, 1)

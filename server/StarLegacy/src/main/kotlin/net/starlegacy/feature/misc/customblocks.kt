@@ -1,6 +1,7 @@
 package net.starlegacy.feature.misc
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.util.NMSBlockData
 import net.starlegacy.util.nms
 import org.bukkit.Material
@@ -55,7 +56,7 @@ object CustomBlocks {
 	}
 
 	private fun customItemDrop(id: String, amount: Int): Array<ItemStack> {
-		return arrayOf(CustomItems[id]?.itemStack(amount) ?: error("No item for block $id"))
+		return arrayOf(CustomItems[id]?.getItem(amount) ?: error("No item for block $id"))
 	}
 
 	//region Minerals

@@ -1,7 +1,7 @@
 package net.starlegacy.listener.misc
 
-import net.starlegacy.feature.misc.CustomBlockItem
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomBlockItem
 import net.starlegacy.feature.multiblock.FurnaceMultiblock
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.listener.SLEventListener
@@ -63,7 +63,7 @@ object FurnaceListener : SLEventListener() {
 		val item = CustomItems[source]
 
 		if (item is CustomBlockItem && item.id.endsWith("_ore")) {
-			event.result = CustomItems[item.id.replace("_ore", "")]!!.itemStack(1)
+			event.result = CustomItems[item.id.replace("_ore", "")]!!.getItem()
 			return
 		}
 

@@ -3,11 +3,11 @@ package net.starlegacy.feature.starship.factory
 import com.google.common.cache.CacheBuilder
 import com.google.common.cache.CacheLoader
 import com.google.common.cache.LoadingCache
+import net.horizonsend.ion.server.customitems.CustomItems
 import java.util.Optional
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.misc.CustomBlocks
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import org.bukkit.Material
 import org.bukkit.block.data.BlockData
 import org.bukkit.block.data.type.Slab
@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack
 data class PrintItem(val itemString: String) {
 	constructor(itemStack: ItemStack) : this(Bazaars.toItemString(itemStack))
 
-	constructor(customItem: CustomItem) : this(customItem.singleItem())
+	constructor(customItem: CustomItem) : this(customItem.getItem())
 
 	constructor(material: Material) : this(ItemStack(material))
 

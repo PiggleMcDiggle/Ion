@@ -7,7 +7,11 @@ import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Optional
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import net.starlegacy.command.SLCommand
-import net.starlegacy.feature.misc.CustomItem
+import net.horizonsend.ion.server.customitems.types.CustomItem
+import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
+import net.horizonsend.ion.server.customitems.types.maxPower
+import net.horizonsend.ion.server.customitems.types.power
+import net.horizonsend.ion.server.sendMiniMessage
 import net.starlegacy.util.green
 import net.starlegacy.util.msg
 import net.starlegacy.util.plus
@@ -30,16 +34,15 @@ object CustomItemCommand : SLCommand() {
 		failIf(amount <= 0) { "Amount cannot be <= 0" }
         failIf(player != sender && !sender.hasPermission("ion.customitem.other")) {"You cannot send others custom items. Reason: lacking permission node ion.customitem.other"}
 
-		val item = customItem.itemStack(amount)
+		val item = customItem.getItem(amount)
+		if (item.isPowerableCustomItem) item.power = item.maxPower!!
 		val result = player.inventory.addItem(item)
 
 		if (result.isEmpty()) {
-			sender msg green("Gave ") +
-					white("${amount}x ${customItem.displayName}") +
-					green(" to ${player.name}")
+			sender.sendMiniMessage("<green>Gave <white>${amount}x ${customItem.displayName}<green> to ${player.name}")
 		} else {
 			val extra = result.values.sumOf { it.amount }
-			sender msg red("Could not fit $extra out of the $amount items in ${player.name}'s inventory!")
+			sender.sendMiniMessage("<red>Could not fit $extra out of the $amount items in ${player.name}'s inventory!")
 		}
 	}
 }

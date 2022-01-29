@@ -2,10 +2,6 @@ package net.starlegacy.feature.space
 
 import java.util.concurrent.TimeUnit
 import net.starlegacy.SLComponent
-import net.starlegacy.feature.gear.powerarmor.PowerArmorManager
-import net.starlegacy.feature.gear.powerarmor.PowerArmorModule
-import net.starlegacy.feature.misc.getPower
-import net.starlegacy.feature.misc.removePower
 import net.starlegacy.util.PerPlayerCooldown
 import net.starlegacy.util.Tasks
 import net.starlegacy.util.Vec3i
@@ -166,9 +162,13 @@ object SpaceMechanics : SLComponent() {
 		val helmet = player.inventory.helmet
 			?: return false
 
+
+		return false
+		/*
 		if (!PowerArmorManager.hasModule(helmet, PowerArmorModule.PRESSURE_FIELD)) {
 			return false
 		}
+		// todo: add again
 
 		val powerUsage = 10
 
@@ -180,5 +180,7 @@ object SpaceMechanics : SLComponent() {
 			removePower(helmet, powerUsage)
 		}
 		return true
+		*/
+
 	}
 }

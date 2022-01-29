@@ -2,8 +2,8 @@ package net.starlegacy.feature.space
 
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.space.Planet
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.starlegacy.util.NMSBlockData
 import net.starlegacy.util.NMSBlocks
 import net.starlegacy.util.Vec3i
@@ -56,7 +56,7 @@ class CachedPlanet(
 	var orbitProgress: Double = orbitProgress; private set
 
 	val planetIcon: CustomItem = CustomItems["planet_icon_${name.lowercase().replace(" ", "")}"]
-		?: CustomItems.DETONATOR
+		?: CustomItems.blankItem
 
 	init {
 		require(size > 0 && size <= 1)

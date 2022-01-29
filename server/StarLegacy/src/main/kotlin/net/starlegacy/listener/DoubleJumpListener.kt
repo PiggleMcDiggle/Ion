@@ -1,8 +1,7 @@
-package net.starlegacy.listener.gear
+package net.starlegacy.listener
 
 import java.util.UUID
 import net.starlegacy.feature.space.SpaceWorlds
-import net.starlegacy.listener.SLEventListener
 import org.bukkit.FluidCollisionMode
 import org.bukkit.GameMode
 import org.bukkit.entity.Player

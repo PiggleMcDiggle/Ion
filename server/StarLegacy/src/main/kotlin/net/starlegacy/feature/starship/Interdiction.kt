@@ -2,7 +2,7 @@ package net.starlegacy.feature.starship
 
 import net.horizonsend.ion.server.commands.QuickBalance
 import net.starlegacy.SLComponent
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.multiblock.Multiblocks
 import net.starlegacy.feature.multiblock.gravitywell.GravityWellMultiblock
 import net.starlegacy.feature.space.SpaceWorlds
@@ -73,7 +73,7 @@ object Interdiction : SLComponent() {
 
 		val input = GravityWellMultiblock.getInput(sign)
 
-		if (LegacyItemUtils.getTotalItems(input, CustomItems.MINERAL_CHETHERITE.singleItem()) < 2) {
+		if (LegacyItemUtils.getTotalItems(input, CustomItems["chetherite"]!!.getItem()) < 2) {
 			player msg "&cNot enough hypermatter in the dropper. Two chetherite shards are required!"
 			return
 		}
@@ -101,7 +101,7 @@ object Interdiction : SLComponent() {
 			cruisingShip.sendMessage("&cQuantum fluctuations detected - velocity has been reduced by 10%.")
 		}
 
-		input.removeItem(CustomItems.MINERAL_CHETHERITE.itemStack(2))
+		input.removeItem(CustomItems["chetherite"]!!.getItem(2))
 		starship.sendMessage("&5Gravity pulse has been invoked by ${player.name}.")
 	}
 }

@@ -1,6 +1,6 @@
 package net.starlegacy.listener.misc
 
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.multiblock.misc.MobDefender
 import net.starlegacy.listener.SLEventListener
 import net.starlegacy.util.stripColor

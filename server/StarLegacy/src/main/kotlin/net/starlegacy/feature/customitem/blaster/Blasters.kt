@@ -1,29 +1,23 @@
-package net.starlegacy.feature.gear.blaster
+package net.starlegacy.feature.customitem.blaster
 
-import java.time.Instant
-import java.util.Random
-import java.util.UUID
 import net.md_5.bungee.api.ChatColor
 import net.starlegacy.cache.nations.NationCache
 import net.starlegacy.cache.nations.PlayerCache
-import net.starlegacy.feature.misc.CustomItems
-import net.starlegacy.feature.misc.getPower
-import net.starlegacy.feature.misc.removePower
-import net.starlegacy.util.updateMeta
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.BlasterItem
+import net.horizonsend.ion.server.customitems.types.power
+import net.horizonsend.ion.server.customitems.types.uses
 import org.bukkit.Color
-import org.bukkit.DyeColor
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.Damageable
 import org.bukkit.util.Vector
+import java.time.Instant
+import java.util.Random
+import java.util.UUID
 
 object Blasters {
-	fun getBlaster(item: ItemStack): CustomItems.BlasterItem? = CustomItems[item] as? CustomItems.BlasterItem
-
-	private val typeMap = mutableMapOf<String, BlasterType>()
-	fun getBlasterType(item: CustomItems.BlasterItem): BlasterType =
-		typeMap.getOrPut(item.id) { BlasterType.values().single { it.item === item } }
+	fun getBlaster(item: ItemStack): BlasterItem? = CustomItems[item] as? BlasterItem
 
 	private val randomColorCache = mutableMapOf<UUID, Color>()
 	fun getRandomColor(uuid: UUID): Color = randomColorCache.getOrElse(uuid) {
@@ -41,7 +35,8 @@ object Blasters {
 
 	private val lastFired = HashMap<UUID, Long>()
 
-	fun fireBlaster(entity: LivingEntity, blaster: ItemStack, type: BlasterType) {
+	fun fireBlaster(entity: LivingEntity, blaster: ItemStack) {
+		val type = getBlaster(blaster) ?: return
 		val uniqueId = entity.uniqueId
 		if (Instant.now().toEpochMilli() - (lastFired[uniqueId] ?: 0) < type.cooldown) {
 			return
@@ -49,29 +44,23 @@ object Blasters {
 		if (entity is Player) {
 			val powerUsage = type.power
 
-			if (getPower(blaster) < powerUsage) {
+			if (blaster.power < powerUsage) {
 				entity.sendMessage(ChatColor.RED.toString() + "Out of power!")
 				return
 			}
 
 			if (!entity.getWorld().name.lowercase().contains("arena")) {
-				removePower(blaster, powerUsage)
+				blaster.power -= powerUsage
+				blaster.uses--
 			}
 
 			entity.setCooldown(blaster.type, (type.cooldown / 1000.0f * 20.0f).toInt())
-
-			blaster.updateMeta {
-				(it as Damageable).damage++
-			}
 		}
 		lastFired[uniqueId] = Instant.now().toEpochMilli()
 		BlasterProjectile.scheduler.submit {
 			val location = entity.eyeLocation
-			val lore = blaster.itemMeta.lore
 
-			val color = if (lore != null && lore.size > 1) {
-				DyeColor.valueOf(lore[1]).color
-			} else when (entity) {
+			val color = when (entity) {
 				is Player -> getColor(entity)
 				else -> getRandomColor(entity.uniqueId)
 			}
@@ -92,3 +81,4 @@ object Blasters {
 		}
 	}
 }
+

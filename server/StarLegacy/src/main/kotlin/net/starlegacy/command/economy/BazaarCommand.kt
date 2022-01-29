@@ -11,14 +11,14 @@ import net.starlegacy.database.schema.economy.BazaarItem
 import net.starlegacy.database.schema.economy.CityNPC
 import net.starlegacy.database.schema.nations.Settlement
 import net.starlegacy.database.slPlayerId
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.economy.bazaar.Bazaars
 import net.starlegacy.feature.economy.bazaar.Merchants
 import net.starlegacy.feature.economy.city.CityNPCs
 import net.starlegacy.feature.economy.city.TradeCities
 import net.starlegacy.feature.economy.city.TradeCityData
 import net.starlegacy.feature.economy.city.TradeCityType
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.starlegacy.feature.nations.gui.playerClicker
 import net.starlegacy.feature.nations.region.Regions
 import net.starlegacy.feature.nations.region.types.RegionTerritory
@@ -229,10 +229,10 @@ object BazaarCommand : SLCommand() {
 				val territoryId = city.territoryId
 				val territory: RegionTerritory = Regions[territoryId]
 
-				// attempt to get the planet icon, just use a detonator if unavailable
-				val item: CustomItem = Space.getPlanet(territory.world)?.planetIcon ?: CustomItems.DETONATOR
+				// attempt to get the planet icon, just use a blank item
+				val item: CustomItem = Space.getPlanet(territory.world)?.planetIcon ?: CustomItems.blankItem
 
-				return@map guiButton(item.itemStack(1)) {
+				return@map guiButton(item.getItem(1)) {
 					val clicker: Player = playerClicker
 					val remote: Boolean = Regions.findFirstOf<RegionTerritory>(clicker.location)?.id != territoryId
 					Bazaars.openMainMenu(territoryId, clicker, remote)

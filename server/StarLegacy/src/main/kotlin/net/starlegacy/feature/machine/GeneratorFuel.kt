@@ -1,18 +1,18 @@
 package net.starlegacy.feature.machine
 
-import net.starlegacy.feature.misc.CustomItem
-import net.starlegacy.feature.misc.CustomItems
+import net.horizonsend.ion.server.customitems.CustomItems
+import net.horizonsend.ion.server.customitems.types.CustomItem
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
-private fun customItem(customItem: CustomItem): ItemStack = customItem.singleItem()
+private fun customItem(customItem: CustomItem): ItemStack = customItem.getItem()
 private fun itemStack(material: Material): ItemStack = ItemStack(material, 1)
 
 enum class GeneratorFuel(private val item: ItemStack, val cooldown: Int, val power: Int) {
-	HYDROGEN(customItem(CustomItems.GAS_CANISTER_HYDROGEN), cooldown = 200, power = 300),
-	OXYGEN(customItem(CustomItems.GAS_CANISTER_OXYGEN), cooldown = 150, power = 100),
-	NITROGEN(customItem(CustomItems.GAS_CANISTER_NITROGEN), cooldown = 100, power = 250),
-	URANIUM(customItem(CustomItems.MINERAL_URANIUM), cooldown = 2000, power = 5000),
+	HYDROGEN(customItem(CustomItems["gas_canister_hydrogen"]!!), cooldown = 200, power = 300),
+	OXYGEN(customItem(CustomItems["gas_canister_oxygen"]!!), cooldown = 150, power = 100),
+	NITROGEN(customItem(CustomItems["gas_canister_nitrogen"]!!), cooldown = 100, power = 250),
+	URANIUM(customItem(CustomItems["uranium"]!!), cooldown = 2000, power = 5000),
 	COAL(itemStack(Material.COAL), cooldown = 40, power = 500),
 	CHARCOAL(itemStack(Material.CHARCOAL), cooldown = 40, power = 400),
 	COAL_BLOCK(itemStack(Material.COAL_BLOCK), cooldown = 300, power = 4000),

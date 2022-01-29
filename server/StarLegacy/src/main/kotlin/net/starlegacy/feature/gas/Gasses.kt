@@ -3,13 +3,9 @@ package net.starlegacy.feature.gas
 import java.io.File
 import kotlin.collections.set
 import net.starlegacy.SLComponent
+import net.horizonsend.ion.server.customitems.CustomItems
 import net.starlegacy.feature.gas.collectionfactors.CollectionFactor
-import net.starlegacy.feature.misc.CustomItems
-import net.starlegacy.util.Tasks
-import net.starlegacy.util.getFacing
-import net.starlegacy.util.getRelativeIfLoaded
-import net.starlegacy.util.leftFace
-import net.starlegacy.util.rightFace
+import net.starlegacy.util.*
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
@@ -26,6 +22,7 @@ object Gasses : SLComponent() {
 	private var gasses = mutableMapOf<String, Gas>()
 
 	override fun onEnable() {
+		// TODO: make sure this matched the item ids for the new custom item system
 		val file = File(plugin.dataFolder, "gasses.yml")
 		file.createNewFile()
 		val configuration = YamlConfiguration.loadConfiguration(file)
@@ -87,14 +84,14 @@ object Gasses : SLComponent() {
 	}
 
 	fun isEmptyCanister(itemStack: ItemStack?): Boolean {
-		return itemStack != null && CustomItems[itemStack] === CustomItems.GAS_CANISTER_EMPTY
+		return itemStack != null && CustomItems[itemStack] === CustomItems["gas_canister_empty"]
 	}
 
 	private fun tryHarvestGas(furnaceBlock: Block, hopperBlock: Block, gas: Gas): Boolean {
 		val furnace = furnaceBlock.getState(false) as Furnace
 		val hopper = hopperBlock.getState(false) as Hopper
 		val canisterItem = furnace.inventory.smelting ?: return false
-		val gasItem = gas.item.itemStack(1)
+		val gasItem = gas.item.getItem(1)
 		if (!isEmptyCanister(canisterItem)) {
 			return false
 		}
