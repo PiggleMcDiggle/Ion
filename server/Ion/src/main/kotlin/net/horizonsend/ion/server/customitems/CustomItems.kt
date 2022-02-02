@@ -103,6 +103,11 @@ class CustomItems : Listener {
 		val blankItem = GenericCustomItem("blank_item", 0, "Blank Custom Item", EMERALD)
 
 
+		/**
+		 * Register a shapeless recipe for [itemStack]
+		 * @param ingredients the crafting ingredients as a set of id strings
+		 * @see registerShapedRecipe
+		 */
 		fun registerShapelessRecipe(itemStack: ItemStack, ingredients: Set<String>) {
 			// Have to go through and check if one of the ingredients is a powerable custom item
 			// If it is, ExactChoice won't work for it, so we have to do custom recipe handling
@@ -110,15 +115,38 @@ class CustomItems : Listener {
 				if (CustomItems[it] is PowerItem) customShapelessRecipes[ingredients] = itemStack
 			}
 			// Either way, register a bukkit recipe
+			val recipe = ShapelessRecipe(NamespacedKey(PLUGIN, "ion_recipe_${idFromItemStack(itemStack)}"), itemStack)
+			ingredients.forEach {
+				recipe.addIngredient(itemStackFromId(it)!!)
+			}
+			addRecipe(recipe)
 		}
 
-		fun registerShapedRecipe(itemStack: ItemStack, matrix: List<String>) {
+		/**
+		 * Register a shaped recipe for [itemStack]
+		 * @param matrix a list of item (or custom item) ids that represent the crafting grid
+		 * @see registerShapelessRecipe
+		 */
+		fun registerShapedRecipe(itemStack: ItemStack, matrix: List<String?>) {
 			// Have to go through and check if one of the ingredients is a powerable custom item
 			// If it is, ExactChoice won't work for it, so we have to do custom recipe handling
 			matrix.forEach {
 				if (CustomItems[it] is PowerItem) customShapedRecipes[matrix] = itemStack
 			}
 			// Either way, register a bukkit recipe
+			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, "ion_recipe_${idFromItemStack(itemStack)}"), itemStack)
+			var shape = ""
+			val str = "abcdefghi"
+			for (i in 0..8){
+				if (matrix[i] == null) {
+					shape += " "
+					continue
+				}
+				shape += str[i]
+				recipe.setIngredient(str[i], itemStackFromId(matrix[i]!!)!!)
+			}
+			recipe.shape(*shape.chunked(3).toTypedArray())
+			addRecipe(recipe)
 		}
 
 		/**
