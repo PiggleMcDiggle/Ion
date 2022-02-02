@@ -39,6 +39,12 @@ class CustomItems : Listener {
 		val customItems = mutableMapOf<String, CustomItem>()
 
 		/**
+		 * All custom recipes that couldn't be registered through Bukkit.
+		 * Map of crafting matrices (a list of maps of id: count) to [ItemStack]
+		 */
+		val customRecipes = mutableMapOf<MutableList<Map<String, Int>?>, ItemStack>()
+
+		/**
 		 * Registers the customitem. Will warn the console if the [item]'s ID is already in use
 		 * or if it's [Material], [CustomItem.model] pair is already in use
 		 *
@@ -166,12 +172,22 @@ class CustomItems : Listener {
 
 		/**
 		 * @return the itemstack of the custom item or material with [id], with [count] items
+		 * @see [idFromItemStack]
 		 */
 		fun itemStackFromId(id: String, count: Int = 1): ItemStack? {
 			return CustomItems[id]?.getItem(count) ?: ItemStack(
 				Material.getMaterial(id.uppercase()) ?: return null,
 				count
 			)
+		}
+
+		/**
+		 * @return the id (either CustomItem or Material) of the ItemStack
+		 * Note: Material IDs will be lowercase
+		 * @see [itemStackFromId]
+		 */
+		fun idFromItemStack(itemStack: ItemStack): String {
+			return itemStack.customItem?.id ?: itemStack.type.toString().lowercase()
 		}
 		// endregion
 	}
@@ -193,6 +209,27 @@ class CustomItems : Listener {
 		Minerals.register()
 		MiscRecipes.register()
 		RocketItems.register()
+		customRecipes[mutableListOf(
+			mapOf("anvil" to 1), null, null,
+			mapOf("torch" to 5), mapOf("battery_g" to 4), null,
+			mapOf("aluminum" to 2), null, null
+		)] = ItemStack(Material.BEACON)
+	}
+
+	/**
+	 * Handles custom crafting recipes that can't be done through Bukkit
+	 */
+	@EventHandler
+	fun onPrepareCraft(event: PrepareItemCraftEvent) {
+		val stringMatrix = MutableList<Map<String, Int>?>(9) {null}
+		var i = -1
+		event.inventory.matrix!!.forEach {
+			i++
+			it ?: return@forEach
+			stringMatrix[i] = mapOf(idFromItemStack(it) to it.amount)
+		}
+		println(stringMatrix.toString())
+		if (customRecipes.containsKey(stringMatrix)) event.inventory.result = customRecipes[stringMatrix]
 	}
 
 	// region Custom Item Hooks
