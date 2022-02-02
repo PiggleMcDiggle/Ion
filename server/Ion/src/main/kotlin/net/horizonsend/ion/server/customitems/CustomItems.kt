@@ -126,48 +126,13 @@ class CustomItems : Listener {
 			return recipe
 		}
 
-		/**
-		 * Registers a [ShapelessRecipe] for [output]
-		 * @return the recipe
-		 * @see registerShapedRecipe
-		 * @see recipeChoice
-		 */
-		fun registerShapelessRecipe(
-			id: String, output: ItemStack, vararg ingredients: RecipeChoice
-		): ShapelessRecipe {
-			check(ingredients.isNotEmpty())
-			val recipe = ShapelessRecipe(NamespacedKey(PLUGIN, id), output)
 
-			ingredients.forEach {
-				recipe.addIngredient(it)
-			}
-			addRecipe(recipe)
-			//PLUGIN.logger.warning("Created shapeless recipe $id")
-			return recipe
+		fun registerShapelessRecipe(itemStack: ItemStack, ingredients: List<String>) {
+
 		}
 
-		/**
-		 * Uses [RecipeChoice.ExactChoice]
-		 * @return a [RecipeChoice] that represents [customItem].
-		 */
-		fun recipeChoice(customItem: CustomItem): RecipeChoice {
-			return RecipeChoice.ExactChoice(customItem.getItem())
-		}
+		fun registerRecipe(itemStack: ItemStack, matrix: List<String>) {
 
-		/**
-		 * Uses [RecipeChoice.MaterialChoice]
-		 * @return a [RecipeChoice] that represents [material]
-		 */
-		fun recipeChoice(material: Material): RecipeChoice {
-			return RecipeChoice.MaterialChoice(material)
-		}
-
-		/**
-		 * Uses [RecipeChoice.ExactChoice] which might cause issues, use the recipeChoice for [Material] if possible
-		 * @return a [RecipeChoice] that represents [itemStack].
-		 */
-		fun recipeChoice(itemStack: ItemStack): RecipeChoice {
-			return RecipeChoice.ExactChoice(itemStack) // exactchoice might cause issues?
 		}
 
 		/**
@@ -209,11 +174,6 @@ class CustomItems : Listener {
 		Minerals.register()
 		MiscRecipes.register()
 		RocketItems.register()
-		customRecipes[mutableListOf(
-			"anvil",    null,        null,
-			"torch",    "battery_g", null,
-			"aluminum", null,        null
-		)] = ItemStack(Material.BEACON)
 	}
 
 	/**
