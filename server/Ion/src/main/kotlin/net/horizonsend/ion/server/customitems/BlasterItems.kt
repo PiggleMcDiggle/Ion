@@ -66,10 +66,11 @@ object BlasterItems {
 		)
 		Tasks.syncDelay(1) {
 			CustomItems.registerShapedRecipe(
-				pistol.id, pistol.getItem(), " bg", " t ", ingredients = mapOf(
-					'b' to CustomItems.recipeChoice(CustomItems["battery_a"]!!),
-					'g' to CustomItems.recipeChoice(GLASS_PANE),
-					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!)
+				pistol.getItem(),
+				listOf(
+					null, "battery_a", "glass_pane",
+					null, "titanium",  null,
+					null, null,        null
 				)
 			)
 		}
@@ -91,10 +92,11 @@ object BlasterItems {
 		)
 		Tasks.syncDelay(1) {
 			CustomItems.registerShapedRecipe(
-				rifle.id, rifle.getItem(), "btg", "t  ", ingredients = mapOf(
-					'b' to CustomItems.recipeChoice(CustomItems["battery_a"]!!),
-					'g' to CustomItems.recipeChoice(GLASS_PANE),
-					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!)
+				rifle.getItem(),
+				listOf(
+					"battery_a", "titanium", "glass_pane",
+					"titanium",  null,        null,
+					null,        null,        null
 				)
 			)
 		}
@@ -116,10 +118,11 @@ object BlasterItems {
 		)
 		Tasks.syncDelay(1) {
 			CustomItems.registerShapedRecipe(
-				sniper.id, sniper.getItem(), " t ", "btg", "t  ", ingredients = mapOf(
-					'b' to CustomItems.recipeChoice(CustomItems["battery_a"]!!),
-					'g' to CustomItems.recipeChoice(GLASS_PANE),
-					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!)
+				sniper.getItem(),
+				listOf(
+					null,        "titanium", null,
+					"battery_a", "titanium", "glass_pane",
+					"titanium",  null,       null
 				)
 			)
 		}
@@ -142,10 +145,11 @@ object BlasterItems {
 		)
 		Tasks.syncDelay(1) {
 			CustomItems.registerShapedRecipe(
-				cannon.id, cannon.getItem(), "brt", "t  ", ingredients = mapOf(
-					'b' to CustomItems.recipeChoice(CustomItems["battery_a"]!!),
-					'r' to CustomItems.recipeChoice(REDSTONE),
-					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!)
+				cannon.getItem(),
+				listOf(
+					"battery_a", "redstone", "titanium",
+					"titanium",  null,       null,
+					null,        null,       null
 				)
 			)
 		}

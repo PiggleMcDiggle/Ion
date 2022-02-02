@@ -1,8 +1,6 @@
 package net.horizonsend.ion.server.customitems
 
 import net.horizonsend.ion.server.capitalized
-import net.horizonsend.ion.server.customitems.CustomItems.Companion.itemStackFromId
-import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
 import net.horizonsend.ion.server.customitems.types.EnergySwordItem
 import net.starlegacy.StarLegacy.Companion.PLUGIN
@@ -22,11 +20,11 @@ object EnergySwords {
 		CustomItems.register(item)
 		Tasks.syncDelay(1) {
 			registerShapedRecipe(
-				item.id, item.getItem(), "aga", "a*a", "ata", ingredients = mapOf(
-					'a' to recipeChoice(itemStackFromId("aluminum")!!),
-					'g' to recipeChoice(itemStackFromId("glass_pane")!!),
-					'*' to recipeChoice(itemStackFromId(craft)!!),
-					't' to recipeChoice(itemStackFromId("titanium")!!)
+				item.getItem(),
+				listOf(
+					"aluminum", "glass_pane", "aluminum",
+					"aluminum", craft,        "aluminum",
+					"aluminum", "titanium",   "aluminum"
 				)
 			)
 		}

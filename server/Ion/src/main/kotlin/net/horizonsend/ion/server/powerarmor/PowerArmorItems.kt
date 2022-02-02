@@ -28,21 +28,39 @@ object PowerArmorItems {
 		val leggings = registerPowerArmor("Leggings", 1, LEATHER_LEGGINGS, 50000)
 		val boots = registerPowerArmor("Boots", 1, LEATHER_BOOTS, 50000)
 		Tasks.syncDelay(1) {
-			val items = mapOf(
-				'*' to CustomItems.recipeChoice(CustomItems["titanium"]!!),
-				'b' to CustomItems.recipeChoice(CustomItems["battery_g"]!!)
-			)
-			CustomItems.registerShapedRecipe(helmet.id, helmet.getItem(), "*b*", "* *", ingredients = items)
+
 			CustomItems.registerShapedRecipe(
-				chestplate.id,
-				chestplate.getItem(),
-				"* *",
-				"*b*",
-				"***",
-				ingredients = items
+				helmet.getItem(),
+				listOf(
+					"titanium", "battery_g", "titanium",
+					"titanium", null,        "titanium",
+					null,       null,        null
+				)
 			)
-			CustomItems.registerShapedRecipe(leggings.id, leggings.getItem(), "*b*", "* *", "* *", ingredients = items)
-			CustomItems.registerShapedRecipe(boots.id, boots.getItem(), "* *", "*b*", ingredients = items)
+			CustomItems.registerShapedRecipe(
+				chestplate.getItem(),
+				listOf(
+					"titanium", null,        "titanium",
+					"titanium", "battery_g", "titanium",
+					"titanium", "titanium",  "titanium"
+				)
+			)
+			CustomItems.registerShapedRecipe(
+				leggings.getItem(),
+				listOf(
+					"titanium", "battery_g", "titanium",
+					"titanium", null,        "titanium",
+					"titanium", null,        "titanium"
+				)
+			)
+			CustomItems.registerShapedRecipe(
+				boots.getItem(),
+				listOf(
+					null,       null,        null,
+					"titanium", null,        "titanium",
+					"titanium", "battery_g", "titanium"
+				)
+			)
 		}
 	}
 }

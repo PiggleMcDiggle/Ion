@@ -34,22 +34,23 @@ object RocketItems {
 		)
 		Tasks.syncDelay(1) {
 			CustomItems.registerShapelessRecipe(
-				rocket.id,
 				rocket.getItem(),
-				CustomItems.recipeChoice(base),
-				CustomItems.recipeChoice(warhead)
+				setOf(base.id, warhead.id)
 			)
 			CustomItems.registerShapedRecipe(
-				base.id, base.getItem(3), "t t", "tht", "tgt", ingredients = mapOf(
-					't' to CustomItems.recipeChoice(CustomItems["titanium"]!!),
-					'h' to CustomItems.recipeChoice(CustomItems["gas_canister_helium"]!!),
-					'g' to CustomItems.recipeChoice(HOPPER),
+				base.getItem(3),
+				listOf(
+					"titanium", null,                  "titanium",
+					"titanium", "gas_canister_helium", "titanium",
+					"titanium", "hopper",              "titanium"
 				)
 			)
 			CustomItems.registerShapedRecipe(
-				warhead.id, warhead.getItem(3), " a ", "aoa", " a ", ingredients = mapOf(
-					'a' to CustomItems.recipeChoice(CustomItems["aluminum"]!!),
-					'o' to CustomItems.recipeChoice(DIAMOND_BLOCK)
+				warhead.getItem(3),
+				listOf(
+					null,       "aluminum",      null,
+					"aluminum", "diamond_block", "aluminum",
+					null,       "aluminum",      null
 				)
 			)
 		}

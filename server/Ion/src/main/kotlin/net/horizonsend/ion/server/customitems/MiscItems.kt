@@ -1,12 +1,10 @@
 package net.horizonsend.ion.server.customitems
 
-import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
 import net.starlegacy.feature.customitem.type.DetonatorItem
 import net.starlegacy.util.Tasks
 import org.bukkit.ChatColor.GRAY
 import org.bukkit.ChatColor.RED
-import org.bukkit.Material.REDSTONE
 import org.bukkit.Material.SHEARS
 
 object MiscItems {
@@ -23,10 +21,11 @@ object MiscItems {
 		)
 		Tasks.syncDelay(1) {
 			registerShapedRecipe(
-				detonator.id, detonator.getItem(), " r ", "tut", " t ", ingredients = mapOf(
-					'r' to recipeChoice(REDSTONE),
-					't' to recipeChoice(CustomItems["titanium"]!!),
-					'u' to recipeChoice(CustomItems["uranium"]!!)
+				detonator.getItem(),
+				listOf(
+					null,       "redstone", null,
+					"titanium", "uranium",  "titanium",
+					null,       "titanium", null
 				)
 			)
 		}

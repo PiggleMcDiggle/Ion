@@ -1,6 +1,5 @@
 package net.horizonsend.ion.server.customitems
 
-import net.horizonsend.ion.server.customitems.CustomItems.Companion.recipeChoice
 import net.horizonsend.ion.server.customitems.CustomItems.Companion.registerShapedRecipe
 import net.horizonsend.ion.server.customitems.types.GasItem
 import net.starlegacy.util.Tasks
@@ -11,7 +10,6 @@ import org.bukkit.ChatColor.GREEN
 import org.bukkit.ChatColor.RED
 import org.bukkit.ChatColor.WHITE
 import org.bukkit.ChatColor.YELLOW
-import org.bukkit.Material.GLASS_PANE
 import org.bukkit.Material.SNOWBALL
 
 object GasItems {
@@ -31,9 +29,11 @@ object GasItems {
 		val empty = registerGas("${WHITE}Empty", model = 1)
 		Tasks.syncDelay(1) {
 			registerShapedRecipe(
-				empty.id, empty.getItem(), " i ", "igi", " i ", ingredients = mapOf(
-					'i' to recipeChoice(CustomItems["titanium"]!!),
-					'g' to recipeChoice(GLASS_PANE)
+				empty.getItem(),
+				listOf(
+					null,       "titanium",   null,
+					"titanium", "glass_pane", "titanium",
+					null,       "titanium",   null
 				)
 			)
 		}

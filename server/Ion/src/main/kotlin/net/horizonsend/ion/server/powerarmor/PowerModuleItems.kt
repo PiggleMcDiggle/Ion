@@ -24,10 +24,11 @@ object PowerModuleItems {
 		CustomItems.register(item)
 		Tasks.syncDelay(1) {
 			CustomItems.registerShapedRecipe(
-				item.id, item.getItem(), "aga", "g*g", "aga", ingredients = mapOf(
-					'a' to CustomItems.recipeChoice(CustomItems["aluminum"]!!),
-					'g' to CustomItems.recipeChoice(GLASS_PANE),
-					'*' to CustomItems.recipeChoice(CustomItems.itemStackFromId(craft)!!)
+				item.getItem(),
+				listOf(
+					"aluminum",   "glass_pane", "aluminum",
+					"glass_pane", craft,        "glass_pane",
+					"aluminum",   "glass_pane", "aluminum",
 				)
 			)
 		}
