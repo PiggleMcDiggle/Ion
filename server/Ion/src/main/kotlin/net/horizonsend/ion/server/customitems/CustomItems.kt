@@ -40,9 +40,9 @@ class CustomItems : Listener {
 
 		/**
 		 * All custom recipes that couldn't be registered through Bukkit.
-		 * Map of crafting matrices (a list of maps of id: count) to [ItemStack]
+		 * Map of crafting matrices to [ItemStack]
 		 */
-		val customRecipes = mutableMapOf<MutableList<Map<String, Int>?>, ItemStack>()
+		val customRecipes = mutableMapOf<MutableList<String?>, ItemStack>()
 
 		/**
 		 * Registers the customitem. Will warn the console if the [item]'s ID is already in use
@@ -210,9 +210,9 @@ class CustomItems : Listener {
 		MiscRecipes.register()
 		RocketItems.register()
 		customRecipes[mutableListOf(
-			mapOf("anvil" to 1), null, null,
-			mapOf("torch" to 5), mapOf("battery_g" to 4), null,
-			mapOf("aluminum" to 2), null, null
+			"anvil",    null,        null,
+			"torch",    "battery_g", null,
+			"aluminum", null,        null
 		)] = ItemStack(Material.BEACON)
 	}
 
@@ -221,12 +221,12 @@ class CustomItems : Listener {
 	 */
 	@EventHandler
 	fun onPrepareCraft(event: PrepareItemCraftEvent) {
-		val stringMatrix = MutableList<Map<String, Int>?>(9) {null}
+		val stringMatrix = MutableList<String?>(9) {null}
 		var i = -1
 		event.inventory.matrix!!.forEach {
 			i++
 			it ?: return@forEach
-			stringMatrix[i] = mapOf(idFromItemStack(it) to it.amount)
+			stringMatrix[i] = idFromItemStack(it)
 		}
 		println(stringMatrix.toString())
 		if (customRecipes.containsKey(stringMatrix)) event.inventory.result = customRecipes[stringMatrix]
