@@ -143,8 +143,9 @@ class CustomItems : Listener {
 					continue
 				}
 				shape += str[i]
-				recipe.shape(*shape.chunked(3).toTypedArray()) // Have to repeatedly set shape, otherwise
+				recipe.shape("abc", "def", "ghi") // Have to repeatedly set shape, otherwise
 				// Bukkit complains that the ingredient isn't in the shape. *pain*
+				// Can't set it to the WIP shape as it isn't necessarily rectangular
 				recipe.setIngredient(str[i], itemStackFromId(matrix[i]!!)!!)
 			}
 			recipe.shape(*shape.chunked(3).toTypedArray())
