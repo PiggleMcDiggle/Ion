@@ -104,34 +104,11 @@ class CustomItems : Listener {
 		// The original StarLegacy code had a custom addRecipe that had delays and attempts.
 		// If for some reason this doesn't work as expected, check that.
 
-		/**
-		 * Registers a [ShapedRecipe] for [output]
-		 *
-		 * [shape] should be a series of 3 3 character strings.
-		 * [map] maps the characters in [shape] to [RecipeChoice]s
-		 *
-		 * @return the recipe
-		 * @see registerShapelessRecipe
-		 */
-		fun registerShapedRecipe(
-			id: String, output: ItemStack, vararg shape: String, ingredients: Map<Char, RecipeChoice>
-		): ShapedRecipe {
-			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, id), output)
-			recipe.shape(*shape)
-			ingredients.forEach { (char, ingredient) ->
-				recipe.setIngredient(char, ingredient)
-			}
-			addRecipe(recipe)
-			//PLUGIN.logger.warning("Created shaped recipe $id")
-			return recipe
-		}
-
-
 		fun registerShapelessRecipe(itemStack: ItemStack, ingredients: List<String>) {
 
 		}
 
-		fun registerRecipe(itemStack: ItemStack, matrix: List<String>) {
+		fun registerShapedRecipe(itemStack: ItemStack, matrix: List<String>) {
 
 		}
 
