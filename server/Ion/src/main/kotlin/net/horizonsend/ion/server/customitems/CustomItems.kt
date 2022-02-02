@@ -2,6 +2,7 @@ package net.horizonsend.ion.server.customitems
 
 import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.horizonsend.ion.server.customitems.types.GenericCustomItem
+import net.horizonsend.ion.server.customitems.types.PowerItem
 import net.horizonsend.ion.server.customitems.types.PowerItemBreakCanceller
 import net.horizonsend.ion.server.powerarmor.PowerArmorItems
 import net.horizonsend.ion.server.powerarmor.PowerArmorListener
@@ -42,7 +43,8 @@ class CustomItems : Listener {
 		 * All custom recipes that couldn't be registered through Bukkit.
 		 * Map of crafting matrices to [ItemStack]
 		 */
-		val customRecipes = mutableMapOf<MutableList<String?>, ItemStack>()
+		val customShapedRecipes = mutableMapOf<List<String?>, ItemStack>()
+		val customShapelessRecipes = mutableMapOf<Set<String>, ItemStack>()
 
 		/**
 		 * Registers the customitem. Will warn the console if the [item]'s ID is already in use
@@ -100,16 +102,23 @@ class CustomItems : Listener {
 		 */
 		val blankItem = GenericCustomItem("blank_item", 0, "Blank Custom Item", EMERALD)
 
-		// region Recipes
-		// The original StarLegacy code had a custom addRecipe that had delays and attempts.
-		// If for some reason this doesn't work as expected, check that.
 
-		fun registerShapelessRecipe(itemStack: ItemStack, ingredients: List<String>) {
-
+		fun registerShapelessRecipe(itemStack: ItemStack, ingredients: Set<String>) {
+			// Have to go through and check if one of the ingredients is a powerable custom item
+			// If it is, ExactChoice won't work for it, so we have to do custom recipe handling
+			ingredients.forEach {
+				if (CustomItems[it] is PowerItem) customShapelessRecipes[ingredients] = itemStack
+			}
+			// Either way, register a bukkit recipe
 		}
 
 		fun registerShapedRecipe(itemStack: ItemStack, matrix: List<String>) {
-
+			// Have to go through and check if one of the ingredients is a powerable custom item
+			// If it is, ExactChoice won't work for it, so we have to do custom recipe handling
+			matrix.forEach {
+				if (CustomItems[it] is PowerItem) customShapedRecipes[matrix] = itemStack
+			}
+			// Either way, register a bukkit recipe
 		}
 
 		/**
@@ -131,7 +140,6 @@ class CustomItems : Listener {
 		fun idFromItemStack(itemStack: ItemStack): String {
 			return itemStack.customItem?.id ?: itemStack.type.toString().lowercase()
 		}
-		// endregion
 	}
 
 	init {
@@ -165,11 +173,11 @@ class CustomItems : Listener {
 			it ?: return@forEach
 			stringMatrix[i] = idFromItemStack(it)
 		}
-		println(stringMatrix.toString())
-		if (customRecipes.containsKey(stringMatrix)) event.inventory.result = customRecipes[stringMatrix]
+		if (customShapedRecipes.containsKey(stringMatrix.toList())) event.inventory.result = customShapedRecipes[stringMatrix.toList()]
+		val shapelessIngredients = stringMatrix.toMutableSet()
+		shapelessIngredients.removeAll(setOf(null))
+		if (customShapelessRecipes.containsKey(shapelessIngredients.toSet())) event.inventory.result = customShapelessRecipes[shapelessIngredients.toSet()]
 	}
-
-	// region Custom Item Hooks
 
 	/**
 	 * Calls custom item onClick hooks.
