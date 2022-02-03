@@ -266,6 +266,7 @@ class StarLegacy : JavaPlugin() {
 			config.getString("username")!!,
 			config.getString("password")!!
 		)
+		SETTINGS.redis.host = config.getString("redis-host")!!
 
 			//loadConfig(dataFolder, "config")
 
