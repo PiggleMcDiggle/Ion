@@ -54,7 +54,7 @@ class CustomItems : Listener {
 		 */
 		fun register(item: CustomItem): CustomItem {
 			// Check for duplicate custom model data
-			customItems.forEach { (id, customItem) ->
+			customItems.forEach { (_, customItem) ->
 				if (customItem.model == item.model && customItem.material == item.material) {
 					PLUGIN.logger.warning("Multiple custom items have registered for the same material and model data!")
 					PLUGIN.logger.warning("${customItem.id} and ${item.id} are both using ${customItem.material.name} and ${customItem.model}")
@@ -134,7 +134,7 @@ class CustomItems : Listener {
 				if (CustomItems[it] is PowerItem) customShapedRecipes[matrix] = itemStack
 			}
 			// Either way, register a bukkit recipe
-			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, "ion_recipe_${idFromItemStack(itemStack)}"), itemStack)
+			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, "ion_recipe_${idFromItemStack(itemStack)}"), itemStack).shape("abc", "def", "ghi")
 			var shape = ""
 			val str = "abcdefghi"
 			for (i in 0..8){
@@ -143,9 +143,6 @@ class CustomItems : Listener {
 					continue
 				}
 				shape += str[i]
-				recipe.shape("abc", "def", "ghi") // Have to repeatedly set shape, otherwise
-				// Bukkit complains that the ingredient isn't in the shape. *pain*
-				// Can't set it to the WIP shape as it isn't necessarily rectangular
 				recipe.setIngredient(str[i], itemStackFromId(matrix[i]!!)!!)
 			}
 			recipe.shape(*shape.chunked(3).toTypedArray())
