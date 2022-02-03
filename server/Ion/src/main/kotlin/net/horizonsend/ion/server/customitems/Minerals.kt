@@ -36,8 +36,8 @@ object Minerals {
 		CustomItems.register(ore)
 		CustomItems.register(item)
 
-		CustomItems.registerShapelessRecipe(block.getItem(), MutableList(9){item.id}.toSet())
-		CustomItems.registerShapelessRecipe(item.getItem(9), setOf(block.id))
+		CustomItems.registerShapelessRecipe(block.getItem(), List(9){item.id})
+		CustomItems.registerShapelessRecipe(item.getItem(9), listOf(block.id))
 		return item
 
 	}

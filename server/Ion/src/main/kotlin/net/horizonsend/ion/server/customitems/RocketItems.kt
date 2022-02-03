@@ -35,7 +35,7 @@ object RocketItems {
 		Tasks.syncDelay(1) {
 			CustomItems.registerShapelessRecipe(
 				rocket.getItem(),
-				setOf(base.id, warhead.id)
+				listOf(base.id, warhead.id)
 			)
 			CustomItems.registerShapedRecipe(
 				base.getItem(3),

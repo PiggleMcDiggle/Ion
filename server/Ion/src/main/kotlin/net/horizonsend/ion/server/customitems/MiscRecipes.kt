@@ -9,11 +9,11 @@ object MiscRecipes {
 	fun register() {
 		CustomItems.registerShapelessRecipe(
 			ItemStack(END_ROD, 16),
-			List(3){"copper_ingot"}.toSet()
+			List(3){"copper_ingot"}
 		)
 		CustomItems.registerShapelessRecipe(
 			ItemStack(SEA_LANTERN, 1),
-			List(4){"prismarine_crystals"}.toSet()
+			List(4){"prismarine_crystals"}
 		)
 		CustomItems.registerShapedRecipe(
 			ItemStack(END_PORTAL_FRAME, 1),

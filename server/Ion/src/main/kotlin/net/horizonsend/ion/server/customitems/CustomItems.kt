@@ -44,7 +44,7 @@ class CustomItems : Listener {
 		 * Map of crafting matrices to [ItemStack]
 		 */
 		val customShapedRecipes = mutableMapOf<List<String?>, ItemStack>()
-		val customShapelessRecipes = mutableMapOf<Set<String>, ItemStack>()
+		val customShapelessRecipes = mutableMapOf<List<String>, ItemStack>()
 
 		/**
 		 * Registers the customitem. Will warn the console if the [item]'s ID is already in use
@@ -108,7 +108,7 @@ class CustomItems : Listener {
 		 * @param ingredients the crafting ingredients as a set of id strings
 		 * @see registerShapedRecipe
 		 */
-		fun registerShapelessRecipe(itemStack: ItemStack, ingredients: Set<String>) {
+		fun registerShapelessRecipe(itemStack: ItemStack, ingredients: List<String>) {
 			// Have to go through and check if one of the ingredients is a powerable custom item
 			// If it is, ExactChoice won't work for it, so we have to do custom recipe handling
 			ingredients.forEach {
@@ -205,9 +205,11 @@ class CustomItems : Listener {
 			stringMatrix[i] = idFromItemStack(it)
 		}
 		if (customShapedRecipes.containsKey(stringMatrix.toList())) event.inventory.result = customShapedRecipes[stringMatrix.toList()]
-		val shapelessIngredients = stringMatrix.toMutableSet()
-		shapelessIngredients.removeAll(setOf(null))
-		if (customShapelessRecipes.containsKey(shapelessIngredients.toSet())) event.inventory.result = customShapelessRecipes[shapelessIngredients.toSet()]
+		stringMatrix.removeAll(setOf(null))
+		customShapedRecipes.keys.forEach {
+			// This is pain, but we can't use sets, and this is the best way to ignore indexes
+			if (it.containsAll(stringMatrix) && stringMatrix.size == it.size) event.inventory.result = customShapelessRecipes[it]
+		}
 	}
 
 	/**
