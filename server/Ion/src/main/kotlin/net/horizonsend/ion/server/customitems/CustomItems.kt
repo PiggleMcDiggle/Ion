@@ -42,8 +42,14 @@ class CustomItems : Listener {
 		/**
 		 * All custom recipes that couldn't be registered through Bukkit.
 		 * Map of crafting matrices to [ItemStack]
+		 * @see customShapelessRecipes
 		 */
 		val customShapedRecipes = mutableMapOf<List<String?>, ItemStack>()
+		/**
+		 * All custom shapeless recipes that couldn't be registered through Bukkit.
+		 * Map of crafting matrices to [ItemStack]
+		 * @see customShapedRecipes
+		 */
 		val customShapelessRecipes = mutableMapOf<List<String>, ItemStack>()
 
 		/**
@@ -115,7 +121,7 @@ class CustomItems : Listener {
 				if (CustomItems[it] is PowerItem) customShapelessRecipes[ingredients] = itemStack
 			}
 			// Either way, register a bukkit recipe
-			val recipe = ShapelessRecipe(NamespacedKey(PLUGIN, "ion_recipe_${idFromItemStack(itemStack)}"), itemStack)
+			val recipe = ShapelessRecipe(NamespacedKey(PLUGIN, "ion_recipe_${itemStack.id}"), itemStack)
 			ingredients.forEach {
 				recipe.addIngredient(itemStackFromId(it)!!)
 			}
@@ -134,7 +140,7 @@ class CustomItems : Listener {
 				if (CustomItems[it] is PowerItem) customShapedRecipes[matrix] = itemStack
 			}
 			// Either way, register a bukkit recipe
-			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, "ion_recipe_${idFromItemStack(itemStack)}"), itemStack).shape("abc", "def", "ghi")
+			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, "ion_recipe_${itemStack.id}"), itemStack).shape("abc", "def", "ghi")
 			var shape = ""
 			val str = "abcdefghi"
 			for (i in 0..8){
@@ -158,15 +164,6 @@ class CustomItems : Listener {
 				Material.getMaterial(id.uppercase()) ?: return null,
 				count
 			)
-		}
-
-		/**
-		 * @return the id (either CustomItem or Material) of the ItemStack
-		 * Note: Material IDs will be lowercase
-		 * @see [itemStackFromId]
-		 */
-		fun idFromItemStack(itemStack: ItemStack): String {
-			return itemStack.customItem?.id ?: itemStack.type.toString().lowercase()
 		}
 	}
 
@@ -199,7 +196,7 @@ class CustomItems : Listener {
 		event.inventory.matrix!!.forEach {
 			i++
 			it ?: return@forEach
-			stringMatrix[i] = idFromItemStack(it)
+			stringMatrix[i] = it.id
 		}
 		if (customShapedRecipes.containsKey(stringMatrix.toList())) event.inventory.result = customShapedRecipes[stringMatrix.toList()]
 		stringMatrix.removeAll(setOf(null))
@@ -314,3 +311,11 @@ val ItemStack.isCustomItem: Boolean get() = CustomItems[this] != null
  * @see [CustomItems.getCustomItem]
  */
 val ItemStack.customItem: CustomItem? get() = CustomItems[this]
+
+/**
+* The id (either CustomItem or Material) of the ItemStack
+* Note: Material IDs will be lowercase
+* @see [itemStackFromId]
+*/
+val ItemStack.id: String
+	get() = this.customItem?.id ?: this.type.toString().lowercase()
