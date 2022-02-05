@@ -9,6 +9,7 @@ import net.horizonsend.ion.server.powerarmor.PowerArmorListener
 import net.horizonsend.ion.server.powerarmor.PowerModuleItems
 import net.starlegacy.PLUGIN
 import org.bukkit.Bukkit.addRecipe
+import org.bukkit.Bukkit.getRecipe
 import org.bukkit.Material
 import org.bukkit.Material.EMERALD
 import org.bukkit.NamespacedKey
@@ -23,7 +24,6 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.RecipeChoice
 import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.inventory.ShapelessRecipe
 import org.bukkit.persistence.PersistentDataType
@@ -45,6 +45,7 @@ class CustomItems : Listener {
 		 * @see customShapelessRecipes
 		 */
 		val customShapedRecipes = mutableMapOf<List<String?>, ItemStack>()
+
 		/**
 		 * All custom shapeless recipes that couldn't be registered through Bukkit.
 		 * Map of crafting matrices to [ItemStack]
@@ -120,8 +121,14 @@ class CustomItems : Listener {
 			ingredients.forEach {
 				if (CustomItems[it] is PowerItem) customShapelessRecipes[ingredients] = itemStack
 			}
+			val key = NamespacedKey(PLUGIN, "recipe_${itemStack.id}")
+			if (getRecipe(key) != null) {
+				PLUGIN.logger.warning("A recipe is already registered with key ${key.key}!")
+				PLUGIN.logger.warning("Cannot register bukkit shapeless recipe for ${itemStack.id}")
+				return
+			}
 			// Either way, register a bukkit recipe
-			val recipe = ShapelessRecipe(NamespacedKey(PLUGIN, "ion_recipe_${itemStack.id}"), itemStack)
+			val recipe = ShapelessRecipe(key, itemStack)
 			ingredients.forEach {
 				recipe.addIngredient(itemStackFromId(it)!!)
 			}
@@ -139,11 +146,17 @@ class CustomItems : Listener {
 			matrix.forEach {
 				if (CustomItems[it] is PowerItem) customShapedRecipes[matrix] = itemStack
 			}
+			val key = NamespacedKey(PLUGIN, "recipe_${itemStack.id}")
+			if (getRecipe(key) != null) {
+				PLUGIN.logger.warning("A recipe is already registered with key ${key.key}!")
+				PLUGIN.logger.warning("Cannot register bukkit shaped recipe for ${itemStack.id}")
+				return
+			}
 			// Either way, register a bukkit recipe
-			val recipe = ShapedRecipe(NamespacedKey(PLUGIN, "ion_recipe_${itemStack.id}"), itemStack).shape("abc", "def", "ghi")
+			val recipe = ShapedRecipe(key, itemStack).shape("abc", "def", "ghi")
 			var shape = ""
 			val str = "abcdefghi"
-			for (i in 0..8){
+			for (i in 0..8) {
 				if (matrix[i] == null) {
 					shape += " "
 					continue
@@ -191,18 +204,20 @@ class CustomItems : Listener {
 	 */
 	@EventHandler
 	fun onPrepareCraft(event: PrepareItemCraftEvent) {
-		val stringMatrix = MutableList<String?>(9) {null}
+		val stringMatrix = MutableList<String?>(9) { null }
 		var i = -1
 		event.inventory.matrix!!.forEach {
 			i++
 			it ?: return@forEach
 			stringMatrix[i] = it.id
 		}
-		if (customShapedRecipes.containsKey(stringMatrix.toList())) event.inventory.result = customShapedRecipes[stringMatrix.toList()]
+		if (customShapedRecipes.containsKey(stringMatrix.toList())) event.inventory.result =
+			customShapedRecipes[stringMatrix.toList()]
 		stringMatrix.removeAll(setOf(null))
 		customShapedRecipes.keys.forEach {
 			// This is pain, but we can't use sets, and this is the best way to ignore indexes
-			if (it.containsAll(stringMatrix) && stringMatrix.size == it.size) event.inventory.result = customShapelessRecipes[it]
+			if (it.containsAll(stringMatrix) && stringMatrix.size == it.size) event.inventory.result =
+				customShapelessRecipes[it]
 		}
 	}
 
@@ -313,9 +328,9 @@ val ItemStack.isCustomItem: Boolean get() = CustomItems[this] != null
 val ItemStack.customItem: CustomItem? get() = CustomItems[this]
 
 /**
-* The id (either CustomItem or Material) of the ItemStack
-* Note: Material IDs will be lowercase
-* @see [itemStackFromId]
-*/
+ * The id (either CustomItem or Material) of the ItemStack
+ * Note: Material IDs will be lowercase
+ * @see [itemStackFromId]
+ */
 val ItemStack.id: String
 	get() = this.customItem?.id ?: this.type.toString().lowercase()
