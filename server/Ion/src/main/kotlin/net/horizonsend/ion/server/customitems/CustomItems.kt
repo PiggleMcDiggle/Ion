@@ -133,6 +133,7 @@ class CustomItems : Listener {
 				recipe.addIngredient(itemStackFromId(it)!!)
 			}
 			addRecipe(recipe)
+			itemStack.customItem?.onRecipeRegistered(recipe)
 		}
 
 		/**
@@ -166,6 +167,7 @@ class CustomItems : Listener {
 			}
 			recipe.shape(*shape.chunked(3).toTypedArray())
 			addRecipe(recipe)
+			itemStack.customItem?.onRecipeRegistered(recipe)
 		}
 
 		/**

@@ -12,6 +12,7 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.Recipe
 import org.bukkit.persistence.PersistentDataType
 
 /**
@@ -97,6 +98,13 @@ abstract class CustomItem {
 	 * Called immediately after the item is registered.
 	 */
 	open fun onItemRegistered() {}
+
+	/**
+	 * Called when a crafting recipe is registered for this item
+	 *
+	 * @param recipe the recipe
+	 */
+	open fun onRecipeRegistered(recipe: Recipe) {}
 
 	/**
 	 * Called when an entity damages another entity while holding the item.
