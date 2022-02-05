@@ -204,20 +204,17 @@ class CustomItems : Listener {
 	 */
 	@EventHandler
 	fun onPrepareCraft(event: PrepareItemCraftEvent) {
-		val stringMatrix = MutableList<String?>(9) { null }
-		var i = -1
-		event.inventory.matrix!!.forEach {
-			i++
-			it ?: return@forEach
-			stringMatrix[i] = it.id
-		}
-		if (customShapedRecipes.containsKey(stringMatrix.toList())) event.inventory.result =
-			customShapedRecipes[stringMatrix.toList()]
-		stringMatrix.removeAll(setOf(null))
+		// Get a crafting matrix of item ids
+		val stringMatrix = List(9) { index -> event.inventory.matrix?.get(index)?.id }
+		// Check shaped recipes
+		if (customShapedRecipes.containsKey(stringMatrix)) event.inventory.result = customShapedRecipes[stringMatrix]
+		// Check shapeless recipes
+		val ingredients = stringMatrix.filterNotNull()
 		customShapedRecipes.keys.forEach {
-			// This is pain, but we can't use sets, and this is the best way to ignore indexes
-			if (it.containsAll(stringMatrix) && stringMatrix.size == it.size) event.inventory.result =
-				customShapelessRecipes[it]
+			// Pain but I don't know a  better way to compare the contents of lists
+			if (it.containsAll(ingredients) && ingredients.containsAll(it)) {
+				event.inventory.result = customShapelessRecipes[it]
+			}
 		}
 	}
 
