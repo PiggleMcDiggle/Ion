@@ -4,6 +4,8 @@ import net.horizonsend.ion.server.customitems.types.CustomItem
 import net.horizonsend.ion.server.customitems.types.GenericCustomItem
 import net.horizonsend.ion.server.customitems.types.PowerItem
 import net.horizonsend.ion.server.customitems.types.PowerItemBreakCanceller
+import net.horizonsend.ion.server.customitems.types.isPowerableCustomItem
+import net.horizonsend.ion.server.customitems.types.power
 import net.horizonsend.ion.server.powerarmor.PowerArmorItems
 import net.horizonsend.ion.server.powerarmor.PowerArmorListener
 import net.horizonsend.ion.server.powerarmor.PowerModuleItems
@@ -216,6 +218,12 @@ class CustomItems : Listener {
 			// Pain but I don't know a  better way to compare the contents of lists
 			if (it.containsAll(ingredients) && ingredients.containsAll(it)) {
 				event.inventory.result = customShapelessRecipes[it]
+			}
+		}
+		// Check if we crafted using a battery, and if so, put its power in the new item, assuming its powerable
+		event.inventory.matrix!!.forEach {
+			if (it?.isPowerableCustomItem == true && event.inventory.result?.isPowerableCustomItem == true) {
+				event.inventory.result!!.power += it.power
 			}
 		}
 	}
