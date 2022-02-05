@@ -154,7 +154,7 @@ var Player.armorPower: Int
 	set(value) {
 		var powerLeft = value
 		inventory.armorContents?.forEach {
-			if (it!!.isPowerArmor) {
+			if (it?.isPowerArmor == true) {
 				val powerToAdd = min(powerLeft, it.maxPower!!)
 				it.power = powerToAdd
 				powerLeft -= powerToAdd
