@@ -3,3 +3,4 @@ port: 27017
 database: test
 username: test
 password: test
+redis-host: localhost
