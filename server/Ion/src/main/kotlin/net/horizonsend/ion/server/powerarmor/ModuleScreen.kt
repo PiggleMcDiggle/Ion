@@ -66,7 +66,7 @@ class ModuleScreen(player: Player) : Screen() {
 		}
 		// Figure out what color to make the status bar
 		val color = ItemStack(
-			if (weight <= maxModuleWeight) {
+			if (weight >= maxModuleWeight) {
 				RED_STAINED_GLASS_PANE
 			} else {
 				LIME_STAINED_GLASS_PANE
