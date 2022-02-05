@@ -18,8 +18,8 @@ object Server: BaseCommand() {
 	fun switch(source: Player, targetServer: String) {
 		val server = server.getServer(targetServer).orElse(null)
 
-		if (server == null || !source.hasPermission("ion.server.$server")) {
-			source.sendMessage(text("Server $server does not exist, or you can not access it."))
+		if (server == null || !source.hasPermission("ion.server.${server.name}")) {
+			source.sendMessage(text("Server ${server.name} does not exist, or you can not access it."))
 			return
 		}
 
