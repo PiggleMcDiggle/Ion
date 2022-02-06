@@ -1,6 +1,7 @@
 package net.horizonsend.ion.server
 
 import net.horizonsend.ion.server.commands.QuickBalance
+import net.horizonsend.ion.server.commands.misc.PowerArmorCommand
 import net.horizonsend.ion.server.commands.starships.Listships
 import net.horizonsend.ion.server.listeners.dynmap.DynmapEnabledListener
 import net.horizonsend.ion.server.listeners.paper.Tweaks
@@ -30,6 +31,7 @@ class Ion {
 		ionInstance.manager.apply {
 			registerCommand(Listships)
 			registerCommand(QuickBalance)
+			registerCommand(PowerArmorCommand)
 
 			commandCompletions.registerCompletion("valueNames") {
 				QuickBalance.balancedValues.keys
