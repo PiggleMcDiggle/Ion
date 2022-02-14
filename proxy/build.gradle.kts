@@ -19,7 +19,7 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 	implementation("net.kyori:adventure-text-minimessage:4.10.0-SNAPSHOT")
 	implementation("co.aikar:acf-velocity:0.5.1-SNAPSHOT")
-	implementation("org.litote.kmongo:kmongo:4.4.0")
+	implementation("org.litote.kmongo:kmongo:4.5.0")
 	implementation("net.dv8tion:JDA:5.0.0-alpha.5")
 }
 

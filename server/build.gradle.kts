@@ -42,7 +42,7 @@ dependencies {
 	implementation("net.wesjd:anvilgui:1.5.2-SNAPSHOT") // AnvilGUI 1.5.3 is broken on the repository. :/
 	implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
 	implementation("com.github.jkcclemens:khttp:0.1.0")
-	implementation("org.litote.kmongo:kmongo:4.4.0")
+	implementation("org.litote.kmongo:kmongo:4.5.0")
 	implementation("redis.clients:jedis:3.7.1") // Newer version changed stuff, I am too lazy to fix it.
 
 }
