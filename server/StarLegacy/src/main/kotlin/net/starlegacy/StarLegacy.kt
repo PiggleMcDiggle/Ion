@@ -24,7 +24,6 @@ import net.starlegacy.command.misc.GToggleCommand
 import net.starlegacy.command.misc.GlobalGameRuleCommand
 import net.starlegacy.command.misc.PlanetSpawnMenuCommand
 import net.starlegacy.command.misc.PlayerInfoCommand
-import net.starlegacy.command.misc.SLTimeConvertCommand
 import net.starlegacy.command.misc.ShuttleCommand
 import net.starlegacy.command.misc.TransportDebugCommand
 import net.starlegacy.command.nations.NationCommand
@@ -321,7 +320,6 @@ class StarLegacy : JavaPlugin() {
 			CustomItemCommand,
 			TransportDebugCommand,
 			PlanetSpawnMenuCommand,
-			SLTimeConvertCommand,
 			ShuttleCommand,
 
 			SettlementCommand,
